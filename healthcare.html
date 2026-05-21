@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare — Bryce Lote</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-white: #f5f0e8;
+    --cream: #ede6d8;
+    --sand: #d4c9b4;
+    --clay: #a89279;
+    --earth: #6b5b4a;
+    --dark-earth: #3d3328;
+    --deep: #2a231c;
+    --ink: #1a1510;
+    --rust: #9e6b47;
+    --sage: #7a8a6e;
+    --quiet-blue: #6e7f8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--dark-earth);
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  nav {
+    position: fixed; top: 0; width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    background: rgba(245, 240, 232, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+  }
+  .nav-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem; color: var(--dark-earth);
+    letter-spacing: 0.02em; text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-size: 0.85rem; color: var(--earth); text-decoration: none;
+    letter-spacing: 0.06em; text-transform: lowercase;
+    transition: color 0.3s; font-weight: 400;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--dark-earth); }
+
+  .page-header {
+    padding: 9rem 3rem 4rem;
+    max-width: 800px; margin: 0 auto;
+  }
+  .page-header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400; color: var(--ink); line-height: 1.3;
+    margin-bottom: 1.25rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .page-header p {
+    font-size: 1rem; color: var(--earth);
+    max-width: 520px; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .page-header-line {
+    width: 60px; height: 1px; background: var(--sand);
+    margin-top: 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .entries {
+    max-width: 800px; margin: 0 auto;
+    padding: 2rem 3rem 6rem;
+  }
+  .entry {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+  }
+  .entry:first-child {
+    border-top: 1px solid rgba(164, 146, 121, 0.15);
+  }
+  .entry-date {
+    font-size: 0.75rem; color: var(--clay);
+    letter-spacing: 0.1em; margin-bottom: 1rem;
+  }
+  .entry h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.35rem; font-weight: 400; color: var(--ink);
+    line-height: 1.4; margin-bottom: 1.25rem;
+  }
+  .entry p {
+    color: var(--dark-earth); margin-bottom: 1rem;
+    max-width: 620px; line-height: 1.8;
+  }
+  .entry p:last-child { margin-bottom: 0; }
+
+  .back-link {
+    display: inline-block; margin-top: 3rem;
+    font-size: 0.85rem; color: var(--clay);
+    text-decoration: none; transition: color 0.3s;
+    letter-spacing: 0.03em;
+  }
+  .back-link:hover { color: var(--dark-earth); }
+  .back-link span {
+    margin-right: 0.4rem; transition: transform 0.3s;
+    display: inline-block;
+  }
+  .back-link:hover span { transform: translateX(-3px); }
+
+  footer {
+    padding: 4rem 3rem; max-width: 800px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 1px solid rgba(164, 146, 121, 0.15);
+  }
+  .footer-left {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; color: var(--dark-earth);
+  }
+  .footer-left small {
+    display: block; margin-top: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; color: var(--clay);
+  }
+  .footer-right { font-size: 0.8rem; color: var(--clay); }
+  .footer-right a { color: var(--earth); text-decoration: none; transition: color 0.3s; }
+  .footer-right a:hover { color: var(--dark-earth); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.8rem; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .entries { padding: 2rem 1.5rem 4rem; }
+    footer { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Bryce Lote</a>
+  <div class="nav-links">
+    <a href="index.html#about">about</a>
+    <a href="index.html#work">work</a>
+    <a href="observe.html">observe</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Healthcare</h1>
+  <p>What I'm learning about community health, the people who hold it together, and the workflows nobody outside the building sees.</p>
+  <div class="page-header-line"></div>
+</div>
+
+<div class="entries">
+
+  <!-- ============================================
+       HOW TO ADD A NEW ENTRY:
+
+       1. Copy everything between START and END
+       2. Paste it ABOVE the most recent entry
+       3. Change the date, title, and paragraphs
+       4. Commit the file to GitHub
+
+       START COPY -------------------------------->
+
+  <div class="entry fade-in">
+    <div class="entry-date">may 2026</div>
+    <h2>First entry goes here</h2>
+    <p>This is a place for the things you are learning about healthcare that most people never see. The coordinators. The workflows. The weight of it. Write what you notice.</p>
+  </div>
+
+  <!-- END COPY ---------------------------------->
+
+  <a href="index.html" class="back-link"><span>&larr;</span> back home</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Bryce Lote
+    <small>Yukon, Oklahoma</small>
+  </div>
+  <div class="footer-right">
+    <a href="#">linkedin</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => { observer.observe(el); });
+</script>
+
+</body>
+</html>
