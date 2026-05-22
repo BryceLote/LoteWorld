@@ -233,6 +233,47 @@
   .branch-card:nth-child(4)::before { background: var(--clay); }
   .branch-card:nth-child(5)::before { background: var(--earth); }
   .branch-card:nth-child(6)::before { background: var(--rust); }
+  .branch-card:nth-child(7)::before { background: var(--sage); }
+
+  /* ---- LIBRARY CARD (full-width) ---- */
+  .branch-card-library {
+    grid-column: 1 / -1;
+  }
+
+  .library-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
+  .library-card-stats {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .library-stat {
+    text-align: center;
+  }
+
+  .library-stat-number {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    display: block;
+    line-height: 1.2;
+  }
+
+  .library-stat-label {
+    font-size: 0.7rem;
+    color: var(--clay);
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    margin-top: 0.3rem;
+    display: block;
+  }
 
   .branch-card:hover {
     background: rgba(237, 230, 216, 0.8);
@@ -420,6 +461,15 @@
       grid-template-columns: 1fr;
     }
 
+    .library-card-content {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .library-card-stats {
+      gap: 1.5rem;
+    }
+
     .currently-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -447,6 +497,7 @@
   .branch-card:nth-child(4) { transition-delay: 0.2s; }
   .branch-card:nth-child(5) { transition-delay: 0.25s; }
   .branch-card:nth-child(6) { transition-delay: 0.3s; }
+  .branch-card:nth-child(7) { transition-delay: 0.35s; }
 </style>
 </head>
 <body>
@@ -456,6 +507,7 @@
   <div class="nav-links">
     <a href="#about">about</a>
     <a href="#work">work</a>
+    <a href="library.html">library</a>
     <a href="observe.html">observe</a>
   </div>
 </nav>
@@ -485,7 +537,7 @@
   <p>
     I moved to Oklahoma in 2020. Built a career in operations and sales. I met the love of my life in 2023, and we got married in August of 2024. September 2025 our daughter Gianna was born, and that October I adopted Norah and Nehemiah. Our family officially became whole.
   </p>
-  <p>I work in healthcare technology now as an SDR at Calvient, a company building workflow automation for the organizations that serve patients regardless of ability to pay. I was employee twelve. Once again there is no playbook. one.
+  <p>I work in healthcare technology now as an SDR at Calvient, a company building workflow automation for the organizations that serve patients regardless of ability to pay. I was employee twelve. Once again there is no playbook.
   </p>
   <p>I organize my life around four things: family, faith, fitness, and finance. Everything else fits around those or it doesn't fit.</p>
 </section>
@@ -537,6 +589,22 @@
       <div class="branch-title">Machines</div>
       <div class="branch-desc">Computers I've built. Cars I've worked on. Audio and video systems. The kind of things that make more sense when you take them apart.</div>
       <div class="branch-arrow">&rarr;</div>
+    </a>
+
+    <a class="branch-card branch-card-library" href="library.html">
+      <div class="branch-number">07</div>
+      <div class="library-card-content">
+        <div>
+          <div class="branch-title">Library</div>
+          <div class="branch-desc">Everything I read while working the night shift at the Children's Justice Center. Eighteen months. Eighty-eight books. Roughly 90% of everything I consumed during that period.</div>
+          <div class="branch-arrow">&rarr;</div>
+        </div>
+        <div class="library-card-stats">
+          <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
+          <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
+          <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
+        </div>
+      </div>
     </a>
   </div>
 </div>
