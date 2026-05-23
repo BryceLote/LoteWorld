@@ -338,7 +338,7 @@
     margin: 1.5rem 0 2rem;
   }
 
-  .img-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .img-grid.cols-2 { grid-template-columns: 1fr 1fr; align-items: start; }
   .img-grid.cols-1 { grid-template-columns: 1fr; max-width: 600px; }
 
   .img-card {
@@ -466,6 +466,45 @@
     line-height: 1.6;
   }
 
+  /* ---- IMAGE + TEXT SIDE BY SIDE ---- */
+  .img-text-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .img-text-pair .pair-text .prose { margin-bottom: 0; }
+
+  @media (max-width: 768px) {
+    .img-text-pair { grid-template-columns: 1fr; }
+  }
+
+  /* ---- IMAGE VARIANT MODIFIERS ---- */
+  /* Diagrams that need full height to show content */
+  .img-wrap--diagram {
+    aspect-ratio: 4 / 3 !important;
+    background: #f8f5f0 !important;
+  }
+  .img-wrap--diagram img {
+    object-fit: contain !important;
+  }
+
+  /* Portrait images — shown full width, not cropped into landscape */
+  .img-card--portrait {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .img-wrap--portrait {
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  /* Reposition crop to show bottom of image */
+  .img-wrap--bottom img {
+    object-position: center bottom !important;
+  }
+
   /* ---- ANIMATIONS ---- */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -508,15 +547,14 @@
   <div class="nav-links">
     <a href="index.html#about">about</a>
     <a href="index.html#work">work</a>
-    <a href="library.html">library</a>
     <a href="observe.html">observe</a>
   </div>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
 <div class="hero">
-  <div class="hero-greeting">Complete Owners Guide</div>
-  <h1>Glock 43X</h1>
+  <div class="hero-greeting">glock 43x</div>
+  <h1>Complete Owner's Guide</h1>
   <p class="hero-description">
     Function, maintenance, operation, and ownership. Everything in one place.
   </p>
@@ -559,11 +597,6 @@
     <span class="section-num">01</span>
     <span class="section-title">Overview & History</span>
   </div>
-  <div class="prose">
-    <p>The Glock 43X is a 9mm Luger semi-automatic pistol released in July 2019 as part of Glock's Slimline series. It occupies a hybrid position between the ultra-compact Glock 43 (6-round capacity) and the slightly longer Glock 48, combining the 43's short slide with a full-length grip frame that accommodates a 10-round flush-fit magazine. The result is a pistol specifically optimized for concealed carry that provides substantially better capacity and shootability than the original G43 without significantly increasing its footprint.</p>
-    <p>As a Gen 5 platform, the 43X incorporates several design improvements over earlier generations: an ambidextrous slide stop lever, a flared magazine well for faster reloads, the absence of finger grooves on the grip (allowing a more universal fit across hand sizes), and the Glock Marksman Barrel (GMB) with improved rifling for better accuracy.</p>
-    <p>The 43X quickly became one of the most popular concealed carry pistols in the United States. In 2020, Glock expanded the lineup with the 43X MOS (Modular Optic System), which features a factory-milled slide to accept micro red dot optics. The MOS version uses the RMSc footprint and, as of 2025, offers direct mounting for Holosun 407K/507K/EPS, Vortex, and Aimpoint optics without adapter plates.</p>
-  </div>
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -583,6 +616,11 @@
         <p>Ambidextrous slide stop lever, reversible magazine catch, and front slide serrations visible from this angle.</p>
       </div>
     </div>
+  </div>
+  <div class="prose">
+    <p>The Glock 43X is a 9mm Luger semi-automatic pistol released in July 2019 as part of Glock's Slimline series. It occupies a hybrid position between the ultra-compact Glock 43 (6-round capacity) and the slightly longer Glock 48, combining the 43's short slide with a full-length grip frame that accommodates a 10-round flush-fit magazine. The result is a pistol specifically optimized for concealed carry that provides substantially better capacity and shootability than the original G43 without significantly increasing its footprint.</p>
+    <p>As a Gen 5 platform, the 43X incorporates several design improvements over earlier generations: an ambidextrous slide stop lever, a flared magazine well for faster reloads, the absence of finger grooves on the grip (allowing a more universal fit across hand sizes), and the Glock Marksman Barrel (GMB) with improved rifling for better accuracy.</p>
+    <p>The 43X quickly became one of the most popular concealed carry pistols in the United States. In 2020, Glock expanded the lineup with the 43X MOS (Modular Optic System), which features a factory-milled slide to accept micro red dot optics. The MOS version uses the RMSc footprint and, as of 2025, offers direct mounting for Holosun 407K/507K/EPS, Vortex, and Aimpoint optics without adapter plates.</p>
   </div>
 </div>
 
@@ -624,6 +662,26 @@
   </div>
 
   <h3 class="subsection-title">The Safe Action System</h3>
+  <div class="img-grid cols-2">
+    <div class="img-card">
+      <div class="img-wrap img-wrap--diagram">
+        <img src="image/glock/safe-action-system.jpg" alt="Glock Safe Action System diagram" loading="lazy">
+      </div>
+      <div class="caption">
+        <h3>Safe Action Overview</h3>
+        <p>The three-safety system. Trigger safety (face lever), firing pin safety (plunger), and drop safety (trigger bar) work independently.</p>
+      </div>
+    </div>
+    <div class="img-card">
+      <div class="img-wrap img-wrap--diagram">
+        <img src="image/glock/trigger-anatomy.jpg" alt="Glock trigger mechanism anatomy" loading="lazy">
+      </div>
+      <div class="caption">
+        <h3>Trigger Mechanism Anatomy</h3>
+        <p>Trigger bar, connector, and cruciform. Pulling the trigger lifts the firing pin safety plunger and releases the partially pre-loaded striker.</p>
+      </div>
+    </div>
+  </div>
   <div class="prose">
     <p>Unlike firearms with a manual safety lever, the Glock 43X relies on Glock's Safe Action system. It is a fully automatic, passive safety mechanism consisting of three independent mechanical safeties that engage and disengage without any conscious input from the shooter. All three safeties disengage sequentially as the trigger is pulled and re-engage automatically when the trigger is released.</p>
   </div>
@@ -643,27 +701,6 @@
 
   <div class="prose" style="margin-top: 1.5rem;">
     <p>The practical effect: if the trigger is forward, all safeties are engaged. Pulling the trigger disengages all three in sequence and fires the round. Releasing the trigger re-engages all three. There is no safety switch to forget.</p>
-  </div>
-
-  <div class="img-grid cols-2">
-    <div class="img-card">
-      <div class="img-wrap">
-        <img src="image/glock/safe-action-system.jpg" alt="Glock Safe Action System diagram" loading="lazy">
-      </div>
-      <div class="caption">
-        <h3>Safe Action Overview</h3>
-        <p>The three-safety system. Trigger safety (face lever), firing pin safety (plunger), and drop safety (trigger bar) work independently.</p>
-      </div>
-    </div>
-    <div class="img-card">
-      <div class="img-wrap">
-        <img src="image/glock/trigger-anatomy.jpg" alt="Glock trigger mechanism anatomy" loading="lazy">
-      </div>
-      <div class="caption">
-        <h3>Trigger Mechanism Anatomy</h3>
-        <p>Trigger bar, connector, and cruciform. Pulling the trigger lifts the firing pin safety plunger and releases the partially pre-loaded striker.</p>
-      </div>
-    </div>
   </div>
 
   <h3 class="subsection-title">Firing Cycle</h3>
@@ -721,11 +758,6 @@
 
   <h3 class="subsection-title">Field Strip Procedure</h3>
   <div class="callout"><strong>Safety first.</strong> Remove all ammunition from your workspace. Remove the magazine. Lock the slide back and visually and physically confirm the chamber is empty. Let the slide go forward.</div>
-  <div class="prose">
-    <p>Point the pistol in a safe direction. With the magazine removed and chamber confirmed empty, pull the trigger to release the striker (dry fire). Grasp the slide and pull it rearward approximately 1/8 inch. While holding the slide in that position, pull down on both sides of the slide lock lever (the takedown tabs located on the frame above and forward of the trigger). While holding the takedown tabs down, push the slide forward off the frame.</p>
-    <p>Remove the recoil spring assembly from the slide by lifting it slightly and pulling it out. Remove the barrel from the slide by lifting the rear end and sliding it forward.</p>
-    <p>You now have four components: frame, slide, barrel, and recoil spring assembly. This is the maximum disassembly Glock intends for end users. Internal slide disassembly (striker, extractor, etc.) is considered armorer-level work.</p>
-  </div>
 
   <div class="img-grid cols-1">
     <div class="img-card">
@@ -737,6 +769,12 @@
         <p>From left: frame (receiver), barrel, recoil spring assembly, slide. The barrel's feed ramp and the slide rails are the highest-priority cleaning areas.</p>
       </div>
     </div>
+  </div>
+
+  <div class="prose">
+    <p>Point the pistol in a safe direction. With the magazine removed and chamber confirmed empty, pull the trigger to release the striker (dry fire). Grasp the slide and pull it rearward approximately 1/8 inch. While holding the slide in that position, pull down on both sides of the slide lock lever (the takedown tabs located on the frame above and forward of the trigger). While holding the takedown tabs down, push the slide forward off the frame.</p>
+    <p>Remove the recoil spring assembly from the slide by lifting it slightly and pulling it out. Remove the barrel from the slide by lifting the rear end and sliding it forward.</p>
+    <p>You now have four components: frame, slide, barrel, and recoil spring assembly. This is the maximum disassembly Glock intends for end users. Internal slide disassembly (striker, extractor, etc.) is considered armorer-level work.</p>
   </div>
 
   <h3 class="subsection-title">Cleaning</h3>
@@ -758,10 +796,6 @@
   </div>
 
   <h3 class="subsection-title">Lubrication</h3>
-  <div class="prose">
-    <p>Glock pistols are designed to run with very little lubrication. Over-lubrication attracts debris and unburnt powder, forming sludge that can impair function. Six drops of oil total.</p>
-  </div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -772,8 +806,8 @@
         <p>One drop in each slide rail groove, one on the barrel hood, one on the barrel lug. Wipe the recoil spring with an oily cloth.</p>
       </div>
     </div>
-    <div class="img-card">
-      <div class="img-wrap">
+    <div class="img-card img-card--portrait">
+      <div class="img-wrap img-wrap--portrait">
         <img src="image/glock/lube-321-method.jpg" alt="Glock lubrication 3-2-1 method" loading="lazy">
       </div>
       <div class="caption">
@@ -781,6 +815,9 @@
         <p>3 drops on the slide (2 rails + 1 hood), 2 on the barrel (hood + lug), 1 on the connector/trigger bar interface.</p>
       </div>
     </div>
+  </div>
+  <div class="prose">
+    <p>Glock pistols are designed to run with very little lubrication. Over-lubrication attracts debris and unburnt powder, forming sludge that can impair function. Six drops of oil total.</p>
   </div>
 
   <div class="callout"><strong>Never allow oil to enter the firing pin/striker channel.</strong> Oil in the striker channel can slow striker travel, causing light primer strikes and failures to fire. If you suspect oil has entered the channel, have it cleaned by a certified Glock armorer.</div>
@@ -822,11 +859,6 @@
   </div>
 
   <h3 class="subsection-title">Holster Selection</h3>
-  <div class="prose">
-    <p>Because the Glock 43X has no manual safety, a proper holster is non-negotiable. The holster must fully cover the trigger guard to prevent any object from contacting the trigger. It must provide positive retention (audible click when holstered, resistance when drawing). It must be made of rigid material: Kydex, injection-molded polymer, or quality leather with a reinforced mouth. And it must be specific to the Glock 43X (or 43X/48 Slimline, which share the same frame).</p>
-    <p>If you mount a weapon light or optic, you will need a holster specifically designed to accommodate those accessories.</p>
-  </div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -838,7 +870,7 @@
       </div>
     </div>
     <div class="img-card">
-      <div class="img-wrap">
+      <div class="img-wrap img-wrap--bottom">
         <img src="image/glock/light-bearing-holster.jpg" alt="C&G MOD1 holster with Glock 43X and TLR-7 Sub" loading="lazy">
       </div>
       <div class="caption">
@@ -846,6 +878,10 @@
         <p>If you mount a weapon light, you need a holster molded for that specific light + gun combination. The light housing becomes part of the retention geometry.</p>
       </div>
     </div>
+  </div>
+  <div class="prose">
+    <p>Because the Glock 43X has no manual safety, a proper holster is non-negotiable. The holster must fully cover the trigger guard to prevent any object from contacting the trigger. It must provide positive retention (audible click when holstered, resistance when drawing). It must be made of rigid material: Kydex, injection-molded polymer, or quality leather with a reinforced mouth. And it must be specific to the Glock 43X (or 43X/48 Slimline, which share the same frame).</p>
+    <p>If you mount a weapon light or optic, you will need a holster specifically designed to accommodate those accessories.</p>
   </div>
 
   <h3 class="subsection-title">Carry Positions</h3>
@@ -881,15 +917,6 @@
   </div>
 
   <h3 class="subsection-title">Practice vs. Defensive</h3>
-  <div class="detail-item">
-    <span class="detail-label">Practice/Range.</span>
-    <span class="detail-text">Full metal jacket (FMJ) rounds in 115 gr or 124 gr are the most common and affordable training ammunition. Brass-cased is preferred over steel-cased for reliability and less fouling.</span>
-  </div>
-  <div class="detail-item">
-    <span class="detail-label">Defensive/Carry.</span>
-    <span class="detail-text">Jacketed hollow point (JHP) ammunition designed for self-defense. Popular choices include Federal HST (124 gr or 147 gr), Speer Gold Dot (124 gr), Hornady Critical Defense (115 gr), and Sig Sauer V-Crown (124 gr). Verify that your specific pistol reliably feeds your chosen defensive load by running at least 100-200 rounds through it before trusting it for carry.</span>
-  </div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -910,6 +937,14 @@
       </div>
     </div>
   </div>
+  <div class="detail-item">
+    <span class="detail-label">Practice/Range.</span>
+    <span class="detail-text">Full metal jacket (FMJ) rounds in 115 gr or 124 gr are the most common and affordable training ammunition. Brass-cased is preferred over steel-cased for reliability and less fouling.</span>
+  </div>
+  <div class="detail-item">
+    <span class="detail-label">Defensive/Carry.</span>
+    <span class="detail-text">Jacketed hollow point (JHP) ammunition designed for self-defense. Popular choices include Federal HST (124 gr or 147 gr), Speer Gold Dot (124 gr), Hornady Critical Defense (115 gr), and Sig Sauer V-Crown (124 gr). Verify that your specific pistol reliably feeds your chosen defensive load by running at least 100-200 rounds through it before trusting it for carry.</span>
+  </div>
 
   <h3 class="subsection-title">Break-In Period</h3>
   <div class="prose">
@@ -927,10 +962,6 @@
   </div>
 
   <h3 class="subsection-title">Sights</h3>
-  <div class="prose">
-    <p>Factory Glock sights are functional but basic. Upgrading to night sights (tritium) or fiber optic sights is one of the most popular first modifications. Options include Trijicon HD XR, AmeriGlo Bold/Hackathorn, and Night Fission Perfect Dot.</p>
-  </div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -951,13 +982,11 @@
       </div>
     </div>
   </div>
+  <div class="prose">
+    <p>Factory Glock sights are functional but basic. Upgrading to night sights (tritium) or fiber optic sights is one of the most popular first modifications. Options include Trijicon HD XR, AmeriGlo Bold/Hackathorn, and Night Fission Perfect Dot.</p>
+  </div>
 
   <h3 class="subsection-title">Shield Arms S15 Magazines</h3>
-  <div class="prose">
-    <p>The Shield Arms S15 is a flush-fitting, 15-round steel magazine that fits the Glock 43X and 48. It provides a 50% capacity increase in the same external footprint as the factory magazine.</p>
-  </div>
-  <div class="callout"><strong>Important:</strong> The S15 requires swapping the factory polymer magazine catch for a Shield Arms steel magazine catch. The steel S15 will wear down the factory polymer catch over time. Shield Arms also offers +2 and +5 magazine extensions, bringing capacity to 17 or 20 rounds respectively.</div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -978,12 +1007,12 @@
       </div>
     </div>
   </div>
+  <div class="prose">
+    <p>The Shield Arms S15 is a flush-fitting, 15-round steel magazine that fits the Glock 43X and 48. It provides a 50% capacity increase in the same external footprint as the factory magazine.</p>
+  </div>
+  <div class="callout"><strong>Important:</strong> The S15 requires swapping the factory polymer magazine catch for a Shield Arms steel magazine catch. The steel S15 will wear down the factory polymer catch over time. Shield Arms also offers +2 and +5 magazine extensions, bringing capacity to 17 or 20 rounds respectively.</div>
 
   <h3 class="subsection-title">Weapon Lights</h3>
-  <div class="prose">
-    <p>Current-production 43X models include a Slimline accessory rail. A weapon light is strongly recommended for any defensive pistol. Target identification in low-light conditions is critical.</p>
-  </div>
-
   <div class="img-grid cols-2">
     <div class="img-card">
       <div class="img-wrap">
@@ -1003,6 +1032,9 @@
         <p>Ultra-compact at 350 lumens. Barely extends past the trigger guard. Premium aluminum build. The minimalist's choice.</p>
       </div>
     </div>
+  </div>
+  <div class="prose">
+    <p>Current-production 43X models include a Slimline accessory rail. A weapon light is strongly recommended for any defensive pistol. Target identification in low-light conditions is critical.</p>
   </div>
 
   <h3 class="subsection-title">Optics (MOS Models)</h3>
