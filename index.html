@@ -7,588 +7,365 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --warm-white: #f5f0e8;
-    --cream: #ede6d8;
-    --sand: #d4c9b4;
-    --clay: #a89279;
-    --earth: #6b5b4a;
-    --dark-earth: #3d3328;
-    --deep: #2a231c;
-    --ink: #1a1510;
+    --bg: #1a1d21;
+    --bg-card: #212428;
+    --bg-surface: #272a2f;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --text-heading: #e8e5de;
+    --text-body: #908b82;
+    --text-muted: #5a5750;
+    --text-faint: #3a3630;
     --rust: #9e6b47;
     --sage: #7a8a6e;
     --quiet-blue: #6e7f8a;
+    --clay: #a89279;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--warm-white);
-    color: var(--dark-earth);
+    background: var(--bg);
+    color: var(--text-body);
     line-height: 1.7;
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-  }
-
   /* ---- NAV ---- */
   nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    position: fixed; top: 0; width: 100%;
     padding: 1.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
-    background: rgba(245, 240, 232, 0.9);
+    background: rgba(26, 29, 33, 0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+    border-bottom: 1px solid var(--border);
   }
 
   .nav-name {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.1rem;
-    color: var(--dark-earth);
-    letter-spacing: 0.02em;
-    text-decoration: none;
+    font-size: 1.1rem; color: var(--text-heading);
+    letter-spacing: 0.02em; text-decoration: none;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-  }
-
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
   .nav-links a {
-    font-size: 0.85rem;
-    color: var(--earth);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: color 0.3s;
-    font-weight: 400;
+    font-size: 0.9rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.3s; font-weight: 400;
   }
-
-  .nav-links a:hover {
-    color: var(--dark-earth);
-  }
+  .nav-links a:hover { color: var(--text-heading); opacity: 0.7; }
 
   /* ---- DROPDOWN ---- */
-  .nav-dropdown {
-    position: relative;
-  }
-
+  .nav-dropdown { position: relative; }
   .nav-dropdown-trigger {
-    font-size: 0.85rem;
-    color: var(--earth);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: color 0.3s;
-    font-weight: 400;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: inherit;
-    padding: 0;
+    font-size: 0.9rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.3s; font-weight: 400;
+    cursor: pointer; background: none; border: none;
+    font-family: inherit; padding: 0;
   }
-
-  .nav-dropdown-trigger:hover {
-    color: var(--dark-earth);
-  }
-
+  .nav-dropdown-trigger:hover { opacity: 0.7; }
   .nav-dropdown-trigger::after {
-    content: '';
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-right: 1px solid var(--clay);
-    border-bottom: 1px solid var(--clay);
+    content: ''; display: inline-block;
+    width: 5px; height: 5px;
+    border-right: 1px solid var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
     transform: rotate(45deg);
-    margin-left: 0.4rem;
-    position: relative;
-    top: -2px;
+    margin-left: 0.4rem; position: relative; top: -2px;
     transition: transform 0.3s;
   }
-
   .nav-dropdown.open .nav-dropdown-trigger::after {
-    transform: rotate(-135deg);
-    top: 1px;
+    transform: rotate(-135deg); top: 1px;
   }
-
   .nav-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 0.75rem);
-    right: 0;
-    background: rgba(245, 240, 232, 0.97);
+    position: absolute; top: calc(100% + 0.75rem); right: 0;
+    background: var(--bg-surface);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(164, 146, 121, 0.2);
-    padding: 0.5rem 0;
-    min-width: 180px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
+    border: 1px solid var(--border-hover);
+    padding: 0.5rem 0; min-width: 180px;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-    box-shadow: 0 8px 24px rgba(26, 21, 16, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
-
   .nav-dropdown-menu a {
-    display: block;
-    padding: 0.5rem 1.25rem;
-    font-size: 0.82rem;
-    color: var(--earth);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s, background 0.2s;
+    display: block; padding: 0.5rem 1.25rem;
+    font-size: 0.88rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.03em; transition: color 0.2s, background 0.2s;
   }
-
   .nav-dropdown-menu a:hover {
-    color: var(--dark-earth);
-    background: rgba(164, 146, 121, 0.08);
+    color: var(--text-heading);
+    background: rgba(255, 255, 255, 0.04);
   }
-
-  /* Desktop: hover opens dropdown */
   @media (hover: hover) {
     .nav-dropdown:hover .nav-dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+      opacity: 1; visibility: visible; transform: translateY(0);
     }
   }
-
-  /* Mobile & touch: open class toggles dropdown */
   .nav-dropdown.open .nav-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    opacity: 1; visibility: visible; transform: translateY(0);
   }
 
   /* ---- HERO ---- */
   .hero {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 6rem;
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 3rem;
+    max-width: 800px; margin: 0 auto;
     position: relative;
   }
 
   .hero-greeting {
-    font-size: 0.85rem;
-    color: var(--clay);
-    letter-spacing: 0.1em;
-    text-transform: lowercase;
+    font-size: 0.8rem; color: var(--text-muted);
+    letter-spacing: 0.12em;
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
   }
 
   .hero h1 {
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(2.5rem, 5vw, 3.8rem);
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.25;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.5s forwards;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 400; color: var(--text-heading);
+    line-height: 1.25; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
   }
 
   .hero-description {
-    font-size: 1.05rem;
-    color: var(--earth);
-    max-width: 560px;
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.8s forwards;
+    font-size: 1.05rem; color: var(--text-body);
+    max-width: 560px; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
   }
 
   .hero-line {
-    width: 60px;
-    height: 1px;
-    background: var(--sand);
+    width: 48px; height: 1px; background: var(--text-faint);
     margin-top: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1.1s forwards;
+    opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
   }
 
   /* ---- SECTIONS ---- */
   section {
-    padding: 6rem 3rem;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 3.5rem 3rem;
+    max-width: 800px; margin: 0 auto;
   }
 
   .section-label {
-    font-size: 0.75rem;
-    color: var(--clay);
+    font-size: 0.72rem; color: var(--text-muted);
     letter-spacing: 0.12em;
-    text-transform: lowercase;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   section h2 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-    line-height: 1.35;
+    font-size: 1.8rem; font-weight: 400; color: var(--text-heading);
+    margin-bottom: 1.5rem; line-height: 1.35;
   }
 
   section p {
-    color: var(--dark-earth);
-    margin-bottom: 1.25rem;
-    max-width: 600px;
+    color: var(--text-body);
+    margin-bottom: 1.25rem; max-width: 600px;
   }
 
   /* ---- DIVIDER ---- */
   .divider {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 3rem;
+    max-width: 800px; margin: 0 auto; padding: 0 3rem;
   }
-
   .divider-line {
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--sand), transparent);
+    background: linear-gradient(to right, transparent, var(--text-faint), transparent);
   }
 
-  /* ---- BRANCHES (Categories) ---- */
+  /* ---- BRANCHES ---- */
   .branches {
-    padding: 6rem 3rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 3.5rem 3rem 4rem;
+    max-width: 900px; margin: 0 auto;
+  }
+
+  .branches .section-label {
+    margin-bottom: 1rem;
+  }
+
+  .branches h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.8rem; font-weight: 400; color: var(--text-heading);
+    margin-bottom: 1.5rem; line-height: 1.35;
   }
 
   .branch-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+    gap: 1rem;
   }
 
   .branch-card {
-    background: var(--cream);
-    border: 1px solid rgba(164, 146, 121, 0.2);
-    padding: 2.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1.5rem;
     cursor: pointer;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-    display: block;
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+    text-decoration: none; display: block;
   }
 
   .branch-card::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 0;
-    transition: height 0.4s ease;
-  }
-
-  .branch-card:hover::before {
-    height: 100%;
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 100%;
   }
 
   .branch-card:nth-child(1)::before { background: var(--rust); }
   .branch-card:nth-child(2)::before { background: var(--sage); }
   .branch-card:nth-child(3)::before { background: var(--quiet-blue); }
   .branch-card:nth-child(4)::before { background: var(--clay); }
-  .branch-card:nth-child(5)::before { background: var(--earth); }
-  .branch-card:nth-child(6)::before { background: var(--rust); }
-  .branch-card:nth-child(7)::before { background: var(--sage); }
-  .branch-card:nth-child(8)::before { background: var(--quiet-blue); }
-
-  /* ---- LIBRARY CARD (full-width) ---- */
-  .branch-card-library {
-    grid-column: 1 / -1;
-  }
-
-  .library-card-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3rem;
-  }
-
-  .library-card-stats {
-    display: flex;
-    gap: 2rem;
-    flex-shrink: 0;
-    padding-top: 0.2rem;
-  }
-
-  .library-stat {
-    text-align: center;
-  }
-
-  .library-stat-number {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.5rem;
-    color: var(--ink);
-    display: block;
-    line-height: 1.2;
-  }
-
-  .library-stat-label {
-    font-size: 0.7rem;
-    color: var(--clay);
-    letter-spacing: 0.08em;
-    text-transform: lowercase;
-    margin-top: 0.3rem;
-    display: block;
-  }
+  .branch-card:nth-child(5)::before { background: var(--rust); }
+  .branch-card:nth-child(6)::before { background: var(--sage); }
 
   .branch-card:hover {
-    background: rgba(237, 230, 216, 0.8);
+    background: var(--bg-surface);
+    border-color: var(--border-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(26, 21, 16, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
   .branch-number {
-    font-size: 0.7rem;
-    color: var(--sand);
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    font-size: 0.68rem; color: var(--text-muted);
+    letter-spacing: 0.1em; font-weight: 500;
+    margin-right: 0.75rem; flex-shrink: 0;
+  }
+
+  .branch-title-row {
+    display: flex; align-items: baseline;
+    margin-bottom: 0.6rem;
   }
 
   .branch-title {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.15rem;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
+    font-size: 1.15rem; color: var(--text-heading);
     font-weight: 400;
   }
 
   .branch-desc {
-    font-size: 0.88rem;
-    color: var(--earth);
+    font-size: 0.9rem; color: var(--text-body);
     line-height: 1.65;
   }
 
   .branch-arrow {
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: var(--clay);
-    transition: transform 0.3s;
+    margin-top: 1rem;
+    font-size: 0.85rem; color: var(--text-muted);
+    transition: transform 0.3s, color 0.3s;
     display: inline-block;
   }
 
   .branch-card:hover .branch-arrow {
     transform: translateX(4px);
+    color: var(--text-heading);
   }
 
-  /* ---- QUOTE SECTION ---- */
-  .quote-section {
-    padding: 6rem 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+  /* ---- LIBRARY CARD (full-width) ---- */
+  .branch-card-library { grid-column: 1 / -1; }
+
+  .library-card-content {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 3rem;
   }
 
-  .quote-section blockquote {
+  .library-card-stats {
+    display: flex; gap: 2rem; flex-shrink: 0; padding-top: 0.2rem;
+  }
+
+  .library-stat { text-align: center; }
+
+  .library-stat-number {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.4rem;
-    font-style: italic;
-    color: var(--dark-earth);
-    line-height: 1.6;
-    max-width: 560px;
-    margin: 0 auto 1.5rem;
+    font-size: 1.5rem; color: var(--text-heading);
+    display: block; line-height: 1.2;
   }
 
-  .quote-attr {
-    font-size: 0.8rem;
-    color: var(--clay);
+  .library-stat-label {
+    font-size: 0.7rem; color: var(--text-muted);
     letter-spacing: 0.08em;
+    margin-top: 0.3rem; display: block;
   }
 
-  /* ---- CURRENTLY SECTION ---- */
+  /* ---- CURRENTLY ---- */
   .currently {
-    background: var(--cream);
-    border-top: 1px solid rgba(164, 146, 121, 0.15);
-    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .currently .section-label {
+    color: var(--text-heading);
   }
 
   .currently-inner {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 5rem 3rem;
+    max-width: 800px; margin: 0 auto; padding: 3.5rem 3rem;
   }
 
   .currently-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-top: 2.5rem;
+    gap: 3rem; margin-top: 1.5rem;
   }
 
   .currently-item h4 {
-    font-size: 0.75rem;
-    color: var(--clay);
+    font-size: 0.75rem; color: var(--text-heading);
     letter-spacing: 0.1em;
-    text-transform: lowercase;
     margin-bottom: 0.75rem;
   }
 
   .currently-item p {
-    font-size: 0.95rem;
-    color: var(--dark-earth);
+    font-size: 0.95rem; color: var(--text-body);
     line-height: 1.6;
   }
 
   /* ---- FOOTER ---- */
   footer {
-    padding: 4rem 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    padding: 4rem 3rem; max-width: 800px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: flex-end;
   }
 
   .footer-left {
     font-family: 'Libre Baskerville', serif;
-    font-size: 0.95rem;
-    color: var(--dark-earth);
+    font-size: 0.95rem; color: var(--text-body);
   }
 
   .footer-left small {
-    display: block;
-    margin-top: 0.5rem;
+    display: block; margin-top: 0.5rem;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    color: var(--clay);
+    font-size: 0.78rem; color: var(--text-muted);
   }
 
   .footer-right {
-    font-size: 0.8rem;
-    color: var(--clay);
+    font-size: 0.8rem; color: var(--text-muted);
+    display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;
   }
-
   .footer-right a {
-    color: var(--earth);
-    text-decoration: none;
-    transition: color 0.3s;
+    color: var(--text-muted); text-decoration: none; transition: color 0.3s;
   }
-
-  .footer-right a:hover {
-    color: var(--dark-earth);
-  }
+  .footer-right a:hover { color: var(--text-heading); }
 
   /* ---- ANIMATIONS ---- */
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
-    nav {
-      padding: 1.2rem 1.5rem;
-    }
-
-    .nav-links {
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-    }
-
-    .hero {
-      padding: 7rem 1.5rem 4rem;
-    }
-
-    section, .branches, .quote-section {
-      padding: 4rem 1.5rem;
-    }
-
-    .branch-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .library-card-content {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .library-card-stats {
-      gap: 1.5rem;
-    }
-
-    .currently-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .currently-inner {
-      padding: 4rem 1.5rem;
-    }
-
-    footer {
-      flex-direction: column;
-      gap: 1.5rem;
-      padding: 3rem 1.5rem;
-    }
-
-    .divider {
-      padding: 0 1.5rem;
-    }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.8rem; }
+    .hero { padding: 7rem 1.5rem 2rem; }
+    section, .branches { padding: 2.5rem 1.5rem; }
+    .branch-grid { grid-template-columns: 1fr; }
+    .library-card-content { flex-direction: column; gap: 1.5rem; }
+    .library-card-stats { gap: 1.5rem; }
+    .currently-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .currently-inner { padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
+    .divider { padding: 0 1.5rem; }
   }
-
-  /* ---- SCROLL REVEAL STAGGER ---- */
-  .branch-card:nth-child(1) { transition-delay: 0.05s; }
-  .branch-card:nth-child(2) { transition-delay: 0.1s; }
-  .branch-card:nth-child(3) { transition-delay: 0.15s; }
-  .branch-card:nth-child(4) { transition-delay: 0.2s; }
-  .branch-card:nth-child(5) { transition-delay: 0.25s; }
-  .branch-card:nth-child(6) { transition-delay: 0.3s; }
-  .branch-card:nth-child(7) { transition-delay: 0.35s; }
-  .branch-card:nth-child(8) { transition-delay: 0.4s; }
 </style>
 </head>
 <body>
@@ -596,35 +373,36 @@
 <nav>
   <a href="index.html" class="nav-name">Bryce Lote</a>
   <div class="nav-links">
-    <a href="#about">home</a>
+    <a href="#about">Home</a>
     <div class="nav-dropdown">
-      <a href="#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">everything</a>
+      <a href="#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">Everything</a>
       <div class="nav-dropdown-menu">
-        <a href="writing.html">writing</a>
-        <a href="breakdowns.html">breakdowns</a>
-        <a href="body-mind.html">body &amp; mind</a>
-        <a href="faith-family.html">faith &amp; family</a>
-        <a href="library.html">library</a>
-        <a href="games.html">games</a>
+        <a href="writing.html">Writing</a>
+        <a href="breakdowns.html">Breakdowns</a>
+        <a href="body-mind.html">Body &amp; Mind</a>
+        <a href="faith-family.html">Faith &amp; Family</a>
+        <a href="library.html">Library</a>
+        <a href="games.html">Games</a>
       </div>
     </div>
   </div>
 </nav>
 
 <div class="hero">
-  <div class="hero-greeting">yukon, oklahoma</div>
+  <div class="hero-greeting">Yukon, Oklahoma</div>
   <h1>I build things.<br>
-    I write to think. <br>
+    I write to think.<br>
     This is where I put it all.</h1>
   <p class="hero-description">
-    I'm a husband, a father of three, and I'm tired because one of them is a baby. I work hard and I hyperfixate on things that interest me. I'm a karate and ballet dad. I have a skateboard I haven't touched in over a year and a shelf of books I haven't made time for. My biggest concern right now is being present with my family while still working hard enough to support them. I'm figuring that out in real time and this site is part of how I think through it.  </p>
+    I'm a husband, a father of three, and I'm tired because one of them is a baby. I work hard and I hyperfixate on things that interest me. I'm a karate and ballet dad. I have a skateboard I haven't touched in over a year and a shelf of books I haven't made time for. My biggest concern right now is being present with my family while still working hard enough to support them. I'm figuring that out in real time and this site is part of how I think through it.
+  </p>
   <div class="hero-line"></div>
 </div>
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<section id="about" class="fade-in">
-  <div class="section-label">about</div>
+<section id="about">
+  <div class="section-label">About</div>
   <h2>The short version</h2>
   <p>I got into serious trouble as a teenager. Hit a wall at eighteen that I didn't see coming and couldn't ignore. I spent several years in Hawaii putting myself back together, slowly and without a roadmap. That period shaped how I think about almost everything now.</p>
   <p>I moved to Oklahoma in 2020. Built a career in operations and sales. Married Alli in August 2024. Our daughter Gianna was born in September 2025, and that October I adopted Norah and Nehemiah.</p>
@@ -633,91 +411,102 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<div class="branches fade-in" id="work">
-  <div class="section-label">where this branches</div>
+<div class="branches" id="work">
+  <div class="section-label">Where this branches</div>
   <h2>Things I think about and things I've made</h2>
 
-<div class="branch-grid">
-  <a class="branch-card" href="writing.html">
-    <div class="branch-number">01</div>
-    <div class="branch-title">Writing</div>
-    <div class="branch-desc">Things I needed to get out of my head and put somewhere I could find them again.</div>
-    <div class="branch-arrow">&rarr;</div>
-  </a>
-
-  <a class="branch-card" href="breakdowns.html">
-    <div class="branch-number">02</div>
-    <div class="branch-title">Breakdowns</div>
-    <div class="branch-desc">Things I've taken apart and put back together in a way that makes sense.</div>
-    <div class="branch-arrow">&rarr;</div>
-  </a>
-
-  <a class="branch-card" href="body-mind.html">
-    <div class="branch-number">03</div>
-    <div class="branch-title">Body &amp; Mind</div>
-    <div class="branch-desc">What I'm learning about how to take care of myself.</div>
-    <div class="branch-arrow">&rarr;</div>
-  </a>
-
-  <a class="branch-card" href="faith-family.html">
-    <div class="branch-number">04</div>
-    <div class="branch-title">Faith &amp; Family</div>
-    <div class="branch-desc">The foundation underneath everything else. Moments I want to remember the way I was thinking about them at the time.</div>
-    <div class="branch-arrow">&rarr;</div>
-  </a>
-
-  <a class="branch-card branch-card-library" href="library.html">
-    <div class="branch-number">05</div>
-    <div class="library-card-content">
-      <div>
-        <div class="branch-title">Library</div>
-        <div class="branch-desc">Everything I read while working the night shift at the Children's Justice Center. Eighteen months. Eighty-eight books.</div>
-        <div class="branch-arrow">&rarr;</div>
+  <div class="branch-grid">
+    <a class="branch-card" href="writing.html">
+      <div class="branch-title-row">
+        <div class="branch-number">01</div>
+        <div class="branch-title">Writing</div>
       </div>
-      <div class="library-card-stats">
-        <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
-        <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
-        <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
-      </div>
-    </div>
-  </a>
+      <div class="branch-desc">Things I needed to get out of my head and put somewhere I could find them again.</div>
+      <div class="branch-arrow">&rarr;</div>
+    </a>
 
-  <a class="branch-card branch-card-library" href="games.html">
-    <div class="branch-number">06</div>
-    <div class="library-card-content">
-      <div>
-        <div class="branch-title">Games</div>
-        <div class="branch-desc">Every game I can remember playing for 10 hours or more, ranked and rated.</div>
-        <div class="branch-arrow">&rarr;</div>
+    <a class="branch-card" href="breakdowns.html">
+      <div class="branch-title-row">
+        <div class="branch-number">02</div>
+        <div class="branch-title">Breakdowns</div>
       </div>
-      <div class="library-card-stats">
-        <div class="library-stat"><span class="library-stat-number">90</span><span class="library-stat-label">games</span></div>
-        <div class="library-stat"><span class="library-stat-number">12,000+</span><span class="library-stat-label">hours</span></div>
-        <div class="library-stat"><span class="library-stat-number">5</span><span class="library-stat-label">perfect 10s</span></div>
+      <div class="branch-desc">Things I've taken apart and put back together in a way that makes sense.</div>
+      <div class="branch-arrow">&rarr;</div>
+    </a>
+
+    <a class="branch-card" href="body-mind.html">
+      <div class="branch-title-row">
+        <div class="branch-number">03</div>
+        <div class="branch-title">Body &amp; Mind</div>
       </div>
-    </div>
-  </a>
+      <div class="branch-desc">What I'm learning about how to take care of myself.</div>
+      <div class="branch-arrow">&rarr;</div>
+    </a>
+
+    <a class="branch-card" href="faith-family.html">
+      <div class="branch-title-row">
+        <div class="branch-number">04</div>
+        <div class="branch-title">Faith &amp; Family</div>
+      </div>
+      <div class="branch-desc">The foundation underneath everything else. Moments I want to remember the way I was thinking about them at the time.</div>
+      <div class="branch-arrow">&rarr;</div>
+    </a>
+
+    <a class="branch-card branch-card-library" href="library.html">
+      <div class="library-card-content">
+        <div>
+          <div class="branch-title-row">
+            <div class="branch-number">05</div>
+            <div class="branch-title">Library</div>
+          </div>
+          <div class="branch-desc">Everything I read while working the night shift at the Children's Justice Center. Eighteen months. Eighty-eight books.</div>
+          <div class="branch-arrow">&rarr;</div>
+        </div>
+        <div class="library-card-stats">
+          <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
+          <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
+          <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="branch-card branch-card-library" href="games.html">
+      <div class="library-card-content">
+        <div>
+          <div class="branch-title-row">
+            <div class="branch-number">06</div>
+            <div class="branch-title">Games</div>
+          </div>
+          <div class="branch-desc">Every game I can remember playing for 10 hours or more, ranked and rated.</div>
+          <div class="branch-arrow">&rarr;</div>
+        </div>
+        <div class="library-card-stats">
+          <div class="library-stat"><span class="library-stat-number">90</span><span class="library-stat-label">games</span></div>
+          <div class="library-stat"><span class="library-stat-number">12,000+</span><span class="library-stat-label">hours</span></div>
+          <div class="library-stat"><span class="library-stat-number">5</span><span class="library-stat-label">perfect 10s</span></div>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
-</div>
-
 
 <div class="divider"><div class="divider-line"></div></div>
 
 <div class="currently">
   <div class="currently-inner">
-    <div class="section-label">currently</div>
+    <div class="section-label">Currently</div>
     <div class="currently-grid">
       <div class="currently-item">
-        <h4>working on</h4>
+        <h4>Working on</h4>
         <p>Finding consistency. Three months into building a pipeline and the results have been feast or famine. I can set meetings. What I'm working on now is making that repeatable.</p>
       </div>
       <div class="currently-item">
-        <h4>thinking about</h4>
+        <h4>Thinking about</h4>
         <p>How to make the most of this summer. My wife needs support and my kids need structure. Getting both of those right at the same time is its own kind of project.</p>
       </div>
       <div class="currently-item">
         <h4>Playing</h4>
-        <p><em>Took a break from Morrowind and Borderlands. Deciding what's next. Terraria is on the list. </em></p>
+        <p><em>Took a break from Morrowind and Borderlands. Deciding what's next. Terraria is on the list.</em></p>
       </div>
     </div>
   </div>
@@ -729,28 +518,13 @@
     <small>Yukon, Oklahoma</small>
   </div>
   <div class="footer-right">
-    <a href="https://www.linkedin.com/in/bryce-lote/">linkedin</a>
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
   </div>
 </footer>
 
 <script>
-  // Intersection Observer for fade-in elements
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
-  document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
-  });
-
-  // Close dropdown when tapping outside on mobile
   document.addEventListener('click', function(e) {
     const dropdown = document.querySelector('.nav-dropdown');
     if (dropdown && !dropdown.contains(e.target)) {

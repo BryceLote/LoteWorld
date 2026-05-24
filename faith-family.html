@@ -7,17 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --warm-white: #f5f0e8;
-    --cream: #ede6d8;
-    --sand: #d4c9b4;
-    --clay: #a89279;
-    --earth: #6b5b4a;
-    --dark-earth: #3d3328;
-    --deep: #2a231c;
-    --ink: #1a1510;
+    --bg: #1a1d21;
+    --bg-card: #212428;
+    --bg-surface: #272a2f;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --text-heading: #e8e5de;
+    --text-body: #908b82;
+    --text-muted: #5a5750;
+    --text-faint: #3a3630;
     --rust: #9e6b47;
     --sage: #7a8a6e;
     --quiet-blue: #6e7f8a;
+    --clay: #a89279;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,20 +27,10 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--warm-white);
-    color: var(--dark-earth);
-    line-height: 1.7;
-    font-size: 17px;
+    background: var(--bg);
+    color: var(--text-body);
+    line-height: 1.7; font-size: 17px;
     -webkit-font-smoothing: antialiased;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
   }
 
   nav {
@@ -46,37 +38,35 @@
     padding: 1.5rem 3rem;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
-    background: rgba(245, 240, 232, 0.9);
+    background: rgba(26, 29, 33, 0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+    border-bottom: 1px solid var(--border);
   }
   .nav-name {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.1rem; color: var(--dark-earth);
+    font-size: 1.1rem; color: var(--text-heading);
     letter-spacing: 0.02em; text-decoration: none;
   }
   .nav-links { display: flex; gap: 2.5rem; align-items: center; }
   .nav-links a {
-    font-size: 0.85rem; color: var(--earth); text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: color 0.3s; font-weight: 400;
+    font-size: 0.9rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.3s; font-weight: 400;
   }
-  .nav-links a:hover { color: var(--dark-earth); }
+  .nav-links a:hover { opacity: 0.7; }
 
   .nav-dropdown { position: relative; }
   .nav-dropdown-trigger {
-    font-size: 0.85rem; color: var(--earth); text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: color 0.3s; font-weight: 400;
+    font-size: 0.9rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.3s; font-weight: 400;
     cursor: pointer; background: none; border: none;
     font-family: inherit; padding: 0;
   }
-  .nav-dropdown-trigger:hover { color: var(--dark-earth); }
+  .nav-dropdown-trigger:hover { opacity: 0.7; }
   .nav-dropdown-trigger::after {
     content: ''; display: inline-block;
     width: 5px; height: 5px;
-    border-right: 1px solid var(--clay);
-    border-bottom: 1px solid var(--clay);
+    border-right: 1px solid var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
     transform: rotate(45deg);
     margin-left: 0.4rem; position: relative; top: -2px;
     transition: transform 0.3s;
@@ -86,23 +76,21 @@
   }
   .nav-dropdown-menu {
     position: absolute; top: calc(100% + 0.75rem); right: 0;
-    background: rgba(245, 240, 232, 0.97);
+    background: var(--bg-surface);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(164, 146, 121, 0.2);
+    border: 1px solid var(--border-hover);
     padding: 0.5rem 0; min-width: 180px;
     opacity: 0; visibility: hidden; transform: translateY(-4px);
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-    box-shadow: 0 8px 24px rgba(26, 21, 16, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
   .nav-dropdown-menu a {
     display: block; padding: 0.5rem 1.25rem;
-    font-size: 0.82rem; color: var(--earth); text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s, background 0.2s;
+    font-size: 0.88rem; color: var(--text-heading); text-decoration: none;
+    letter-spacing: 0.03em; transition: color 0.2s, background 0.2s;
   }
   .nav-dropdown-menu a:hover {
-    color: var(--dark-earth);
-    background: rgba(164, 146, 121, 0.08);
+    background: rgba(255, 255, 255, 0.04);
   }
   @media (hover: hover) {
     .nav-dropdown:hover .nav-dropdown-menu {
@@ -114,60 +102,81 @@
   }
 
   .page-header {
-    padding: 9rem 3rem 4rem;
+    padding: 9rem 3rem 3rem;
     max-width: 800px; margin: 0 auto;
   }
   .page-header h1 {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400; color: var(--ink); line-height: 1.3;
+    font-weight: 400; color: var(--text-heading); line-height: 1.3;
     margin-bottom: 1.25rem;
     opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
   }
   .page-header p {
-    font-size: 1rem; color: var(--earth);
+    font-size: 1rem; color: var(--text-body);
     max-width: 520px; line-height: 1.8;
     opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
   }
   .page-header-line {
-    width: 60px; height: 1px; background: var(--sand);
+    width: 48px; height: 1px; background: var(--text-faint);
     margin-top: 2.5rem;
     opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
   }
 
   .entries {
     max-width: 800px; margin: 0 auto;
-    padding: 2rem 3rem 6rem;
+    padding: 2rem 3rem 4rem;
   }
   .entry {
-    padding: 3rem 0;
-    border-bottom: 1px solid rgba(164, 146, 121, 0.15);
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
   }
   .entry:first-child {
-    border-top: 1px solid rgba(164, 146, 121, 0.15);
+    border-top: 1px solid var(--border);
+  }
+  .entry-tag {
+    display: inline-block;
+    font-size: 0.7rem; color: var(--text-muted);
+    letter-spacing: 0.1em;
+    border: 1px solid var(--border-hover);
+    padding: 0.15rem 0.5rem; margin-bottom: 0.75rem;
+    margin-right: 0.4rem;
   }
   .entry-date {
-    font-size: 0.75rem; color: var(--clay);
+    font-size: 0.75rem; color: var(--text-muted);
     letter-spacing: 0.1em; margin-bottom: 1rem;
   }
   .entry h2 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.35rem; font-weight: 400; color: var(--ink);
+    font-size: 1.35rem; font-weight: 400; color: var(--text-heading);
     line-height: 1.4; margin-bottom: 1.25rem;
   }
   .entry p {
-    color: var(--dark-earth); margin-bottom: 1rem;
+    color: var(--text-body); margin-bottom: 1rem;
     max-width: 620px; line-height: 1.8;
   }
   .entry p:last-child { margin-bottom: 0; }
 
+  .entry-link {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.85rem; color: var(--text-body);
+    text-decoration: none;
+    border: 1px solid var(--border-hover);
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+  }
+  .entry-link:hover {
+    color: var(--text-heading);
+    border-color: var(--text-muted);
+  }
+
   .back-link {
-    display: inline-block; margin-top: 3rem;
-    font-size: 0.85rem; color: var(--clay);
+    display: inline-block; margin-top: 2.5rem;
+    font-size: 0.85rem; color: var(--text-muted);
     text-decoration: none; transition: color 0.3s;
     letter-spacing: 0.03em;
   }
-  .back-link:hover { color: var(--dark-earth); }
+  .back-link:hover { color: var(--text-heading); }
   .back-link span {
     margin-right: 0.4rem; transition: transform 0.3s;
     display: inline-block;
@@ -177,28 +186,33 @@
   footer {
     padding: 4rem 3rem; max-width: 800px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: flex-end;
-    border-top: 1px solid rgba(164, 146, 121, 0.15);
+    border-top: 1px solid var(--border);
   }
   .footer-left {
     font-family: 'Libre Baskerville', serif;
-    font-size: 0.95rem; color: var(--dark-earth);
+    font-size: 0.95rem; color: var(--text-body);
   }
   .footer-left small {
     display: block; margin-top: 0.5rem;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem; color: var(--clay);
+    font-size: 0.78rem; color: var(--text-muted);
   }
-  .footer-right { font-size: 0.8rem; color: var(--clay); }
-  .footer-right a { color: var(--earth); text-decoration: none; transition: color 0.3s; }
-  .footer-right a:hover { color: var(--dark-earth); }
+  .footer-right {
+    font-size: 0.8rem; color: var(--text-muted);
+    display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;
+  }
+  .footer-right a {
+    color: var(--text-muted); text-decoration: none; transition: color 0.3s;
+  }
+  .footer-right a:hover { color: var(--text-heading); }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .fade-in {
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -206,8 +220,8 @@
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
     .nav-links a { font-size: 0.8rem; }
-    .page-header { padding: 7rem 1.5rem 3rem; }
-    .entries { padding: 2rem 1.5rem 4rem; }
+    .page-header { padding: 7rem 1.5rem 2rem; }
+    .entries { padding: 2rem 1.5rem 3rem; }
     footer { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
   }
 </style>
@@ -240,23 +254,11 @@
 
 <div class="entries">
 
-  <!-- ============================================
-       HOW TO ADD A NEW ENTRY:
-
-       1. Copy everything between START and END
-       2. Paste it ABOVE the most recent entry
-       3. Change the date, title, and paragraphs
-       4. Commit the file to GitHub
-
-       START COPY -------------------------------->
-
   <div class="entry fade-in">
-    <div class="entry-date">may 2026</div>
+    <div class="entry-date">May 2026</div>
     <h2>Nothing here yet</h2>
     <p>This page is for the things that matter most and change the slowest. First entry is coming.</p>
   </div>
-
-  <!-- END COPY ---------------------------------->
 
   <a href="index.html" class="back-link"><span>&larr;</span> back home</a>
 </div>
@@ -268,6 +270,8 @@
   </div>
   <div class="footer-right">
     <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
   </div>
 </footer>
 
