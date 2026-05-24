@@ -78,6 +78,7 @@
   .nav-links {
     display: flex;
     gap: 2.5rem;
+    align-items: center;
   }
 
   .nav-links a {
@@ -85,13 +86,101 @@
     color: var(--earth);
     text-decoration: none;
     letter-spacing: 0.06em;
-    text-transform: lowercase;
     transition: color 0.3s;
     font-weight: 400;
   }
 
   .nav-links a:hover {
     color: var(--dark-earth);
+  }
+
+  /* ---- DROPDOWN ---- */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger {
+    font-size: 0.85rem;
+    color: var(--earth);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+    font-weight: 400;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  .nav-dropdown-trigger:hover {
+    color: var(--dark-earth);
+  }
+
+  .nav-dropdown-trigger::after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-right: 1px solid var(--clay);
+    border-bottom: 1px solid var(--clay);
+    transform: rotate(45deg);
+    margin-left: 0.4rem;
+    position: relative;
+    top: -2px;
+    transition: transform 0.3s;
+  }
+
+  .nav-dropdown.open .nav-dropdown-trigger::after {
+    transform: rotate(-135deg);
+    top: 1px;
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    background: rgba(245, 240, 232, 0.97);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(164, 146, 121, 0.2);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    box-shadow: 0 8px 24px rgba(26, 21, 16, 0.08);
+  }
+
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.82rem;
+    color: var(--earth);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-dropdown-menu a:hover {
+    color: var(--dark-earth);
+    background: rgba(164, 146, 121, 0.08);
+  }
+
+  /* Desktop: hover opens dropdown */
+  @media (hover: hover) {
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile & touch: open class toggles dropdown */
+  .nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   /* ---- HERO ---- */
@@ -505,10 +594,20 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-name">Bryce Lote</a>
+  <a href="index.html" class="nav-name">Bryce Lote</a>
   <div class="nav-links">
-    <a href="#about">Home</a>
-    <a href="#work">my work</a>
+    <a href="#about">home</a>
+    <div class="nav-dropdown">
+      <a href="#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">everything</a>
+      <div class="nav-dropdown-menu">
+        <a href="writing.html">writing</a>
+        <a href="breakdowns.html">breakdowns</a>
+        <a href="body-mind.html">body &amp; mind</a>
+        <a href="faith-family.html">faith &amp; family</a>
+        <a href="library.html">library</a>
+        <a href="games.html">games</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -518,8 +617,7 @@
     I write to think. <br>
     This is where I put it all.</h1>
   <p class="hero-description">
-    I grew up between a NICU and a server room. My mother was a nurse for forty years. My father built a career in IT. I spent my twenties taking a harder path than either of them would have chosen for me. Now I work at the intersection of both worlds, in healthcare technology, trying to earn the trust of people who have been sold to their whole careers and have very good reasons to be skeptical.
-  </p>
+    I'm a husband, a father of three, and I'm tired because one of them is a baby. I work hard and I hyperfixate on things that interest me. I'm a karate and ballet dad. I have a skateboard I haven't touched in over a year and a shelf of books I haven't made time for. My biggest concern right now is being present with my family while still working hard enough to support them. I'm figuring that out in real time and this site is part of how I think through it.  </p>
   <div class="hero-line"></div>
 </div>
 
@@ -528,18 +626,9 @@
 <section id="about" class="fade-in">
   <div class="section-label">about</div>
   <h2>The short version</h2>
-  <p>
-  Growing up in Texas I had two reference points for what work could mean. My mother spent forty years as a NICU nurse. My father built a career in IT and cybersecurity. Both of them stayed in their fields because they believed in what they were doing, not because it was easy or well-paid. That stayed with me even when I wasn't living up to it.
-  </p>
-  <p>
-  I got into serious trouble as a teenager. Hit a wall at eighteen that I didn't see coming and couldn't ignore. I spent several years in Hawaii putting myself back together, slowly and without a roadmap. The work of that period, the discipline it took, the willingness to start from nothing, shaped how I think about almost everything now.
-  </p>
-  <p>
-    I moved to Oklahoma in 2020. Built a career in operations and sales. I met the love of my life in 2023, and we got married in August of 2024. September 2025 our daughter Gianna was born, and that October I adopted Norah and Nehemiah. Our family officially became whole.
-  </p>
-  <p>I work in healthcare technology now as an SDR at Calvient, a company building workflow automation for the organizations that serve patients regardless of ability to pay. I was employee twelve. Once again there is no playbook.
-  </p>
-  <p>I organize my life around four things: family, faith, fitness, and finance. Everything else fits around those or it doesn't fit.</p>
+  <p>I got into serious trouble as a teenager. Hit a wall at eighteen that I didn't see coming and couldn't ignore. I spent several years in Hawaii putting myself back together, slowly and without a roadmap. That period shaped how I think about almost everything now.</p>
+  <p>I moved to Oklahoma in 2020. Built a career in operations and sales. Married Alli in August 2024. Our daughter Gianna was born in September 2025, and that October I adopted Norah and Nehemiah.</p>
+  <p>These days I work in healthcare technology and I spend most of my free time outside, building something around the house, or scrolling through everything on TV until I'm too tired to actually watch anything.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -548,89 +637,69 @@
   <div class="section-label">where this branches</div>
   <h2>Things I think about and things I've made</h2>
 
-  <div class="branch-grid">
-    <a class="branch-card" href="observe.html">
-      <div class="branch-number">01</div>
-      <div class="branch-title">Observe</div>
-      <div class="branch-desc">Observations, reflections, things I like and things I'm working through.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
+<div class="branch-grid">
+  <a class="branch-card" href="writing.html">
+    <div class="branch-number">01</div>
+    <div class="branch-title">Writing</div>
+    <div class="branch-desc">Things I needed to get out of my head and put somewhere I could find them again.</div>
+    <div class="branch-arrow">&rarr;</div>
+  </a>
 
-    <a class="branch-card" href="building.html">
-      <div class="branch-number">02</div>
-      <div class="branch-title">Building</div>
-      <div class="branch-desc">Systems, frameworks, processes. The way I approach problems, whether they live in a spreadsheet or a sales pipeline.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
+  <a class="branch-card" href="breakdowns.html">
+    <div class="branch-number">02</div>
+    <div class="branch-title">Breakdowns</div>
+    <div class="branch-desc">Things I've taken apart and put back together in a way that makes sense.</div>
+    <div class="branch-arrow">&rarr;</div>
+  </a>
 
-    <a class="branch-card" href="thework.html">
-      <div class="branch-number">03</div>
-      <div class="branch-title">The Work</div>
-      <div class="branch-desc">What I'm learning about healthcare, sales, and how organizations actually run. The stuff that doesn't fit on a resume.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
+  <a class="branch-card" href="body-mind.html">
+    <div class="branch-number">03</div>
+    <div class="branch-title">Body &amp; Mind</div>
+    <div class="branch-desc">What I'm learning about how to take care of myself.</div>
+    <div class="branch-arrow">&rarr;</div>
+  </a>
 
-    <a class="branch-card" href="faith-family.html">
-      <div class="branch-number">04</div>
-      <div class="branch-title">Faith &amp; Family</div>
-      <div class="branch-desc">The foundation underneath everything else. Moments I want to remember the way I was thinking about them at the time.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
+  <a class="branch-card" href="faith-family.html">
+    <div class="branch-number">04</div>
+    <div class="branch-title">Faith &amp; Family</div>
+    <div class="branch-desc">The foundation underneath everything else. Moments I want to remember the way I was thinking about them at the time.</div>
+    <div class="branch-arrow">&rarr;</div>
+  </a>
 
-    <a class="branch-card" href="fitness.html">
-      <div class="branch-number">05</div>
-      <div class="branch-title">Fitness</div>
-      <div class="branch-desc">Four years running a gym. A lifetime of learning how bodies work. Getting back to it now after letting it slide.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
-
-    <a class="branch-card" href="machines.html">
-      <div class="branch-number">06</div>
-      <div class="branch-title">Machines</div>
-      <div class="branch-desc">Computers I've built. Cars I've worked on. Audio and video systems. The kind of things that make more sense when you take them apart.</div>
-      <div class="branch-arrow">&rarr;</div>
-    </a>
-
-    <a class="branch-card branch-card-library" href="library.html">
-      <div class="branch-number">07</div>
-      <div class="library-card-content">
-        <div>
-          <div class="branch-title">Library</div>
-          <div class="branch-desc">Everything I read while working the night shift at the Children's Justice Center. Eighteen months. Eighty-eight books. Roughly 90% of everything I consumed during that period.</div>
-          <div class="branch-arrow">&rarr;</div>
-        </div>
-        <div class="library-card-stats">
-          <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
-          <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
-          <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
-        </div>
+  <a class="branch-card branch-card-library" href="library.html">
+    <div class="branch-number">05</div>
+    <div class="library-card-content">
+      <div>
+        <div class="branch-title">Library</div>
+        <div class="branch-desc">Everything I read while working the night shift at the Children's Justice Center. Eighteen months. Eighty-eight books.</div>
+        <div class="branch-arrow">&rarr;</div>
       </div>
-    </a>
-
-    <a class="branch-card branch-card-library" href="games.html">
-      <div class="branch-number">08</div>
-      <div class="library-card-content">
-        <div>
-          <div class="branch-title">Games</div>
-          <div class="branch-desc">Every game I can remember playing for 10 hours or more, ranked and rated. This is the distilled essence of my gaming history — the titles that captivated me, challenged me, and left a lasting impression. Each game on this list is a chapter in my journey as a player, representing countless hours of exploration, triumphs, and memorable moments.</div>
-          <div class="branch-arrow">&rarr;</div>
-        </div>
-        <div class="library-card-stats">
-          <div class="library-stat"><span class="library-stat-number">90</span><span class="library-stat-label">games</span></div>
-          <div class="library-stat"><span class="library-stat-number">12,000+</span><span class="library-stat-label">hours</span></div>
-          <div class="library-stat"><span class="library-stat-number">5</span><span class="library-stat-label">perfect 10s</span></div>
-        </div>
+      <div class="library-card-stats">
+        <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
+        <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
+        <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
       </div>
-    </a>
-  </div>
+    </div>
+  </a>
+
+  <a class="branch-card branch-card-library" href="games.html">
+    <div class="branch-number">06</div>
+    <div class="library-card-content">
+      <div>
+        <div class="branch-title">Games</div>
+        <div class="branch-desc">Every game I can remember playing for 10 hours or more, ranked and rated.</div>
+        <div class="branch-arrow">&rarr;</div>
+      </div>
+      <div class="library-card-stats">
+        <div class="library-stat"><span class="library-stat-number">90</span><span class="library-stat-label">games</span></div>
+        <div class="library-stat"><span class="library-stat-number">12,000+</span><span class="library-stat-label">hours</span></div>
+        <div class="library-stat"><span class="library-stat-number">5</span><span class="library-stat-label">perfect 10s</span></div>
+      </div>
+    </div>
+  </a>
+</div>
 </div>
 
-<div class="divider"><div class="divider-line"></div></div>
-
-<div class="quote-section fade-in">
-  <blockquote>"Sometimes we have to take a step back to spring forward."</blockquote>
-  <div class="quote-attr">&#8212; something I've carried for a while now</div>
-</div>
 
 <div class="divider"><div class="divider-line"></div></div>
 
@@ -640,7 +709,6 @@
     <div class="currently-grid">
       <div class="currently-item">
         <h4>working on</h4>
-        <p>
         <p>Finding consistency. Three months into building a pipeline and the results have been feast or famine. I can set meetings. What I'm working on now is making that repeatable.</p>
       </div>
       <div class="currently-item">
@@ -680,6 +748,14 @@
 
   document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
+  });
+
+  // Close dropdown when tapping outside on mobile
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.nav-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
   });
 </script>
 

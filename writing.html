@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faith &amp; Family — Bryce Lote</title>
+<title>Writing — Bryce Lote</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -41,6 +41,7 @@
     z-index: 1000;
   }
 
+  /* ---- NAV ---- */
   nav {
     position: fixed; top: 0; width: 100%;
     padding: 1.5rem 3rem;
@@ -63,6 +64,7 @@
   }
   .nav-links a:hover { color: var(--dark-earth); }
 
+  /* ---- DROPDOWN ---- */
   .nav-dropdown { position: relative; }
   .nav-dropdown-trigger {
     font-size: 0.85rem; color: var(--earth); text-decoration: none;
@@ -113,6 +115,7 @@
     opacity: 1; visibility: visible; transform: translateY(0);
   }
 
+  /* ---- PAGE HEADER ---- */
   .page-header {
     padding: 9rem 3rem 4rem;
     max-width: 800px; margin: 0 auto;
@@ -135,6 +138,7 @@
     opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
   }
 
+  /* ---- ENTRIES ---- */
   .entries {
     max-width: 800px; margin: 0 auto;
     padding: 2rem 3rem 6rem;
@@ -145,6 +149,13 @@
   }
   .entry:first-child {
     border-top: 1px solid rgba(164, 146, 121, 0.15);
+  }
+  .entry-tag {
+    display: inline-block;
+    font-size: 0.7rem; color: var(--clay);
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(164, 146, 121, 0.3);
+    padding: 0.2rem 0.6rem; margin-bottom: 1rem;
   }
   .entry-date {
     font-size: 0.75rem; color: var(--clay);
@@ -161,6 +172,7 @@
   }
   .entry p:last-child { margin-bottom: 0; }
 
+  /* ---- BACK LINK ---- */
   .back-link {
     display: inline-block; margin-top: 3rem;
     font-size: 0.85rem; color: var(--clay);
@@ -174,6 +186,7 @@
   }
   .back-link:hover span { transform: translateX(-3px); }
 
+  /* ---- FOOTER ---- */
   footer {
     padding: 4rem 3rem; max-width: 800px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: flex-end;
@@ -233,8 +246,8 @@
 </nav>
 
 <div class="page-header">
-  <h1>Faith &amp; Family</h1>
-  <p>The foundation underneath everything else. Moments I want to remember the way I was thinking about them at the time.</p>
+  <h1>Writing</h1>
+  <p>Things I needed to get out of my head and put somewhere I could find them again.</p>
   <div class="page-header-line"></div>
 </div>
 
@@ -246,14 +259,24 @@
        1. Copy everything between START and END
        2. Paste it ABOVE the most recent entry
        3. Change the date, title, and paragraphs
-       4. Commit the file to GitHub
+       4. Tag is optional. Add or remove as needed.
+       5. Commit the file to GitHub
 
        START COPY -------------------------------->
 
   <div class="entry fade-in">
+    <div class="entry-tag">sales</div>
     <div class="entry-date">may 2026</div>
-    <h2>Nothing here yet</h2>
-    <p>This page is for the things that matter most and change the slowest. First entry is coming.</p>
+    <a href="doc/3-month-outbound-lessons.pdf">
+      <img src="image/img-what-phones-taught-me.png" alt="What the Phones Taught Me"
+        style="max-width: 100%; margin-top: 1rem; margin-bottom: 1rem;
+        border: 1px solid rgba(164, 146, 121, 0.2);">
+    </a>
+    <h2>What the phones taught me</h2>
+    <p>I started at Calvient in March with no playbook, no predecessor, and no experience in healthcare. Twelve employees. A CRM full of potential. A phone. And a market I had never worked in.</p>
+    <p>Three months later I had talked to referral coordinators managing a thousand open cases, nursing directors thirty days into the job carrying doubts nobody asked them about, and operations leaders holding two roles without complaint. Most of them talked because I asked about the work instead of the org chart.</p>
+    <p>This is what I learned. About outbound sales, about healthcare, and about what happens when you stop pitching and start listening.</p>
+    <a href="doc/3-month-outbound-lessons.pdf" style="display: inline-block; margin-top: 1rem; font-size: 0.85rem; color: var(--earth); text-decoration: none; border: 1px solid rgba(164, 146, 121, 0.3); padding: 0.5rem 1rem; transition: all 0.3s;">Read the full piece (PDF) &rarr;</a>
   </div>
 
   <!-- END COPY ---------------------------------->
