@@ -119,7 +119,57 @@
     footer { flex-direction:column;gap:1.5rem;padding:3rem 1.5rem; }
     .book-card:hover { margin:0;padding:1rem 0; }
     .divider { padding:0 1.5rem; }
+    .currently-playing { padding-left:1.5rem;padding-right:1.5rem; }
+    .cp-card { flex-direction:column;gap:1rem; }
+    .cp-cover { width:100%;max-width:none; }
+    .cp-articles a { padding:0.6rem 0.75rem; }
   }
+
+  /* ---- CURRENTLY PLAYING ---- */
+  .currently-playing { max-width:800px;margin:0 auto;padding:2rem 3rem 3rem; }
+  .currently-playing .section-label { font-size:0.72rem;color:var(--text-muted);letter-spacing:0.12em;margin-bottom:1.5rem; }
+  .currently-playing h2 { font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:400;color:var(--text-heading);margin-bottom:1.5rem; }
+
+  .cp-card {
+    display:flex;gap:1.5rem;align-items:flex-start;
+    background:var(--bg-card);border:1px solid var(--border);
+    padding:1.5rem;transition:border-color 0.3s;
+  }
+  .cp-card:hover { border-color:var(--border-hover); }
+
+  .cp-cover {
+    width:200px;flex-shrink:0;border:1px solid var(--border);
+  }
+  .cp-cover img { width:100%;display:block; }
+
+  .cp-info { flex:1; }
+  .cp-title {
+    font-family:'Libre Baskerville',serif;font-size:1.15rem;
+    color:var(--text-heading);font-weight:400;margin-bottom:0.25rem;
+  }
+  .cp-title a { color:var(--text-heading);text-decoration:none; }
+  .cp-title a:hover { opacity:0.7; }
+  .cp-meta { font-size:0.8rem;color:var(--text-muted);letter-spacing:0.04em;margin-bottom:1rem; }
+
+  .cp-articles-label {
+    font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;
+    margin-bottom:0.5rem;
+  }
+  .cp-articles {
+    display:flex;flex-direction:column;gap:0.35rem;
+  }
+  .cp-articles a {
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.85rem;color:var(--text-body);text-decoration:none;
+    padding:0.5rem 0.75rem;
+    background:var(--bg-surface);border:1px solid var(--border);
+    transition:all 0.3s;
+  }
+  .cp-articles a:hover {
+    color:var(--text-heading);border-color:var(--border-hover);
+  }
+  .cp-articles a span { font-size:0.75rem;color:var(--text-muted);transition:transform 0.3s; }
+  .cp-articles a:hover span { transform:translateX(3px);color:var(--text-heading); }
 </style>
 </head>
 <body>
@@ -250,6 +300,29 @@
       <a href="#disco-elysium" class="mosaic-link"><img src="image/game-covers/34_Disco_Elysium.jpg" alt="Disco Elysium" loading="lazy"></a>
       <a href="#teardown" class="mosaic-link"><img src="image/game-covers/35_Teardown.jpg" alt="Teardown" loading="lazy"></a>
       <a href="#bioshock-infinite" class="mosaic-link"><img src="image/game-covers/36_BioShock_Infinite.jpg" alt="BioShock Infinite" loading="lazy"></a>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="currently-playing fade-in">
+  <div class="section-label">Currently Playing</div>
+  <div class="cp-card">
+    <div class="cp-cover">
+      <a href="https://store.steampowered.com/app/105600/Terraria/" target="_blank" rel="noopener">
+        <img src="image/game-covers/Terraria.jpg" alt="Terraria" loading="lazy">
+      </a>
+    </div>
+    <div class="cp-info">
+      <div class="cp-title"><a href="https://store.steampowered.com/app/105600/Terraria/" target="_blank" rel="noopener">Terraria</a></div>
+      <div class="cp-meta">26 hours · Sandbox Survival · 2011</div>
+      <p style="font-size:0.9rem;color:var(--text-body);line-height:1.7;margin-bottom:1rem;max-width:500px;">First playthrough. Corruption world, Classic difficulty. A 2D sandbox where you dig, build, fight bosses, and collect gear across a procedurally generated world. It looks simple until you realize the crafting tree is hundreds of items deep and every biome has its own ecosystem of enemies, materials, and secrets.</p>
+      <div class="cp-articles-label">Related Articles</div>
+      <div class="cp-articles">
+        <a href="doc/terraria-east-field-guide.pdf">East-Side Field Guide <span>&rarr;</span></a>
+        <a href="doc/Terraria-Progress-Tracker.pdf">Progress Tracker <span>&rarr;</span></a>
+      </div>
+    </div>
   </div>
 </div>
 
