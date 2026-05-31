@@ -103,7 +103,7 @@
 
   .page-header {
     padding: 9rem 3rem 3rem;
-    max-width: 800px; margin: 0 auto;
+    max-width: 900px; margin: 0 auto;
   }
   .page-header h1 {
     font-family: 'Libre Baskerville', serif;
@@ -123,55 +123,158 @@
     opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
   }
 
-  .entries {
-    max-width: 800px; margin: 0 auto;
-    padding: 2rem 3rem 4rem;
+  /* ---- FILTER ---- */
+  .filter-bar {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 3rem;
+    display: flex; align-items: center; gap: 0.75rem;
   }
-  .entry {
-    padding: 2.5rem 0;
+
+  .filter-label {
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .filter-dropdown { position: relative; }
+
+  .filter-trigger {
+    font-family: inherit; font-size: 0.85rem;
+    color: var(--text-heading); background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem; cursor: pointer;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: border-color 0.3s;
+  }
+  .filter-trigger:hover { border-color: var(--border-hover); }
+  .filter-trigger::after {
+    content: ''; display: inline-block;
+    width: 5px; height: 5px;
+    border-right: 1px solid var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
+    transform: rotate(45deg);
+    position: relative; top: -1px;
+    transition: transform 0.3s;
+  }
+  .filter-dropdown.open .filter-trigger::after {
+    transform: rotate(-135deg); top: 2px;
+  }
+
+  .filter-menu {
+    position: absolute; top: calc(100% + 0.4rem); left: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-hover);
+    padding: 0.35rem 0; min-width: 150px;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 50;
+  }
+  .filter-dropdown.open .filter-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+
+  .filter-option {
+    display: block; width: 100%;
+    font-family: inherit; font-size: 0.85rem;
+    color: var(--text-body); background: none; border: none;
+    padding: 0.4rem 1rem; text-align: left;
+    cursor: pointer; transition: color 0.2s, background 0.2s;
+  }
+  .filter-option:hover {
+    color: var(--text-heading);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .filter-option.active { color: var(--text-heading); }
+
+  /* ---- CARD GRID ---- */
+  .card-grid {
+    max-width: 900px; margin: 0 auto;
+    padding: 2rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .writing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    overflow: hidden;
+  }
+  .writing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: var(--border-hover);
+  }
+  .writing-card.hidden { display: none; }
+
+  .card-image {
+    width: 100%; aspect-ratio: 16 / 9;
+    object-fit: cover; display: block;
     border-bottom: 1px solid var(--border);
   }
-  .entry:first-child {
-    border-top: 1px solid var(--border);
+
+  .card-body {
+    padding: 1.5rem; flex: 1;
+    display: flex; flex-direction: column;
   }
-  .entry-tag {
+
+  .card-tag {
     display: inline-block;
     font-size: 0.7rem; color: var(--text-muted);
     letter-spacing: 0.1em;
     border: 1px solid var(--border-hover);
     padding: 0.15rem 0.5rem; margin-bottom: 0.75rem;
-    margin-right: 0.4rem;
+    align-self: flex-start;
   }
-  .entry-date {
-    font-size: 0.75rem; color: var(--text-muted);
-    letter-spacing: 0.1em; margin-bottom: 1rem;
-  }
-  .entry h2 {
+
+  .card-title {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.35rem; font-weight: 400; color: var(--text-heading);
-    line-height: 1.4; margin-bottom: 1.25rem;
+    font-size: 1.15rem; font-weight: 400; color: var(--text-heading);
+    line-height: 1.4; margin-bottom: 0.75rem;
   }
-  .entry p {
-    color: var(--text-body); margin-bottom: 1rem;
-    max-width: 620px; line-height: 1.8;
-  }
-  .entry p:last-child { margin-bottom: 0; }
 
-  .entry-link {
-    display: inline-block; margin-top: 1rem;
+  .card-desc {
+    font-size: 0.9rem; color: var(--text-body);
+    line-height: 1.7; flex: 1;
+  }
+
+  .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 1.25rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-date {
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .card-link {
     font-size: 0.85rem; color: var(--text-body);
-    text-decoration: none;
-    border: 1px solid var(--border-hover);
-    padding: 0.5rem 1rem;
-    transition: all 0.3s;
+    transition: color 0.3s;
   }
-  .entry-link:hover {
-    color: var(--text-heading);
-    border-color: var(--text-muted);
+  .writing-card:hover .card-link { color: var(--text-heading); }
+  .card-link span {
+    margin-left: 0.3rem; display: inline-block;
+    transition: transform 0.3s;
+  }
+  .writing-card:hover .card-link span { transform: translateX(3px); }
+
+  .card-status {
+    font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 0.06em; font-style: italic;
   }
 
+  /* ---- BACK & FOOTER ---- */
+  .back-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 3rem 4rem;
+  }
   .back-link {
-    display: inline-block; margin-top: 2.5rem;
+    display: inline-block;
     font-size: 0.85rem; color: var(--text-muted);
     text-decoration: none; transition: color 0.3s;
     letter-spacing: 0.03em;
@@ -184,7 +287,7 @@
   .back-link:hover span { transform: translateX(-3px); }
 
   footer {
-    padding: 4rem 3rem; max-width: 800px; margin: 0 auto;
+    padding: 4rem 3rem; max-width: 900px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: flex-end;
     border-top: 1px solid var(--border);
   }
@@ -221,9 +324,16 @@
     .nav-links { gap: 1.5rem; }
     .nav-links a { font-size: 0.8rem; }
     .page-header { padding: 7rem 1.5rem 2rem; }
-    .entries { padding: 2rem 1.5rem 3rem; }
+    .card-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem 3rem; }
+    .filter-bar { padding: 0 1.5rem; }
+    .back-section { padding: 0 1.5rem 3rem; }
     footer { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
   }
+
+  .writing-card:nth-child(1) { transition-delay: 0.05s; }
+  .writing-card:nth-child(2) { transition-delay: 0.1s; }
+  .writing-card:nth-child(3) { transition-delay: 0.15s; }
+  .writing-card:nth-child(4) { transition-delay: 0.2s; }
 </style>
 </head>
 <body>
@@ -251,23 +361,50 @@
   <div class="page-header-line"></div>
 </div>
 
-<div class="entries">
-
-  <div class="entry fade-in">
-    <div class="entry-tag">sales</div>
-    <div class="entry-date">May 2026</div>
-    <a href="doc/3-month-outbound-lessons.pdf">
-      <img src="image/img-what-phones-taught-me.png" alt="What the Phones Taught Me"
-        style="max-width: 100%; margin-top: 1rem; margin-bottom: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.06);">
-    </a>
-    <h2>What the phones taught me</h2>
-    <p>I started at Calvient in March with no playbook, no predecessor, and no experience in healthcare. Twelve employees. A CRM full of potential. A phone. And a market I had never worked in.</p>
-    <p>Three months later I had talked to referral coordinators managing a thousand open cases, nursing directors thirty days into the job carrying doubts nobody asked them about, and operations leaders holding two roles without complaint. Most of them talked because I asked about the work instead of the org chart.</p>
-    <p>This is what I learned. About outbound sales, about healthcare, and about what happens when you stop pitching and start listening.</p>
-    <a href="doc/3-month-outbound-lessons.pdf" class="entry-link">Read the full piece (PDF) &rarr;</a>
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <div class="filter-dropdown">
+    <button class="filter-trigger">All</button>
+    <div class="filter-menu">
+      <button class="filter-option active" data-filter="all">All</button>
+      <button class="filter-option" data-filter="terraria">Terraria</button>
+      <button class="filter-option" data-filter="sales">Sales</button>
+    </div>
   </div>
+</div>
 
+<div class="card-grid">
+
+  <a class="writing-card fade-in" href="#" data-tag="terraria" data-date="2026-05-31" style="pointer-events:none;opacity:0.5;">
+    <div class="card-body">
+      <div class="card-tag">Terraria</div>
+      <div class="card-tag">Video games</div>
+      <div class="card-tag">Narrative</div>
+      <div class="card-title">The Long Work — A Terraria Chronicle</div>
+      <div class="card-desc">My first Terraria playthrough told as narrative fiction. A man arrives in an empty world with a bad pickaxe and no plan, and does what he always does: builds something.</div>
+      <div class="card-footer">
+        <span class="card-status">Coming soon</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="writing-card fade-in" href="doc/3-month-outbound-lessons.pdf" data-tag="sales" data-date="2026-05-15">
+    <img class="card-image" src="image/img-what-phones-taught-me.png" alt="What the Phones Taught Me">
+    <div class="card-body">
+      <div class="card-tag">Sales</div>
+      <div class="card-tag">Lessons</div>
+      <div class="card-title">What the phones taught me</div>
+      <div class="card-desc">Three months of outbound calls in a market I had never worked in. What I learned about healthcare, sales, and what happens when you stop pitching and start listening.</div>
+      <div class="card-footer">
+        <span class="card-date">May 2026</span>
+        <span class="card-link">Read the full piece <span>&rarr;</span></span>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<div class="back-section">
   <a href="index.html" class="back-link"><span>&larr;</span> back home</a>
 </div>
 
@@ -293,11 +430,49 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => { observer.observe(el); });
 
+  // Nav dropdown
   document.addEventListener('click', function(e) {
-    const dropdown = document.querySelector('.nav-dropdown');
-    if (dropdown && !dropdown.contains(e.target)) {
-      dropdown.classList.remove('open');
+    const navDropdown = document.querySelector('.nav-dropdown');
+    if (navDropdown && !navDropdown.contains(e.target)) {
+      navDropdown.classList.remove('open');
     }
+  });
+
+  // Filter dropdown
+  const filterDropdown = document.querySelector('.filter-dropdown');
+  const filterTrigger = document.querySelector('.filter-trigger');
+  const filterOptions = document.querySelectorAll('.filter-option');
+  const cards = document.querySelectorAll('.writing-card');
+
+  filterTrigger.addEventListener('click', function() {
+    filterDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!filterDropdown.contains(e.target)) {
+      filterDropdown.classList.remove('open');
+    }
+  });
+
+  filterOptions.forEach(function(option) {
+    option.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+
+      filterOptions.forEach(function(opt) { opt.classList.remove('active'); });
+      this.classList.add('active');
+
+      filterTrigger.textContent = this.textContent;
+
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-tag') === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      filterDropdown.classList.remove('open');
+    });
   });
 </script>
 
