@@ -495,19 +495,8 @@
 <div class="currently">
   <div class="currently-inner">
     <div class="section-label">Currently</div>
-    <div class="currently-grid">
-      <div class="currently-item">
-        <h4>Working on</h4>
-        <p>Finding consistency. Three months into building a pipeline and the results have been feast or famine. I can set meetings. What I'm working on now is making that repeatable.</p>
-      </div>
-      <div class="currently-item">
-        <h4>Thinking about</h4>
-        <p>How to make the most of this summer. My wife needs support and my kids need structure. Getting both of those right at the same time is its own kind of project.</p>
-      </div>
-      <div class="currently-item">
-        <h4>Playing</h4>
-        <p><em>Took a break from Morrowind and Borderlands. Deciding what's next. Terraria is on the list.</em></p>
-      </div>
+    <div class="currently-grid" id="currently-grid">
+      <!-- Populated from data/currently.json -->
     </div>
   </div>
 </div>
@@ -531,6 +520,25 @@
       dropdown.classList.remove('open');
     }
   });
+
+  // Load currently section from JSON
+  fetch('data/currently.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var grid = document.getElementById('currently-grid');
+      var items = [
+        { label: 'Working on', text: data.working_on },
+        { label: 'Thinking about', text: data.thinking_about },
+        { label: 'Playing', text: data.playing }
+      ];
+
+      items.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'currently-item';
+        div.innerHTML = '<h4>' + item.label + '</h4><p>' + item.text + '</p>';
+        grid.appendChild(div);
+      });
+    });
 </script>
 
 </body>
