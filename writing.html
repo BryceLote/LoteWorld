@@ -221,13 +221,19 @@
     display: flex; flex-direction: column;
   }
 
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
   .card-tag {
     display: inline-block;
     font-size: 0.7rem; color: var(--text-muted);
     letter-spacing: 0.1em;
     border: 1px solid var(--border-hover);
-    padding: 0.15rem 0.5rem; margin-bottom: 0.75rem;
-    align-self: flex-start;
+    padding: 0.15rem 0.5rem;
   }
 
   .card-title {
@@ -375,15 +381,19 @@
 
 <div class="card-grid">
 
-  <a class="writing-card fade-in" href="#" data-tag="terraria" data-date="2026-05-31" style="pointer-events:none;opacity:0.5;">
+  <a class="writing-card fade-in" href="the-long-work.html" data-tag="terraria" data-date="2026-05-31">
+    <img class="card-image" src="image/terreria-images/the-western-edge-at-the-end.png" alt="The Long Work — The Western Edge">
     <div class="card-body">
-      <div class="card-tag">Terraria</div>
-      <div class="card-tag">Video games</div>
-      <div class="card-tag">Narrative</div>
+      <div class="card-tags">
+        <div class="card-tag">Terraria</div>
+        <div class="card-tag">Video games</div>
+        <div class="card-tag">Narrative</div>
+      </div>
       <div class="card-title">The Long Work — A Terraria Chronicle</div>
       <div class="card-desc">My first Terraria playthrough told as narrative fiction. A man arrives in an empty world with a bad pickaxe and no plan, and does what he always does: builds something.</div>
       <div class="card-footer">
-        <span class="card-status">Coming soon</span>
+        <span class="card-date">May 2026</span>
+        <span class="card-link">Read Entry One <span>&rarr;</span></span>
       </div>
     </div>
   </a>
@@ -391,8 +401,10 @@
   <a class="writing-card fade-in" href="doc/3-month-outbound-lessons.pdf" data-tag="sales" data-date="2026-05-15">
     <img class="card-image" src="image/img-what-phones-taught-me.png" alt="What the Phones Taught Me">
     <div class="card-body">
-      <div class="card-tag">Sales</div>
-      <div class="card-tag">Lessons</div>
+      <div class="card-tags">
+        <div class="card-tag">Sales</div>
+        <div class="card-tag">Lessons</div>
+      </div>
       <div class="card-title">What the phones taught me</div>
       <div class="card-desc">Three months of outbound calls in a market I had never worked in. What I learned about healthcare, sales, and what happens when you stop pitching and start listening.</div>
       <div class="card-footer">
