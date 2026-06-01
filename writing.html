@@ -371,49 +371,14 @@
   <span class="filter-label">Filter</span>
   <div class="filter-dropdown">
     <button class="filter-trigger">All</button>
-    <div class="filter-menu">
-      <button class="filter-option active" data-filter="all">All</button>
-      <button class="filter-option" data-filter="terraria">Terraria</button>
-      <button class="filter-option" data-filter="sales">Sales</button>
+    <div class="filter-menu" id="filter-menu">
+      <!-- Populated from JSON tags -->
     </div>
   </div>
 </div>
 
-<div class="card-grid">
-
-  <a class="writing-card fade-in" href="the-long-work.html" data-tag="terraria" data-date="2026-05-31">
-    <img class="card-image" src="image/terreria-images/the-western-edge-at-the-end.png" alt="The Long Work — The Western Edge">
-    <div class="card-body">
-      <div class="card-tags">
-        <div class="card-tag">Terraria</div>
-        <div class="card-tag">Video games</div>
-        <div class="card-tag">Narrative</div>
-      </div>
-      <div class="card-title">The Long Work — A Terraria Chronicle</div>
-      <div class="card-desc">My first Terraria playthrough told as narrative fiction. A man arrives in an empty world with a bad pickaxe and no plan, and does what he always does: builds something.</div>
-      <div class="card-footer">
-        <span class="card-date">May 2026</span>
-        <span class="card-link">Read Entry One <span>&rarr;</span></span>
-      </div>
-    </div>
-  </a>
-
-  <a class="writing-card fade-in" href="doc/3-month-outbound-lessons.pdf" data-tag="sales" data-date="2026-05-15">
-    <img class="card-image" src="image/img-what-phones-taught-me.png" alt="What the Phones Taught Me">
-    <div class="card-body">
-      <div class="card-tags">
-        <div class="card-tag">Sales</div>
-        <div class="card-tag">Lessons</div>
-      </div>
-      <div class="card-title">What the phones taught me</div>
-      <div class="card-desc">Three months of outbound calls in a market I had never worked in. What I learned about healthcare, sales, and what happens when you stop pitching and start listening.</div>
-      <div class="card-footer">
-        <span class="card-date">May 2026</span>
-        <span class="card-link">Read the full piece <span>&rarr;</span></span>
-      </div>
-    </div>
-  </a>
-
+<div class="card-grid" id="card-grid">
+  <!-- Populated from data/writing.json -->
 </div>
 
 <div class="back-section">
@@ -433,59 +398,121 @@
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+  // Intersection Observer
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => { observer.observe(el); });
 
-  // Nav dropdown
+  // Nav dropdown close
   document.addEventListener('click', function(e) {
-    const navDropdown = document.querySelector('.nav-dropdown');
+    var navDropdown = document.querySelector('.nav-dropdown');
     if (navDropdown && !navDropdown.contains(e.target)) {
       navDropdown.classList.remove('open');
     }
   });
 
-  // Filter dropdown
-  const filterDropdown = document.querySelector('.filter-dropdown');
-  const filterTrigger = document.querySelector('.filter-trigger');
-  const filterOptions = document.querySelectorAll('.filter-option');
-  const cards = document.querySelectorAll('.writing-card');
+  // Render cards from JSON
+  fetch('data/writing.json')
+    .then(function(r) { return r.json(); })
+    .then(function(entries) {
+      var grid = document.getElementById('card-grid');
+      var filterMenu = document.getElementById('filter-menu');
+      var allTags = [];
 
-  filterTrigger.addEventListener('click', function() {
-    filterDropdown.classList.toggle('open');
-  });
+      // Sort newest first
+      entries.sort(function(a, b) {
+        return b.date_sort.localeCompare(a.date_sort);
+      });
 
-  document.addEventListener('click', function(e) {
-    if (!filterDropdown.contains(e.target)) {
-      filterDropdown.classList.remove('open');
-    }
-  });
+      // Build cards
+      entries.forEach(function(entry, i) {
+        var card = document.createElement('a');
+        card.className = 'writing-card fade-in';
+        card.href = entry.url;
+        card.setAttribute('data-tags', entry.tags.join(','));
+        card.style.transitionDelay = (0.05 + i * 0.05) + 's';
 
-  filterOptions.forEach(function(option) {
-    option.addEventListener('click', function() {
-      const filter = this.getAttribute('data-filter');
+        var html = '';
 
-      filterOptions.forEach(function(opt) { opt.classList.remove('active'); });
-      this.classList.add('active');
+        if (entry.image) {
+          html += '<img class="card-image" src="' + entry.image + '" alt="' + entry.title + '">';
+        }
 
-      filterTrigger.textContent = this.textContent;
+        html += '<div class="card-body">';
+        html += '<div class="card-tags">';
+        entry.tags.forEach(function(tag) {
+          html += '<div class="card-tag">' + tag.charAt(0).toUpperCase() + tag.slice(1) + '</div>';
+          if (allTags.indexOf(tag) === -1) allTags.push(tag);
+        });
+        html += '</div>';
 
-      cards.forEach(function(card) {
-        if (filter === 'all' || card.getAttribute('data-tag') === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
+        html += '<div class="card-title">' + entry.title + '</div>';
+        html += '<div class="card-desc">' + entry.description + '</div>';
+        html += '<div class="card-footer">';
+        html += '<span class="card-date">' + entry.date + '</span>';
+        html += '<span class="card-link">' + entry.link_text + ' <span>&rarr;</span></span>';
+        html += '</div></div>';
+
+        card.innerHTML = html;
+        grid.appendChild(card);
+        observer.observe(card);
+      });
+
+      // Build filter options
+      var allBtn = document.createElement('button');
+      allBtn.className = 'filter-option active';
+      allBtn.setAttribute('data-filter', 'all');
+      allBtn.textContent = 'All';
+      filterMenu.appendChild(allBtn);
+
+      allTags.forEach(function(tag) {
+        var btn = document.createElement('button');
+        btn.className = 'filter-option';
+        btn.setAttribute('data-filter', tag);
+        btn.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+        filterMenu.appendChild(btn);
+      });
+
+      // Filter behavior
+      var filterDropdown = document.querySelector('.filter-dropdown');
+      var filterTrigger = document.querySelector('.filter-trigger');
+
+      filterTrigger.addEventListener('click', function() {
+        filterDropdown.classList.toggle('open');
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!filterDropdown.contains(e.target)) {
+          filterDropdown.classList.remove('open');
         }
       });
 
-      filterDropdown.classList.remove('open');
+      filterMenu.addEventListener('click', function(e) {
+        var option = e.target.closest('.filter-option');
+        if (!option) return;
+
+        var filter = option.getAttribute('data-filter');
+
+        filterMenu.querySelectorAll('.filter-option').forEach(function(opt) {
+          opt.classList.remove('active');
+        });
+        option.classList.add('active');
+        filterTrigger.textContent = option.textContent;
+
+        grid.querySelectorAll('.writing-card').forEach(function(card) {
+          var cardTags = card.getAttribute('data-tags').split(',');
+          if (filter === 'all' || cardTags.indexOf(filter) !== -1) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        filterDropdown.classList.remove('open');
+      });
     });
-  });
 </script>
 
 </body>
