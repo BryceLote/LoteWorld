@@ -103,6 +103,7 @@ section{padding:40px 0 6px; opacity:0; transform:translateY(14px); animation:ris
 .item .nm{font-weight:600; font-size:15.5px}
 .tag{font-family:"JetBrains Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:5px; border:1px solid currentColor; opacity:.9}
 .t-melee{color:var(--melee)} .t-ranged{color:var(--ranged)} .t-magic{color:var(--magic)} .t-summon{color:var(--summon)} .t-other{color:var(--other)}
+.stat-chip{font-family:"JetBrains Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:5px; border:1px solid var(--border); color:var(--muted); opacity:.9}
 .item .d{color:var(--muted); font-size:13.5px; flex-basis:100%; font-style:italic}
 
 /* npcs */
@@ -257,34 +258,34 @@ const DATA={
   ],
   events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
   armor:[
-    ["Molten armor","Hellstone set, equipped — best pre-Hardmode defense and melee bonuses; no movement bonus"],
-    ["Shadow Armor","kept — +15% movement speed, which he misses under Molten"],
-    ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast"]
+    ["Molten armor","Hellstone set, equipped — best pre-Hardmode defense and melee bonuses; no movement bonus","25 def"],
+    ["Shadow Armor","kept — +15% movement speed, which he misses under Molten","13 def"],
+    ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
   ],
   weapons:[
-    ["Bee Keeper","melee",3,"Queen Bee sword; releases bees on hit; sentimental favorite"],
-    ["Night's Edge","melee",4,"Godly · pre-Hardmode sword capstone (Blade of Grass + Muramasa + Fiery Greatsword + Light's Bane)"],
-    ["Phoenix Blaster","ranged",4,"Godly · Handgun + Hellstone Bars; top pre-Hardmode gun"],
-    ["Vilethorn","magic",1,"pierces walls; from Corruption shadow orbs"],
-    ["Molten Fury","ranged",4,"Hellstone bow; turns Wooden Arrows into Flaming Arrows"],
-    ["The Volcano","melee",4,"Hellstone sword; bouncing fireballs, On Fire"],
-    ["Water Bolt","magic",3,"Dungeon tome; bouncing/piercing bolt, great in tight spaces"],
-    ["Demon Bow + Unholy Arrows","ranged",2,"backup"],
-    ["War Axe of the Night","melee",2,"earlier melee"],
-    ["Flaming Mace","melee",1,"earlier crowd control"],
-    ["Space Gun","ranged",3,"from Meteorite, unused; free to cast with Meteor armor"],
-    ["Dark Lance","melee",3,"Shadow Chest (spear); found in multiples"],
-    ["Sunfury","melee",3,"Shadow Chest (flail)"],
-    ["Flamelash","magic",3,"Shadow Chest"],
-    ["Flower of Fire","magic",3,"Shadow Chest"],
-    ["Hellwing Bow","ranged",3,"Shadow Chest"],
-    ["Boomstick","ranged",2,"Jungle gun; found, not needed"]
+    ["Bee Keeper","melee",3,"Queen Bee sword; releases bees on hit; sentimental favorite","26 dmg"],
+    ["Night's Edge","melee",4,"Godly · pre-Hardmode sword capstone (Blade of Grass + Muramasa + Fiery Greatsword + Light's Bane)","40 dmg"],
+    ["Phoenix Blaster","ranged",4,"Godly · Handgun + Hellstone Bars; top pre-Hardmode gun","30 dmg"],
+    ["Vilethorn","magic",1,"pierces walls; from Corruption shadow orbs","13 dmg"],
+    ["Molten Fury","ranged",4,"Hellstone bow; turns Wooden Arrows into Flaming Arrows","31 dmg"],
+    ["The Volcano","melee",4,"Hellstone sword; bouncing fireballs, On Fire","38 dmg"],
+    ["Water Bolt","magic",3,"Dungeon tome; bouncing/piercing bolt, great in tight spaces","18 dmg"],
+    ["Demon Bow + Unholy Arrows","ranged",2,"backup","13 dmg"],
+    ["War Axe of the Night","melee",2,"earlier melee","28 dmg"],
+    ["Flaming Mace","melee",1,"earlier crowd control","24 dmg"],
+    ["Space Gun","ranged",3,"from Meteorite, unused; free to cast with Meteor armor","17 dmg"],
+    ["Dark Lance","melee",3,"Shadow Chest (spear); found in multiples","25 dmg"],
+    ["Sunfury","melee",3,"Shadow Chest (flail)","30 dmg"],
+    ["Flamelash","magic",3,"Shadow Chest","30 dmg"],
+    ["Flower of Fire","magic",3,"Shadow Chest","28 dmg"],
+    ["Hellwing Bow","ranged",3,"Shadow Chest","20 dmg"],
+    ["Boomstick","ranged",2,"Jungle gun; found, not needed","30 dmg"]
   ],
   tools:[
-    ["Molten Pickaxe","top pre-Hardmode pickaxe — can mine the first Hardmode ores"],
-    ["Molten Hamaxe","Hellstone hammer-axe combo"],
-    ["Diamond Hook","grapple"],
-    ["Staff of Regrowth","improves herb harvesting and grass spreading"]
+    ["Molten Pickaxe","top pre-Hardmode pickaxe — can mine the first Hardmode ores","100% pick"],
+    ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
+    ["Diamond Hook","grapple",""],
+    ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
   ],
   accEq:[
     "Lightning Boots (Hermes + Rocket = Spectre, + Aglet + Anklet of the Wind)",
@@ -371,21 +372,21 @@ const bd=DATA.bosses.filter(b=>b[1]).length;
 $("#bossmeta").textContent=`${bd} / ${DATA.bosses.length} fought`;
 
 // armor
-DATA.armor.forEach(([n,d])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span><span class="d">${d}</span>`; $("#armor").appendChild(i);});
+DATA.armor.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#armor").appendChild(i);});
 // weapons + filters
 const classes=["all","melee","ranged","magic"];
 const fw=$("#filters");
 classes.forEach(c=>{const b=el("button",c==="all"?"active":""); b.textContent=c; b.dataset.c=c; b.onclick=()=>{document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("active")); b.classList.add("active"); renderWeapons(c);}; fw.appendChild(b);});
 function renderWeapons(filter){
   const host=$("#weapons"); host.innerHTML="";
-  DATA.weapons.filter(w=>filter==="all"||w[1]===filter).forEach(([n,cls,rar,d])=>{
+  DATA.weapons.filter(w=>filter==="all"||w[1]===filter).forEach(([n,cls,rar,d,stat])=>{
     const i=el("div","item");
-    i.innerHTML=`<span class="nm" style="color:var(${RC[rar]})">${wlink(n,n)}</span><span class="tag t-${cls}">${cls}</span><span class="d">${d}</span>`;
+    i.innerHTML=`<span class="nm" style="color:var(${RC[rar]})">${wlink(n,n)}</span><span class="tag t-${cls}">${cls}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`;
     host.appendChild(i);
   });
 }
 renderWeapons("all");
-DATA.tools.forEach(([n,d])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span><span class="d">${d}</span>`; $("#tools").appendChild(i);});
+DATA.tools.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#tools").appendChild(i);});
 
 // accessories
 DATA.accEq.forEach(t=>{var base=t.split("(")[0].split("—")[0].trim(); $("#accEq").appendChild(el("li",null,wlink(base)+(t.includes("(")||t.includes("—")?" "+t.slice(base.length):"") ));});
