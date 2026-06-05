@@ -2,7 +2,9 @@
   {
     "title": "Terraria — East-Side Field Guide",
     "description": "Every weapon, armor set, and accessory still left to collect on the east side of my Corruption world, organized by zone. Jungle, desert, ocean, sky. A checklist for clearing what remains before heading west.",
-    "tags": ["terraria"],
+    "tags": [
+      "terraria"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-30",
     "url": "doc/terraria-east-field-guide.pdf",
@@ -12,17 +14,21 @@
   {
     "title": "Terraria — Progress Tracker",
     "description": "A living document tracking my first Terraria playthrough session by session. Character state, gear, bosses, infrastructure, and what happened each night. Updated as I play.",
-    "tags": ["terraria"],
+    "tags": [
+      "terraria"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-30",
-    "url": "doc/Terraria-Progress-Tracker.pdf",
+    "url": "terraria-tracker.html",
     "image": "image/terreria-images/progress-tracker.png",
     "link_text": "View tracker"
   },
   {
     "title": "Glock 43X — Complete Owner's Guide",
     "description": "Every system, every maintenance interval, every decision point. The Safe Action system, field strip procedure, lubrication points, holster considerations, Oklahoma law, ammunition. All of it in one place.",
-    "tags": ["firearm"],
+    "tags": [
+      "firearm"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-15",
     "url": "glock43x.html",
@@ -32,7 +38,9 @@
   {
     "title": "Lawn and tree care plan for Yukon, OK",
     "description": "Bermuda grass management and elm tree care specific to central Oklahoma. Soil chemistry, pest cycles, seasonal timing. An 11-page month-by-month reference.",
-    "tags": ["home"],
+    "tags": [
+      "home"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-01",
     "url": "doc/bryce-lawn-and-tree-guide-2026.pdf",

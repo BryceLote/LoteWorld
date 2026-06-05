@@ -170,6 +170,50 @@
   }
   .cp-articles a span { font-size:0.75rem;color:var(--text-muted);transition:transform 0.3s; }
   .cp-articles a:hover span { transform:translateX(3px);color:var(--text-heading); }
+
+  /* ---- FILTER & SORT CONTROLS ---- */
+  .controls-bar {
+    max-width:800px;margin:0 auto;padding:0 3rem 1rem;
+    display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  }
+  .control-group { display:flex;align-items:center;gap:0.5rem; }
+  .control-label { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em; }
+  .control-dropdown { position:relative; }
+  .control-trigger {
+    font-family:inherit;font-size:0.85rem;color:var(--text-heading);
+    background:var(--bg-card);border:1px solid var(--border);
+    padding:0.4rem 0.9rem;cursor:pointer;
+    display:flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;
+  }
+  .control-trigger:hover { border-color:var(--border-hover); }
+  .control-trigger::after {
+    content:'';display:inline-block;width:5px;height:5px;
+    border-right:1px solid var(--text-muted);border-bottom:1px solid var(--text-muted);
+    transform:rotate(45deg);position:relative;top:-1px;transition:transform 0.3s;
+  }
+  .control-dropdown.open .control-trigger::after { transform:rotate(-135deg);top:2px; }
+  .control-menu {
+    position:absolute;top:calc(100% + 0.4rem);left:0;
+    background:var(--bg-surface);border:1px solid var(--border-hover);
+    padding:0.35rem 0;min-width:180px;
+    opacity:0;visibility:hidden;transform:translateY(-4px);
+    transition:opacity 0.2s ease,transform 0.2s ease,visibility 0.2s;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:50;
+  }
+  .control-dropdown.open .control-menu { opacity:1;visibility:visible;transform:translateY(0); }
+  .control-option {
+    display:block;width:100%;font-family:inherit;font-size:0.85rem;
+    color:var(--text-body);background:none;border:none;
+    padding:0.4rem 1rem;text-align:left;
+    cursor:pointer;transition:color 0.2s,background 0.2s;
+  }
+  .control-option:hover { color:var(--text-heading);background:rgba(255,255,255,0.04); }
+  .control-option.active { color:var(--text-heading); }
+
+  .game-count {
+    font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em;
+    margin-left:auto;
+  }
 </style>
 </head>
 <body>
@@ -201,10 +245,10 @@
 </div>
 
 <div class="stats">
-  <div class="stat"><span class="stat-number">90</span><div class="stat-label">games tracked</div></div>
-  <div class="stat"><span class="stat-number">11,168</span><div class="stat-label">total hours</div></div>
-  <div class="stat"><span class="stat-number">6</span><div class="stat-label">foundation titles</div></div>
-  <div class="stat"><span class="stat-number">5</span><div class="stat-label">perfect 10s</div></div>
+  <div class="stat"><span class="stat-number" id="stat-gm-count">90</span><div class="stat-label">games tracked</div></div>
+  <div class="stat"><span class="stat-number" id="stat-gm-hours">11,168</span><div class="stat-label">total hours</div></div>
+  <div class="stat"><span class="stat-number" id="stat-gm-foundation">6</span><div class="stat-label">foundation titles</div></div>
+  <div class="stat"><span class="stat-number" id="stat-gm-perfect">5</span><div class="stat-label">perfect 10s</div></div>
 </div>
 
 <div class="mosaic-section">
@@ -327,1061 +371,37 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
+
 <div class="library-section fade-in">
   <div class="section-label">the list</div>
   <h2>Every game, grouped by genre</h2>
 </div>
 
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">01</span>
-      <h3 class="group-name">Open World RPG</h3>
-      <span class="group-count">9 games</span>
+<div class="controls-bar">
+  <div class="control-group">
+    <span class="control-label">Filter</span>
+    <div class="control-dropdown" id="filter-dropdown">
+      <button class="control-trigger" id="filter-trigger">All genres</button>
+      <div class="control-menu" id="filter-menu"></div>
     </div>
-    <div class="book-list">
-      <div class="book-card" id="the-elder-scrolls-iii-morrowind">
-        <a href="https://store.steampowered.com/app/22320/The_Elder_Scrolls_III_Morrowind_Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/38_Morrowind.jpg" alt="The Elder Scrolls III: Morrowind" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/22320/The_Elder_Scrolls_III_Morrowind_Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="game-link">The Elder Scrolls III: Morrowind</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">3000+ hrs · Open World RPG · 2002</div>
-            <p class="book-notes">Played thousands of hours starting around age 7, before I could read fluently. Completed the game through spatial memory, pattern recognition, and world-reading rather than text. All-time favorite. The game that established how I process complex systems — by inhabiting them</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-elder-scrolls-iv-oblivion">
-        <a href="https://store.steampowered.com/app/22330/The_Elder_Scrolls_IV_Oblivion_Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/99_Oblivion.jpg" alt="The Elder Scrolls IV: Oblivion" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/22330/The_Elder_Scrolls_IV_Oblivion_Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="game-link">The Elder Scrolls IV: Oblivion</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">600+ hrs · Open World RPG · 2006</div>
-            <p class="book-notes">600+ hours, most of it modded. One of the first games I could mod and run on my own machine. The vanilla systems are frustrating, but that was almost the point; it functioned more as a sandbox for understanding how games work than as a game I played straight. I experimented with small tweaks of my own and tried a ton of other people&#x27;s mods. It opened my eyes to what was possible.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-elder-scrolls-v-skyrim">
-        <a href="https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/02_Skyrim.jpg" alt="The Elder Scrolls V: Skyrim" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim/" target="_blank" rel="noopener" class="game-link">The Elder Scrolls V: Skyrim</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">234.9 hrs · Open World RPG · 2011</div>
-            <p class="book-notes">470 hours total across both editions. One of the defining games. Deep RPG investment, world-immersion.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-witcher-3-wild-hunt">
-        <a href="https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/24_Witcher_3.jpg" alt="The Witcher 3: Wild Hunt" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/" target="_blank" rel="noopener" class="game-link">The Witcher 3: Wild Hunt</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">200 hrs · Open World RPG · 2015</div>
-            <p class="book-notes">Quality-wise this should be a 9 or 10. The world feels more alive and lived-in than any game I&#x27;ve played since. Every quest feels real and important, and the player isn&#x27;t the center of the universe, just another inhabitant of the world. Great build variety, phenomenal story, and the graphics pushed me to build a new PC which is another favorite hobby. The reason it&#x27;s not higher is my own inability to commit to long story games as I&#x27;ve gotten older. I used to fully immerse in multi-dozen-hour campaigns. Now I play 10-20 hours, get busy, come back feeling lost, and end up starting over instead of pushing through. I&#x27;ve completed it once and played 30-40 hours into separate saves multiple times. I&#x27;ve experienced most of what it has to offer. The rating reflects me, not the game.</p>
-        </div>
-      </div>
-      <div class="book-card" id="fallout-4">
-        <a href="https://store.steampowered.com/app/377160/Fallout_4/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/45_Fallout_4_162h.jpg" alt="Fallout 4" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/377160/Fallout_4/" target="_blank" rel="noopener" class="game-link">Fallout 4</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">162.1 hrs · Open World RPG / FPS · 2015</div>
-            <p class="book-notes">My least favorite Fallout game. I spent hundreds of hours on 3 and New Vegas on PS3 and was very excited for this one. Got it at release, spent a ton of time exploring the wasteland and even more time building bases. But the story is weak and the roleplaying elements are shallow. I haven&#x27;t even completed the main story despite many attempts. It&#x27;s a good action RPG but not a great Fallout game.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-elder-scrolls-v-skyrim-special-edition">
-        <a href="https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/06_Skyrim_Special_Edition.jpg" alt="The Elder Scrolls V: Skyrim Special Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/72850/The_Elder_Scrolls_V_Skyrim/" target="_blank" rel="noopener" class="game-link">The Elder Scrolls V: Skyrim</a> Special Edition <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">93 hrs · Open World RPG · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="assassin-s-creed-odyssey">
-        <a href="https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/50_Assassins_Creed_Odyssey.jpg" alt="Assassin&#x27;s Creed Odyssey" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/" target="_blank" rel="noopener" class="game-link">Assassin&#x27;s Creed Odyssey</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">64.6 hrs · Action RPG / Open World · 2018</div>
-        </div>
-      </div>
-      <div class="book-card" id="fallout-new-vegas">
-        <a href="https://store.steampowered.com/app/22380/Fallout_New_Vegas/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/79_Fallout_New_Vegas.jpg" alt="Fallout: New Vegas" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/22380/Fallout_New_Vegas/" target="_blank" rel="noopener" class="game-link">Fallout: New Vegas</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">19.3 hrs · Open World RPG / FPS · 2010</div>
-        </div>
-      </div>
-      <div class="book-card" id="hogwarts-legacy">
-        <a href="https://store.steampowered.com/app/990080/Hogwarts_Legacy/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/89_Hogwarts_Legacy.jpg" alt="Hogwarts Legacy" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/990080/Hogwarts_Legacy/" target="_blank" rel="noopener" class="game-link">Hogwarts Legacy</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">15 hrs · Action RPG / Open World · 2023</div>
-        </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Sort</span>
+    <div class="control-dropdown" id="sort-dropdown">
+      <button class="control-trigger" id="sort-trigger">Genre</button>
+      <div class="control-menu" id="sort-menu">
+        <button class="control-option active" data-sort="genre">Genre</button>
+        <button class="control-option" data-sort="rating">Rating</button>
+        <button class="control-option" data-sort="hours">Hours played</button>
+        <button class="control-option" data-sort="alpha">Alphabetical</button>
+        <button class="control-option" data-sort="year">Year</button>
       </div>
     </div>
   </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">02</span>
-      <h3 class="group-name">Soulslike</h3>
-      <span class="group-count">5 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="dark-souls-iii">
-        <a href="https://store.steampowered.com/app/374320/DARK_SOULS_III/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/01_Dark_Souls_III.jpg" alt="DARK SOULS III" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/374320/DARK_SOULS_III/" target="_blank" rel="noopener" class="game-link">DARK SOULS III</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">256.2 hrs · Action RPG / Soulslike · 2016</div>
-            <p class="book-notes">The first Dark Souls that actually clicked. I had tried DS1 earlier and bounced off it because it was so different from the RPGs I knew. DS3 got popular and something about it landed. Played it for a while, didn&#x27;t finish, went back to DS1 and fell in love with the series there. Came back to DS3 with a fresh save and completed it. Built multiple characters for PvP, which pulled me into collecting nearly all items and endings in the process. DS1 is the favorite, but DS3 is the one that caught the deepest hyperfixation. Played it extensively for months and really haven&#x27;t been back since.</p>
-        </div>
-      </div>
-      <div class="book-card" id="elden-ring">
-        <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/44_Elden_Ring_164h.jpg" alt="ELDEN RING" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" rel="noopener" class="game-link">ELDEN RING</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">164.6 hrs · Action RPG / Soulslike / Open World · 2022</div>
-            <p class="book-notes">The most refined version of the Souls formula. Does everything I love about the DS games; character building, world building, and both the levels and bosses are top notch. The only reason I don&#x27;t play it more is the same thing that makes it great. It&#x27;s so vast that if I come back after time away I feel lost and disconnected. Same friction I have with long games generally, just applied to the best version of my favorite genre.</p>
-        </div>
-      </div>
-      <div class="book-card" id="dark-souls-remastered">
-        <a href="https://store.steampowered.com/app/570940/DARK_SOULS_REMASTERED/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/47_Dark_Souls_Remastered.jpg" alt="DARK SOULS: REMASTERED" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/570940/DARK_SOULS_REMASTERED/" target="_blank" rel="noopener" class="game-link">DARK SOULS: REMASTERED</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">129.4 hrs · Action RPG / Soulslike · 2018</div>
-            <p class="book-notes">242 hours combined across PTDE and Remastered. One of my all-time favorites. The game that defined the Soulslike for me — failure as a learning mechanism, mastery through repetition, a world that trusts you to figure it out.</p>
-        </div>
-      </div>
-      <div class="book-card" id="dark-souls-prepare-to-die-edition">
-        <a href="https://store.steampowered.com/app/211420/DARK_SOULS_Prepare_To_Die_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/25_Dark_Souls_Prepare_to_Die.jpg" alt="DARK SOULS: Prepare To Die Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/211420/DARK_SOULS_Prepare_To_Die_Edition/" target="_blank" rel="noopener" class="game-link">DARK SOULS: Prepare To Die Edition</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">9.5</span>
-          </div>
-          <div class="book-meta">113.1 hrs · Action RPG / Soulslike · 2012</div>
-            <p class="book-notes">Same game, revisited. 129 more hours on top of the 113 in the original. The investment across both editions puts this at the same level as DS3 and Skyrim</p>
-        </div>
-      </div>
-      <div class="book-card" id="dark-souls-ii-scholar-of-the-first-sin">
-        <a href="https://store.steampowered.com/app/335300/DARK_SOULS_II_Scholar_of_the_First_Sin/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/53_Dark_Souls_II_SOTFS.jpg" alt="DARK SOULS II: Scholar of the First Sin" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/335300/DARK_SOULS_II_Scholar_of_the_First_Sin/" target="_blank" rel="noopener" class="game-link">DARK SOULS II: Scholar of the First Sin</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">52.1 hrs · Action RPG / Soulslike · 2015</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">03</span>
-      <h3 class="group-name">Action RPG</h3>
-      <span class="group-count">10 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="the-legend-of-zelda-ocarina-of-time">
-        <a href="https://www.nintendo.com/us/store/products/the-legend-of-zelda-ocarina-of-time-3d-3ds/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/41_Ocarina_of_Time.jpg" alt="The Legend of Zelda: Ocarina of Time" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://www.nintendo.com/us/store/products/the-legend-of-zelda-ocarina-of-time-3d-3ds/" target="_blank" rel="noopener" class="game-link">The Legend of Zelda: Ocarina of Time</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">500+ hrs · Action RPG / Adventure · 1998</div>
-            <p class="book-notes">Completed hundreds of times before I could read. Same pre-literacy pattern as Morrowind and Majora&#x27;s Mask — navigating one of the most spatially complex games of its era through memory and pattern recognition alone.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-legend-of-zelda-majora-s-mask">
-        <a href="https://www.nintendo.com/us/store/products/the-legend-of-zelda-majoras-mask-3d-3ds/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/42_Majoras_Mask.jpg" alt="The Legend of Zelda: Majora&#x27;s Mask" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://www.nintendo.com/us/store/products/the-legend-of-zelda-majoras-mask-3d-3ds/" target="_blank" rel="noopener" class="game-link">The Legend of Zelda: Majora&#x27;s Mask</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">500+ hrs · Action RPG / Adventure · 2000</div>
-            <p class="book-notes">Completed multiple times before i could read. All-time favorite alongside Morrowind. The time-loop structure, the masks, the atmosphere of grief and impermanence. I have masks and concept art from the game guide in my home. The aesthetic has never left me.</p>
-        </div>
-      </div>
-      <div class="book-card" id="vampyr">
-        <a href="https://store.steampowered.com/app/427290/Vampyr/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/12_Vampyr.jpg" alt="Vampyr" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/427290/Vampyr/" target="_blank" rel="noopener" class="game-link">Vampyr</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">66.1 hrs · Action RPG · 2018</div>
-        </div>
-      </div>
-      <div class="book-card" id="outward">
-        <a href="https://store.steampowered.com/app/794260/Outward_Definitive_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/58_Outward.jpg" alt="Outward" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/794260/Outward_Definitive_Edition/" target="_blank" rel="noopener" class="game-link">Outward</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">44.1 hrs · Action RPG / Survival · 2019</div>
-        </div>
-      </div>
-      <div class="book-card" id="mass-effect-legendary-edition">
-        <a href="https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/61_Mass_Effect_Legendary.jpg" alt="Mass Effect Legendary Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1328670/Mass_Effect_Legendary_Edition/" target="_blank" rel="noopener" class="game-link">Mass Effect Legendary Edition</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">43.2 hrs · Action RPG / Sci-Fi · 2021</div>
-        </div>
-      </div>
-      <div class="book-card" id="kingdoms-of-amalur-reckoning">
-        <a href="https://store.steampowered.com/app/102500/Kingdoms_of_Amalur_Reckoning/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/66_Kingdoms_of_Amalur.jpg" alt="Kingdoms of Amalur: Reckoning" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/102500/Kingdoms_of_Amalur_Reckoning/" target="_blank" rel="noopener" class="game-link">Kingdoms of Amalur: Reckoning</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">37.6 hrs · Action RPG / Fantasy · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="mass-effect-2">
-        <a href="https://store.steampowered.com/app/24980/Mass_Effect_2_2010/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/67_Mass_Effect_2.jpg" alt="Mass Effect 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/24980/Mass_Effect_2_2010/" target="_blank" rel="noopener" class="game-link">Mass Effect 2</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">28.2 hrs · Action RPG / Sci-Fi · 2010</div>
-        </div>
-      </div>
-      <div class="book-card" id="fable-anniversary">
-        <a href="https://store.steampowered.com/app/288470/Fable_Anniversary/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/76_Fable_Anniversary.jpg" alt="Fable Anniversary" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/288470/Fable_Anniversary/" target="_blank" rel="noopener" class="game-link">Fable Anniversary</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">20.3 hrs · Action RPG / Fantasy · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="alpha-protocol">
-        <a href="https://store.steampowered.com/app/34010/Alpha_Protocol/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/85_Alpha_Protocol.jpg" alt="Alpha Protocol" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/34010/Alpha_Protocol/" target="_blank" rel="noopener" class="game-link">Alpha Protocol</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">15.8 hrs · Action RPG / Spy · 2010</div>
-        </div>
-      </div>
-      <div class="book-card" id="kingdoms-of-amalur-re-reckoning">
-        <a href="https://store.steampowered.com/app/1041720/Kingdoms_of_Amalur_ReReckoning/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/88_Kingdoms_of_Amalur_ReReckoning.jpg" alt="Kingdoms of Amalur: Re-Reckoning" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1041720/Kingdoms_of_Amalur_ReReckoning/" target="_blank" rel="noopener" class="game-link">Kingdoms of Amalur: Re-Reckoning</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8.5</span>
-          </div>
-          <div class="book-meta">15.6 hrs · Action RPG / Fantasy · 2020</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">04</span>
-      <h3 class="group-name">CRPG</h3>
-      <span class="group-count">2 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="divinity-original-sin-2">
-        <a href="https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/48_Divinity_Original_Sin_2.jpg" alt="Divinity: Original Sin 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/" target="_blank" rel="noopener" class="game-link">Divinity: Original Sin 2</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">122.5 hrs · CRPG / Turn-Based · 2017</div>
-            <p class="book-notes">Turn-based CRPG with genuine systems depth — one of the higher-investment titles outside the Soulslike catalog.</p>
-        </div>
-      </div>
-      <div class="book-card" id="disco-elysium">
-        <a href="https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/34_Disco_Elysium.jpg" alt="Disco Elysium" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" target="_blank" rel="noopener" class="game-link">Disco Elysium</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">10.9 hrs · CRPG / Detective · 2019</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">05</span>
-      <h3 class="group-name">FPS & Shooters</h3>
-      <span class="group-count">17 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="doom-ii">
-        <a href="https://store.steampowered.com/app/2300/Doom_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/40_Doom_2.jpg" alt="Doom II" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/2300/Doom_II/" target="_blank" rel="noopener" class="game-link">Doom II</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">1000+ hrs · FPS / Modding · 1994</div>
-            <p class="book-notes">Played and modded since around age 12. Making maps in Doom 2 was my first real creative outlet. Not just playing — building. The origin of the maker instinct that shows up everywhere else in my life.</p>
-        </div>
-      </div>
-      <div class="book-card" id="far-cry-3">
-        <a href="https://store.steampowered.com/app/220240/Far_Cry_3/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/21_Far_Cry_3.jpg" alt="Far Cry 3" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/220240/Far_Cry_3/" target="_blank" rel="noopener" class="game-link">Far Cry 3</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">150+ hrs · FPS / Open World · 2012</div>
-            <p class="book-notes">Played extensively on PS3 as well. I loved the setting and the feeling of freedom and power progression. The simple loop of explore, fight, grow, done well. There was always something to do without feeling like the game was actively trying to bombard me with content.</p>
-        </div>
-      </div>
-      <div class="book-card" id="borderlands-2">
-        <a href="https://store.steampowered.com/app/49520/Borderlands_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/10_Borderlands_2.jpg" alt="Borderlands 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/49520/Borderlands_2/" target="_blank" rel="noopener" class="game-link">Borderlands 2</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">114.7 hrs · FPS / Looter Shooter / Co-op · 2012</div>
-            <p class="book-notes">Most recent active play. Played on Steam Deck in small focused sessions — each one targeted at 1-3 objectives to strengthen my Commando build. Survival tree, Bee Shield, full legendary loadout. Level 52, completed TVHM. Used the save editor to level my legendaries — I know what I value about the experience and refused to waste limited time on the parts that don&#x27;t deliver it.</p>
-        </div>
-      </div>
-      <div class="book-card" id="borderlands-the-pre-sequel">
-        <a href="https://store.steampowered.com/app/261640/Borderlands_The_PreSequel/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/52_Borderlands_Pre_Sequel.jpg" alt="Borderlands: The Pre-Sequel" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/261640/Borderlands_The_PreSequel/" target="_blank" rel="noopener" class="game-link">Borderlands: The Pre-Sequel</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">55.1 hrs · FPS / Looter Shooter · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="doom-2016">
-        <a href="https://store.steampowered.com/app/379720/DOOM/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/59_Doom_2016.jpg" alt="DOOM (2016)" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/379720/DOOM/" target="_blank" rel="noopener" class="game-link">DOOM (2016)</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">44 hrs · FPS / Action · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="far-cry-5">
-        <a href="https://store.steampowered.com/app/552520/Far_Cry_5/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/62_Far_Cry_5.jpg" alt="Far Cry 5" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/552520/Far_Cry_5/" target="_blank" rel="noopener" class="game-link">Far Cry 5</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6.5</span>
-          </div>
-          <div class="book-meta">42.4 hrs · FPS / Open World · 2018</div>
-        </div>
-      </div>
-      <div class="book-card" id="call-of-duty-black-ops-ii-multiplayer">
-        <a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/64_COD_Black_Ops_II_MP.jpg" alt="Call of Duty: Black Ops II - Multiplayer" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="game-link">Call of Duty: Black Ops II - Multiplayer</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">39.2 hrs · FPS / Multiplayer · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="sanctum-2">
-        <a href="https://store.steampowered.com/app/210770/Sanctum_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/65_Sanctum_2.jpg" alt="Sanctum 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/210770/Sanctum_2/" target="_blank" rel="noopener" class="game-link">Sanctum 2</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">38.7 hrs · FPS / Tower Defense · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="metro-last-light-complete-edition">
-        <a href="https://store.steampowered.com/app/43160/Metro_Last_Light_Complete_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/19_Metro_Last_Light.jpg" alt="Metro: Last Light Complete Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/43160/Metro_Last_Light_Complete_Edition/" target="_blank" rel="noopener" class="game-link">Metro: Last Light Complete Edition</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">30.7 hrs · FPS / Horror / Atmospheric · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="call-of-duty-black-ops-iii">
-        <a href="https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/68_COD_Black_Ops_III.jpg" alt="Call of Duty: Black Ops III" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/311210/Call_of_Duty_Black_Ops_III/" target="_blank" rel="noopener" class="game-link">Call of Duty: Black Ops III</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">27 hrs · FPS / Multiplayer · 2015</div>
-        </div>
-      </div>
-      <div class="book-card" id="payday-2">
-        <a href="https://store.steampowered.com/app/218620/PAYDAY_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/70_Payday_2.jpg" alt="PAYDAY 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/218620/PAYDAY_2/" target="_blank" rel="noopener" class="game-link">PAYDAY 2</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">24.4 hrs · FPS / Co-op / Heist · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="wolfenstein-the-new-order">
-        <a href="https://store.steampowered.com/app/201810/Wolfenstein_The_New_Order/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/73_Wolfenstein_New_Order.jpg" alt="Wolfenstein: The New Order" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/201810/Wolfenstein_The_New_Order/" target="_blank" rel="noopener" class="game-link">Wolfenstein: The New Order</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6.5</span>
-          </div>
-          <div class="book-meta">23.1 hrs · FPS / Action · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="half-life-2">
-        <a href="https://store.steampowered.com/app/220/HalfLife_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/77_Half_Life_2.jpg" alt="Half-Life 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/220/HalfLife_2/" target="_blank" rel="noopener" class="game-link">Half-Life 2</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">19.8 hrs · FPS / Sci-Fi · 2004</div>
-        </div>
-      </div>
-      <div class="book-card" id="call-of-duty-black-ops-ii-zombies">
-        <a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/82_COD_Black_Ops_II_Zombies.jpg" alt="Call of Duty: Black Ops II - Zombies" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="game-link">Call of Duty: Black Ops II - Zombies</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">16.4 hrs · FPS / Co-op / Zombies · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="call-of-duty-black-ops-ii">
-        <a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/64_COD_Black_Ops_II_MP.jpg" alt="Call of Duty: Black Ops II" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/202990/Call_of_Duty_Black_Ops_II/" target="_blank" rel="noopener" class="game-link">Call of Duty: Black Ops II</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">14.8 hrs · FPS / Campaign · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="turok-2-seeds-of-evil">
-        <a href="https://store.steampowered.com/app/405830/Turok_2_Seeds_of_Evil/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/90_Turok_2.jpg" alt="Turok 2: Seeds of Evil" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/405830/Turok_2_Seeds_of_Evil/" target="_blank" rel="noopener" class="game-link">Turok 2: Seeds of Evil</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">14.5 hrs · FPS / Retro · 1998</div>
-        </div>
-      </div>
-      <div class="book-card" id="bioshock-infinite">
-        <a href="https://store.steampowered.com/app/8870/BioShock_Infinite/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/36_BioShock_Infinite.jpg" alt="BioShock Infinite" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/8870/BioShock_Infinite/" target="_blank" rel="noopener" class="game-link">BioShock Infinite</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6.5</span>
-          </div>
-          <div class="book-meta">10.1 hrs · FPS / Story · 2013</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">06</span>
-      <h3 class="group-name">Immersive Sim & Stealth</h3>
-      <span class="group-count">5 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="deus-ex-human-revolution-director-s-cut">
-        <a href="https://store.steampowered.com/app/238010/Deus_Ex_Human_Revolution__Directors_Cut/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/55_Deus_Ex_Human_Revolution.jpg" alt="Deus Ex: Human Revolution - Director&#x27;s Cut" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/238010/Deus_Ex_Human_Revolution__Directors_Cut/" target="_blank" rel="noopener" class="game-link">Deus Ex: Human Revolution - Director&#x27;s Cut</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">9.5</span>
-          </div>
-          <div class="book-meta">47 hrs · Action RPG / Immersive Sim · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="deus-ex-mankind-divided">
-        <a href="https://store.steampowered.com/app/337000/Deus_Ex_Mankind_Divided/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/15_Deus_Ex_Mankind_Divided.jpg" alt="Deus Ex: Mankind Divided" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/337000/Deus_Ex_Mankind_Divided/" target="_blank" rel="noopener" class="game-link">Deus Ex: Mankind Divided</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">36.4 hrs · Action RPG / Immersive Sim · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="tom-clancy-s-splinter-cell-blacklist">
-        <a href="https://store.steampowered.com/app/235600/Tom_Clancys_Splinter_Cell_Blacklist/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/75_Splinter_Cell_Blacklist.jpg" alt="Tom Clancy&#x27;s Splinter Cell Blacklist" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/235600/Tom_Clancys_Splinter_Cell_Blacklist/" target="_blank" rel="noopener" class="game-link">Tom Clancy&#x27;s Splinter Cell Blacklist</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8.5</span>
-          </div>
-          <div class="book-meta">21.3 hrs · Stealth / Action · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="dishonored">
-        <a href="https://store.steampowered.com/app/205100/Dishonored/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/92_Dishonored.jpg" alt="Dishonored" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/205100/Dishonored/" target="_blank" rel="noopener" class="game-link">Dishonored</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8.5</span>
-          </div>
-          <div class="book-meta">13.5 hrs · Immersive Sim / Stealth · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="hitman-absolution">
-        <a href="https://store.steampowered.com/app/203140/Hitman_Absolution/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/33_Hitman_Absolution.jpg" alt="Hitman: Absolution" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/203140/Hitman_Absolution/" target="_blank" rel="noopener" class="game-link">Hitman: Absolution</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">5</span>
-          </div>
-          <div class="book-meta">10.9 hrs · Stealth · 2012</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">07</span>
-      <h3 class="group-name">Roguelite</h3>
-      <span class="group-count">7 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="vampire-survivors">
-        <a href="https://store.steampowered.com/app/1794680/Vampire_Survivors/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/07_Vampire_Survivors.jpg" alt="Vampire Survivors" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1794680/Vampire_Survivors/" target="_blank" rel="noopener" class="game-link">Vampire Survivors</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">93.3 hrs · Roguelite / Bullet Hell · 2022</div>
-            <p class="book-notes">Same roguelite hook as Hades and Isaac — short sessions, build engineering, watching a system execute.</p>
-        </div>
-      </div>
-      <div class="book-card" id="slay-the-spire">
-        <a href="https://store.steampowered.com/app/646570/Slay_the_Spire/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/63_Slay_the_Spire.jpg" alt="Slay the Spire" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/646570/Slay_the_Spire/" target="_blank" rel="noopener" class="game-link">Slay the Spire</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8.5</span>
-          </div>
-          <div class="book-meta">39.7 hrs · Roguelite / Deckbuilder · 2019</div>
-        </div>
-      </div>
-      <div class="book-card" id="hades">
-        <a href="https://store.steampowered.com/app/1145360/Hades/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/16_Hades.jpg" alt="Hades" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1145360/Hades/" target="_blank" rel="noopener" class="game-link">Hades</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">35.9 hrs · Action Roguelite · 2020</div>
-            <p class="book-notes">Short runs, build optimization, high variance. The roguelite loop that fits ADHD reward structure.</p>
-        </div>
-      </div>
-      <div class="book-card" id="noita">
-        <a href="https://store.steampowered.com/app/881100/Noita/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/83_Noita.jpg" alt="Noita" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/881100/Noita/" target="_blank" rel="noopener" class="game-link">Noita</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">16 hrs · Roguelite / Physics / Pixel · 2020</div>
-        </div>
-      </div>
-      <div class="book-card" id="immortal-redneck">
-        <a href="https://store.steampowered.com/app/595140/Immortal_Redneck/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/84_Immortal_Redneck.jpg" alt="Immortal Redneck" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/595140/Immortal_Redneck/" target="_blank" rel="noopener" class="game-link">Immortal Redneck</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">16 hrs · FPS / Roguelite · 2017</div>
-        </div>
-      </div>
-      <div class="book-card" id="barony">
-        <a href="https://store.steampowered.com/app/371970/Barony/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/87_Barony.jpg" alt="Barony" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/371970/Barony/" target="_blank" rel="noopener" class="game-link">Barony</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">8.5</span>
-          </div>
-          <div class="book-meta">15.6 hrs · Roguelite / RPG / Co-op · 2015</div>
-        </div>
-      </div>
-      <div class="book-card" id="brotato">
-        <a href="https://store.steampowered.com/app/1942280/Brotato/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/94_Brotato.jpg" alt="Brotato" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1942280/Brotato/" target="_blank" rel="noopener" class="game-link">Brotato</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">13 hrs · Roguelite / Top-Down · 2023</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">08</span>
-      <h3 class="group-name">Strategy & Builders</h3>
-      <span class="group-count">11 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="skater-xl">
-        <a href="https://store.steampowered.com/app/962730/Skater_XL/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/03_Skater_XL.jpg" alt="Skater XL" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/962730/Skater_XL/" target="_blank" rel="noopener" class="game-link">Skater XL</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">232.3 hrs · Sports / Skating Sim · 2020</div>
-            <p class="book-notes">Skateboarding has been one of my great loves. I love the challenge, the process, and the artistic nature of seeing an everyday spot through the lens of how it can be experienced on a skateboard. This game is the purest simulation of that. It&#x27;s physics-based and you genuinely can&#x27;t play it without a fundamental understanding of how to manipulate the physics of a skateboard, gravity, and yourself. No score system, no goals, just a skateboarding simulation. There was a time in my life where I skated 4-6 hours every day. My body could only take so much and I was limited by daylight. Skater XL let me continue developing my skate brain when I physically couldn&#x27;t be out there.</p>
-        </div>
-      </div>
-      <div class="book-card" id="sid-meier-s-civilization-v">
-        <a href="https://store.steampowered.com/app/8930/Sid_Meiers_Civilization_V/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/04_Civilization_V.jpg" alt="Sid Meier&#x27;s Civilization V" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/8930/Sid_Meiers_Civilization_V/" target="_blank" rel="noopener" class="game-link">Sid Meier&#x27;s Civilization V</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">184.5 hrs · Strategy / 4X · 2010</div>
-            <p class="book-notes">My first Civ game. I like building things that get stronger over time and the strategy makes me feel smart. The systems feel homey to me and I can always pick it up. I can&#x27;t always put it down though, which is why I don&#x27;t play it much anymore. I fall very easily into the one-more-turn trap</p>
-        </div>
-      </div>
-      <div class="book-card" id="cities-skylines">
-        <a href="https://store.steampowered.com/app/255710/Cities_Skylines/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/49_Cities_Skylines.jpg" alt="Cities: Skylines" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/255710/Cities_Skylines/" target="_blank" rel="noopener" class="game-link">Cities: Skylines</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">120.7 hrs · City Builder / Simulation · 2015</div>
-            <p class="book-notes">Pure builder. Same instinct as Minecraft and Doom 2 mapping — constructing and optimizing a system.</p>
-        </div>
-      </div>
-      <div class="book-card" id="stronghold-crusader-2">
-        <a href="https://store.steampowered.com/app/232890/Stronghold_Crusader_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/11_Stronghold_Crusader_2.jpg" alt="Stronghold Crusader 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/232890/Stronghold_Crusader_2/" target="_blank" rel="noopener" class="game-link">Stronghold Crusader 2</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">67.3 hrs · Strategy / RTS · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="sid-meier-s-civilization-vi">
-        <a href="https://store.steampowered.com/app/8930/Sid_Meiers_Civilization_V/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/51_Civilization_VI.jpg" alt="Sid Meier&#x27;s Civilization VI" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/8930/Sid_Meiers_Civilization_V/" target="_blank" rel="noopener" class="game-link">Sid Meier&#x27;s Civilization V</a>I <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">56.6 hrs · Strategy / 4X · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="crusader-kings-ii">
-        <a href="https://store.steampowered.com/app/203770/Crusader_Kings_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/18_Crusader_Kings_II.jpg" alt="Crusader Kings II" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/203770/Crusader_Kings_II/" target="_blank" rel="noopener" class="game-link">Crusader Kings II</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">32.9 hrs · Strategy / Grand Strategy · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="total-war-warhammer-ii">
-        <a href="https://store.steampowered.com/app/594570/Total_War_WARHAMMER_II/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/20_Total_War_Warhammer_II.jpg" alt="Total War: WARHAMMER II" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/594570/Total_War_WARHAMMER_II/" target="_blank" rel="noopener" class="game-link">Total War: WARHAMMER II</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">30.1 hrs · Strategy / RTS · 2017</div>
-        </div>
-      </div>
-      <div class="book-card" id="xcom-enemy-unknown">
-        <a href="https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/72_XCOM_Enemy_Unknown.jpg" alt="XCOM: Enemy Unknown" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/" target="_blank" rel="noopener" class="game-link">XCOM: Enemy Unknown</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">23.9 hrs · Strategy / Tactical · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="nba-2k14">
-        <a href="https://store.steampowered.com/app/255480/NBA_2K14/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/74_NBA_2K14.jpg" alt="NBA 2K14" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/255480/NBA_2K14/" target="_blank" rel="noopener" class="game-link">NBA 2K14</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">22.4 hrs · Sports / Basketball · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="insurgency">
-        <a href="https://store.steampowered.com/app/222880/Insurgency/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/86_Insurgency.jpg" alt="Insurgency" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/222880/Insurgency/" target="_blank" rel="noopener" class="game-link">Insurgency</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">15.7 hrs · FPS / Tactical · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="banished">
-        <a href="https://store.steampowered.com/app/242920/Banished/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/31_Banished.jpg" alt="Banished" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/242920/Banished/" target="_blank" rel="noopener" class="game-link">Banished</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">11.5 hrs · City Builder / Survival · 2014</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">09</span>
-      <h3 class="group-name">Sandbox & Builders</h3>
-      <span class="group-count">7 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="minecraft">
-        <a href="https://www.minecraft.net/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/39_Minecraft.jpg" alt="Minecraft" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://www.minecraft.net/" target="_blank" rel="noopener" class="game-link">Minecraft</a> <span class="tier-badge foundation">Foundation</span></span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">500+ hrs · Sandbox / Creative / Survival · 2011</div>
-            <p class="book-notes">Hundreds of hours in both Creative and Survival. Creative mode as digital architecture, Survival as systems management. Builder identity in its purest form</p>
-        </div>
-      </div>
-      <div class="book-card" id="stardew-valley">
-        <a href="https://store.steampowered.com/app/413150/Stardew_Valley/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/57_Stardew_Valley.jpg" alt="Stardew Valley" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/413150/Stardew_Valley/" target="_blank" rel="noopener" class="game-link">Stardew Valley</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">120.5 hrs · Farming Sim / RPG · 2016</div>
-            <p class="book-notes">The other half of the build loop I love. Small sessions, incremental progress, building something that compounds over time.</p>
-        </div>
-      </div>
-      <div class="book-card" id="garry-s-mod">
-        <a href="https://store.steampowered.com/app/4000/Garrys_Mod/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/09_Garrys_Mod.jpg" alt="Garry&#x27;s Mod" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/4000/Garrys_Mod/" target="_blank" rel="noopener" class="game-link">Garry&#x27;s Mod</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">76.1 hrs · Sandbox / Physics · 2006</div>
-        </div>
-      </div>
-      <div class="book-card" id="no-man-s-sky">
-        <a href="https://store.steampowered.com/app/275850/No_Mans_Sky/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/54_No_Mans_Sky.jpg" alt="No Man&#x27;s Sky" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/275850/No_Mans_Sky/" target="_blank" rel="noopener" class="game-link">No Man&#x27;s Sky</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">48.4 hrs · Exploration / Survival / Sandbox · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="hitman">
-        <a href="https://store.steampowered.com/app/236870/HITMAN/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/56_Hitman_2016.jpg" alt="HITMAN" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/236870/HITMAN/" target="_blank" rel="noopener" class="game-link">HITMAN</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">44.6 hrs · Stealth / Sandbox · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-sims-4">
-        <a href="https://store.steampowered.com/app/1222670/The_Sims_4/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/95_Sims_4.jpg" alt="The Sims 4" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1222670/The_Sims_4/" target="_blank" rel="noopener" class="game-link">The Sims 4</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">13 hrs · Life Simulation · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="teardown">
-        <a href="https://store.steampowered.com/app/1167630/Teardown/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/35_Teardown.jpg" alt="Teardown" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1167630/Teardown/" target="_blank" rel="noopener" class="game-link">Teardown</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">10.6 hrs · Sandbox / Physics / Destruction · 2022</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">10</span>
-      <h3 class="group-name">Action & Adventure</h3>
-      <span class="group-count">9 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="grand-theft-auto-v">
-        <a href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/46_GTA_V.jpg" alt="Grand Theft Auto V" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/" target="_blank" rel="noopener" class="game-link">Grand Theft Auto V</a> <span class="tier-badge hall-of-fame">Hall of Fame</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">130.3 hrs · Open World / Action · 2013</div>
-                     <p class="book-notes">Pre-ordered on PS3 and played story mode extensively. For a long time it was my go-to turn-off-my-brain game; log on, drive around, run around an open world. Never got into the online mode and it turned me off that the game became all about it. Stopped playing for years, came back later and spent a good amount of time with single player mods, which is where most of these hours come from. Also used it as a benchmark for the PCs I built.</p>
-        </div>
-      </div>
-      <div class="book-card" id="middle-earth-shadow-of-mordor">
-        <a href="https://store.steampowered.com/app/241930/Middleearth_Shadow_of_Mordor/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/05_Shadow_of_Mordor.jpg" alt="Middle-earth: Shadow of Mordor" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/241930/Middleearth_Shadow_of_Mordor/" target="_blank" rel="noopener" class="game-link">Middle-earth: Shadow of Mordor</a> <span class="tier-badge major">Major</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">99.5 hrs · Action / Open World · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="god-of-war">
-        <a href="https://store.steampowered.com/app/1593500/God_of_War/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/14_God_of_War.jpg" alt="God of War" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1593500/God_of_War/" target="_blank" rel="noopener" class="game-link">God of War</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">36.8 hrs · Action / Adventure · 2022</div>
-        </div>
-      </div>
-      <div class="book-card" id="batman-arkham-city-goty">
-        <a href="https://store.steampowered.com/app/200260/Batman_Arkham_City__Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/22_Batman_Arkham_City.jpg" alt="Batman: Arkham City GOTY" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/200260/Batman_Arkham_City__Game_of_the_Year_Edition/" target="_blank" rel="noopener" class="game-link">Batman: Arkham City GOTY</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">29.3 hrs · Action / Adventure · 2012</div>
-        </div>
-      </div>
-      <div class="book-card" id="assassin-s-creed-iv-black-flag">
-        <a href="https://store.steampowered.com/app/242050/Assassins_Creed_IV_Black_Flag/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/13_Assassins_Creed_IV_Black_Flag.jpg" alt="Assassin&#x27;s Creed IV Black Flag" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/242050/Assassins_Creed_IV_Black_Flag/" target="_blank" rel="noopener" class="game-link">Assassin&#x27;s Creed IV Black Flag</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">27.4 hrs · Action / Open World / Pirate · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="control-ultimate-edition">
-        <a href="https://store.steampowered.com/app/870780/Control_Ultimate_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/78_Control.jpg" alt="Control Ultimate Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/870780/Control_Ultimate_Edition/" target="_blank" rel="noopener" class="game-link">Control Ultimate Edition</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">19.4 hrs · Action / Adventure / Supernatural · 2019</div>
-        </div>
-      </div>
-      <div class="book-card" id="saints-row-iv">
-        <a href="https://store.steampowered.com/app/206420/Saints_Row_IV/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/81_Saints_Row_IV.jpg" alt="Saints Row IV" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/206420/Saints_Row_IV/" target="_blank" rel="noopener" class="game-link">Saints Row IV</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">17.7 hrs · Open World / Action / Comedy · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="batman-arkham-origins">
-        <a href="https://store.steampowered.com/app/209000/Batman_Arkham_Origins/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/93_Batman_Arkham_Origins.jpg" alt="Batman: Arkham Origins" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/209000/Batman_Arkham_Origins/" target="_blank" rel="noopener" class="game-link">Batman: Arkham Origins</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">13.4 hrs · Action / Adventure · 2013</div>
-        </div>
-      </div>
-      <div class="book-card" id="batman-arkham-knight">
-        <a href="https://store.steampowered.com/app/208650/Batman_Arkham_Knight/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/97_Batman_Arkham_Knight.jpg" alt="Batman: Arkham Knight" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/208650/Batman_Arkham_Knight/" target="_blank" rel="noopener" class="game-link">Batman: Arkham Knight</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">12.5 hrs · Action / Adventure · 2015</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">11</span>
-      <h3 class="group-name">Fighting</h3>
-      <span class="group-count">5 games</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="mortal-kombat-x">
-        <a href="https://store.steampowered.com/app/307780/Mortal_Kombat_X/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/17_Mortal_Kombat_X.jpg" alt="Mortal Kombat X" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/307780/Mortal_Kombat_X/" target="_blank" rel="noopener" class="game-link">Mortal Kombat X</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">33.6 hrs · Fighting · 2015</div>
-        </div>
-      </div>
-      <div class="book-card" id="ultra-street-fighter-iv">
-        <a href="https://store.steampowered.com/app/45760/Ultra_Street_Fighter_IV/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/80_Ultra_Street_Fighter_IV.jpg" alt="Ultra Street Fighter IV" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/45760/Ultra_Street_Fighter_IV/" target="_blank" rel="noopener" class="game-link">Ultra Street Fighter IV</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">18.1 hrs · Fighting · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="naruto-shippuden-ultimate-ninja-storm-4">
-        <a href="https://store.steampowered.com/app/349040/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_4/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/91_Naruto_Storm_4.jpg" alt="NARUTO SHIPPUDEN: Ultimate Ninja STORM 4" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/349040/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_4/" target="_blank" rel="noopener" class="game-link">NARUTO SHIPPUDEN: Ultimate Ninja STORM 4</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">14.4 hrs · Fighting / Anime · 2016</div>
-        </div>
-      </div>
-      <div class="book-card" id="naruto-shippuden-ultimate-ninja-storm-revolution">
-        <a href="https://store.steampowered.com/app/272510/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_Revolution/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/96_Naruto_Storm_Revolution.jpg" alt="NARUTO SHIPPUDEN: Ultimate Ninja STORM Revolution" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/272510/NARUTO_SHIPPUDEN_Ultimate_Ninja_STORM_Revolution/" target="_blank" rel="noopener" class="game-link">NARUTO SHIPPUDEN: Ultimate Ninja STORM Revolution</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">7.5</span>
-          </div>
-          <div class="book-meta">12.9 hrs · Fighting / Anime · 2014</div>
-        </div>
-      </div>
-      <div class="book-card" id="injustice-gods-among-us-ultimate-edition">
-        <a href="https://store.steampowered.com/app/242700/Injustice_Gods_Among_Us_Ultimate_Edition/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/32_Injustice.jpg" alt="Injustice: Gods Among Us Ultimate Edition" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/242700/Injustice_Gods_Among_Us_Ultimate_Edition/" target="_blank" rel="noopener" class="game-link">Injustice: Gods Among Us Ultimate Edition</a> <span class="tier-badge explored">Explored</span></span>
-            <span class="book-rating ">4</span>
-          </div>
-          <div class="book-meta">11.2 hrs · Fighting · 2013</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">12</span>
-      <h3 class="group-name">Racing & Sports</h3>
-      <span class="group-count">1 game</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="grid-2">
-        <a href="https://store.steampowered.com/app/44350/GRID_2/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/69_GRID_2.jpg" alt="GRID 2" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/44350/GRID_2/" target="_blank" rel="noopener" class="game-link">GRID 2</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">6.5</span>
-          </div>
-          <div class="book-meta">25.3 hrs · Racing · 2013</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">13</span>
-      <h3 class="group-name">MMO</h3>
-      <span class="group-count">1 game</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="runescape">
-        <a href="https://store.steampowered.com/app/1343400/RuneScape/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/60_RuneScape.jpg" alt="RuneScape" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/1343400/RuneScape/" target="_blank" rel="noopener" class="game-link">RuneScape</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">500+ hrs · MMORPG · 2001</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">14</span>
-      <h3 class="group-name">Other</h3>
-      <span class="group-count">1 game</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="state-of-decay">
-        <a href="https://store.steampowered.com/app/241540/State_of_Decay_YOSE/" target="_blank" rel="noopener" class="cover-link"><img src="image/game-covers/71_State_of_Decay.jpg" alt="State of Decay" class="book-cover-thumb game-cover" loading="lazy"></a>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title"><a href="https://store.steampowered.com/app/241540/State_of_Decay_YOSE/" target="_blank" rel="noopener" class="game-link">State of Decay</a> <span class="tier-badge committed">Committed</span></span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">23.9 hrs · Survival / Zombie / Open World · 2013</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <span class="game-count" id="game-count"></span>
+</div>
 
+<div id="game-list"></div>
 
 <div class="divider"><div class="divider-line"></div></div>
 
@@ -1416,15 +436,14 @@
   });
 
   document.addEventListener('click', function(e) {
-    const dropdown = document.querySelector('.nav-dropdown');
-    if (dropdown && !dropdown.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
+    document.querySelectorAll('.control-dropdown, .nav-dropdown').forEach(function(dd) {
+      if (!dd.contains(e.target)) dd.classList.remove('open');
+    });
   });
 
-  // Load Terraria articles from JSON
+  // Load Terraria articles
   fetch('data/terraria-articles.json')
-    .then(function(response) { return response.json(); })
+    .then(function(r) { return r.json(); })
     .then(function(articles) {
       var container = document.getElementById('terraria-articles');
       articles.forEach(function(article) {
@@ -1433,10 +452,219 @@
         link.innerHTML = article.title + ' <span>&rarr;</span>';
         container.appendChild(link);
       });
-    })
-    .catch(function() {
-      // If JSON fails to load, show nothing — links just won't appear
+    }).catch(function() {});
+
+  // ---- GAMES LIST ----
+  var allGames = [];
+  var currentFilter = 'all';
+  var currentSort = 'genre';
+
+  fetch('data/games.json')
+    .then(function(r) { return r.json(); })
+    .then(function(games) {
+      allGames = games;
+
+      // Auto-calculate stats
+      var totalHours = 0;
+      var perfectCount = 0;
+      var foundationCount = 0;
+      games.forEach(function(g) {
+        totalHours += g.hours || 0;
+        if (parseFloat(g.rating) === 10) perfectCount++;
+        if (g.tier === 'foundation') foundationCount++;
+      });
+
+      document.getElementById('stat-gm-count').textContent = games.length;
+      document.getElementById('stat-gm-hours').textContent = Math.round(totalHours).toLocaleString();
+      document.getElementById('stat-gm-foundation').textContent = foundationCount;
+      document.getElementById('stat-gm-perfect').textContent = perfectCount;
+
+      // Build filter options
+      var filterMenu = document.getElementById('filter-menu');
+      var allBtn = document.createElement('button');
+      allBtn.className = 'control-option active';
+      allBtn.setAttribute('data-filter', 'all');
+      allBtn.textContent = 'All genres';
+      filterMenu.appendChild(allBtn);
+
+      var genres = [];
+      games.forEach(function(g) {
+        if (genres.indexOf(g.genre) === -1) genres.push(g.genre);
+      });
+      genres.forEach(function(genre) {
+        var btn = document.createElement('button');
+        btn.className = 'control-option';
+        btn.setAttribute('data-filter', genre);
+        btn.textContent = genre;
+        filterMenu.appendChild(btn);
+      });
+
+      renderGames();
+      setupControls();
     });
+
+  function renderGames() {
+    var container = document.getElementById('game-list');
+    container.innerHTML = '';
+
+    var filtered = currentFilter === 'all'
+      ? allGames.slice()
+      : allGames.filter(function(g) { return g.genre === currentFilter; });
+
+    // Sort
+    if (currentSort === 'rating') {
+      filtered.sort(function(a, b) { return (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0); });
+    } else if (currentSort === 'hours') {
+      filtered.sort(function(a, b) { return (b.hours || 0) - (a.hours || 0); });
+    } else if (currentSort === 'alpha') {
+      filtered.sort(function(a, b) { return a.title.localeCompare(b.title); });
+    } else if (currentSort === 'year') {
+      filtered.sort(function(a, b) { return (a.year || 9999) - (b.year || 9999); });
+    } else {
+      // Genre sort: keep original genre order, then hours within genre
+      filtered.sort(function(a, b) {
+        if (a.genre_order !== b.genre_order) return a.genre_order - b.genre_order;
+        return (b.hours || 0) - (a.hours || 0);
+      });
+    }
+
+    // Update count
+    document.getElementById('game-count').textContent = filtered.length + ' game' + (filtered.length !== 1 ? 's' : '');
+
+    if (currentSort === 'genre') {
+      // Grouped view
+      var currentGenre = null;
+      var groupNum = 0;
+      var groupDiv = null;
+      var listDiv = null;
+
+      filtered.forEach(function(game) {
+        if (game.genre !== currentGenre) {
+          currentGenre = game.genre;
+          groupNum++;
+          var genreGames = filtered.filter(function(g) { return g.genre === currentGenre; });
+
+          groupDiv = document.createElement('div');
+          groupDiv.className = 'book-group fade-in';
+
+          var header = document.createElement('div');
+          header.className = 'group-header';
+          header.innerHTML = '<span class="group-number">' + String(groupNum).padStart(2, '0') + '</span>'
+            + '<h3 class="group-name">' + currentGenre + '</h3>'
+            + '<span class="group-count">' + genreGames.length + ' game' + (genreGames.length !== 1 ? 's' : '') + '</span>';
+          groupDiv.appendChild(header);
+
+          listDiv = document.createElement('div');
+          listDiv.className = 'book-list';
+          groupDiv.appendChild(listDiv);
+          container.appendChild(groupDiv);
+          observer.observe(groupDiv);
+          groupDiv.classList.add('visible');
+        }
+
+        listDiv.appendChild(buildCard(game));
+      });
+    } else {
+      // Flat view
+      var flatGroup = document.createElement('div');
+      flatGroup.className = 'book-group fade-in';
+      var flatList = document.createElement('div');
+      flatList.className = 'book-list';
+      flatGroup.appendChild(flatList);
+
+      filtered.forEach(function(game) {
+        flatList.appendChild(buildCard(game));
+      });
+
+      container.appendChild(flatGroup);
+      observer.observe(flatGroup);
+      flatGroup.classList.add('visible');
+    }
+  }
+
+  function buildCard(game) {
+    var card = document.createElement('div');
+    card.className = 'book-card';
+    card.id = game.id;
+
+    var html = '';
+
+    // Cover image
+    if (game.cover) {
+      html += '<a href="' + (game.url || '#') + '" target="_blank" rel="noopener" class="cover-link">'
+        + '<img src="' + game.cover + '" alt="' + escHtml(game.title) + '" class="book-cover-thumb game-cover" loading="lazy"></a>';
+    }
+
+    // Info
+    html += '<div class="book-info"><div class="book-title-row"><span class="book-title">';
+    html += '<a href="' + (game.url || '#') + '" target="_blank" rel="noopener" class="game-link">' + escHtml(game.title) + '</a>';
+    if (game.tier) {
+      html += ' <span class="tier-badge ' + game.tier + '">' + game.tier_label + '</span>';
+    }
+    html += '</span>';
+
+    // Rating
+    var rClass = game.rating_class || '';
+    html += '<span class="book-rating ' + rClass + '">' + game.rating + '</span>';
+    html += '</div>';
+
+    // Meta
+    if (game.meta) {
+      html += '<div class="book-meta">' + escHtml(game.meta) + '</div>';
+    }
+
+    // Notes
+    if (game.notes) {
+      html += '<p class="book-notes">' + escHtml(game.notes) + '</p>';
+    }
+
+    html += '</div>';
+    card.innerHTML = html;
+    return card;
+  }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function setupControls() {
+    // Filter
+    var filterDD = document.getElementById('filter-dropdown');
+    var filterTrigger = document.getElementById('filter-trigger');
+    var filterMenu = document.getElementById('filter-menu');
+
+    filterTrigger.addEventListener('click', function() { filterDD.classList.toggle('open'); });
+
+    filterMenu.addEventListener('click', function(e) {
+      var opt = e.target.closest('.control-option');
+      if (!opt) return;
+      currentFilter = opt.getAttribute('data-filter');
+      filterMenu.querySelectorAll('.control-option').forEach(function(o) { o.classList.remove('active'); });
+      opt.classList.add('active');
+      filterTrigger.textContent = opt.textContent;
+      filterDD.classList.remove('open');
+      renderGames();
+    });
+
+    // Sort
+    var sortDD = document.getElementById('sort-dropdown');
+    var sortTrigger = document.getElementById('sort-trigger');
+    var sortMenu = document.getElementById('sort-menu');
+
+    sortTrigger.addEventListener('click', function() { sortDD.classList.toggle('open'); });
+
+    sortMenu.addEventListener('click', function(e) {
+      var opt = e.target.closest('.control-option');
+      if (!opt) return;
+      currentSort = opt.getAttribute('data-sort');
+      sortMenu.querySelectorAll('.control-option').forEach(function(o) { o.classList.remove('active'); });
+      opt.classList.add('active');
+      sortTrigger.textContent = opt.textContent;
+      sortDD.classList.remove('open');
+      renderGames();
+    });
+  }
 </script>
 
 </body>

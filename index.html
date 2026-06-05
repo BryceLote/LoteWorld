@@ -463,9 +463,9 @@
           <div class="branch-arrow">&rarr;</div>
         </div>
         <div class="library-card-stats">
-          <div class="library-stat"><span class="library-stat-number">88</span><span class="library-stat-label">books</span></div>
-          <div class="library-stat"><span class="library-stat-number">36</span><span class="library-stat-label">star wars</span></div>
-          <div class="library-stat"><span class="library-stat-number">3</span><span class="library-stat-label">perfect 10s</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-library-books">88</span><span class="library-stat-label">books</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-library-starwars">36</span><span class="library-stat-label">star wars</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-library-perfect">3</span><span class="library-stat-label">perfect 10s</span></div>
         </div>
       </div>
     </a>
@@ -481,9 +481,9 @@
           <div class="branch-arrow">&rarr;</div>
         </div>
         <div class="library-card-stats">
-          <div class="library-stat"><span class="library-stat-number">90</span><span class="library-stat-label">games</span></div>
-          <div class="library-stat"><span class="library-stat-number">12,000+</span><span class="library-stat-label">hours</span></div>
-          <div class="library-stat"><span class="library-stat-number">5</span><span class="library-stat-label">perfect 10s</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-games-count">90</span><span class="library-stat-label">games</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-games-hours">12,000+</span><span class="library-stat-label">hours</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-games-perfect">5</span><span class="library-stat-label">perfect 10s</span></div>
         </div>
       </div>
     </a>
@@ -538,6 +538,18 @@
         div.innerHTML = '<h4>' + item.label + '</h4><p>' + item.text + '</p>';
         grid.appendChild(div);
       });
+    });
+
+  // Load stats from JSON
+  fetch('data/stats.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('stat-library-books').textContent = data.library.books;
+      document.getElementById('stat-library-starwars').textContent = data.library.star_wars;
+      document.getElementById('stat-library-perfect').textContent = data.library.perfect_10s;
+      document.getElementById('stat-games-count').textContent = data.games.count;
+      document.getElementById('stat-games-hours').textContent = data.games.total_hours_short;
+      document.getElementById('stat-games-perfect').textContent = data.games.perfect_10s;
     });
 </script>
 

@@ -139,10 +139,10 @@
 </div>
 
 <div class="stats">
-  <div class="stat"><span class="stat-number">88</span><div class="stat-label">books tracked</div></div>
-  <div class="stat"><span class="stat-number">36</span><div class="stat-label">star wars novels</div></div>
-  <div class="stat"><span class="stat-number">7.6</span><div class="stat-label">avg rating</div></div>
-  <div class="stat"><span class="stat-number">3</span><div class="stat-label">perfect 10s</div></div>
+  <div class="stat"><span class="stat-number" id="stat-lib-books">88</span><div class="stat-label">books tracked</div></div>
+  <div class="stat"><span class="stat-number" id="stat-lib-starwars">36</span><div class="stat-label">star wars novels</div></div>
+  <div class="stat"><span class="stat-number" id="stat-lib-avg">7.6</span><div class="stat-label">avg rating</div></div>
+  <div class="stat"><span class="stat-number" id="stat-lib-perfect">3</span><div class="stat-label">perfect 10s</div></div>
 </div>
 
 <div class="mosaic-section">
@@ -1310,6 +1310,15 @@
       dropdown.classList.remove('open');
     }
   });
+
+  fetch('data/stats.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('stat-lib-books').textContent = data.library.books;
+      document.getElementById('stat-lib-starwars').textContent = data.library.star_wars;
+      document.getElementById('stat-lib-avg').textContent = data.library.avg_rating;
+      document.getElementById('stat-lib-perfect').textContent = data.library.perfect_10s;
+    });
 </script>
 
 </body>
