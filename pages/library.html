@@ -191,7 +191,7 @@
 
 <div class="stats">
   <div class="stat"><span class="stat-number" id="stat-lib-books">88</span><div class="stat-label">books tracked</div></div>
-  <div class="stat"><span class="stat-number" id="stat-lib-starwars">36</span><div class="stat-label">star wars novels</div></div>
+  <div class="stat"><span class="stat-number" id="stat-lib-series">33</span><div class="stat-label">book series</div></div>
   <div class="stat"><span class="stat-number" id="stat-lib-avg">7.6</span><div class="stat-label">avg rating</div></div>
   <div class="stat"><span class="stat-number" id="stat-lib-perfect">3</span><div class="stat-label">perfect 10s</div></div>
 </div>
@@ -274,6 +274,19 @@
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // Count "book series": distinct multi-book series (case-normalized, book-number
+  // suffixes stripped) plus each standalone book counted as its own series.
+  function countBookSeries(books) {
+    var realSeries = {}, standalones = 0;
+    books.forEach(function(b) {
+      var s = (b.series || '').trim();
+      if (!s || s.toLowerCase() === 'standalone') { standalones++; return; }
+      var key = s.toLowerCase().replace(/\s*\(\d+\)\s*$/, '').replace(/\s*&\s*/g, ' and ').replace(/\s+/g, ' ').trim();
+      realSeries[key] = true;
+    });
+    return Object.keys(realSeries).length + standalones;
+  }
+
   // ---- LIBRARY LIST ----
   var allBooks = [];
   var currentFilter = 'all';
@@ -288,14 +301,13 @@
       allBooks = books;
 
       // Auto-calculate stats
-      var ratedSum = 0, ratedCount = 0, perfect = 0, starWars = 0;
+      var ratedSum = 0, ratedCount = 0, perfect = 0;
       books.forEach(function(b) {
         var n = parseInt(b.rating, 10);
         if (!isNaN(n)) { ratedSum += n; ratedCount++; if (n === 10) perfect++; }
-        if (b.group && b.group.indexOf('Star Wars') === 0) starWars++;
       });
       document.getElementById('stat-lib-books').textContent = books.length;
-      document.getElementById('stat-lib-starwars').textContent = starWars;
+      document.getElementById('stat-lib-series').textContent = countBookSeries(books);
       document.getElementById('stat-lib-avg').textContent = ratedCount ? (ratedSum / ratedCount).toFixed(1) : '—';
       document.getElementById('stat-lib-perfect').textContent = perfect;
 

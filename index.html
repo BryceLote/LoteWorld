@@ -469,7 +469,7 @@
         </div>
         <div class="library-card-stats">
           <div class="library-stat"><span class="library-stat-number" id="stat-library-books">88</span><span class="library-stat-label">books</span></div>
-          <div class="library-stat"><span class="library-stat-number" id="stat-library-starwars">36</span><span class="library-stat-label">star wars</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-library-series">33</span><span class="library-stat-label">book series</span></div>
           <div class="library-stat"><span class="library-stat-number" id="stat-library-perfect">3</span><span class="library-stat-label">perfect 10s</span></div>
         </div>
       </div>
@@ -546,16 +546,26 @@
     });
 
   // Stats computed live from the same JSON the Library and Games pages use
+  function countBookSeries(books) {
+    var realSeries = {}, standalones = 0;
+    books.forEach(function(b) {
+      var s = (b.series || '').trim();
+      if (!s || s.toLowerCase() === 'standalone') { standalones++; return; }
+      var key = s.toLowerCase().replace(/\s*\(\d+\)\s*$/, '').replace(/\s*&\s*/g, ' and ').replace(/\s+/g, ' ').trim();
+      realSeries[key] = true;
+    });
+    return Object.keys(realSeries).length + standalones;
+  }
+
   fetch('/data/books.json')
     .then(function(r) { return r.json(); })
     .then(function(books) {
-      var perfect = 0, starWars = 0;
+      var perfect = 0;
       books.forEach(function(b) {
         if (parseInt(b.rating, 10) === 10) perfect++;
-        if (b.group && b.group.indexOf('Star Wars') === 0) starWars++;
       });
       document.getElementById('stat-library-books').textContent = books.length;
-      document.getElementById('stat-library-starwars').textContent = starWars;
+      document.getElementById('stat-library-series').textContent = countBookSeries(books);
       document.getElementById('stat-library-perfect').textContent = perfect;
     })
     .catch(function(err) { console.error('Library stats failed:', err); });
