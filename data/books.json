@@ -14,7 +14,9 @@
     "year": 1991,
     "notes": "One of the most compelling Star Wars stories I've read that establishes an entire cast of classic characters that live on throughout the cannon following this book. The plot was very funny and introduces one of the best written antagonists in all of science fiction. This book is so good it established and entire cannon and was the basis for the star war expanded universe",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/9540602-heir-to-the-empire",
+    "goodreads_exact": true
   },
   {
     "id": "dark-force-rising",
@@ -31,7 +33,9 @@
     "year": 1992,
     "notes": "This book kept me on my toes and raised the stakes throughout. I enjoyed how well this book portrayed thrawn as a legitimate threat and really drove home how fragile the new galactic government's hold on the galaxy truly was.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/216442.Dark_Force_Rising",
+    "goodreads_exact": true
   },
   {
     "id": "the-last-command",
@@ -48,7 +52,9 @@
     "year": 1993,
     "notes": "The plot is extremely engaging and the stakes felt so high. The antagonists in this book and series were so much fun and both felt like a genuine threat to the galaxy until the very end. The book always manages to portray Thrawn in a way that keeps the reader impressed and awed of his character while simultaneously rooting against him.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/216422.The_Last_Command",
+    "goodreads_exact": true
   },
   {
     "id": "specter-of-the-past",
@@ -65,7 +71,9 @@
     "year": 1997,
     "notes": "Excellent follow up to his previous series that further develops the character expertly.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/77787.Specter_of_the_Past",
+    "goodreads_exact": true
   },
   {
     "id": "vision-of-the-future",
@@ -82,7 +90,9 @@
     "year": 1998,
     "notes": "Great plot that left that had lasting repercussions for the rest of the EU. Great book and character development",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/77786.Vision_of_the_Future",
+    "goodreads_exact": true
   },
   {
     "id": "path-of-destruction",
@@ -99,7 +109,9 @@
     "year": 2006,
     "notes": "I very much enjoyed the Darth bane characterization and the way it humanized his journey into the dark side. This book truly made the with feel like an order of actual characters vs the typical bad guy archetype.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/35430.Path_of_Destruction",
+    "goodreads_exact": true
   },
   {
     "id": "rule-of-two",
@@ -116,7 +128,9 @@
     "year": 2007,
     "notes": "While I enjoyed how this book fleshed out zannahs character and set her up for the next book I felt the book overall fell a little flat and was by far the weakest entry into the series. That said I did enjoy the action sequence vs the Jedi toward the end.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Rule%20of%20two%20Drew%20Karpyshyn",
+    "goodreads_exact": false
   },
   {
     "id": "dynasty-of-evil",
@@ -133,7 +147,9 @@
     "year": 2009,
     "notes": "The pacing of this book especially the end was a lot of fun and felt like a fuse burning at both ends, I enjoyed the ambiguous ending as well as the implications for the greater Star Wars universe.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Dynasty%20of%20Evil%20Drew%20Karpyshyn",
+    "goodreads_exact": false
   },
   {
     "id": "outcast",
@@ -150,7 +166,9 @@
     "year": 2009,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Outcast%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "omen",
@@ -167,7 +185,9 @@
     "year": 2009,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Omen%20Christie%20golden",
+    "goodreads_exact": false
   },
   {
     "id": "allies",
@@ -184,7 +204,9 @@
     "year": 2010,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Allies%20Christie%20golden",
+    "goodreads_exact": false
   },
   {
     "id": "ascension",
@@ -201,7 +223,9 @@
     "year": 2011,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Ascension%20Christie%20golden",
+    "goodreads_exact": false
   },
   {
     "id": "backlash",
@@ -218,7 +242,9 @@
     "year": 2010,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Backlash%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "conviction",
@@ -235,7 +261,9 @@
     "year": 2011,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Conviction%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "vortex",
@@ -252,7 +280,9 @@
     "year": 2010,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Vortex%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "abyss",
@@ -269,7 +299,9 @@
     "year": 2009,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Abyss%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "apocalypse",
@@ -286,7 +318,9 @@
     "year": 2012,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Apocalypse%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "betrayal",
@@ -303,7 +337,9 @@
     "year": 2006,
     "notes": "A necessary setup book that establishes the political fracture and begins Jacen's slow drift toward the dark side, but it struggles to generate much momentum on its own. Allston's writing style has always been a friction point for me and this one felt like a slog to get through despite the foundation it's laying.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Betrayal%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "bloodlines",
@@ -320,7 +356,9 @@
     "year": 2006,
     "notes": "A significant step up from the first entry. Boba Fett's subplot was the highlight; watching how age and experience have reshaped him while his ability to operate on the level of Force users through pure skill and cunning remains fully intact was deeply satisfying. The way he leverages his own notoriety as a tool was a particular favorite. Ben's perspective also added a lot; seeing the same events through the eyes of those around him who sense something is wrong before he does hit close to home.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Bloodlines%20Karen%20Traviss",
+    "goodreads_exact": false
   },
   {
     "id": "tempest",
@@ -337,7 +375,9 @@
     "year": 2006,
     "notes": "Denning does well here with what I find most compelling about dark side storytelling; the seductive logic of it. Jacen isn't obviously evil yet; he's a person you still want to give the benefit of the doubt, making calculated decisions he's convinced are necessary. The tension between his genuine love for Tenel Ka and Allana and the coldness he's developing sits at the center of the book and keeps it interesting. A solid middle entry that does its job well without being exceptional.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Tempest%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "exile",
@@ -354,7 +394,9 @@
     "year": 2007,
     "notes": "Allston's writing remains a friction point but the story itself had enough momentum by this point to carry past it. The growing rift between Jacen and his parents was handled well and felt earned given everything that's come before. Ben's arc was the real highlight for me; knowing where he ends up in Fate of the Jedi made watching these formative experiences take shape genuinely compelling.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Exile%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "sacrifice",
@@ -371,7 +413,9 @@
     "year": 2007,
     "notes": "Traviss at her best. The death of Mara Jade is the centerpiece and even knowing it was coming didn't diminish the impact; the entire book builds pressure across multiple converging threads that feel disconnected on the surface but are quietly tightening toward the same inevitable moment. Like watching a fuse burn when you already know what it's attached to.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Sacrifice%20Karen%20Traviss",
+    "goodreads_exact": false
   },
   {
     "id": "inferno",
@@ -388,7 +432,9 @@
     "year": 2007,
     "notes": "Denning delivers the emotional payoff the series had been building toward. Watching Jacen get his first real reality check at Luke's hands was deeply satisfying; he'd been operating unchallenged for so long that the confrontation felt genuinely shocking even when you knew it was coming. The grief dynamic between Luke and Ben is the emotional core of the book and it's handled with real weight; two people processing the same loss in opposite ways and discovering they need exactly what the other one has.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Inferno%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "fury",
@@ -405,7 +451,9 @@
     "year": 2007,
     "notes": "Allston's best entry in the series for me. The Jaina and Boba Fett training arc carries the book and earns its score on its own. Watching Jaina accept that she needed to become something different in order to stop her brother was compelling, and her dynamic with Fett works because she's one of the only characters tough enough to genuinely surrender to Mandalorian culture without losing herself in it.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Fury%20Aaron%20Allston",
+    "goodreads_exact": false
   },
   {
     "id": "revelation",
@@ -422,7 +470,9 @@
     "year": 2008,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Revelation%20Karen%20Traviss",
+    "goodreads_exact": false
   },
   {
     "id": "invincible",
@@ -439,7 +489,9 @@
     "year": 2008,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Invincible%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "revan",
@@ -456,7 +508,9 @@
     "year": 2011,
     "notes": "A fun story with compelling characters that serves well to fill out the old republic timeline. I very much enjoyed the dual plot lines and how they intersect the main characters. The ending however was a let down and felt heavily constrained to the established lore. Basically the ending battle was pigeonholed into the predetermined result of the video games that followed it and felt at odds with the book itself.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Revan%20Drew%20Karpyshyn",
+    "goodreads_exact": false
   },
   {
     "id": "fatal-alliance",
@@ -473,7 +527,9 @@
     "year": 2010,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Fatal%20Alliance%20Drew%20Karpyshyn",
+    "goodreads_exact": false
   },
   {
     "id": "deceived",
@@ -490,7 +546,9 @@
     "year": 2011,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Deceived%20Paul%20S.%20Kemp",
+    "goodreads_exact": false
   },
   {
     "id": "darth-plagueis",
@@ -507,7 +565,9 @@
     "year": 2012,
     "notes": "The plot of this book is somewhat slow and can feel dense at times, the content of the story and character development it does for the movies is tremendous and makes this book feel like required reading to fully understand the prequel movies plot lines. Also this book goes really well with the Darth bane trilogy as it fleshes out the order of the sith and tell the story of the end of his line of succession.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Darth%20Plagueis%20James%20Lucero",
+    "goodreads_exact": false
   },
   {
     "id": "shadow-hunter",
@@ -524,7 +584,9 @@
     "year": 2001,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Shadow%20Hunter%20Michael%20Reeves",
+    "goodreads_exact": false
   },
   {
     "id": "lockdown",
@@ -541,7 +603,9 @@
     "year": 2014,
     "notes": "Such a fun story, I really enjoyed this thriller / jailbreak story set in the Star Wars unviverse and appreciated how it did not rely so heavily on \"the force\" or the greater plot of the cannon. It was just a fantastic book that took full advantage of the Star Wars setting and pre established characters.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/13317315-maul",
+    "goodreads_exact": true
   },
   {
     "id": "crucible",
@@ -558,7 +622,9 @@
     "year": 2013,
     "notes": "Felt like extra content for the sake of extra content. Easily shippable fan service for readers who want more after finishing the fate of the Jedi series. With hollow references throughout and a cheesy storyline.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Crucible%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "kenobi",
@@ -575,7 +641,9 @@
     "year": 2013,
     "notes": "Excellent character study of who obi wan kenobi has become in the aftermath of the movies and a very fun story that makes it clear who he must become to serve the greater good moving forward.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/17262173-kenobi",
+    "goodreads_exact": true
   },
   {
     "id": "shatterpoint",
@@ -592,7 +660,9 @@
     "year": 2003,
     "notes": "The setting and tone of the plot are fun but mace windu is not my favorite character and the plot seems like it has a hard time deciding what it wants to be. That being said I did enjoy how this story seems to be an omage the the classic film apocalypse now set in the Star Wars universe.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Shatterpoint%20Matthew%20Stover",
+    "goodreads_exact": false
   },
   {
     "id": "the-joiner-king",
@@ -609,7 +679,9 @@
     "year": 2005,
     "notes": "",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Joiner%20King%20Troy%20Denning",
+    "goodreads_exact": false
   },
   {
     "id": "dune",
@@ -626,7 +698,9 @@
     "year": 1965,
     "notes": "Easily a classic. Although dense with the expectation that the reader will take the time to learn about the world the characters inhabit. The character, setting, and plot development were all absolutely fantastic!",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/book/show/44767458-dune",
+    "goodreads_exact": true
   },
   {
     "id": "dune-messiah",
@@ -643,7 +717,9 @@
     "year": 1969,
     "notes": "Good follow up to the first book and continues do give the characters even more depth. The plot is definitely weaker than its predecessor though.",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Dune%3A%20Messiah%20Frank%20Herbert",
+    "goodreads_exact": false
   },
   {
     "id": "children-of-dune",
@@ -660,7 +736,9 @@
     "year": 1976,
     "notes": "Great for fan service but it's very obvious that quality in the series begins to fall off from this point",
     "genre": "Sci-Fi",
-    "genre_order": 1
+    "genre_order": 1,
+    "goodreads": "https://www.goodreads.com/search?q=Children%20of%20Dune%20Frank%20Herbert",
+    "goodreads_exact": false
   },
   {
     "id": "how-to-win-friends-and-influence-people",
@@ -677,7 +755,9 @@
     "year": 1936,
     "notes": "The book feel very obviously dated but the concepts and information is extremely valuable and would benefit anyone to study and impliment.",
     "genre": "Self-Improvement",
-    "genre_order": 2
+    "genre_order": 2,
+    "goodreads": "https://www.goodreads.com/search?q=How%20to%20win%20friends%20and%20influence%20people%20Dale%20Carnegie",
+    "goodreads_exact": false
   },
   {
     "id": "the-servant",
@@ -694,7 +774,9 @@
     "year": 1998,
     "notes": "I thoroughly enjoyed this book and listened multiple times. The story is structured very well and succeeds in helping the reader to identify with the authors faults as he learns how to become a better leader throughout an engaging story.",
     "genre": "Self-Improvement",
-    "genre_order": 2
+    "genre_order": 2,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Servant%20James%20C.%20Hunter",
+    "goodreads_exact": false
   },
   {
     "id": "the-richest-man-in-babylon",
@@ -711,7 +793,9 @@
     "year": 1926,
     "notes": "Timeless information presented in an interesting manner. Somewhat hard to follow at times due to its age and the way it's organized. The content itself was extremely useful and immediately actionable. I also appreciated how throughly it explained its principles by fleshing out each examples through multiple different perspectives and examples.",
     "genre": "Self-Improvement",
-    "genre_order": 2
+    "genre_order": 2,
+    "goodreads": "https://www.goodreads.com/book/show/1201772.The_Richest_Man_in_Babylon",
+    "goodreads_exact": true
   },
   {
     "id": "12-rules-for-life",
@@ -728,7 +812,9 @@
     "year": 2018,
     "notes": "While this book did intrigue me throughout and cause me to consider its meaning deeper, it ultimately felt self serving to the author and very much gave me the impression that the entire book was written as an exercise of his ego.",
     "genre": "Self-Improvement",
-    "genre_order": 2
+    "genre_order": 2,
+    "goodreads": "https://www.goodreads.com/search?q=12%20Rules%20for%20life%20Jordan%20B%20Peterson",
+    "goodreads_exact": false
   },
   {
     "id": "dark-of-the-moon",
@@ -745,7 +831,9 @@
     "year": 2007,
     "notes": "Solid mystery novel that expertly introduces one of my favorite characters of all time Virgil flowers. While not super complex the plot remains engaging and the characters feel real.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Dark%20of%20the%20moon%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "heat-lightning",
@@ -762,7 +850,9 @@
     "year": 2008,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Heat%20lightning%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "rough-country",
@@ -779,7 +869,9 @@
     "year": 2009,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Rough%20Country%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "mad-river",
@@ -796,7 +888,9 @@
     "year": 2012,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Mad%20River%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "bad-blood",
@@ -813,7 +907,9 @@
     "year": 2010,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/7713965-bad-blood",
+    "goodreads_exact": true
   },
   {
     "id": "deadline",
@@ -830,7 +926,9 @@
     "year": 2014,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/20820995-deadline",
+    "goodreads_exact": true
   },
   {
     "id": "stormfront",
@@ -847,7 +945,9 @@
     "year": 2013,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Stormfront%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "deep-freeze",
@@ -864,7 +964,9 @@
     "year": 2017,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Deep%20Freeze%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "holy-ghost",
@@ -881,7 +983,9 @@
     "year": 2018,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Holy%20Ghost%20John%20Sandford",
+    "goodreads_exact": false
   },
   {
     "id": "the-last-mile",
@@ -898,7 +1002,9 @@
     "year": 2016,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20last%20Mile%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-fix",
@@ -915,7 +1021,9 @@
     "year": 2017,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Fix%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "redemption",
@@ -932,7 +1040,9 @@
     "year": 2019,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Redemption%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-fallen",
@@ -949,7 +1059,9 @@
     "year": 2018,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Fallen%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "split-second",
@@ -966,7 +1078,9 @@
     "year": 2003,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Split%20Second%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "long-shadows",
@@ -983,7 +1097,9 @@
     "year": 2022,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Long%20Shadows%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "long-road-to-mercy",
@@ -1000,7 +1116,9 @@
     "year": 2018,
     "notes": "Once the action kicks in it's not a bad ride and I enjoyed following along, the characters and their development felt so shallow and boring. Also it's very obvious that the author struggles to write female characters and with the lead being a female this is a serious negative for the book and series as a whole. Honestly his female characters feel like men who he later decided should be women so he changed their names.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Long%20Road%20to%20Mercy%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "king-and-maxwell",
@@ -1017,7 +1135,9 @@
     "year": 2013,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=King%20and%20Maxwell%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "hour-game",
@@ -1034,7 +1154,9 @@
     "year": 2004,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/85306.Hour_Game",
+    "goodreads_exact": true
   },
   {
     "id": "simple-genius",
@@ -1051,7 +1173,9 @@
     "year": 2007,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Simple%20Genius%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "first-family",
@@ -1068,7 +1192,9 @@
     "year": 2009,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=First%20Family%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "mercy",
@@ -1085,7 +1211,9 @@
     "year": 2021,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Mercy%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-6-20-man",
@@ -1102,7 +1230,9 @@
     "year": 2022,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%206%3A20%20Man%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "bullseye",
@@ -1119,7 +1249,9 @@
     "year": 2014,
     "notes": "Very shallow, even though it was a short story the plot itself offered absolutely no depth. It was written as if the only focus were practicing writing an action sequence.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Bullseye%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-edge",
@@ -1136,7 +1268,9 @@
     "year": 2023,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Edge%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "to-die-for",
@@ -1153,7 +1287,9 @@
     "year": 2024,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=To%20Die%20For%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-sixth-man",
@@ -1170,7 +1306,9 @@
     "year": 2011,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/9509287-the-sixth-man",
+    "goodreads_exact": true
   },
   {
     "id": "the-forgotten",
@@ -1187,7 +1325,9 @@
     "year": 2012,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20forgotten%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-escape",
@@ -1204,7 +1344,9 @@
     "year": 2014,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/20767918-the-escape",
+    "goodreads_exact": true
   },
   {
     "id": "no-mans-land",
@@ -1221,7 +1363,9 @@
     "year": 2016,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/29467945-no-man-s-land",
+    "goodreads_exact": true
   },
   {
     "id": "zero-day",
@@ -1238,7 +1382,9 @@
     "year": 2011,
     "notes": "Probably the last Baldacci novel I read for a while. His plots are too similar and somewhat shallow. The books fill the role of being an easy passive listen but are simple and sometimes not very engaging. The action sequences however are enjoyable.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Zero%20Day%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "daylight",
@@ -1255,7 +1401,9 @@
     "year": 2020,
     "notes": "The a plot was fun and engaging, I enjoyed the inclusion of John Puller in the investigation. However the book abruptly changes lanes once the a plot is resolved and steps back into the longstanding mystery of her missing sister. The shift is somewhat jarring and taking up the last bit of the book. It feels more like an afterthought trying to tie up loose ends than a cohesive part of the book. The entire section felt like it could've been better left for the next book.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Daylight%20David%20Baldacci",
+    "goodreads_exact": false
   },
   {
     "id": "the-couple-next-door",
@@ -1272,7 +1420,9 @@
     "year": 2016,
     "notes": "This book left me dissatisfied as most of the twists felt shallow and predictable",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20Couple%20next%20door%20Shari%20Lapena",
+    "goodreads_exact": false
   },
   {
     "id": "eruption",
@@ -1289,7 +1439,9 @@
     "year": 2024,
     "notes": "The story was a fun ride and it was written in a way that built the stakes extremely high, however anytime something major happened it was a function of nature and left me with the feeling that nothing the characters did mattered whatsoever. Especially the ending, I was absolutely left with the feeling that the ending was lazy and the authors relied solely on the idea of deus ex machina.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Eruption%20Michael%20Crichton",
+    "goodreads_exact": false
   },
   {
     "id": "house-of-leaves",
@@ -1307,7 +1459,9 @@
     "notes": "Format was super engaging but the multiple plots were somewhat uneven. Even though they were all extremely deep, some were far less enjoyable and pulled me out of the experience from time to time.",
     "rating_note": "7 / 9",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=House%20Of%20Leaves%20Mark%20Z.%20danielewski",
+    "goodreads_exact": false
   },
   {
     "id": "the-stranger",
@@ -1324,7 +1478,9 @@
     "year": 2015,
     "notes": "",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=The%20stranger%20Harlan%20Coban",
+    "goodreads_exact": false
   },
   {
     "id": "when-darkness-falls",
@@ -1341,7 +1497,9 @@
     "year": 2022,
     "notes": "I enjoyed the different style of mystery from the perspective of Jack with him not being a detective. Also I enjoyed the difference of it being more of a thriller as well.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=When%20darkness%20falls%20James%20Grippando",
+    "goodreads_exact": false
   },
   {
     "id": "mr-mercedes",
@@ -1358,7 +1516,9 @@
     "year": 2014,
     "notes": "I do not like Stephen Kings writing style. He rambles on and on in a droning self indulgent manner.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Mr%20Mercedes%20Stephen%20king",
+    "goodreads_exact": false
   },
   {
     "id": "born-to-run",
@@ -1375,7 +1535,9 @@
     "year": 2022,
     "notes": "Predictable easy listen. Nothing special but not bad. I found myself my annoyed that this devolved into another hostage situation like the sixth book which I listens too just before. However I do enjoy enjoy that this series strays away from the typical murder mystery.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Born%20to%20run%20James%20Grippando",
+    "goodreads_exact": false
   },
   {
     "id": "the-silent-patient",
@@ -1392,7 +1554,9 @@
     "year": 2019,
     "notes": "Well written, thematically complex, deep characters. I enjoyed this book overall but was somewhat disappointed to realize that I had deciphered the twist very early on. Which could be a positive as well because the hints were very subtle. The author does really well to bury them underneath the narrators unreliable accounts",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/book/show/40097951-the-silent-patient",
+    "goodreads_exact": true
   },
   {
     "id": "red-widow",
@@ -1409,7 +1573,9 @@
     "year": 2013,
     "notes": "I enjoyed the different perspective on the traditional spy thriller. The story was mostly engaging and the turns kept me interested throughout.",
     "genre": "Thriller",
-    "genre_order": 3
+    "genre_order": 3,
+    "goodreads": "https://www.goodreads.com/search?q=Red%20Widow%20Alma%20Katsu",
+    "goodreads_exact": false
   },
   {
     "id": "harry-potter-and-the-prisoner-of-azkaban",
@@ -1426,7 +1592,9 @@
     "year": 1999,
     "notes": "",
     "genre": "Fantasy",
-    "genre_order": 4
+    "genre_order": 4,
+    "goodreads": "https://www.goodreads.com/search?q=Harry%20potter%20and%20the%20prisoner%20of%20azkaban%20J.K.%20Rowling",
+    "goodreads_exact": false
   },
   {
     "id": "harry-potter-and-the-goblet-of-fire",
@@ -1443,7 +1611,9 @@
     "year": 2000,
     "notes": "",
     "genre": "Fantasy",
-    "genre_order": 4
+    "genre_order": 4,
+    "goodreads": "https://www.goodreads.com/search?q=Harry%20Potter%20and%20the%20Goblet%20of%20Fire%20J.K.%20Rowling",
+    "goodreads_exact": false
   },
   {
     "id": "harry-potter-and-the-order-of-the-pheonix",
@@ -1460,7 +1630,9 @@
     "year": 2003,
     "notes": "",
     "genre": "Fantasy",
-    "genre_order": 4
+    "genre_order": 4,
+    "goodreads": "https://www.goodreads.com/search?q=Harry%20Potter%20and%20the%20order%20of%20the%20pheonix%20J.K.%20Rowling",
+    "goodreads_exact": false
   },
   {
     "id": "harry-potter-and-the-half-blood-prince",
@@ -1477,7 +1649,9 @@
     "year": 2005,
     "notes": "",
     "genre": "Fantasy",
-    "genre_order": 4
+    "genre_order": 4,
+    "goodreads": "https://www.goodreads.com/search?q=Harry%20potter%20and%20the%20half%20blood%20prince%20J.K.%20Rowling",
+    "goodreads_exact": false
   },
   {
     "id": "harry-potter-and-the-deathly-hallows",
@@ -1494,6 +1668,8 @@
     "year": 2007,
     "notes": "",
     "genre": "Fantasy",
-    "genre_order": 4
+    "genre_order": 4,
+    "goodreads": "https://www.goodreads.com/book/show/820344.Harry_Potter_and_the_Deathly_Hallows",
+    "goodreads_exact": true
   }
 ]

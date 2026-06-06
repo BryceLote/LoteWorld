@@ -61,9 +61,10 @@
   .group-count { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em; }
 
   .book-list { display:flex;flex-direction:column;gap:0; }
-  .book-card { display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);transition:background 0.3s; }
+  .book-card { display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);transition:background 0.3s;text-decoration:none;color:inherit; }
   .book-card:last-child { border-bottom:none; }
-  .book-card:hover { background:rgba(255,255,255,0.03);margin:0 -0.75rem;padding:1rem 0.75rem;border-radius:4px; }
+  .book-card:hover { background:rgba(255,255,255,0.03);margin:0 -0.75rem;padding:1rem 0.75rem;border-radius:4px;cursor:pointer; }
+  .book-card:hover .book-title { color:var(--rust); }
   .book-card:target { background:rgba(158,107,71,0.12);margin:0 -0.75rem;padding:1rem 0.75rem;border-radius:4px;box-shadow:inset 3px 0 0 var(--rust); }
 
   .book-cover-thumb { width:48px;height:72px;object-fit:cover;border-radius:2px;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,0.3); }
@@ -71,7 +72,7 @@
 
   .book-info { flex:1;min-width:0; }
   .book-title-row { display:flex;justify-content:space-between;align-items:baseline;gap:0.5rem; }
-  .book-title { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-heading);font-weight:400; }
+  .book-title { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-heading);font-weight:400;transition:color 0.3s; }
   .book-rating { font-size:0.85rem;color:var(--text-body);font-weight:500;flex-shrink:0;min-width:1.5rem;text-align:right; }
   .book-rating.ten { color:var(--rust);font-weight:700; }
   .book-rating.nine { color:var(--sage); }
@@ -413,9 +414,14 @@
   }
 
   function buildCard(book) {
-    var card = document.createElement('div');
+    var card = document.createElement('a');
     card.className = 'book-card';
     card.id = book.id;
+    if (book.goodreads) {
+      card.href = book.goodreads;
+      card.target = '_blank';
+      card.rel = 'noopener';
+    }
 
     var html = '';
     if (book.cover) {

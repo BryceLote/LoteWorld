@@ -61,9 +61,12 @@
   .group-count { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em; }
 
   .book-list { display:flex;flex-direction:column;gap:0; }
-  .book-card { display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);transition:background 0.3s; }
+  .book-card { display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);transition:background 0.3s;text-decoration:none;color:inherit; }
   .book-card:last-child { border-bottom:none; }
+  a.book-card:hover { cursor:pointer; }
   .book-card:hover { background:rgba(255,255,255,0.03);margin:0 -0.75rem;padding:1rem 0.75rem;border-radius:4px; }
+  a.book-card:hover .book-title { color:var(--rust); }
+  a.book-card:hover .book-cover-thumb { box-shadow:0 4px 12px rgba(158,107,71,0.25); }
   .book-card:target { background:rgba(158,107,71,0.12);margin:0 -0.75rem;padding:1rem 0.75rem;border-radius:4px;box-shadow:inset 3px 0 0 var(--rust); }
 
   .game-cover { width:80px;height:38px;object-fit:cover; }
@@ -79,7 +82,7 @@
 
   .book-info { flex:1;min-width:0; }
   .book-title-row { display:flex;justify-content:space-between;align-items:baseline;gap:0.5rem; }
-  .book-title { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-heading);font-weight:400; }
+  .book-title { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-heading);font-weight:400;transition:color 0.3s; }
   .book-rating { font-size:0.85rem;color:var(--text-body);font-weight:500;flex-shrink:0;min-width:1.5rem;text-align:right; }
   .book-rating.ten { color:var(--rust);font-weight:700; }
   .book-rating.nine { color:var(--sage); }
@@ -503,21 +506,26 @@
   }
 
   function buildCard(game) {
-    var card = document.createElement('div');
+    var hasUrl = game.url && game.url !== '#';
+    var card = document.createElement(hasUrl ? 'a' : 'div');
     card.className = 'book-card';
     card.id = game.id;
+    if (hasUrl) {
+      card.href = game.url;
+      card.target = '_blank';
+      card.rel = 'noopener';
+    }
 
     var html = '';
 
     // Cover image
     if (game.cover) {
-      html += '<a href="' + (game.url || '#') + '" target="_blank" rel="noopener" class="cover-link">'
-        + '<img src="' + game.cover + '" alt="' + escHtml(game.title) + '" class="book-cover-thumb game-cover" loading="lazy"></a>';
+      html += '<img src="' + game.cover + '" alt="' + escHtml(game.title) + '" class="book-cover-thumb game-cover" loading="lazy">';
     }
 
     // Info
     html += '<div class="book-info"><div class="book-title-row"><span class="book-title">';
-    html += '<a href="' + (game.url || '#') + '" target="_blank" rel="noopener" class="game-link">' + escHtml(game.title) + '</a>';
+    html += escHtml(game.title);
     if (game.tier) {
       html += ' <span class="tier-badge ' + game.tier + '">' + game.tier_label + '</span>';
     }
