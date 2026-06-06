@@ -147,6 +147,14 @@ details.sess[open]::before{background:var(--brass)}
 
 footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px solid var(--line); color:var(--faint); font-family:"JetBrains Mono",monospace; font-size:11px; line-height:1.7}
 .note{font-style:italic; color:var(--faint); font-size:13px; margin-top:10px; font-family:"Spectral",serif}
+/* item sprites (added) */
+.spr{height:26px; width:auto; max-width:48px; image-rendering:pixelated; image-rendering:crisp-edges; flex:none; align-self:center}
+.line .spr{height:30px; max-width:60px}
+.npc{text-align:center}
+.spr-npc{display:block; height:42px; width:auto; max-width:64px; margin:2px auto 8px; image-rendering:pixelated; image-rendering:crisp-edges}
+.blist.with-icon li{padding-left:0}
+.blist.with-icon li::before{display:none}
+.blist.with-icon li .spr{margin-right:9px}
 </style>
 </head>
 <body>
@@ -154,7 +162,7 @@ footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px s
   <div class="nav-inner">
     <a href="index.html" class="brand" style="text-decoration:none">Bryce Lote</a>
     <nav class="chips">
-      <a href="#overview">Overview</a><a href="#bosses">Bosses</a><a href="#gear">Gear</a>
+      <a href="#overview">Overview</a><a href="#bosses">Bosses</a><a href="#goals">Goals</a><a href="#gear">Gear</a>
       <a href="#acc">Accessories</a><a href="#npcs">Townsfolk</a><a href="#map">Map</a>
       <a href="#infra">Infrastructure</a><a href="#log">Sessions</a>
     </nav>
@@ -179,6 +187,11 @@ footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px s
       <div class="card"><div class="sub-h">Bosses</div><div id="bosslist"></div></div>
       <div class="card"><div class="sub-h">Events Cleared</div><div id="eventlist"></div></div>
     </div>
+  </section>
+
+  <section id="goals" style="animation-delay:.11s">
+    <div class="s-head"><span class="tick"></span><h2>Goals</h2><span class="meta" id="goalmeta"></span></div>
+    <div class="card"><div id="goallist"></div></div>
   </section>
 
   <section id="gear" style="animation-delay:.12s">
@@ -241,20 +254,50 @@ footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px s
 
 <script>
 const RC={0:"--r0",1:"--r1",2:"--r2",3:"--r3",4:"--r4"};
+
+// ---- Item sprite images ----
+// To move the image folder, change ONLY this line:
+const IMG_BASE="../image/terreria-images/terraria_tracker_images/";
+const IMG={
+"Eye of Cthulhu":"boss_eye_of_cthulhu.png","Eater of Worlds":"boss_eater_of_worlds.png","Queen Bee":"boss_queen_bee.png","Skeletron":"boss_skeletron.png","King Slime":"boss_king_slime.png","Deerclops":"","Wall of Flesh":"",
+"Goblin Army":"event_goblin_army.png","Blood Moon":"event_blood_moon.png",
+"Molten armor":"armor_molten.png","Shadow Armor":"armor_shadow.png","Meteor armor":"armor_meteor.png",
+"Bee Keeper":"weapon_bee_keeper.png","Night's Edge":"weapon_nights_edge.png","Phoenix Blaster":"weapon_phoenix_blaster.png","Vilethorn":"weapon_vilethorn.png","Molten Fury":"weapon_molten_fury.png","The Volcano":"weapon_the_volcano.png","Water Bolt":"weapon_water_bolt.png","Demon Bow + Unholy Arrows":"weapon_demon_bow.png","War Axe of the Night":"weapon_war_axe_of_the_night.png","Flaming Mace":"weapon_flaming_mace.png","Space Gun":"weapon_space_gun.png","Dark Lance":"weapon_dark_lance.png","Sunfury":"weapon_sunfury.png","Flamelash":"weapon_flamelash.png","Flower of Fire":"weapon_flower_of_fire.png","Hellwing Bow":"weapon_hellwing_bow.png","Boomstick":"weapon_boomstick.png",
+"Molten Pickaxe":"tool_molten_pickaxe.png","Molten Hamaxe":"tool_molten_hamaxe.png","Diamond Hook":"tool_diamond_hook.png","Staff of Regrowth":"tool_staff_of_regrowth.png",
+"Lightning Boots":"accessory_lightning_boots.png","Tiger Climbing Gear":"accessory_tiger_climbing_gear.png","Mana Regeneration Band":"accessory_mana_regeneration_band.png","Ancient Chisel":"accessory_ancient_chisel.png","Feral Claws":"accessory_feral_claws.png","Whoopie Cushion":"accessory_whoopie_cushion.png","Chillet":"mount_chillet.png","Obsidian Skull Rose":"accessory_obsidian_skull_rose.png","Ram Rune":"accessory_ram_rune.png",
+"Guide":"npc_guide.png","Merchant":"npc_merchant.png","Nurse":"npc_nurse.png","Dryad":"npc_dryad.png","Painter":"npc_painter.png","Zoologist":"npc_zoologist.png","Angler":"npc_angler.png","Goblin Tinkerer":"npc_goblin_tinkerer.png","Arms Dealer":"npc_arms_dealer.png","Tavernkeep":"npc_tavernkeep.png","Skeleton Merchant":"npc_skeleton_merchant.png","Dye Trader":"npc_dye_trader.png","Witch Doctor":"npc_witch_doctor.png","Golfer":"npc_golfer.png","Stylist":"npc_stylist.png","Town Slime":"npc_town_slime.png"
+};
+function imgKey(name){
+  var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
+  if(IMG[k]!==undefined) return k;
+  return k.split(/[(\u2014:+\/]/)[0].trim();
+}
+function imgTag(name,cls){
+  var f=IMG[name]; if(f===undefined) f=IMG[imgKey(name)];
+  return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
+}
 const DATA={
   updated:"Updated through Session 10 — Thursday, June 4, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · +4 reach"],["Favored Kit","Bee Keeper + Vilethorn"]
+    ["Permanent Buff","Artisan Loaf · +4 reach"],["Favored Kit","Night's Edge + Phoenix Blaster"]
   ],
   hp:400, mana:200,
-  approach:"<p><b>Play style.</b> First playthrough; immersion and collecting and experimenting across all classes, not min-maxing. Naturally hybrid, currently favoring the Bee Keeper (melee) and Vilethorn (magic), with the Demon Bow as backup.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems (pylons, platforms, a hub base) for short, sustainable sessions around a busy life and to ease navigation once Hardmode makes travel dangerous. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  approach:"<p><b>Play style.</b> First playthrough; immersion and collecting and experimenting across all classes, not min-maxing. Currently runs the Night's Edge (melee) and Phoenix Blaster (ranged) as his main pair; not using a magic weapon at the moment, but open to trying one.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems (pylons, platforms, a hub base) for short, sustainable sessions around a busy life and to ease navigation once Hardmode makes travel dangerous. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  goals:[
+    "Finish the last pre-Hardmode bosses — King Slime and Deerclops — then take on the Wall of Flesh",
+    "Build a Wall of Flesh arena (the Underworld lava bridge is a head start)",
+    "Find the Shimmer and run a path/route to it",
+    "Start fishing (the Angler is already on staff)"
+  ],
   bosses:[
     ["Eye of Cthulhu",1,""],
     ["Eater of Worlds",1,"killed five times total"],
     ["Queen Bee",1,"dropped the Bee Keeper, a favorite"],
     ["Skeletron",1,"defeated — opened the Dungeon"],
-    ["King Slime",0,"not yet fought (optional)"]
+    ["King Slime",0,"not yet fought (optional)"],
+    ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
+    ["Wall of Flesh",0,"not yet fought — gateway to Hardmode"]
   ],
   events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
   armor:[
@@ -302,13 +345,13 @@ const DATA={
   ],
   npcs:[
     ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
-    ["Angler","deep jungle"],["Goblin Tinkerer","below spawn"],["Arms Dealer",""],["Tavernkeep",""],
-    ["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
-    ["Golfer","Underground Desert"],["Stylist","freed in a spider nest"],["Town Slime","×2"]
+    ["Angler","deep jungle"],["Goblin Tinkerer","below spawn"],["Arms Dealer","snow biome"],["Tavernkeep","snow biome"],
+    ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
+    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"]
   ],
-  npcplace:"Witch Doctor and Goblin Tinkerer housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses.",
+  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier have since moved out to the snow biome, and the Golfer and Stylist now live up on the sky islands.",
   zones:[
-    ["Dungeon","cleared Skeletron","#33373d"],["2nd Corruption","orbs smashed","#3a2d4a"],
+    ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
     ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
     ["Forest","","#26392a"],["SPAWN","home base","#26392a"],["Forest","living tree","#26392a"],
     ["Desert","antlions","#3d3526"],["Jungle","Queen Bee","#1f3320"],["Ocean","east edge","#23384a"]
@@ -365,14 +408,18 @@ const hp=el("div","stat"); hp.innerHTML=`<div class="k">Max Health</div><div cla
 const mp=el("div","stat"); mp.innerHTML=`<div class="k">Max Mana</div><div class="pips"><span class="m">${"\u2605".repeat(mStars)}</span><small>${DATA.mana} · capped</small></div>`; sw.appendChild(mp);
 $("#approach").innerHTML=DATA.approach;
 
+// goals
+DATA.goals.forEach(g=>{const l=el("div","line"); l.innerHTML=`<span class="box"></span><span><span class="t">${g}</span></span>`; $("#goallist").appendChild(l);});
+$("#goalmeta").textContent=`${DATA.goals.length} in progress`;
+
 // bosses
-function checks(arr,host){arr.forEach(([n,d,note])=>{const l=el("div","line"); l.innerHTML=`<span class="box ${d?"done":""}">${d?"\u2713":""}</span><span><span class="t">${wlink(n)}</span>${note?` <span class="n">— ${note}</span>`:""}</span>`; host.appendChild(l);});}
+function checks(arr,host){arr.forEach(([n,d,note])=>{const l=el("div","line"); l.innerHTML=`<span class="box ${d?"done":""}">${d?"\u2713":""}</span>${imgTag(n)}<span><span class="t">${wlink(n)}</span>${note?` <span class="n">— ${note}</span>`:""}</span>`; host.appendChild(l);});}
 checks(DATA.bosses,$("#bosslist")); checks(DATA.events,$("#eventlist"));
 const bd=DATA.bosses.filter(b=>b[1]).length;
 $("#bossmeta").textContent=`${bd} / ${DATA.bosses.length} fought`;
 
 // armor
-DATA.armor.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#armor").appendChild(i);});
+DATA.armor.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`${imgTag(n)}<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#armor").appendChild(i);});
 // weapons + filters
 const classes=["all","melee","ranged","magic"];
 const fw=$("#filters");
@@ -381,19 +428,21 @@ function renderWeapons(filter){
   const host=$("#weapons"); host.innerHTML="";
   DATA.weapons.filter(w=>filter==="all"||w[1]===filter).forEach(([n,cls,rar,d,stat])=>{
     const i=el("div","item");
-    i.innerHTML=`<span class="nm" style="color:var(${RC[rar]})">${wlink(n,n)}</span><span class="tag t-${cls}">${cls}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`;
+    i.innerHTML=`${imgTag(n)}<span class="nm" style="color:var(${RC[rar]})">${wlink(n,n)}</span><span class="tag t-${cls}">${cls}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`;
     host.appendChild(i);
   });
 }
 renderWeapons("all");
-DATA.tools.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#tools").appendChild(i);});
+DATA.tools.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`${imgTag(n)}<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#tools").appendChild(i);});
 
 // accessories
-DATA.accEq.forEach(t=>{var base=t.split("(")[0].split("—")[0].trim(); $("#accEq").appendChild(el("li",null,wlink(base)+(t.includes("(")||t.includes("—")?" "+t.slice(base.length):"") ));});
-DATA.accOther.forEach(t=>{var parts=t.split(":"); if(parts.length>1){var item=parts.slice(1).join(":").trim().split("—")[0].split("(")[0].trim(); $("#accOther").appendChild(el("li",null,parts[0]+": "+wlink(item)+(t.slice(t.indexOf(item)+item.length)||"")));} else {var base=t.split("(")[0].split("—")[0].trim(); $("#accOther").appendChild(el("li",null,wlink(base)+(t.includes("(")||t.includes("—")?" "+t.slice(base.length):"")));}});
+$("#accEq").classList.add("with-icon");
+DATA.accEq.forEach(t=>{var base=t.split("(")[0].split("\u2014")[0].trim(); $("#accEq").appendChild(el("li",null,imgTag(base)+wlink(base)+(t.includes("(")||t.includes("\u2014")?" "+t.slice(base.length):"") ));});
+$("#accOther").classList.add("with-icon");
+DATA.accOther.forEach(t=>{var parts=t.split(":"); if(parts.length>1){var item=parts.slice(1).join(":").trim().split("\u2014")[0].split("(")[0].trim(); $("#accOther").appendChild(el("li",null,imgTag(item)+parts[0]+": "+wlink(item)+(t.slice(t.indexOf(item)+item.length)||"")));} else {var base=t.split("(")[0].split("\u2014")[0].trim(); $("#accOther").appendChild(el("li",null,imgTag(base)+wlink(base)+(t.includes("(")||t.includes("\u2014")?" "+t.slice(base.length):"")));}});
 
 // npcs
-DATA.npcs.forEach(([n,r])=>{const c=el("div","npc"); c.innerHTML=`<div class="nm">${wlink(n)}</div>${r?`<div class="r">${r}</div>`:""}`; $("#npcgrid").appendChild(c);});
+DATA.npcs.forEach(([n,r])=>{const c=el("div","npc"); c.innerHTML=`${imgTag(n,"spr-npc")}<div class="nm">${wlink(n)}</div>${r?`<div class="r">${r}</div>`:""}`; $("#npcgrid").appendChild(c);});
 $("#npcmeta").textContent=`${DATA.npcs.length} residents`;
 $("#npcplace").textContent=DATA.npcplace;
 
