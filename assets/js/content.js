@@ -49,7 +49,8 @@
     return {
       id: b.id,
       title: b.title,
-      url: b.goodreads || '/pages/library.html#' + b.id,
+      url: '/pages/library.html#' + b.id,   // on-site card (auto-expands + scrolls)
+      external_url: b.goodreads || null,      // Goodreads, available from the card itself
       type: 'book',
       category: 'Library',
       tags: tags,
@@ -58,7 +59,7 @@
       date_label: b.year ? String(b.year) : '',
       blurb: (b.author ? b.author + (b.series && b.series !== 'Standalone' ? ' · ' + b.series : '') : '') ,
       cover: b.cover || null,
-      external: true,
+      external: false,
       rating: b.rating
     };
   }
@@ -69,7 +70,8 @@
     return {
       id: g.id,
       title: g.title,
-      url: g.url || '/pages/games.html#' + g.id,
+      url: '/pages/games.html#' + g.id,     // on-site card (auto-expands + scrolls)
+      external_url: g.url || null,           // Steam, available from the card itself
       type: 'game',
       category: 'Games',
       tags: tags,
@@ -78,7 +80,7 @@
       date_label: g.year ? String(g.year) : '',
       blurb: g.meta || '',
       cover: g.cover || null,
-      external: true,
+      external: false,
       rating: g.rating
     };
   }
