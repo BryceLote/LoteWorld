@@ -2,21 +2,28 @@
   {
     "title": "The Long Work — A Terraria Chronicle",
     "description": "My first Terraria playthrough told as narrative fiction. A man arrives in an empty world with a bad pickaxe and no plan, and does what he always does: builds something.",
-    "tags": ["terraria", "video games", "narrative"],
+    "tags": [
+      "terraria",
+      "video games",
+      "narrative"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-31",
-    "url": "the-long-work.html",
-    "image": "image/terreria-images/the-western-edge-at-the-end.png",
+    "url": "/pages/writing/the-long-work.html",
+    "image": "/image/terreria-images/the-western-edge-at-the-end.png",
     "link_text": "Read Entry One"
   },
   {
     "title": "What the phones taught me",
     "description": "Three months of outbound calls in a market I had never worked in. What I learned about healthcare, sales, and what happens when you stop pitching and start listening.",
-    "tags": ["sales", "lessons"],
+    "tags": [
+      "sales",
+      "lessons"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-15",
-    "url": "doc/3-month-outbound-lessons.pdf",
-    "image": "image/img-what-phones-taught-me.png",
+    "url": "/doc/3-month-outbound-lessons.pdf",
+    "image": "/image/img-what-phones-taught-me.png",
     "link_text": "Read the full piece"
   }
 ]

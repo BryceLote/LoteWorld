@@ -376,18 +376,18 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-name">Bryce Lote</a>
+  <a href="/index.html" class="nav-name">Bryce Lote</a>
   <div class="nav-links">
     <a href="#about">Home</a>
     <div class="nav-dropdown">
       <a href="#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">Everything</a>
       <div class="nav-dropdown-menu">
-        <a href="writing.html">Writing</a>
-        <a href="breakdowns.html">Breakdowns</a>
-        <a href="body-mind.html">Body &amp; Mind</a>
-        <a href="faith-family.html">Faith &amp; Family</a>
-        <a href="library.html">Library</a>
-        <a href="games.html">Games</a>
+        <a href="/pages/writing.html">Writing</a>
+        <a href="/pages/breakdowns.html">Breakdowns</a>
+        <a href="/pages/body-mind.html">Body &amp; Mind</a>
+        <a href="/pages/faith-family.html">Faith &amp; Family</a>
+        <a href="/pages/library.html">Library</a>
+        <a href="/pages/games.html">Games</a>
       </div>
     </div>
   </div>
@@ -421,7 +421,7 @@
   <h2>Things I think about and things I've made</h2>
 
   <div class="branch-grid">
-    <a class="branch-card" href="writing.html">
+    <a class="branch-card" href="/pages/writing.html">
       <div class="branch-title-row">
         <div class="branch-number">01</div>
         <div class="branch-title">Writing</div>
@@ -430,7 +430,7 @@
       <div class="branch-arrow">&rarr;</div>
     </a>
 
-    <a class="branch-card" href="breakdowns.html">
+    <a class="branch-card" href="/pages/breakdowns.html">
       <div class="branch-title-row">
         <div class="branch-number">02</div>
         <div class="branch-title">Breakdowns</div>
@@ -439,7 +439,7 @@
       <div class="branch-arrow">&rarr;</div>
     </a>
 
-    <a class="branch-card" href="body-mind.html">
+    <a class="branch-card" href="/pages/body-mind.html">
       <div class="branch-title-row">
         <div class="branch-number">03</div>
         <div class="branch-title">Body &amp; Mind</div>
@@ -448,7 +448,7 @@
       <div class="branch-arrow">&rarr;</div>
     </a>
 
-    <a class="branch-card" href="faith-family.html">
+    <a class="branch-card" href="/pages/faith-family.html">
       <div class="branch-title-row">
         <div class="branch-number">04</div>
         <div class="branch-title">Faith &amp; Family</div>
@@ -457,7 +457,7 @@
       <div class="branch-arrow">&rarr;</div>
     </a>
 
-    <a class="branch-card branch-card-library" href="library.html">
+    <a class="branch-card branch-card-library" href="/pages/library.html">
       <div class="library-card-content">
         <div>
           <div class="branch-title-row">
@@ -475,7 +475,7 @@
       </div>
     </a>
 
-    <a class="branch-card branch-card-library" href="games.html">
+    <a class="branch-card branch-card-library" href="/pages/games.html">
       <div class="library-card-content">
         <div>
           <div class="branch-title-row">
@@ -527,7 +527,7 @@
   });
 
   // Load currently section from JSON
-  fetch('data/currently.json')
+  fetch('/data/currently.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var grid = document.getElementById('currently-grid');
@@ -546,7 +546,7 @@
     });
 
   // Stats computed live from the same JSON the Library and Games pages use
-  fetch('data/books.json')
+  fetch('/data/books.json')
     .then(function(r) { return r.json(); })
     .then(function(books) {
       var perfect = 0, starWars = 0;
@@ -560,7 +560,7 @@
     })
     .catch(function(err) { console.error('Library stats failed:', err); });
 
-  fetch('data/games.json')
+  fetch('/data/games.json')
     .then(function(r) { return r.json(); })
     .then(function(games) {
       var totalHours = 0, perfect = 0;

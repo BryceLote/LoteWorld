@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terraria Progress Tracker — Bryce Lote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1d21; --panel:#212428; --panel2:#272a2f; --border:rgba(255,255,255,0.06); --line:rgba(255,255,255,0.06);
+  --ink:#e8e5de; --muted:#908b82; --faint:#5a5750;
+  --brass:#9e6b47; --brass-bright:#c9a279;
+  --heart:#e05a4d; --mana:#6fb0e6;
+  --melee:#ff9d8a; --ranged:#9fe09a; --magic:#8fb8f0; --summon:#cda8f0; --other:#cbb48f;
+  --r1:#9aa0ff; --r2:#9bef9b; --r3:#ffc794; --r4:#ff9292; --r0:#ffffff;
+  --border-hover:rgba(255,255,255,0.12); --text-heading:#e8e5de; --text-body:#908b82; --text-muted:#5a5750;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink); font-family:"DM Sans",sans-serif; line-height:1.55;
+  -webkit-font-smoothing:antialiased; min-height:100vh; position:relative; overflow-x:hidden;
+}
+
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:inherit;text-decoration:none}
+
+/* nav */
+header.nav{
+  position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+  background:rgba(26,29,33,0.92); border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1080px; margin:0 auto; padding:12px 22px; display:flex; align-items:center; gap:18px}
+.brand{font-family:"Libre Baskerville",serif; font-weight:900; font-size:18px; letter-spacing:.01em; white-space:nowrap}
+.brand b{color:var(--brass)}
+.chips{display:flex; gap:6px; overflow-x:auto; margin-left:auto; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{
+  font-family:"JetBrains Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--muted); padding:6px 10px; border:1px solid transparent; border-radius:0; white-space:nowrap; transition:.18s;
+}
+.chips a:hover{color:var(--ink); border-color:var(--border); background:var(--panel)}
+
+main{max-width:1080px; margin:0 auto; padding:0 22px 90px; position:relative; z-index:1}
+
+/* hero */
+.hero{padding:54px 0 26px; border-bottom:1px solid var(--line)}
+.eyebrow{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass)}
+.hero h1{font-family:"Libre Baskerville",serif; font-weight:900; font-size:clamp(34px,6vw,58px); line-height:1.02; margin:14px 0 6px; letter-spacing:-.01em}
+.hero h1 .sub{display:block; font-size:clamp(15px,2.4vw,20px); font-weight:400; font-style:italic; color:var(--muted); margin-top:10px; letter-spacing:0}
+.updated{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--faint); margin-top:16px}
+
+/* sections */
+section{padding:40px 0 6px; opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1; transform:none}}
+.s-head{display:flex; align-items:baseline; gap:14px; margin-bottom:20px}
+.s-head .tick{width:22px; height:2px; background:var(--brass); transform:translateY(-5px)}
+.s-head h2{font-family:"Libre Baskerville",serif; font-weight:600; font-size:26px; letter-spacing:-.01em}
+.s-head .meta{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--faint); margin-left:auto}
+
+.grid{display:grid; gap:14px}
+@media(min-width:720px){.cols-2{grid-template-columns:1fr 1fr} .cols-3{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--panel); border:1px solid var(--border); border-radius:0; padding:18px 20px; transition:.2s}
+.card:hover{transform:translateY(-2px); border-color:#3a3d45}
+
+/* stat tiles */
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+@media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
+.stat{background:var(--panel); border:1px solid var(--border); border-radius:0; padding:15px 17px}
+.stat .k{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--faint)}
+.stat .v{font-family:"Libre Baskerville",serif; font-weight:600; font-size:21px; margin-top:5px}
+.pips{font-size:15px; line-height:1.5; letter-spacing:1px; margin-top:6px}
+.pips .h{color:var(--heart)} .pips .m{color:var(--mana)}
+.pips small{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint); margin-left:6px; letter-spacing:0}
+
+.prose p{margin-bottom:10px} .prose p:last-child{margin-bottom:0}
+.prose b{color:var(--brass-bright); font-weight:600}
+
+/* bosses */
+.boss-prog{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--muted); margin-bottom:14px; display:flex; align-items:center; gap:12px}
+.bar{height:6px; flex:1; background:#26282e; border-radius:99px; overflow:hidden; max-width:240px}
+.bar>i{display:block; height:100%; background:linear-gradient(90deg,var(--brass),var(--brass-bright)); border-radius:99px}
+.line{display:flex; gap:12px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:none}
+.box{flex:none; width:19px; height:19px; border-radius:5px; border:1.5px solid #777c85; display:grid; place-items:center; margin-top:2px; font-size:12px}
+.box.done{background:#2e6b3e; border-color:#2e6b3e; color:#fff}
+.line .t{font-weight:600} .line .n{color:var(--muted); font-weight:400; font-style:italic}
+
+/* gear */
+.filters{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px}
+.filters button{
+  font-family:"JetBrains Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  background:var(--panel); color:var(--muted); border:1px solid var(--border); padding:7px 12px; border-radius:0; cursor:pointer; transition:.16s;
+}
+.filters button:hover{color:var(--ink)}
+.filters button.active{background:var(--brass); color:#1a1408; border-color:var(--brass); font-weight:700}
+.sub-h{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--brass); margin:18px 0 8px}
+.item{display:flex; gap:10px; align-items:baseline; padding:7px 0; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.item:last-child{border-bottom:none}
+.item .nm{font-weight:600; font-size:15.5px}
+.tag{font-family:"JetBrains Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:5px; border:1px solid currentColor; opacity:.9}
+.t-melee{color:var(--melee)} .t-ranged{color:var(--ranged)} .t-magic{color:var(--magic)} .t-summon{color:var(--summon)} .t-other{color:var(--other)}
+.stat-chip{font-family:"JetBrains Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:5px; border:1px solid var(--border); color:var(--muted); opacity:.9}
+.item .d{color:var(--muted); font-size:13.5px; flex-basis:100%; font-style:italic}
+
+/* npcs */
+.npc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px}
+.npc{background:var(--panel2); border:1px solid var(--border); border-radius:0; padding:11px 13px; transition:.16s}
+.npc:hover{border-color:var(--brass); transform:translateY(-2px)}
+.npc .nm{font-weight:600}
+.npc .r{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint); margin-top:3px}
+
+/* map */
+.zones{display:flex; gap:5px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin}
+.zone{flex:1 0 auto; min-width:74px; text-align:center; padding:13px 8px; border-radius:0; border:1px solid var(--border); position:relative}
+.zone .zn{font-family:"JetBrains Mono",monospace; font-size:10px; text-transform:uppercase; letter-spacing:.05em}
+.zone .zd{font-size:11px; color:var(--muted); margin-top:4px; font-style:italic}
+.zone.spawn{outline:2px solid var(--brass); outline-offset:-2px}
+.zone.spawn::after{content:"spawn"; position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-family:"JetBrains Mono",monospace; font-size:8px; background:var(--brass); color:#1a1408; padding:1px 6px; border-radius:99px; letter-spacing:.05em}
+.uw{margin-top:10px; padding:12px 16px; border-radius:0; border:1px solid #4a2c22; background:linear-gradient(90deg,#2a1712,#3a1d14); font-size:13px}
+.uw b{color:#ff8a5c}
+
+/* lists */
+.blist{list-style:none} .blist li{padding:8px 0 8px 20px; border-bottom:1px solid var(--line); position:relative}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:""; position:absolute; left:2px; top:15px; width:7px; height:7px; border-radius:2px; background:var(--brass); transform:rotate(45deg)}
+
+/* sessions */
+.timeline{position:relative; margin-left:8px; padding-left:24px; border-left:1px solid var(--border)}
+details.sess{margin-bottom:10px; position:relative}
+details.sess::before{content:""; position:absolute; left:-29px; top:13px; width:11px; height:11px; border-radius:50%; background:var(--panel); border:2px solid var(--brass)}
+details.sess[open]::before{background:var(--brass)}
+.sess summary{list-style:none; cursor:pointer; background:var(--panel); border:1px solid var(--border); border-radius:0; padding:12px 16px; display:flex; align-items:center; gap:12px; transition:.16s}
+.sess summary::-webkit-details-marker{display:none}
+.sess summary:hover{border-color:#3a3d45}
+.sess .sn{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--brass); flex:none}
+.sess .st{font-weight:600; font-size:15px}
+.sess .sd{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint); margin-left:auto; flex:none}
+.sess .chev{flex:none; color:var(--faint); transition:.2s; margin-left:4px}
+.sess[open] .chev{transform:rotate(90deg)}
+.sess .body{padding:12px 16px 4px}
+.sess .body ul{list-style:none} .sess .body li{padding:5px 0 5px 18px; position:relative; color:var(--ink); font-size:14px}
+.sess .body li::before{content:"\2013"; position:absolute; left:0; color:var(--brass)}
+
+footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px solid var(--line); color:var(--faint); font-family:"JetBrains Mono",monospace; font-size:11px; line-height:1.7}
+.note{font-style:italic; color:var(--faint); font-size:13px; margin-top:10px; font-family:"Spectral",serif}
+/* item sprites (added) */
+.spr{height:26px; width:auto; max-width:48px; image-rendering:pixelated; image-rendering:crisp-edges; flex:none; align-self:center}
+.line .spr{height:30px; max-width:60px}
+.npc{text-align:center}
+.spr-npc{display:block; height:42px; width:auto; max-width:64px; margin:2px auto 8px; image-rendering:pixelated; image-rendering:crisp-edges}
+.blist.with-icon li{padding-left:0}
+.blist.with-icon li::before{display:none}
+.blist.with-icon li .spr{margin-right:9px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="brand" style="text-decoration:none">Bryce Lote</a>
+    <nav class="chips">
+      <a href="#overview">Overview</a><a href="#bosses">Bosses</a><a href="#goals">Goals</a><a href="#gear">Gear</a>
+      <a href="#acc">Accessories</a><a href="#npcs">Townsfolk</a><a href="#map">Map</a>
+      <a href="#infra">Infrastructure</a><a href="#log">Sessions</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="overview">
+    <div class="eyebrow">Terraria Chronicle &middot; Progress Tracker</div>
+    <h1>World 1 — Corruption<span class="sub">A first playthrough, built slowly and on purpose.</span></h1>
+    <div class="updated" id="updated"></div>
+  </div>
+
+  <section style="animation-delay:.05s">
+    <div class="stats" id="stats"></div>
+    <div class="grid" style="margin-top:14px"><div class="card prose" id="approach"></div></div>
+  </section>
+
+  <section id="bosses" style="animation-delay:.1s">
+    <div class="s-head"><span class="tick"></span><h2>Bosses &amp; Events</h2><span class="meta" id="bossmeta"></span></div>
+    <div class="grid cols-2">
+      <div class="card"><div class="sub-h">Bosses</div><div id="bosslist"></div></div>
+      <div class="card"><div class="sub-h">Events Cleared</div><div id="eventlist"></div></div>
+    </div>
+  </section>
+
+  <section id="goals" style="animation-delay:.11s">
+    <div class="s-head"><span class="tick"></span><h2>Goals</h2><span class="meta" id="goalmeta"></span></div>
+    <div class="card"><div id="goallist"></div></div>
+  </section>
+
+  <section id="gear" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>Gear</h2><span class="meta">names tinted by rarity</span></div>
+    <div class="card">
+      <div class="sub-h">Armor</div><div id="armor"></div>
+      <div class="sub-h" style="margin-top:20px">Weapons</div>
+      <div class="filters" id="filters"></div>
+      <div id="weapons"></div>
+      <div class="sub-h" style="margin-top:20px">Tools</div><div id="tools"></div>
+    </div>
+  </section>
+
+  <section id="acc" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>Accessories</h2></div>
+    <div class="grid cols-2">
+      <div class="card"><div class="sub-h">Equipped &mdash; 5 / 5 (Classic)</div><ul class="blist" id="accEq"></ul></div>
+      <div class="card"><div class="sub-h">Other &amp; situational</div><ul class="blist" id="accOther"></ul></div>
+    </div>
+  </section>
+
+  <section id="npcs" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>Townsfolk</h2><span class="meta" id="npcmeta"></span></div>
+    <div class="npc-grid" id="npcgrid"></div>
+    <div class="note" id="npcplace"></div>
+  </section>
+
+  <section id="map" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>World Map</h2><span class="meta">west &larr; spawn &rarr; east</span></div>
+    <div class="card">
+      <div class="zones" id="zones"></div>
+      <div class="uw" id="underworld"></div>
+    </div>
+  </section>
+
+  <section id="infra" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>Infrastructure</h2></div>
+    <div class="card"><ul class="blist" id="infralist"></ul></div>
+  </section>
+
+  <section id="log" style="animation-delay:.12s">
+    <div class="s-head"><span class="tick"></span><h2>Session Log</h2><span class="meta" id="logmeta"></span></div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+</main>
+
+<footer>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+    <div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--ink)">Bryce Lote</div>
+      <div style="font-size:11px;margin-top:4px">Yukon, Oklahoma</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <a href="https://www.linkedin.com/in/bryce-lote/" style="color:var(--faint);text-decoration:none;font-size:11px">LinkedIn</a>
+      <a href="https://www.facebook.com/bryce.lote" style="color:var(--faint);text-decoration:none;font-size:11px">Facebook</a>
+      <a href="https://www.instagram.com/Handsome_bryce" style="color:var(--faint);text-decoration:none;font-size:11px">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const RC={0:"--r0",1:"--r1",2:"--r2",3:"--r3",4:"--r4"};
+
+// ---- Item sprite images ----
+// To move the image folder, change ONLY this line:
+const IMG_BASE="/image/terreria-images/terraria_tracker_images/";
+const IMG={
+"Eye of Cthulhu":"boss_eye_of_cthulhu.png","Eater of Worlds":"boss_eater_of_worlds.png","Queen Bee":"boss_queen_bee.png","Skeletron":"boss_skeletron.png","King Slime":"boss_king_slime.png","Deerclops":"","Wall of Flesh":"",
+"Goblin Army":"event_goblin_army.png","Blood Moon":"event_blood_moon.png",
+"Molten armor":"armor_molten.png","Shadow Armor":"armor_shadow.png","Meteor armor":"armor_meteor.png",
+"Bee Keeper":"weapon_bee_keeper.png","Night's Edge":"weapon_nights_edge.png","Phoenix Blaster":"weapon_phoenix_blaster.png","Vilethorn":"weapon_vilethorn.png","Molten Fury":"weapon_molten_fury.png","The Volcano":"weapon_the_volcano.png","Water Bolt":"weapon_water_bolt.png","Demon Bow + Unholy Arrows":"weapon_demon_bow.png","War Axe of the Night":"weapon_war_axe_of_the_night.png","Flaming Mace":"weapon_flaming_mace.png","Space Gun":"weapon_space_gun.png","Dark Lance":"weapon_dark_lance.png","Sunfury":"weapon_sunfury.png","Flamelash":"weapon_flamelash.png","Flower of Fire":"weapon_flower_of_fire.png","Hellwing Bow":"weapon_hellwing_bow.png","Boomstick":"weapon_boomstick.png",
+"Molten Pickaxe":"tool_molten_pickaxe.png","Molten Hamaxe":"tool_molten_hamaxe.png","Diamond Hook":"tool_diamond_hook.png","Staff of Regrowth":"tool_staff_of_regrowth.png",
+"Lightning Boots":"accessory_lightning_boots.png","Tiger Climbing Gear":"accessory_tiger_climbing_gear.png","Mana Regeneration Band":"accessory_mana_regeneration_band.png","Ancient Chisel":"accessory_ancient_chisel.png","Feral Claws":"accessory_feral_claws.png","Whoopie Cushion":"accessory_whoopie_cushion.png","Chillet":"mount_chillet.png","Obsidian Skull Rose":"accessory_obsidian_skull_rose.png","Ram Rune":"accessory_ram_rune.png",
+"Guide":"npc_guide.png","Merchant":"npc_merchant.png","Nurse":"npc_nurse.png","Dryad":"npc_dryad.png","Painter":"npc_painter.png","Zoologist":"npc_zoologist.png","Angler":"npc_angler.png","Goblin Tinkerer":"npc_goblin_tinkerer.png","Arms Dealer":"npc_arms_dealer.png","Tavernkeep":"npc_tavernkeep.png","Skeleton Merchant":"npc_skeleton_merchant.png","Dye Trader":"npc_dye_trader.png","Witch Doctor":"npc_witch_doctor.png","Golfer":"npc_golfer.png","Stylist":"npc_stylist.png","Town Slime":"npc_town_slime.png"
+};
+function imgKey(name){
+  var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
+  if(IMG[k]!==undefined) return k;
+  return k.split(/[(\u2014:+\/]/)[0].trim();
+}
+function imgTag(name,cls){
+  var f=IMG[name]; if(f===undefined) f=IMG[imgKey(name)];
+  return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
+}
+const DATA={
+  updated:"Updated through Session 10 — Thursday, June 4, 2026",
+  stats:[
+    ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
+    ["Permanent Buff","Artisan Loaf · +4 reach"],["Favored Kit","Night's Edge + Phoenix Blaster"]
+  ],
+  hp:400, mana:200,
+  approach:"<p><b>Play style.</b> First playthrough; immersion and collecting and experimenting across all classes, not min-maxing. Currently runs the Night's Edge (melee) and Phoenix Blaster (ranged) as his main pair; not using a magic weapon at the moment, but open to trying one.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems (pylons, platforms, a hub base) for short, sustainable sessions around a busy life and to ease navigation once Hardmode makes travel dangerous. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  goals:[
+    "Finish the last pre-Hardmode bosses — King Slime and Deerclops — then take on the Wall of Flesh",
+    "Build a Wall of Flesh arena (the Underworld lava bridge is a head start)",
+    "Find the Shimmer and run a path/route to it",
+    "Start fishing (the Angler is already on staff)"
+  ],
+  bosses:[
+    ["Eye of Cthulhu",1,""],
+    ["Eater of Worlds",1,"killed five times total"],
+    ["Queen Bee",1,"dropped the Bee Keeper, a favorite"],
+    ["Skeletron",1,"defeated — opened the Dungeon"],
+    ["King Slime",0,"not yet fought (optional)"],
+    ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
+    ["Wall of Flesh",0,"not yet fought — gateway to Hardmode"]
+  ],
+  events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
+  armor:[
+    ["Molten armor","Hellstone set, equipped — best pre-Hardmode defense and melee bonuses; no movement bonus","25 def"],
+    ["Shadow Armor","kept — +15% movement speed, which he misses under Molten","13 def"],
+    ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
+  ],
+  weapons:[
+    ["Bee Keeper","melee",3,"Queen Bee sword; releases bees on hit; sentimental favorite","26 dmg"],
+    ["Night's Edge","melee",4,"Godly · pre-Hardmode sword capstone (Blade of Grass + Muramasa + Fiery Greatsword + Light's Bane)","40 dmg"],
+    ["Phoenix Blaster","ranged",4,"Godly · Handgun + Hellstone Bars; top pre-Hardmode gun","30 dmg"],
+    ["Vilethorn","magic",1,"pierces walls; from Corruption shadow orbs","13 dmg"],
+    ["Molten Fury","ranged",4,"Hellstone bow; turns Wooden Arrows into Flaming Arrows","31 dmg"],
+    ["The Volcano","melee",4,"Hellstone sword; bouncing fireballs, On Fire","38 dmg"],
+    ["Water Bolt","magic",3,"Dungeon tome; bouncing/piercing bolt, great in tight spaces","18 dmg"],
+    ["Demon Bow + Unholy Arrows","ranged",2,"backup","13 dmg"],
+    ["War Axe of the Night","melee",2,"earlier melee","28 dmg"],
+    ["Flaming Mace","melee",1,"earlier crowd control","24 dmg"],
+    ["Space Gun","ranged",3,"from Meteorite, unused; free to cast with Meteor armor","17 dmg"],
+    ["Dark Lance","melee",3,"Shadow Chest (spear); found in multiples","25 dmg"],
+    ["Sunfury","melee",3,"Shadow Chest (flail)","30 dmg"],
+    ["Flamelash","magic",3,"Shadow Chest","30 dmg"],
+    ["Flower of Fire","magic",3,"Shadow Chest","28 dmg"],
+    ["Hellwing Bow","ranged",3,"Shadow Chest","20 dmg"],
+    ["Boomstick","ranged",2,"Jungle gun; found, not needed","30 dmg"]
+  ],
+  tools:[
+    ["Molten Pickaxe","top pre-Hardmode pickaxe — can mine the first Hardmode ores","100% pick"],
+    ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
+    ["Diamond Hook","grapple",""],
+    ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
+  ],
+  accEq:[
+    "Lightning Boots (Hermes + Rocket = Spectre, + Aglet + Anklet of the Wind)",
+    "Tiger Climbing Gear (Climbing Claws + Shoe Spikes)",
+    "Mana Regeneration Band (Band of Starpower + Band of Regeneration)",
+    "Ancient Chisel — mining speed (reforged)",
+    "Feral Claws — melee speed / autoswing (reforged +5% move speed)"
+  ],
+  accOther:[
+    "Vanity: Whoopie Cushion",
+    "Mount: Chillet (hatched from a Large Dragon Egg)",
+    "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
+    "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents"
+  ],
+  npcs:[
+    ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
+    ["Angler","deep jungle"],["Goblin Tinkerer","below spawn"],["Arms Dealer","snow biome"],["Tavernkeep","snow biome"],
+    ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
+    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"]
+  ],
+  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier have since moved out to the snow biome, and the Golfer and Stylist now live up on the sky islands.",
+  zones:[
+    ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
+    ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
+    ["Forest","","#26392a"],["SPAWN","home base","#26392a"],["Forest","living tree","#26392a"],
+    ["Desert","antlions","#3d3526"],["Jungle","Queen Bee","#1f3320"],["Ocean","east edge","#23384a"]
+  ],
+  underworld:"<b>Underworld</b> — reached via the hellevator and on both the west and east edges. Much of it mapped, with a lava-spanning bridge linking the east to the center.",
+  infra:[
+    "Stone platform from spawn east to the world edge, with rope drops to the surface",
+    "Western platform road finished all the way to the west map edge (two floating islands found along it)",
+    "Two houses in the deep jungle caves (near where Queen Bee was found)",
+    "Pylon network: spawn, jungle, and a snow pylon by the Dungeon — fast travel to both sides of the map",
+    "Gem trees on underground stone (topaz, amethyst, emerald)",
+    "Hellevator: a roped vertical shaft from beneath the base straight to the Underworld",
+    "Skeletron arena: stacked platform layers over the Dungeon",
+    "Underworld platform road reaching both edges, bridged over the lava to the center",
+    "Fast travel via platform + Lightning Boots + Chillet mount"
+  ],
+  sessions:[
+    [10,"Thursday, June 4, 2026","",["Got the Handgun and crafted the Phoenix Blaster, reforged to Godly","Collected the Blade of Grass and Muramasa and crafted the Night's Edge (with Fiery Greatsword + Light's Bane), reforged to Godly","Found the Staff of Regrowth","Set up a snow-biome pylon by the Dungeon — fast travel to both sides of the map","Got the Ram Rune (ground pound), making hellevator descents much better","Reached the Underworld on both edges; bridged the east Underworld to the center over the lava","Found the Boomstick and multiples of every Shadow Chest weapon; doesn't need them","Reforged Feral Claws for +5% movement speed and the Ancient Chisel"]],
+    [9,"Wednesday, June 3, 2026","short version",["Finished the westward stone platform to the west map edge","Built a Skeletron arena and defeated Skeletron, opening the Dungeon","Found a second Corruption beyond the Dungeon; smashed its Shadow Orbs and killed three more Eaters of Worlds","Began laying stone platform roads across the Underworld","Mined the meteorite; crafted Meteor armor and the Space Gun (unused)","Looted many Shadow Chests; explored much of the Dungeon and Ice biome (neither complete)","Found the Stylist (spider nest) and two Town Slimes; found the Water Bolt"]],
+    [8,"Tuesday, June 2, 2026","",["Collected a lot of obsidian and returned for more Hellstone","Crafted and equipped the full Molten armor set; misses Shadow's +15% move speed","Crafted The Volcano, the Molten Pickaxe, and the Molten Hamaxe","Fought off a second Goblin Army","Started a platform road heading west; found two floating islands","Found and freed the Golfer; the Underworld map filled out a lot"]],
+    [7,"Sunday, May 31, 2026","shorter session",["Dug a hellevator straight down to the Underworld and roped it","Collected obsidian furniture and a Hellforge","Combined an Obsidian Skull with an Obsidian Rose into the Obsidian Skull Rose","Survived another Blood Moon","Crafted the Molten Fury before logging off","Mined a lot of Hellstone (140+ in reserve)"]],
+    [6,"Saturday, May 30, 2026","big push",["Re-killed the Eater of Worlds for extra Shadow Scales","Beat Queen Bee, got the Bee Keeper; survived the Goblin Army and a Blood Moon","Recruited the Goblin Tinkerer, Arms Dealer, Tavernkeep, Skeleton Merchant, Dye Trader, and Witch Doctor (Kohna)","Ate the Artisan Loaf; maxed mana to 200","Built the spawn-to-east-edge stone platform with rope access","Combined Lightning Boots, Tiger Climbing Gear, and the Mana Regeneration Band","Built two jungle-cave houses; set up spawn and jungle pylons"]],
+    [5,"Friday, May 29, 2026","",["Upgraded home; learned potion crafting; recruited Angler, Zoologist, Painter, Dryad","Beat the Eye of Cthulhu (easy); consolidated loot to base","Beat the Eater of Worlds","Crafted the full Shadow Armor set and Nightmare Pickaxe"]],
+    [4,"Thursday, May 28, 2026","focused mining",["Deep cavern run; gathered enough gold for the full gold armor set","Found ten heart crystals and used them all (~180 to 380 HP)","Granite biome; found a spider nest and left it; a second glowing mushroom cave","Ended fully prepped with two Eye summons ready"]],
+    [3,"Wednesday, May 27, 2026","biggest early session",["Realized the demonite pickaxe was boss-locked; spent demonite on the Demon Bow, Light's Bane, War Axe of the Night","First major surface trek east: desert, jungle, ocean","Crafted the Flaming Mace; got Hermes Boots, climbing gear, Jester Arrows","Found two Suspicious Looking Eyes without realizing they were usable","Traveled west; found the Corruption and a glowing mushroom biome with an Extractinator","Crafted a gold pickaxe and a disappointing ruby staff"]],
+    [2,"Tuesday, May 26, 2026","",["Upgraded topaz hook to diamond hook","Completed full iron armor; bow to silver","Planted the first gem trees (topaz, amethyst, emerald)","Found a Band of Regeneration and a second heart crystal","Gathered demonite but came up one ingot short; learned the pickaxe needs shadow scales"]],
+    [1,"Monday, May 25, 2026","~5 hours",["Survived the first night, built initial shelter, started exploring underground","Mixed early armor; silver tools; iron bow with flame arrows","Found a small demonite vein (not enough)","Crafted a topaz grappling hook; ended at a cave mouth"]]
+  ]
+};
+
+
+function wiki(name){
+  // Strip parenthetical notes and take the base item name
+  var base = name.split('(')[0].split('+')[0].split('—')[0].split('·')[0].trim();
+  // Handle "X / Y" style names - take the first
+  base = base.split('/')[0].trim();
+  return 'https://terraria.wiki.gg/wiki/' + base.replace(/ /g, '_');
+}
+function wlink(name, display){
+  if(!display) display = name;
+  return '<a href="' + wiki(name) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .2s" onmouseover="this.style.borderColor=\'var(--brass)\'" onmouseout="this.style.borderColor=\'var(--border)\'">' + display + '</a>';
+}
+
+const $=(s)=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
+
+$("#updated").textContent=DATA.updated;
+
+// stats + pips
+const sw=$("#stats");
+DATA.stats.forEach(([k,v])=>{const d=el("div","stat"); d.innerHTML=`<div class="k">${k}</div><div class="v">${v}</div>`; sw.appendChild(d);});
+const hHearts=DATA.hp/20, mStars=DATA.mana/20;
+const hp=el("div","stat"); hp.innerHTML=`<div class="k">Max Health</div><div class="pips"><span class="h">${"\u2665".repeat(hHearts)}</span><small>${DATA.hp} · capped</small></div>`; sw.appendChild(hp);
+const mp=el("div","stat"); mp.innerHTML=`<div class="k">Max Mana</div><div class="pips"><span class="m">${"\u2605".repeat(mStars)}</span><small>${DATA.mana} · capped</small></div>`; sw.appendChild(mp);
+$("#approach").innerHTML=DATA.approach;
+
+// goals
+DATA.goals.forEach(g=>{const l=el("div","line"); l.innerHTML=`<span class="box"></span><span><span class="t">${g}</span></span>`; $("#goallist").appendChild(l);});
+$("#goalmeta").textContent=`${DATA.goals.length} in progress`;
+
+// bosses
+function checks(arr,host){arr.forEach(([n,d,note])=>{const l=el("div","line"); l.innerHTML=`<span class="box ${d?"done":""}">${d?"\u2713":""}</span>${imgTag(n)}<span><span class="t">${wlink(n)}</span>${note?` <span class="n">— ${note}</span>`:""}</span>`; host.appendChild(l);});}
+checks(DATA.bosses,$("#bosslist")); checks(DATA.events,$("#eventlist"));
+const bd=DATA.bosses.filter(b=>b[1]).length;
+$("#bossmeta").textContent=`${bd} / ${DATA.bosses.length} fought`;
+
+// armor
+DATA.armor.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`${imgTag(n)}<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#armor").appendChild(i);});
+// weapons + filters
+const classes=["all","melee","ranged","magic"];
+const fw=$("#filters");
+classes.forEach(c=>{const b=el("button",c==="all"?"active":""); b.textContent=c; b.dataset.c=c; b.onclick=()=>{document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("active")); b.classList.add("active"); renderWeapons(c);}; fw.appendChild(b);});
+function renderWeapons(filter){
+  const host=$("#weapons"); host.innerHTML="";
+  DATA.weapons.filter(w=>filter==="all"||w[1]===filter).forEach(([n,cls,rar,d,stat])=>{
+    const i=el("div","item");
+    i.innerHTML=`${imgTag(n)}<span class="nm" style="color:var(${RC[rar]})">${wlink(n,n)}</span><span class="tag t-${cls}">${cls}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`;
+    host.appendChild(i);
+  });
+}
+renderWeapons("all");
+DATA.tools.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`${imgTag(n)}<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#tools").appendChild(i);});
+
+// accessories
+$("#accEq").classList.add("with-icon");
+DATA.accEq.forEach(t=>{var base=t.split("(")[0].split("\u2014")[0].trim(); $("#accEq").appendChild(el("li",null,imgTag(base)+wlink(base)+(t.includes("(")||t.includes("\u2014")?" "+t.slice(base.length):"") ));});
+$("#accOther").classList.add("with-icon");
+DATA.accOther.forEach(t=>{var parts=t.split(":"); if(parts.length>1){var item=parts.slice(1).join(":").trim().split("\u2014")[0].split("(")[0].trim(); $("#accOther").appendChild(el("li",null,imgTag(item)+parts[0]+": "+wlink(item)+(t.slice(t.indexOf(item)+item.length)||"")));} else {var base=t.split("(")[0].split("\u2014")[0].trim(); $("#accOther").appendChild(el("li",null,imgTag(base)+wlink(base)+(t.includes("(")||t.includes("\u2014")?" "+t.slice(base.length):"")));}});
+
+// npcs
+DATA.npcs.forEach(([n,r])=>{const c=el("div","npc"); c.innerHTML=`${imgTag(n,"spr-npc")}<div class="nm">${wlink(n)}</div>${r?`<div class="r">${r}</div>`:""}`; $("#npcgrid").appendChild(c);});
+$("#npcmeta").textContent=`${DATA.npcs.length} residents`;
+$("#npcplace").textContent=DATA.npcplace;
+
+// map
+DATA.zones.forEach(([n,d,col])=>{const z=el("div","zone"+(n==="SPAWN"?" spawn":"")); z.style.background=col; z.innerHTML=`<div class="zn">${n}</div>${d?`<div class="zd">${d}</div>`:""}`; $("#zones").appendChild(z);});
+$("#underworld").innerHTML=DATA.underworld;
+
+// infra
+DATA.infra.forEach(t=>$("#infralist").appendChild(el("li",null,t)));
+
+// sessions
+const tl=$("#timeline");
+DATA.sessions.forEach((s,idx)=>{
+  const [n,date,tagline,items]=s;
+  const det=el("details","sess"); if(idx===0)det.open=true;
+  const sum=el("summary"); sum.innerHTML=`<span class="sn">S${n}</span><span class="st">${tagline?tagline:"Session "+n}</span><span class="sd">${date}</span><span class="chev">&#9656;</span>`;
+  const body=el("div","body"); const ul=el("ul"); items.forEach(it=>ul.appendChild(el("li",null,it))); body.appendChild(ul);
+  det.appendChild(sum); det.appendChild(body); tl.appendChild(det);
+});
+$("#logmeta").textContent=`${DATA.sessions.length} sessions`;
+</script>
+</body>
+</html>

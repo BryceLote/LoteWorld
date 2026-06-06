@@ -2,50 +2,65 @@
   {
     "title": "The One Thing I Didn't Build",
     "description": "A response to a Sunday sermon about grace, repentance, and the one foundation I spent years trying to construct that had already been given to me.",
-    "tags": ["faith", "grace"],
+    "tags": [
+      "faith",
+      "grace"
+    ],
     "date": "May 2026",
     "date_sort": "2026-05-31",
-    "url": "the-one-thing-i-didnt-build.html",
-    "image": "image/faith-builder-card.png",
+    "url": "/pages/faith-family/the-one-thing-i-didnt-build.html",
+    "image": "/image/faith-builder-card.png",
     "link_text": "Read"
   },
   {
     "title": "Chosen Fatherhood",
     "description": "Three generations of men who chose their children. My grandfather chose my father. My father chose me. I chose Norah and Nehemiah.",
-    "tags": ["family", "adoption"],
+    "tags": [
+      "family",
+      "adoption"
+    ],
     "date": "October 2025",
     "date_sort": "2025-10-24",
-    "url": "chosen-fatherhood.html",
+    "url": "/pages/faith-family/chosen-fatherhood.html",
     "image": null,
     "link_text": "Read"
   },
   {
     "title": "Letter to Norah and Nehemiah",
     "description": "Written at 2:55 AM the morning of adoption day. Two letters, one for each of them, because they are two separate people.",
-    "tags": ["family", "adoption"],
+    "tags": [
+      "family",
+      "adoption"
+    ],
     "date": "October 2025",
     "date_sort": "2025-10-24",
-    "url": "adoption-day-letter.html",
+    "url": "/pages/faith-family/adoption-day-letter.html",
     "image": null,
     "link_text": "Read"
   },
   {
     "title": "Note to Alli, on Adoption Day",
     "description": "Written the night of adoption day. A letter to the woman who gave me a home, a family, and a purpose.",
-    "tags": ["family", "adoption"],
+    "tags": [
+      "family",
+      "adoption"
+    ],
     "date": "October 2025",
     "date_sort": "2025-10-25",
-    "url": "adoption-day-note-to-alli.html",
+    "url": "/pages/faith-family/adoption-day-note-to-alli.html",
     "image": null,
     "link_text": "Read"
   },
   {
     "title": "Married My Sweet Love Lady",
     "description": "Written eight days after our wedding. The whole day, start to finish, the way I remember it.",
-    "tags": ["family", "wedding"],
+    "tags": [
+      "family",
+      "wedding"
+    ],
     "date": "August 2024",
     "date_sort": "2024-08-11",
-    "url": "married-my-sweet-love-lady.html",
+    "url": "/pages/faith-family/married-my-sweet-love-lady.html",
     "image": null,
     "link_text": "Read"
   }
