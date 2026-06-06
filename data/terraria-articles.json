@@ -2,16 +2,19 @@
   {
     "title": "The Long Work — Entry One",
     "url": "/pages/writing/the-long-work.html",
-    "type": "Writing"
+    "type": "Writing",
+    "published": "2026-05-31"
   },
   {
     "title": "East-Side Field Guide",
     "url": "/doc/terraria-east-field-guide.pdf",
-    "type": "Breakdown"
+    "type": "Breakdown",
+    "published": "2026-05-30"
   },
   {
     "title": "Progress Tracker",
     "url": "/pages/terraria/terraria-tracker.html",
-    "type": "Breakdown"
+    "type": "Breakdown",
+    "published": "2026-06-05"
   }
 ]

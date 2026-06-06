@@ -50,16 +50,16 @@
   .mosaic-grid img { width:72px;height:108px;object-fit:cover;border-radius:2px;transition:transform 0.3s ease,box-shadow 0.3s ease;opacity:0;animation:fadeIn 0.4s ease forwards; }
   .mosaic-grid img:hover { transform:scale(1.15);z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4); }
 
-  .library-section { max-width:800px;margin:0 auto;padding:4rem 3rem 2rem; }
-  .section-label { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:lowercase;margin-bottom:2.5rem; }
-  .library-section h2 { font-family:'Libre Baskerville',serif;font-size:1.8rem;font-weight:400;color:var(--text-heading);margin-bottom:2rem;line-height:1.35; }
+  .library-section { max-width:800px;margin:0 auto;padding:2rem 3rem 1rem; }
+  .section-label { font-size:0.95rem;color:var(--text-heading);letter-spacing:0.12em;text-transform:lowercase;margin-bottom:1.25rem; }
+  .library-section h2 { font-family:'Libre Baskerville',serif;font-size:1.8rem;font-weight:400;color:var(--text-heading);margin-bottom:0;line-height:1.35; }
 
   .book-group { max-width:800px;margin:0 auto 3rem;padding:0 3rem; }
   .group-header { display:flex;align-items:baseline;gap:1rem;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);cursor:pointer;transition:border-color 0.3s; }
   .group-header:hover { border-bottom-color:var(--border-hover); }
   .group-header:hover .group-name { color:var(--rust); }
   .group-number { font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;font-weight:500; }
-  .group-name { font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-heading);font-weight:400;flex:1;transition:color 0.3s; }
+  .group-name { font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--text-muted);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;flex:1;transition:color 0.3s; }
   .group-count { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em; }
   .group-chevron { font-size:0.7rem;color:var(--text-muted);transition:transform 0.3s;flex-shrink:0;transform:rotate(90deg); }
   .book-group.collapsed .group-chevron { transform:rotate(0deg); }
@@ -80,7 +80,7 @@
 
   .book-info { flex:1;min-width:0; }
   .book-title-row { display:flex;justify-content:space-between;align-items:baseline;gap:0.5rem; }
-  .book-title { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-heading);font-weight:400;transition:color 0.3s; }
+  .book-title { font-family:'Libre Baskerville',serif;font-size:1.25rem;color:var(--text-heading);font-weight:500;transition:color 0.3s; }
   .book-rating { font-size:0.85rem;color:var(--text-body);font-weight:500;flex-shrink:0;min-width:1.5rem;text-align:right; }
   .book-rating.ten { color:var(--rust);font-weight:700; }
   .book-rating.nine { color:var(--sage); }
@@ -95,6 +95,24 @@
     padding:0.12rem 0.5rem;margin-left:0.5rem;white-space:nowrap;
     flex-shrink:0;vertical-align:middle;
   }
+
+  /* ---- INSIGHTS PANEL ---- */
+  .insights { max-width:800px;margin:1.5rem auto 1rem;padding:1.5rem 3rem 0;border-top:1px solid var(--border); }
+  .insights-toggle { display:flex;align-items:center;gap:0.7rem;width:100%;background:none;border:none;cursor:pointer;padding:0.6rem 0;font-family:inherit;border-bottom:1px solid var(--border);transition:border-color 0.3s; }
+  .insights-toggle:hover { border-bottom-color:var(--border-hover); }
+  .insights-toggle .il { font-size:0.95rem;color:var(--text-heading);letter-spacing:0.1em;text-transform:uppercase;flex:1;text-align:left;transition:color 0.3s; }
+  .insights-toggle:hover .il { color:var(--rust); }
+  .insights-chevron { font-size:0.85rem;color:var(--rust);transition:transform 0.3s;transform:rotate(90deg); }
+  .insights.collapsed .insights-chevron { transform:rotate(0deg); }
+  .insights-body { margin-top:1.5rem; display:grid;grid-template-columns:1fr 1fr;gap:2.5rem; }
+  .insights.collapsed .insights-body { display:none; }
+  .chart-title { font-size:0.7rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem; }
+  .bar-row { display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;font-size:0.8rem; }
+  .bar-label { flex-shrink:0;width:5.5rem;color:var(--text-body);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .bar-track { flex:1;background:var(--bg-surface);height:0.85rem;position:relative;overflow:hidden; }
+  .bar-fill { height:100%;background:var(--rust);transition:width 0.6s cubic-bezier(.2,.7,.2,1); }
+  .bar-val { flex-shrink:0;width:2.2rem;color:var(--text-muted);font-size:0.72rem;font-variant-numeric:tabular-nums; }
+  @media(max-width:768px){ .insights-body{grid-template-columns:1fr;gap:2rem;} .insights{padding:0 1.5rem;} }
 
   /* ---- FILTER & SORT CONTROLS ---- */
   .controls-bar {
@@ -216,6 +234,17 @@
   <h2>Every book, grouped by series</h2>
 </div>
 
+<div class="insights collapsed" id="insights">
+  <button class="insights-toggle" id="insights-toggle" aria-expanded="false">
+    <span class="il">Insights</span>
+    <span class="insights-chevron">&#9656;</span>
+  </button>
+  <div class="insights-body">
+    <div class="chart" id="chart-ratings"><div class="chart-title">Rating distribution</div></div>
+    <div class="chart" id="chart-genres"><div class="chart-title">By genre</div></div>
+  </div>
+</div>
+
 <div class="controls-bar">
   <div class="control-group">
     <span class="control-label">Filter</span>
@@ -296,6 +325,53 @@
     return Object.keys(realSeries).length + standalones;
   }
 
+  // ---- INSIGHTS (CSS bar charts) ----
+  function renderBars(container, rows) {
+    var max = rows.reduce(function(m, r) { return Math.max(m, r.value); }, 0) || 1;
+    var html = container.querySelector('.chart-title').outerHTML;
+    rows.forEach(function(r) {
+      var pct = Math.round((r.value / max) * 100);
+      html += '<div class="bar-row">' +
+        '<span class="bar-label">' + escHtml(r.label) + '</span>' +
+        '<span class="bar-track"><span class="bar-fill" style="width:' + pct + '%"></span></span>' +
+        '<span class="bar-val">' + r.value + '</span></div>';
+    });
+    container.innerHTML = html;
+  }
+  function buildInsights(books) {
+    // Rating distribution: 10 down to 5, then DNF (groups non-numeric)
+    var ratingCounts = {};
+    books.forEach(function(b) {
+      var n = parseInt(b.rating, 10);
+      var key = isNaN(n) ? 'DNF' : String(n);
+      ratingCounts[key] = (ratingCounts[key] || 0) + 1;
+    });
+    var ratingRows = [];
+    [10,9,8,7,6,5].forEach(function(n) {
+      if (ratingCounts[n]) ratingRows.push({ label: n + ' ★', value: ratingCounts[n] });
+    });
+    if (ratingCounts['DNF']) ratingRows.push({ label: 'DNF', value: ratingCounts['DNF'] });
+    renderBars(document.getElementById('chart-ratings'), ratingRows);
+
+    // By genre, descending
+    var genreCounts = {};
+    books.forEach(function(b) { if (b.genre) genreCounts[b.genre] = (genreCounts[b.genre] || 0) + 1; });
+    var genreRows = Object.keys(genreCounts)
+      .map(function(g) { return { label: g, value: genreCounts[g] }; })
+      .sort(function(a, b) { return b.value - a.value; });
+    renderBars(document.getElementById('chart-genres'), genreRows);
+  }
+  (function() {
+    var ins = document.getElementById('insights');
+    var tog = document.getElementById('insights-toggle');
+    if (ins && tog) {
+      tog.addEventListener('click', function() {
+        var c = ins.classList.toggle('collapsed');
+        tog.setAttribute('aria-expanded', String(!c));
+      });
+    }
+  })();
+
   // ---- LIBRARY LIST ----
   var allBooks = [];
   var currentFilter = 'all';
@@ -319,6 +395,8 @@
       document.getElementById('stat-lib-series').textContent = countBookSeries(books);
       document.getElementById('stat-lib-avg').textContent = ratedCount ? (ratedSum / ratedCount).toFixed(1) : '—';
       document.getElementById('stat-lib-perfect').textContent = perfect;
+
+      buildInsights(books);
 
       // Mosaic (skip books without a cover)
       var mosaic = document.getElementById('mosaic-grid');

@@ -208,7 +208,7 @@
         html += '</div>';
         html += '<div class="card-title">' + entry.title + '</div>';
         html += '<div class="card-desc">' + entry.description + '</div>';
-        html += '<div class="card-footer"><span class="card-date">' + entry.date + '</span>';
+        html += '<div class="card-footer"><span class="card-date">' + entry.date + (entry.read_min ? ' · ~' + entry.read_min + ' min read' : '') + '</span>';
         html += '<span class="card-link">' + entry.link_text + ' <span>&rarr;</span></span></div></div>';
 
         card.innerHTML = html;

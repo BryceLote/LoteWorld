@@ -12,7 +12,8 @@
     "url": "/pages/writing/the-long-work.html",
     "image": "/image/terreria-images/the-western-edge-at-the-end.png",
     "link_text": "Read Entry One",
-    "published": "2026-05-31"
+    "published": "2026-05-31",
+    "read_min": 48
   },
   {
     "title": "What the phones taught me",
