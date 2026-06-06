@@ -357,6 +357,56 @@
   }
 
   /* ---- RESPONSIVE ---- */
+  /* ---- LATEST FEED ---- */
+  .latest { max-width: 800px; margin: 0 auto; padding: 3.5rem 3rem; }
+  .latest .section-label { margin-bottom: 1.5rem; }
+  .latest-list { display: flex; flex-direction: column; }
+  .latest-item {
+    display: flex; align-items: baseline; gap: 1rem;
+    padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit; transition: background 0.3s;
+  }
+  .latest-item:last-child { border-bottom: none; }
+  .latest-item:hover { background: rgba(255,255,255,0.03); margin: 0 -0.75rem; padding: 0.9rem 0.75rem; border-radius: 4px; }
+  .latest-type {
+    font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); border: 1px solid var(--border); padding: 0.15rem 0.5rem;
+    flex-shrink: 0; white-space: nowrap; min-width: 5.5rem; text-align: center;
+  }
+  .latest-title {
+    font-family: 'Libre Baskerville', serif; font-size: 0.98rem;
+    color: var(--text-heading); font-weight: 400; flex: 1; line-height: 1.4;
+    transition: color 0.3s;
+  }
+  .latest-item:hover .latest-title { color: var(--rust); }
+  .latest-date { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em; flex-shrink: 0; }
+
+  /* ---- TAG CLOUD ---- */
+  .explore { max-width: 800px; margin: 0 auto; padding: 2.25rem 3rem; }
+  .explore-toggle {
+    display: flex; align-items: center; gap: 0.75rem; width: 100%;
+    background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
+  }
+  .explore-toggle .section-label { margin-bottom: 0; transition: color 0.3s; }
+  .explore-toggle:hover .section-label { color: var(--text-heading); }
+  .explore-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.3s; transform: rotate(90deg); }
+  .explore.collapsed .explore-chevron { transform: rotate(0deg); }
+  .explore-body { margin-top: 1.5rem; }
+  .explore.collapsed .explore-body { display: none; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tag-chip {
+    font-family: inherit; background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-body); cursor: pointer; padding: 0.35rem 0.8rem;
+    letter-spacing: 0.02em; transition: all 0.25s; line-height: 1.2;
+  }
+  .tag-chip:hover { border-color: var(--border-hover); color: var(--text-heading); }
+  .tag-chip.active { background: var(--rust); border-color: var(--rust); color: #1a1408; }
+  .tag-chip .tag-count { color: var(--text-muted); font-size: 0.85em; margin-left: 0.35rem; }
+  .tag-chip.active .tag-count { color: rgba(26,20,8,0.6); }
+  .tag-results { margin-top: 1.5rem; }
+  .tag-results-head { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+  .tag-results .latest-item { /* reuse latest row styling */ }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
@@ -370,6 +420,9 @@
     .currently-inner { padding: 3rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem; }
     .divider { padding: 0 1.5rem; }
+    .latest { padding: 2.5rem 1.5rem; }
+    .latest-type { min-width: 4.5rem; }
+    .explore { padding: 2.5rem 1.5rem; }
   }
 </style>
 </head>
@@ -506,6 +559,28 @@
   </div>
 </div>
 
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="explore collapsed" id="explore">
+  <button class="explore-toggle" id="explore-toggle" aria-expanded="false">
+    <span class="section-label">Explore by tag</span>
+    <span class="explore-chevron">&#9656;</span>
+  </button>
+  <div class="explore-body">
+    <div class="tag-cloud" id="tag-cloud"></div>
+    <div class="tag-results" id="tag-results"></div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="latest">
+  <div class="section-label">Latest</div>
+  <div class="latest-list" id="latest-list">
+    <!-- Populated from all content via SiteContent.loadAllContent -->
+  </div>
+</div>
+
 <footer>
   <div class="footer-left">
     Bryce Lote
@@ -518,7 +593,20 @@
   </div>
 </footer>
 
+<script src="/assets/js/content.js"></script>
 <script>
+  // Explore-by-tag collapse toggle
+  (function() {
+    var explore = document.getElementById('explore');
+    var toggle = document.getElementById('explore-toggle');
+    if (explore && toggle) {
+      toggle.addEventListener('click', function() {
+        var collapsed = explore.classList.toggle('collapsed');
+        toggle.setAttribute('aria-expanded', String(!collapsed));
+      });
+    }
+  })();
+
   document.addEventListener('click', function(e) {
     const dropdown = document.querySelector('.nav-dropdown');
     if (dropdown && !dropdown.contains(e.target)) {
@@ -583,6 +671,81 @@
       document.getElementById('stat-games-perfect').textContent = perfect;
     })
     .catch(function(err) { console.error('Games stats failed:', err); });
+
+  // ---- ALL-CONTENT FEATURES (Latest feed + tag cloud) ----
+  var TYPE_LABEL = { article: '', book: 'Library', game: 'Games' };
+  function typeLabel(item) {
+    return item.type === 'article' ? item.category : (TYPE_LABEL[item.type] || item.type);
+  }
+  function esc(s) {
+    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  // A single content row (reused by Latest and tag results)
+  function contentRow(it) {
+    var a = document.createElement('a');
+    a.className = 'latest-item';
+    a.href = it.url;
+    if (it.external) { a.target = '_blank'; a.rel = 'noopener'; }
+    a.innerHTML =
+      '<span class="latest-type">' + esc(typeLabel(it)) + '</span>' +
+      '<span class="latest-title">' + esc(it.title) + '</span>' +
+      '<span class="latest-date">' + esc(it.date_label || '') + '</span>';
+    return a;
+  }
+
+  if (window.SiteContent) {
+    SiteContent.loadAllContent()
+      .then(function(items) {
+        // Latest feed
+        var list = document.getElementById('latest-list');
+        if (list) {
+          SiteContent.latest(items, 6).forEach(function(it) { list.appendChild(contentRow(it)); });
+        }
+        // Tag cloud (top 24 tags by count)
+        buildTagCloud(items);
+      })
+      .catch(function(err) { console.error('Homepage content failed:', err); });
+  }
+
+  function buildTagCloud(items) {
+    var cloud = document.getElementById('tag-cloud');
+    var results = document.getElementById('tag-results');
+    if (!cloud) return;
+    var tags = SiteContent.tagList(items).slice(0, 24);
+    var activeTag = null;
+
+    tags.forEach(function(t) {
+      var btn = document.createElement('button');
+      btn.className = 'tag-chip';
+      btn.setAttribute('data-tag', t.tag);
+      btn.innerHTML = esc(t.tag) + '<span class="tag-count">' + t.count + '</span>';
+      btn.addEventListener('click', function() {
+        if (activeTag === t.tag) {
+          // toggle off
+          activeTag = null;
+          btn.classList.remove('active');
+          results.innerHTML = '';
+          return;
+        }
+        activeTag = t.tag;
+        cloud.querySelectorAll('.tag-chip').forEach(function(c) { c.classList.remove('active'); });
+        btn.classList.add('active');
+        showTagResults(t.tag, t.items, results);
+      });
+      cloud.appendChild(btn);
+    });
+  }
+
+  function showTagResults(tag, tagItems, results) {
+    // Newest-first within the tag
+    var sorted = SiteContent.latest(tagItems);
+    results.innerHTML = '<div class="tag-results-head">' + sorted.length + ' item' +
+      (sorted.length !== 1 ? 's' : '') + ' tagged &ldquo;' + esc(tag) + '&rdquo;</div>';
+    var list = document.createElement('div');
+    list.className = 'latest-list';
+    sorted.forEach(function(it) { list.appendChild(contentRow(it)); });
+    results.appendChild(list);
+  }
 </script>
 
 </body>
