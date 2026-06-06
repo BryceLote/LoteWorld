@@ -55,10 +55,18 @@
   .library-section h2 { font-family:'Libre Baskerville',serif;font-size:1.8rem;font-weight:400;color:var(--text-heading);margin-bottom:2rem;line-height:1.35; }
 
   .book-group { max-width:800px;margin:0 auto 3rem;padding:0 3rem; }
-  .group-header { display:flex;align-items:baseline;gap:1rem;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border); }
+  .group-header { display:flex;align-items:baseline;gap:1rem;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);cursor:pointer;transition:border-color 0.3s; }
+  .group-header:hover { border-bottom-color:var(--border-hover); }
+  .group-header:hover .group-name { color:var(--rust); }
   .group-number { font-size:0.7rem;color:var(--text-faint);letter-spacing:0.1em;font-weight:500; }
-  .group-name { font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-heading);font-weight:400;flex:1; }
+  .group-name { font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-heading);font-weight:400;flex:1;transition:color 0.3s; }
   .group-count { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em; }
+  .group-chevron { font-size:0.7rem;color:var(--text-muted);transition:transform 0.3s;flex-shrink:0;transform:rotate(90deg); }
+  .book-group.collapsed .group-chevron { transform:rotate(0deg); }
+  .book-group.collapsed .book-list { display:none; }
+  .book-group.collapsed .group-header { margin-bottom:0; }
+  .collapse-toggle { font-family:inherit;font-size:0.75rem;color:var(--text-muted);background:none;border:none;cursor:pointer;letter-spacing:0.06em;transition:color 0.3s;padding:0; }
+  .collapse-toggle:hover { color:var(--text-heading); }
 
   .book-list { display:flex;flex-direction:column;gap:0; }
   .book-card { display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);transition:background 0.3s;text-decoration:none;color:inherit; }
@@ -229,6 +237,7 @@
       </div>
     </div>
   </div>
+  <button class="collapse-toggle" id="collapse-toggle" style="display:none">Collapse all</button>
   <span class="book-count" id="book-count"></span>
 </div>
 
@@ -346,6 +355,7 @@
 
       renderBooks();
       setupControls();
+      expandTargetGroup();
     })
     .catch(function(err) {
       console.error('Library load failed:', err);
@@ -400,7 +410,10 @@
           header.className = 'group-header';
           header.innerHTML = '<span class="group-number">' + String(groupNum).padStart(2, '0') + '</span>'
             + '<h3 class="group-name">' + escHtml(currentGroup) + '</h3>'
-            + '<span class="group-count">' + groupBooks.length + ' book' + (groupBooks.length !== 1 ? 's' : '') + '</span>';
+            + '<span class="group-count">' + groupBooks.length + ' book' + (groupBooks.length !== 1 ? 's' : '') + '</span>'
+            + '<span class="group-chevron">&#9656;</span>';
+          var gd = groupDiv;
+          header.addEventListener('click', function() { gd.classList.toggle('collapsed'); syncToggleLabel(); });
           groupDiv.appendChild(header);
 
           listDiv = document.createElement('div');
@@ -412,6 +425,7 @@
         }
         listDiv.appendChild(buildCard(book));
       });
+      setupCollapseToggle(true);
     } else {
       var flatGroup = document.createElement('div');
       flatGroup.className = 'book-group fade-in';
@@ -422,8 +436,38 @@
       container.appendChild(flatGroup);
       observer.observe(flatGroup);
       flatGroup.classList.add('visible');
+      setupCollapseToggle(false);
     }
   }
+
+  // Collapse-all / expand-all toggle, only shown in the grouped view
+  function setupCollapseToggle(grouped) {
+    var btn = document.getElementById('collapse-toggle');
+    if (!btn) return;
+    btn.style.display = grouped ? '' : 'none';
+    if (grouped) syncToggleLabel();
+  }
+  function syncToggleLabel() {
+    var btn = document.getElementById('collapse-toggle');
+    if (!btn) return;
+    var groups = document.querySelectorAll('#book-list .book-group');
+    var allCollapsed = groups.length > 0 && Array.prototype.every.call(groups, function(g) { return g.classList.contains('collapsed'); });
+    btn.textContent = allCollapsed ? 'Expand all' : 'Collapse all';
+  }
+  // If the URL targets a book inside a collapsed group, expand that group so it's visible
+  function expandTargetGroup() {
+    var id = location.hash ? location.hash.slice(1) : '';
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var group = el.closest ? el.closest('.book-group') : null;
+    if (group && group.classList.contains('collapsed')) {
+      group.classList.remove('collapsed');
+      syncToggleLabel();
+    }
+    el.scrollIntoView({ block: 'center' });
+  }
+  window.addEventListener('hashchange', expandTargetGroup);
 
   function buildCard(book) {
     var card = document.createElement('a');
@@ -466,6 +510,16 @@
   }
 
   function setupControls() {
+    var collapseBtn = document.getElementById('collapse-toggle');
+    if (collapseBtn) {
+      collapseBtn.addEventListener('click', function() {
+        var groups = document.querySelectorAll('#book-list .book-group');
+        var collapseThem = collapseBtn.textContent.indexOf('Collapse') === 0;
+        groups.forEach(function(g) { g.classList.toggle('collapsed', collapseThem); });
+        syncToggleLabel();
+      });
+    }
+
     var filterDD = document.getElementById('filter-dropdown');
     var filterTrigger = document.getElementById('filter-trigger');
     var filterMenu = document.getElementById('filter-menu');
