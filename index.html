@@ -318,6 +318,11 @@
     font-size: 0.95rem; color: var(--text-body);
     line-height: 1.6;
   }
+  .currently-item a {
+    color: var(--rust); text-decoration: none;
+    border-bottom: 1px solid transparent; transition: border-color 0.3s;
+  }
+  .currently-item a:hover { border-bottom-color: var(--rust); }
 
   /* ---- FOOTER ---- */
   footer {
@@ -540,17 +545,34 @@
       });
     });
 
-  // Load stats from JSON
-  fetch('data/stats.json')
+  // Stats computed live from the same JSON the Library and Games pages use
+  fetch('data/books.json')
     .then(function(r) { return r.json(); })
-    .then(function(data) {
-      document.getElementById('stat-library-books').textContent = data.library.books;
-      document.getElementById('stat-library-starwars').textContent = data.library.star_wars;
-      document.getElementById('stat-library-perfect').textContent = data.library.perfect_10s;
-      document.getElementById('stat-games-count').textContent = data.games.count;
-      document.getElementById('stat-games-hours').textContent = data.games.total_hours_short;
-      document.getElementById('stat-games-perfect').textContent = data.games.perfect_10s;
-    });
+    .then(function(books) {
+      var perfect = 0, starWars = 0;
+      books.forEach(function(b) {
+        if (parseInt(b.rating, 10) === 10) perfect++;
+        if (b.group && b.group.indexOf('Star Wars') === 0) starWars++;
+      });
+      document.getElementById('stat-library-books').textContent = books.length;
+      document.getElementById('stat-library-starwars').textContent = starWars;
+      document.getElementById('stat-library-perfect').textContent = perfect;
+    })
+    .catch(function(err) { console.error('Library stats failed:', err); });
+
+  fetch('data/games.json')
+    .then(function(r) { return r.json(); })
+    .then(function(games) {
+      var totalHours = 0, perfect = 0;
+      games.forEach(function(g) {
+        totalHours += g.hours || 0;
+        if (parseFloat(g.rating) === 10) perfect++;
+      });
+      document.getElementById('stat-games-count').textContent = games.length;
+      document.getElementById('stat-games-hours').textContent = Math.round(totalHours).toLocaleString();
+      document.getElementById('stat-games-perfect').textContent = perfect;
+    })
+    .catch(function(err) { console.error('Games stats failed:', err); });
 </script>
 
 </body>

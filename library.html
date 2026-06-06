@@ -80,6 +80,56 @@
   .book-meta { font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;letter-spacing:0.02em; }
   .book-notes { font-size:0.82rem;color:var(--text-body);font-style:italic;margin-top:0.4rem;line-height:1.5; }
 
+  .genre-tag {
+    font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;
+    color:var(--text-muted);border:1px solid var(--border);
+    padding:0.12rem 0.5rem;margin-left:0.5rem;white-space:nowrap;
+    flex-shrink:0;vertical-align:middle;
+  }
+
+  /* ---- FILTER & SORT CONTROLS ---- */
+  .controls-bar {
+    max-width:800px;margin:0 auto;padding:0 3rem 1rem;
+    display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  }
+  .control-group { display:flex;align-items:center;gap:0.5rem; }
+  .control-label { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em; }
+  .control-dropdown { position:relative; }
+  .control-trigger {
+    font-family:inherit;font-size:0.85rem;color:var(--text-heading);
+    background:var(--bg-card);border:1px solid var(--border);
+    padding:0.4rem 0.9rem;cursor:pointer;
+    display:flex;align-items:center;gap:0.5rem;transition:border-color 0.3s;
+  }
+  .control-trigger:hover { border-color:var(--border-hover); }
+  .control-trigger::after {
+    content:'';display:inline-block;width:5px;height:5px;
+    border-right:1px solid var(--text-muted);border-bottom:1px solid var(--text-muted);
+    transform:rotate(45deg);position:relative;top:-1px;transition:transform 0.3s;
+  }
+  .control-dropdown.open .control-trigger::after { transform:rotate(-135deg);top:2px; }
+  .control-menu {
+    position:absolute;top:calc(100% + 0.4rem);left:0;
+    background:var(--bg-surface);border:1px solid var(--border-hover);
+    padding:0.35rem 0;min-width:200px;max-height:340px;overflow-y:auto;
+    opacity:0;visibility:hidden;transform:translateY(-4px);
+    transition:opacity 0.2s ease,transform 0.2s ease,visibility 0.2s;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:50;
+  }
+  .control-dropdown.open .control-menu { opacity:1;visibility:visible;transform:translateY(0); }
+  .control-option {
+    display:block;width:100%;font-family:inherit;font-size:0.85rem;
+    color:var(--text-body);background:none;border:none;
+    padding:0.4rem 1rem;text-align:left;
+    cursor:pointer;transition:color 0.2s,background 0.2s;
+  }
+  .control-option:hover { color:var(--text-heading);background:rgba(255,255,255,0.04); }
+  .control-option.active { color:var(--text-heading); }
+  .book-count {
+    font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em;
+    margin-left:auto;
+  }
+
   .closing { max-width:800px;margin:0 auto;padding:4rem 3rem;text-align:center; }
   .closing blockquote { font-family:'Libre Baskerville',serif;font-size:1.2rem;font-style:italic;color:var(--text-heading);line-height:1.6;max-width:520px;margin:0 auto 1rem; }
   .closing .quote-attr { font-size:0.8rem;color:var(--text-muted);letter-spacing:0.08em; }
@@ -147,91 +197,7 @@
 
 <div class="mosaic-section">
   <div class="mosaic-label">the full shelf</div>
-  <div class="mosaic-grid">
-      <a href="#how-to-win-friends-and-influence-people" class="mosaic-link"><img src="covers/01_How_to_Win_Friends_and_Influence_People.jpg" alt="How to win friends and influence people" loading="lazy"></a>
-      <a href="#outcast" class="mosaic-link"><img src="covers/16_Outcast_Fate_of_the_Jedi.jpg" alt="Outcast" loading="lazy"></a>
-      <a href="#omen" class="mosaic-link"><img src="covers/17_Omen_Fate_of_the_Jedi.jpg" alt="Omen" loading="lazy"></a>
-      <a href="#allies" class="mosaic-link"><img src="covers/20_Allies_Fate_of_the_Jedi.jpg" alt="Allies" loading="lazy"></a>
-      <a href="#ascension" class="mosaic-link"><img src="covers/23_Ascension_Fate_of_the_Jedi.jpg" alt="Ascension" loading="lazy"></a>
-      <a href="#backlash" class="mosaic-link"><img src="covers/19_Backlash_Fate_of_the_Jedi.jpg" alt="Backlash" loading="lazy"></a>
-      <a href="#conviction" class="mosaic-link"><img src="covers/22_Conviction_Fate_of_the_Jedi.jpg" alt="Conviction" loading="lazy"></a>
-      <a href="#vortex" class="mosaic-link"><img src="covers/21_Vortex_Fate_of_the_Jedi.jpg" alt="Vortex" loading="lazy"></a>
-      <a href="#abyss" class="mosaic-link"><img src="covers/18_Abyss_Fate_of_the_Jedi.jpg" alt="Abyss" loading="lazy"></a>
-      <a href="#apocalypse" class="mosaic-link"><img src="covers/24_Apocalypse_Fate_of_the_Jedi.jpg" alt="Apocalypse" loading="lazy"></a>
-      <a href="#betrayal" class="mosaic-link"><img src="covers/25_Betrayal_Legacy_of_the_Force.jpg" alt="Betrayal" loading="lazy"></a>
-      <a href="#bloodlines" class="mosaic-link"><img src="covers/26_Bloodlines_Legacy_of_the_Force.jpg" alt="Bloodlines" loading="lazy"></a>
-      <a href="#tempest" class="mosaic-link"><img src="covers/27_Tempest_Legacy_of_the_Force.jpg" alt="Tempest" loading="lazy"></a>
-      <a href="#exile" class="mosaic-link"><img src="covers/28_Exile_Legacy_of_the_Force.jpg" alt="Exile" loading="lazy"></a>
-      <a href="#sacrifice" class="mosaic-link"><img src="covers/29_Sacrifice_Legacy_of_the_Force.jpg" alt="Sacrifice" loading="lazy"></a>
-      <a href="#inferno" class="mosaic-link"><img src="covers/30_Inferno_Legacy_of_the_Force.jpg" alt="Inferno" loading="lazy"></a>
-      <a href="#fury" class="mosaic-link"><img src="covers/31_Fury_Legacy_of_the_Force.jpg" alt="Fury" loading="lazy"></a>
-      <a href="#revelation" class="mosaic-link"><img src="covers/32_Revelation_Legacy_of_the_Force.jpg" alt="Revelation" loading="lazy"></a>
-      <a href="#invincible" class="mosaic-link"><img src="covers/33_Invincible_Legacy_of_the_Force.jpg" alt="Invincible" loading="lazy"></a>
-      <a href="#heir-to-the-empire" class="mosaic-link"><img src="covers/02_Heir_to_the_Empire.jpg" alt="Heir to the empire" loading="lazy"></a>
-      <a href="#dark-force-rising" class="mosaic-link"><img src="covers/03_Dark_Force_Rising.jpg" alt="Dark force rising" loading="lazy"></a>
-      <a href="#the-last-command" class="mosaic-link"><img src="covers/04_The_Last_Command.jpg" alt="The last command" loading="lazy"></a>
-      <a href="#specter-of-the-past" class="mosaic-link"><img src="covers/05_Specter_of_the_Past.jpg" alt="Specter of the past" loading="lazy"></a>
-      <a href="#vision-of-the-future" class="mosaic-link"><img src="covers/06_Vision_of_the_Future.jpg" alt="Vision of the future" loading="lazy"></a>
-      <a href="#path-of-destruction" class="mosaic-link"><img src="covers/07_Path_of_Destruction.jpg" alt="Path of destruction" loading="lazy"></a>
-      <a href="#rule-of-two" class="mosaic-link"><img src="covers/08_Rule_of_Two.jpg" alt="Rule of two" loading="lazy"></a>
-      <a href="#dynasty-of-evil" class="mosaic-link"><img src="covers/09_Dynasty_of_Evil.jpg" alt="Dynasty of Evil" loading="lazy"></a>
-      <a href="#darth-plagueis" class="mosaic-link"><img src="covers/10_Darth_Plagueis.jpg" alt="Darth Plagueis" loading="lazy"></a>
-      <a href="#revan" class="mosaic-link"><img src="covers/11_Revan.jpg" alt="Revan" loading="lazy"></a>
-      <a href="#fatal-alliance" class="mosaic-link"><img src="covers/34_Fatal_Alliance_Old_Republic.jpg" alt="Fatal Alliance" loading="lazy"></a>
-      <a href="#deceived" class="mosaic-link"><img src="covers/35_Deceived_Old_Republic.jpg" alt="Deceived" loading="lazy"></a>
-      <a href="#shadow-hunter" class="mosaic-link"><img src="covers/12_Darth_Maul_Shadow_Hunter.jpg" alt="Shadow Hunter" loading="lazy"></a>
-      <a href="#lockdown" class="mosaic-link"><img src="covers/13_Darth_Maul_Lockdown.jpg" alt="Lockdown" loading="lazy"></a>
-      <a href="#dune" class="mosaic-link"><img src="covers/38_Dune.jpg" alt="Dune" loading="lazy"></a>
-      <a href="#dune-messiah" class="mosaic-link"><img src="covers/39_Dune_Messiah.jpg" alt="Dune: Messiah" loading="lazy"></a>
-      <a href="#children-of-dune" class="mosaic-link"><img src="covers/40_Children_of_Dune.jpg" alt="Children of Dune" loading="lazy"></a>
-      <a href="#crucible" class="mosaic-link"><img src="covers/37_Crucible_Star_Wars.jpg" alt="Crucible" loading="lazy"></a>
-      <a href="#the-servant" class="mosaic-link"><img src="covers/41_The_Servant.jpg" alt="The Servant" loading="lazy"></a>
-      <a href="#kenobi" class="mosaic-link"><img src="covers/14_Kenobi.jpg" alt="Kenobi" loading="lazy"></a>
-      <a href="#the-couple-next-door" class="mosaic-link"><img src="covers/44_The_Couple_Next_Door.jpg" alt="The Couple next door" loading="lazy"></a>
-      <a href="#the-richest-man-in-babylon" class="mosaic-link"><img src="covers/42_The_Richest_Man_in_Babylon.jpg" alt="The Richest Man In Babylon" loading="lazy"></a>
-      <a href="#shatterpoint" class="mosaic-link"><img src="covers/15_Shatterpoint.jpg" alt="Shatterpoint" loading="lazy"></a>
-      <a href="#12-rules-for-life" class="mosaic-link"><img src="covers/43_12_Rules_for_Life.jpg" alt="12 Rules for life" loading="lazy"></a>
-      <a href="#dark-of-the-moon" class="mosaic-link"><img src="covers/45_Dark_of_the_Moon_Virgil_Flowers.jpg" alt="Dark of the moon" loading="lazy"></a>
-      <a href="#heat-lightning" class="mosaic-link"><img src="covers/46_Heat_Lightning_Virgil_Flowers.jpg" alt="Heat lightning" loading="lazy"></a>
-      <a href="#rough-country" class="mosaic-link"><img src="covers/47_Rough_Country.jpg" alt="Rough Country" loading="lazy"></a>
-      <a href="#mad-river" class="mosaic-link"><img src="covers/48_Mad_River.jpg" alt="Mad River" loading="lazy"></a>
-      <a href="#bad-blood" class="mosaic-link"><img src="covers/26_Bloodlines_Legacy_of_the_Force.jpg" alt="Bad Blood" loading="lazy"></a>
-      <a href="#deadline" class="mosaic-link"><img src="covers/50_Deadline_Virgil_Flowers.jpg" alt="Deadline" loading="lazy"></a>
-      <a href="#stormfront" class="mosaic-link"><img src="covers/51_Stormfront_Virgil_Flowers.jpg" alt="Stormfront" loading="lazy"></a>
-      <a href="#deep-freeze" class="mosaic-link"><img src="covers/52_Deep_Freeze.jpg" alt="Deep Freeze" loading="lazy"></a>
-      <a href="#holy-ghost" class="mosaic-link"><img src="covers/53_Holy_Ghost.jpg" alt="Holy Ghost" loading="lazy"></a>
-      <a href="#eruption" class="mosaic-link"><img src="covers/76_Eruption.jpg" alt="Eruption" loading="lazy"></a>
-      <a href="#the-last-mile" class="mosaic-link"><img src="covers/54_The_Last_Mile.jpg" alt="The last Mile" loading="lazy"></a>
-      <a href="#redemption" class="mosaic-link"><img src="covers/56_Redemption.jpg" alt="Redemption" loading="lazy"></a>
-      <a href="#the-fallen" class="mosaic-link"><img src="covers/57_The_Fallen.jpg" alt="The Fallen" loading="lazy"></a>
-      <a href="#split-second" class="mosaic-link"><img src="covers/59_Split_Second.jpg" alt="Split Second" loading="lazy"></a>
-      <a href="#long-shadows" class="mosaic-link"><img src="covers/58_Long_Shadows.jpg" alt="Long Shadows" loading="lazy"></a>
-      <a href="#long-road-to-mercy" class="mosaic-link"><img src="covers/65_Long_Road_to_Mercy.jpg" alt="Long Road to Mercy" loading="lazy"></a>
-      <a href="#king-and-maxwell" class="mosaic-link"><img src="covers/60_King_and_Maxwell.jpg" alt="King and Maxwell" loading="lazy"></a>
-      <a href="#hour-game" class="mosaic-link"><img src="covers/61_Hour_Game.jpg" alt="Hour Game" loading="lazy"></a>
-      <a href="#simple-genius" class="mosaic-link"><img src="covers/62_Simple_Genius.jpg" alt="Simple Genius" loading="lazy"></a>
-      <a href="#first-family" class="mosaic-link"><img src="covers/63_First_Family.jpg" alt="First Family" loading="lazy"></a>
-      <a href="#mercy" class="mosaic-link"><img src="covers/65_Long_Road_to_Mercy.jpg" alt="Mercy" loading="lazy"></a>
-      <a href="#house-of-leaves" class="mosaic-link"><img src="covers/77_House_of_Leaves.jpg" alt="House Of Leaves" loading="lazy"></a>
-      <a href="#the-edge" class="mosaic-link"><img src="covers/69_The_Edge.jpg" alt="The Edge" loading="lazy"></a>
-      <a href="#the-sixth-man" class="mosaic-link"><img src="covers/64_The_Sixth_Man.jpg" alt="The Sixth Man" loading="lazy"></a>
-      <a href="#the-forgotten" class="mosaic-link"><img src="covers/73_The_Forgotten.jpg" alt="The forgotten" loading="lazy"></a>
-      <a href="#the-escape" class="mosaic-link"><img src="covers/74_The_Escape_John_Puller.jpg" alt="The Escape" loading="lazy"></a>
-      <a href="#the-joiner-king" class="mosaic-link"><img src="covers/36_The_Joiner_King_Dark_Nest.jpg" alt="The Joiner King" loading="lazy"></a>
-      <a href="#no-mans-land" class="mosaic-link"><img src="covers/75_No_Mans_Land.jpg" alt="No Mans Land" loading="lazy"></a>
-      <a href="#zero-day" class="mosaic-link"><img src="covers/72_Zero_Day_John_Puller.jpg" alt="Zero Day" loading="lazy"></a>
-      <a href="#when-darkness-falls" class="mosaic-link"><img src="covers/80_When_Darkness_Falls.jpg" alt="When darkness falls" loading="lazy"></a>
-      <a href="#mr-mercedes" class="mosaic-link"><img src="covers/82_Mr_Mercedes.jpg" alt="Mr Mercedes" loading="lazy"></a>
-      <a href="#born-to-run" class="mosaic-link"><img src="covers/81_Born_to_Run.jpg" alt="Born to run" loading="lazy"></a>
-      <a href="#the-silent-patient" class="mosaic-link"><img src="covers/78_The_Silent_Patient.jpg" alt="The silent patient" loading="lazy"></a>
-      <a href="#red-widow" class="mosaic-link"><img src="covers/79_Red_Widow.jpg" alt="Red Widow" loading="lazy"></a>
-      <a href="#daylight" class="mosaic-link"><img src="covers/66_Daylight.jpg" alt="Daylight" loading="lazy"></a>
-      <a href="#harry-potter-and-the-prisoner-of-azkaban" class="mosaic-link"><img src="covers/83_Harry_Potter_Prisoner_of_Azkaban.jpg" alt="Harry potter and the prisoner of azkaban" loading="lazy"></a>
-      <a href="#harry-potter-and-the-goblet-of-fire" class="mosaic-link"><img src="covers/84_Harry_Potter_Goblet_of_Fire.jpg" alt="Harry Potter and the Goblet of Fire" loading="lazy"></a>
-      <a href="#harry-potter-and-the-order-of-the-pheonix" class="mosaic-link"><img src="covers/85_Harry_Potter_Order_of_the_Phoenix.jpg" alt="Harry Potter and the order of the pheonix" loading="lazy"></a>
-      <a href="#harry-potter-and-the-half-blood-prince" class="mosaic-link"><img src="covers/86_Harry_Potter_Half_Blood_Prince.jpg" alt="Harry potter and the half blood prince" loading="lazy"></a>
-      <a href="#harry-potter-and-the-deathly-hallows" class="mosaic-link"><img src="covers/87_Harry_Potter_Deathly_Hallows.jpg" alt="Harry potter and the deathly hallows" loading="lazy"></a>
-  </div>
+  <div class="mosaic-grid" id="mosaic-grid"></div>
 </div>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -241,1036 +207,31 @@
   <h2>Every book, grouped by series</h2>
 </div>
 
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">01</span>
-      <h3 class="group-name">Star Wars — Thrawn</h3>
-      <span class="group-count">5 books</span>
+<div class="controls-bar">
+  <div class="control-group">
+    <span class="control-label">Filter</span>
+    <div class="control-dropdown" id="filter-dropdown">
+      <button class="control-trigger" id="filter-trigger">All genres</button>
+      <div class="control-menu" id="filter-menu"></div>
     </div>
-    <div class="book-list">
-      <div class="book-card" id="heir-to-the-empire">
-        <img src="covers/02_Heir_to_the_Empire.jpg" alt="Heir to the empire" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Heir to the empire</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Timothy Zahn · The Thrawn Trilogy · Audiobook</div>
-            <p class="book-notes">One of the most compelling Star Wars stories I&#x27;ve read that establishes an entire cast of classic characters that live on throughout the cannon following this book. The plot was very funny and introduces one of the best written antagonists in all of science fiction. This book is so good it established and entire cannon and was the basis for the star war expanded universe</p>
-        </div>
-      </div>
-      <div class="book-card" id="dark-force-rising">
-        <img src="covers/03_Dark_Force_Rising.jpg" alt="Dark force rising" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Dark force rising</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Timothy Zahn · The thrawn trilogy · Audiobook</div>
-            <p class="book-notes">This book kept me on my toes and raised the stakes throughout. I enjoyed how well this book portrayed thrawn as a legitimate threat and really drove home how fragile the new galactic government&#x27;s hold on the galaxy truly was.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-last-command">
-        <img src="covers/04_The_Last_Command.jpg" alt="The last command" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The last command</span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">Timothy Zahn · The thrawn trilogy · Audiobook</div>
-            <p class="book-notes">The plot is extremely engaging and the stakes felt so high. The antagonists in this book and series were so much fun and both felt like a genuine threat to the galaxy until the very end. The book always manages to portray Thrawn in a way that keeps the reader impressed and awed of his character while simultaneously rooting against him.</p>
-        </div>
-      </div>
-      <div class="book-card" id="specter-of-the-past">
-        <img src="covers/05_Specter_of_the_Past.jpg" alt="Specter of the past" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Specter of the past</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Timothy Zahn · The hand of thrawn · Audiobook</div>
-            <p class="book-notes">Excellent follow up to his previous series that further develops the character expertly.</p>
-        </div>
-      </div>
-      <div class="book-card" id="vision-of-the-future">
-        <img src="covers/06_Vision_of_the_Future.jpg" alt="Vision of the future" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Vision of the future</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Timothy Zahn · The hand of Thrawn · Audiobook</div>
-            <p class="book-notes">Great plot that left that had lasting repercussions for the rest of the EU. Great book and character development</p>
-        </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Sort</span>
+    <div class="control-dropdown" id="sort-dropdown">
+      <button class="control-trigger" id="sort-trigger">Series</button>
+      <div class="control-menu" id="sort-menu">
+        <button class="control-option active" data-sort="series">Series</button>
+        <button class="control-option" data-sort="rating">Rating</button>
+        <button class="control-option" data-sort="alpha">Alphabetical</button>
+        <button class="control-option" data-sort="author">Author</button>
+        <button class="control-option" data-sort="year">Release date</button>
       </div>
     </div>
   </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">02</span>
-      <h3 class="group-name">Star Wars — Darth Bane</h3>
-      <span class="group-count">3 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="path-of-destruction">
-        <img src="covers/07_Path_of_Destruction.jpg" alt="Path of destruction" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Path of destruction</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Drew Karpyshyn · Darth Bane Trilogy · Audiobook</div>
-            <p class="book-notes">I very much enjoyed the Darth bane characterization and the way it humanized his journey into the dark side. This book truly made the with feel like an order of actual characters vs the typical bad guy archetype.</p>
-        </div>
-      </div>
-      <div class="book-card" id="rule-of-two">
-        <img src="covers/08_Rule_of_Two.jpg" alt="Rule of two" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Rule of two</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Drew Karpyshyn · Darth Bane Trilogy · Audiobook</div>
-            <p class="book-notes">While I enjoyed how this book fleshed out zannahs character and set her up for the next book I felt the book overall fell a little flat and was by far the weakest entry into the series. That said I did enjoy the action sequence vs the Jedi toward the end.</p>
-        </div>
-      </div>
-      <div class="book-card" id="dynasty-of-evil">
-        <img src="covers/09_Dynasty_of_Evil.jpg" alt="Dynasty of Evil" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Dynasty of Evil</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Drew Karpyshyn · Darth Bane Trilogy · Audiobook</div>
-            <p class="book-notes">The pacing of this book especially the end was a lot of fun and felt like a fuse burning at both ends, I enjoyed the ambiguous ending as well as the implications for the greater Star Wars universe.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">03</span>
-      <h3 class="group-name">Star Wars — Fate of the Jedi</h3>
-      <span class="group-count">9 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="outcast">
-        <img src="covers/16_Outcast_Fate_of_the_Jedi.jpg" alt="Outcast" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Outcast</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="omen">
-        <img src="covers/17_Omen_Fate_of_the_Jedi.jpg" alt="Omen" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Omen</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Christie golden · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="allies">
-        <img src="covers/20_Allies_Fate_of_the_Jedi.jpg" alt="Allies" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Allies</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Christie golden · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="ascension">
-        <img src="covers/23_Ascension_Fate_of_the_Jedi.jpg" alt="Ascension" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Ascension</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Christie golden · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="backlash">
-        <img src="covers/19_Backlash_Fate_of_the_Jedi.jpg" alt="Backlash" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Backlash</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="conviction">
-        <img src="covers/22_Conviction_Fate_of_the_Jedi.jpg" alt="Conviction" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Conviction</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="vortex">
-        <img src="covers/21_Vortex_Fate_of_the_Jedi.jpg" alt="Vortex" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Vortex</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Troy Denning · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="abyss">
-        <img src="covers/18_Abyss_Fate_of_the_Jedi.jpg" alt="Abyss" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Abyss</span>
-            <span class="book-rating dnf">—</span>
-          </div>
-          <div class="book-meta">Troy Denning · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="apocalypse">
-        <img src="covers/24_Apocalypse_Fate_of_the_Jedi.jpg" alt="Apocalypse" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Apocalypse</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Troy Denning · Fate of the Jedi · Audiobook</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">04</span>
-      <h3 class="group-name">Star Wars — Legacy of the Force</h3>
-      <span class="group-count">9 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="betrayal">
-        <img src="covers/25_Betrayal_Legacy_of_the_Force.jpg" alt="Betrayal" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Betrayal</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Legacy of the Force · Audiobook</div>
-          <p class="book-notes">A necessary setup book that establishes the political fracture and begins Jacen's slow drift toward the dark side, but it struggles to generate much momentum on its own. Allston's writing style has always been a friction point for me and this one felt like a slog to get through despite the foundation it's laying.</p>
-        </div>
-      </div>
-      <div class="book-card" id="bloodlines">
-        <img src="covers/26_Bloodlines_Legacy_of_the_Force.jpg" alt="Bloodlines" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Bloodlines</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Karen Traviss · Legacy of the force · Audiobook</div>
-          <p class="book-notes">A significant step up from the first entry. Boba Fett's subplot was the highlight; watching how age and experience have reshaped him while his ability to operate on the level of Force users through pure skill and cunning remains fully intact was deeply satisfying. The way he leverages his own notoriety as a tool was a particular favorite. Ben's perspective also added a lot; seeing the same events through the eyes of those around him who sense something is wrong before he does hit close to home.</p>
-        </div>
-      </div>
-      <div class="book-card" id="tempest">
-        <img src="covers/27_Tempest_Legacy_of_the_Force.jpg" alt="Tempest" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Tempest</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Troy Denning · Legacy of the force · Audiobook</div>
-          <p class="book-notes">Denning does well here with what I find most compelling about dark side storytelling; the seductive logic of it. Jacen isn't obviously evil yet; he's a person you still want to give the benefit of the doubt, making calculated decisions he's convinced are necessary. The tension between his genuine love for Tenel Ka and Allana and the coldness he's developing sits at the center of the book and keeps it interesting. A solid middle entry that does its job well without being exceptional.</p>
-        </div>
-      </div>
-      <div class="book-card" id="exile">
-        <img src="covers/28_Exile_Legacy_of_the_Force.jpg" alt="Exile" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Exile</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Legacy of the force · Audiobook</div>
-          <p class="book-notes">Allston's writing remains a friction point but the story itself had enough momentum by this point to carry past it. The growing rift between Jacen and his parents was handled well and felt earned given everything that's come before. Ben's arc was the real highlight for me; knowing where he ends up in Fate of the Jedi made watching these formative experiences take shape genuinely compelling.</p>
-        </div>
-      </div>
-      <div class="book-card" id="sacrifice">
-        <img src="covers/29_Sacrifice_Legacy_of_the_Force.jpg" alt="Sacrifice" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Sacrifice</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Karen Traviss · Legacy of the force · Audiobook</div>
-          <p class="book-notes">Traviss at her best. The death of Mara Jade is the centerpiece and even knowing it was coming didn't diminish the impact; the entire book builds pressure across multiple converging threads that feel disconnected on the surface but are quietly tightening toward the same inevitable moment. Like watching a fuse burn when you already know what it's attached to.</p>
-        </div>
-      </div>
-      <div class="book-card" id="inferno">
-        <img src="covers/30_Inferno_Legacy_of_the_Force.jpg" alt="Inferno" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Inferno</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Troy Denning · Legacy of the force · Audiobook</div>
-          <p class="book-notes">Denning delivers the emotional payoff the series had been building toward. Watching Jacen get his first real reality check at Luke's hands was deeply satisfying; he'd been operating unchallenged for so long that the confrontation felt genuinely shocking even when you knew it was coming. The grief dynamic between Luke and Ben is the emotional core of the book and it's handled with real weight; two people processing the same loss in opposite ways and discovering they need exactly what the other one has.</p>
-        </div>
-      </div>
-      <div class="book-card" id="fury">
-        <img src="covers/31_Fury_Legacy_of_the_Force.jpg" alt="Fury" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Fury</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Aaron Allston · Legacy of the force · Audiobook</div>
-          <p class="book-notes">Allston's best entry in the series for me. The Jaina and Boba Fett training arc carries the book and earns its score on its own. Watching Jaina accept that she needed to become something different in order to stop her brother was compelling, and her dynamic with Fett works because she's one of the only characters tough enough to genuinely surrender to Mandalorian culture without losing herself in it.</p>
-        </div>
-      </div>
-      <div class="book-card" id="revelation">
-        <img src="covers/32_Revelation_Legacy_of_the_Force.jpg" alt="Revelation" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Revelation</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Karen Traviss · Legacy of the force · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="invincible">
-        <img src="covers/33_Invincible_Legacy_of_the_Force.jpg" alt="Invincible" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Invincible</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Troy Denning · Legacy of the force · Audiobook</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">05</span>
-      <h3 class="group-name">Star Wars — Old Republic</h3>
-      <span class="group-count">3 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="revan">
-        <img src="covers/11_Revan.jpg" alt="Revan" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Revan</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Drew Karpyshyn · The Old Republic · Audiobook</div>
-            <p class="book-notes">A fun story with compelling characters that serves well to fill out the old republic timeline. I very much enjoyed the dual plot lines and how they intersect the main characters. The ending however was a let down and felt heavily constrained to the established lore. Basically the ending battle was pigeonholed into the predetermined result of the video games that followed it and felt at odds with the book itself.</p>
-        </div>
-      </div>
-      <div class="book-card" id="fatal-alliance">
-        <img src="covers/34_Fatal_Alliance_Old_Republic.jpg" alt="Fatal Alliance" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Fatal Alliance</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Drew Karpyshyn · The Old Republic · Audio book</div>
-        </div>
-      </div>
-      <div class="book-card" id="deceived">
-        <img src="covers/35_Deceived_Old_Republic.jpg" alt="Deceived" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Deceived</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Paul S. Kemp · The Old Republic · Audiobook</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">06</span>
-      <h3 class="group-name">Star Wars — Standalone</h3>
-      <span class="group-count">7 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="darth-plagueis">
-        <img src="covers/10_Darth_Plagueis.jpg" alt="Darth Plagueis" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Darth Plagueis</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">James Lucero · Standalone · Audiobook</div>
-            <p class="book-notes">The plot of this book is somewhat slow and can feel dense at times, the content of the story and character development it does for the movies is tremendous and makes this book feel like required reading to fully understand the prequel movies plot lines. Also this book goes really well with the Darth bane trilogy as it fleshes out the order of the sith and tell the story of the end of his line of succession.</p>
-        </div>
-      </div>
-      <div class="book-card" id="shadow-hunter">
-        <img src="covers/12_Darth_Maul_Shadow_Hunter.jpg" alt="Shadow Hunter" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Shadow Hunter</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Michael Reeves · Darth Maul · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="lockdown">
-        <img src="covers/13_Darth_Maul_Lockdown.jpg" alt="Lockdown" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Lockdown</span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">Joe Schreiber · Darth Maul · Audiobook</div>
-            <p class="book-notes">Such a fun story, I really enjoyed this thriller / jailbreak story set in the Star Wars unviverse and appreciated how it did not rely so heavily on &quot;the force&quot; or the greater plot of the cannon. It was just a fantastic book that took full advantage of the Star Wars setting and pre established characters.</p>
-        </div>
-      </div>
-      <div class="book-card" id="crucible">
-        <img src="covers/37_Crucible_Star_Wars.jpg" alt="Crucible" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Crucible</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Troy Denning · Standalone · Audiobook</div>
-            <p class="book-notes">Felt like extra content for the sake of extra content. Easily shippable fan service for readers who want more after finishing the fate of the Jedi series. With hollow references throughout and a cheesy storyline.</p>
-        </div>
-      </div>
-      <div class="book-card" id="kenobi">
-        <img src="covers/14_Kenobi.jpg" alt="Kenobi" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Kenobi</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">John Jackson Miller · Standalone · Audiobook</div>
-            <p class="book-notes">Excellent character study of who obi wan kenobi has become in the aftermath of the movies and a very fun story that makes it clear who he must become to serve the greater good moving forward.</p>
-        </div>
-      </div>
-      <div class="book-card" id="shatterpoint">
-        <img src="covers/15_Shatterpoint.jpg" alt="Shatterpoint" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Shatterpoint</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Matthew Stover · A clone Wars novel · Audiobook</div>
-            <p class="book-notes">The setting and tone of the plot are fun but mace windu is not my favorite character and the plot seems like it has a hard time deciding what it wants to be. That being said I did enjoy how this story seems to be an omage the the classic film apocalypse now set in the Star Wars universe.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-joiner-king">
-        <img src="covers/36_The_Joiner_King_Dark_Nest.jpg" alt="The Joiner King" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Joiner King</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Troy Denning · The dark nest trilogy · Ebook</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">07</span>
-      <h3 class="group-name">Sci-Fi</h3>
-      <span class="group-count">3 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="dune">
-        <img src="covers/38_Dune.jpg" alt="Dune" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Dune</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Frank Herbert · Dune · Audiobook</div>
-            <p class="book-notes">Easily a classic. Although dense with the expectation that the reader will take the time to learn about the world the characters inhabit. The character, setting, and plot development were all absolutely fantastic!</p>
-        </div>
-      </div>
-      <div class="book-card" id="dune-messiah">
-        <img src="covers/39_Dune_Messiah.jpg" alt="Dune: Messiah" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Dune: Messiah</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Frank Herbert · Dune · Audiobook</div>
-            <p class="book-notes">Good follow up to the first book and continues do give the characters even more depth. The plot is definitely weaker than its predecessor though.</p>
-        </div>
-      </div>
-      <div class="book-card" id="children-of-dune">
-        <img src="covers/40_Children_of_Dune.jpg" alt="Children of Dune" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Children of Dune</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Frank Herbert · Dune · Audiobook</div>
-            <p class="book-notes">Great for fan service but it&#x27;s very obvious that quality in the series begins to fall off from this point</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">08</span>
-      <h3 class="group-name">Self-Improvement</h3>
-      <span class="group-count">4 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="how-to-win-friends-and-influence-people">
-        <img src="covers/01_How_to_Win_Friends_and_Influence_People.jpg" alt="How to win friends and influence people" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">How to win friends and influence people</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">Dale Carnegie · Standalone · Audiobook</div>
-            <p class="book-notes">The book feel very obviously dated but the concepts and information is extremely valuable and would benefit anyone to study and impliment.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-servant">
-        <img src="covers/41_The_Servant.jpg" alt="The Servant" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Servant</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">James C. Hunter · Standalone · Audiobook</div>
-            <p class="book-notes">I thoroughly enjoyed this book and listened multiple times. The story is structured very well and succeeds in helping the reader to identify with the authors faults as he learns how to become a better leader throughout an engaging story.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-richest-man-in-babylon">
-        <img src="covers/42_The_Richest_Man_in_Babylon.jpg" alt="The Richest Man In Babylon" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Richest Man In Babylon</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">George S. Clason · Standalone · Audiobook</div>
-            <p class="book-notes">Timeless information presented in an interesting manner. Somewhat hard to follow at times due to its age and the way it&#x27;s organized. The content itself was extremely useful and immediately actionable. I also appreciated how throughly it explained its principles by fleshing out each examples through multiple different perspectives and examples.</p>
-        </div>
-      </div>
-      <div class="book-card" id="12-rules-for-life">
-        <img src="covers/43_12_Rules_for_Life.jpg" alt="12 Rules for life" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">12 Rules for life</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Jordan B Peterson · Standalone · Audiobook</div>
-            <p class="book-notes">While this book did intrigue me throughout and cause me to consider its meaning deeper, it ultimately felt self serving to the author and very much gave me the impression that the entire book was written as an exercise of his ego.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">09</span>
-      <h3 class="group-name">Thriller — Virgil Flowers</h3>
-      <span class="group-count">9 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="dark-of-the-moon">
-        <img src="covers/45_Dark_of_the_Moon_Virgil_Flowers.jpg" alt="Dark of the moon" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Dark of the moon</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-            <p class="book-notes">Solid mystery novel that expertly introduces one of my favorite characters of all time Virgil flowers. While not super complex the plot remains engaging and the characters feel real.</p>
-        </div>
-      </div>
-      <div class="book-card" id="heat-lightning">
-        <img src="covers/46_Heat_Lightning_Virgil_Flowers.jpg" alt="Heat lightning" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Heat lightning</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="rough-country">
-        <img src="covers/47_Rough_Country.jpg" alt="Rough Country" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Rough Country</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="mad-river">
-        <img src="covers/48_Mad_River.jpg" alt="Mad River" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Mad River</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="bad-blood">
-        <img src="covers/26_Bloodlines_Legacy_of_the_Force.jpg" alt="Bad Blood" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Bad Blood</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="deadline">
-        <img src="covers/50_Deadline_Virgil_Flowers.jpg" alt="Deadline" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Deadline</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="stormfront">
-        <img src="covers/51_Stormfront_Virgil_Flowers.jpg" alt="Stormfront" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Stormfront</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="deep-freeze">
-        <img src="covers/52_Deep_Freeze.jpg" alt="Deep Freeze" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Deep Freeze</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="holy-ghost">
-        <img src="covers/53_Holy_Ghost.jpg" alt="Holy Ghost" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Holy Ghost</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">John Sandford · Virgil Flowers · Audiobook</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">10</span>
-      <h3 class="group-name">Thriller — Baldacci</h3>
-      <span class="group-count">22 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="the-last-mile">
-        <img src="covers/54_The_Last_Mile.jpg" alt="The last Mile" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The last Mile</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · Memory Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-fix">
-        <div class="book-cover-placeholder"></div>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Fix</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · Memory Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="redemption">
-        <img src="covers/56_Redemption.jpg" alt="Redemption" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Redemption</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · Memory Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-fallen">
-        <img src="covers/57_The_Fallen.jpg" alt="The Fallen" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Fallen</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · Memory Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="split-second">
-        <img src="covers/59_Split_Second.jpg" alt="Split Second" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Split Second</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">David Baldacci · King And Maxwell · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="long-shadows">
-        <img src="covers/58_Long_Shadows.jpg" alt="Long Shadows" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Long Shadows</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · Memory Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="long-road-to-mercy">
-        <img src="covers/65_Long_Road_to_Mercy.jpg" alt="Long Road to Mercy" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Long Road to Mercy</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">David Baldacci · Atlee Pine (1) · Audiobook</div>
-            <p class="book-notes">Once the action kicks in it&#x27;s not a bad ride and I enjoyed following along, the characters and their development felt so shallow and boring. Also it&#x27;s very obvious that the author struggles to write female characters and with the lead being a female this is a serious negative for the book and series as a whole. Honestly his female characters feel like men who he later decided should be women so he changed their names.</p>
-        </div>
-      </div>
-      <div class="book-card" id="king-and-maxwell">
-        <img src="covers/60_King_and_Maxwell.jpg" alt="King and Maxwell" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">King and Maxwell</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · King And Maxwell · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="hour-game">
-        <img src="covers/61_Hour_Game.jpg" alt="Hour Game" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Hour Game</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">David Baldacci · King And Maxwell · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="simple-genius">
-        <img src="covers/62_Simple_Genius.jpg" alt="Simple Genius" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Simple Genius</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · King And Maxwell · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="first-family">
-        <img src="covers/63_First_Family.jpg" alt="First Family" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">First Family</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">David Baldacci · King And Maxwell · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="mercy">
-        <img src="covers/65_Long_Road_to_Mercy.jpg" alt="Mercy" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Mercy</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · Atlee Pine (4) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-6-20-man">
-        <div class="book-cover-placeholder"></div>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The 6:20 Man</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · The 6:20 Man · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="bullseye">
-        <div class="book-cover-placeholder"></div>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Bullseye</span>
-            <span class="book-rating ">5</span>
-          </div>
-          <div class="book-meta">David Baldacci · Will Robbie · Ebook</div>
-            <p class="book-notes">Very shallow, even though it was a short story the plot itself offered absolutely no depth. It was written as if the only focus were practicing writing an action sequence.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-edge">
-        <img src="covers/69_The_Edge.jpg" alt="The Edge" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Edge</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · The 6:20 Man (2) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="to-die-for">
-        <div class="book-cover-placeholder"></div>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">To Die For</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · The 6:20 Man (3) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-sixth-man">
-        <img src="covers/64_The_Sixth_Man.jpg" alt="The Sixth Man" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Sixth Man</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">David Baldacci · King &amp; Maxwell · Ebook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-forgotten">
-        <img src="covers/73_The_Forgotten.jpg" alt="The forgotten" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The forgotten</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">David Baldacci · John Puller (2) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="the-escape">
-        <img src="covers/74_The_Escape_John_Puller.jpg" alt="The Escape" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Escape</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">David Baldacci · John Puller (3) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="no-mans-land">
-        <img src="covers/75_No_Mans_Land.jpg" alt="No Mans Land" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">No Mans Land</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">David Baldacci · John Puller (4) · Audiobook</div>
-        </div>
-      </div>
-      <div class="book-card" id="zero-day">
-        <img src="covers/72_Zero_Day_John_Puller.jpg" alt="Zero Day" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Zero Day</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · John Puller (1) · Audiobooks</div>
-            <p class="book-notes">Probably the last Baldacci novel I read for a while. His plots are too similar and somewhat shallow. The books fill the role of being an easy passive listen but are simple and sometimes not very engaging. The action sequences however are enjoyable.</p>
-        </div>
-      </div>
-      <div class="book-card" id="daylight">
-        <img src="covers/66_Daylight.jpg" alt="Daylight" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Daylight</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">David Baldacci · Atlee Pine (3) · Audiobook</div>
-            <p class="book-notes">The a plot was fun and engaging, I enjoyed the inclusion of John Puller in the investigation. However the book abruptly changes lanes once the a plot is resolved and steps back into the longstanding mystery of her missing sister. The shift is somewhat jarring and taking up the last bit of the book. It feels more like an afterthought trying to tie up loose ends than a cohesive part of the book. The entire section felt like it could&#x27;ve been better left for the next book.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">11</span>
-      <h3 class="group-name">Thriller</h3>
-      <span class="group-count">9 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="the-couple-next-door">
-        <img src="covers/44_The_Couple_Next_Door.jpg" alt="The Couple next door" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The Couple next door</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Shari Lapena · Standalone · Ebook</div>
-            <p class="book-notes">This book left me dissatisfied as most of the twists felt shallow and predictable</p>
-        </div>
-      </div>
-      <div class="book-card" id="eruption">
-        <img src="covers/76_Eruption.jpg" alt="Eruption" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Eruption</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">Michael Crichton &amp; James Patterson · Standalone · Audiobook</div>
-            <p class="book-notes">The story was a fun ride and it was written in a way that built the stakes extremely high, however anytime something major happened it was a function of nature and left me with the feeling that nothing the characters did mattered whatsoever. Especially the ending, I was absolutely left with the feeling that the ending was lazy and the authors relied solely on the idea of deus ex machina.</p>
-        </div>
-      </div>
-      <div class="book-card" id="house-of-leaves">
-        <img src="covers/77_House_of_Leaves.jpg" alt="House Of Leaves" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">House Of Leaves</span>
-            <span class="book-rating ">7&9</span>
-          </div>
-          <div class="book-meta">Mark Z. danielewski · Standalone · Paperback</div>
-            <p class="book-notes">Format was super engaging but the multiple plots were somewhat uneven. Even though they were all extremely deep, some were far less enjoyable and pulled me out of the experience from time to time.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-stranger">
-        <div class="book-cover-placeholder"></div>
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The stranger</span>
-            <span class="book-rating dnf">DNF</span>
-          </div>
-          <div class="book-meta">Harlan Coban · Standalone · Ebook</div>
-        </div>
-      </div>
-      <div class="book-card" id="when-darkness-falls">
-        <img src="covers/80_When_Darkness_Falls.jpg" alt="When darkness falls" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">When darkness falls</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">James Grippando · Jack swytek (6) · Audiobook</div>
-            <p class="book-notes">I enjoyed the different style of mystery from the perspective of Jack with him not being a detective. Also I enjoyed the difference of it being more of a thriller as well.</p>
-        </div>
-      </div>
-      <div class="book-card" id="mr-mercedes">
-        <img src="covers/82_Mr_Mercedes.jpg" alt="Mr Mercedes" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Mr Mercedes</span>
-            <span class="book-rating dnf">DNF</span>
-          </div>
-          <div class="book-meta">Stephen king · Standalone · Audiobook</div>
-            <p class="book-notes">I do not like Stephen Kings writing style. He rambles on and on in a droning self indulgent manner.</p>
-        </div>
-      </div>
-      <div class="book-card" id="born-to-run">
-        <img src="covers/81_Born_to_Run.jpg" alt="Born to run" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Born to run</span>
-            <span class="book-rating ">6</span>
-          </div>
-          <div class="book-meta">James Grippando · Jack Swytek (8) · Audiobook</div>
-            <p class="book-notes">Predictable easy listen. Nothing special but not bad. I found myself my annoyed that this devolved into another hostage situation like the sixth book which I listens too just before. However I do enjoy enjoy that this series strays away from the typical murder mystery.</p>
-        </div>
-      </div>
-      <div class="book-card" id="the-silent-patient">
-        <img src="covers/78_The_Silent_Patient.jpg" alt="The silent patient" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">The silent patient</span>
-            <span class="book-rating nine">9</span>
-          </div>
-          <div class="book-meta">Alex Michaelides · Standalone · Audiobook</div>
-            <p class="book-notes">Well written, thematically complex, deep characters. I enjoyed this book overall but was somewhat disappointed to realize that I had deciphered the twist very early on. Which could be a positive as well because the hints were very subtle. The author does really well to bury them underneath the narrators unreliable accounts</p>
-        </div>
-      </div>
-      <div class="book-card" id="red-widow">
-        <img src="covers/79_Red_Widow.jpg" alt="Red Widow" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Red Widow</span>
-            <span class="book-rating ">7</span>
-          </div>
-          <div class="book-meta">Alma Katsu · Standalone · Audiobook</div>
-            <p class="book-notes">I enjoyed the different perspective on the traditional spy thriller. The story was mostly engaging and the turns kept me interested throughout.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="book-group fade-in">
-    <div class="group-header">
-      <span class="group-number">12</span>
-      <h3 class="group-name">Fantasy</h3>
-      <span class="group-count">5 books</span>
-    </div>
-    <div class="book-list">
-      <div class="book-card" id="harry-potter-and-the-prisoner-of-azkaban">
-        <img src="covers/83_Harry_Potter_Prisoner_of_Azkaban.jpg" alt="Harry potter and the prisoner of azkaban" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Harry potter and the prisoner of azkaban</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">J.K. Rowling · Harry Potter</div>
-        </div>
-      </div>
-      <div class="book-card" id="harry-potter-and-the-goblet-of-fire">
-        <img src="covers/84_Harry_Potter_Goblet_of_Fire.jpg" alt="Harry Potter and the Goblet of Fire" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Harry Potter and the Goblet of Fire</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">J.K. Rowling · Harry Potter</div>
-        </div>
-      </div>
-      <div class="book-card" id="harry-potter-and-the-order-of-the-pheonix">
-        <img src="covers/85_Harry_Potter_Order_of_the_Phoenix.jpg" alt="Harry Potter and the order of the pheonix" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Harry Potter and the order of the pheonix</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">J.K. Rowling · Harry Potter</div>
-        </div>
-      </div>
-      <div class="book-card" id="harry-potter-and-the-half-blood-prince">
-        <img src="covers/86_Harry_Potter_Half_Blood_Prince.jpg" alt="Harry potter and the half blood prince" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Harry potter and the half blood prince</span>
-            <span class="book-rating ">8</span>
-          </div>
-          <div class="book-meta">J.K. Rowling · Harry Potter</div>
-        </div>
-      </div>
-      <div class="book-card" id="harry-potter-and-the-deathly-hallows">
-        <img src="covers/87_Harry_Potter_Deathly_Hallows.jpg" alt="Harry potter and the deathly hallows" class="book-cover-thumb" loading="lazy">
-        <div class="book-info">
-          <div class="book-title-row">
-            <span class="book-title">Harry potter and the deathly hallows</span>
-            <span class="book-rating ten">10</span>
-          </div>
-          <div class="book-meta">J.K. Rowling · Harry Potter</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <span class="book-count" id="book-count"></span>
+</div>
 
+<div id="book-list"></div>
 
 <div class="divider"><div class="divider-line"></div></div>
 
@@ -1300,25 +261,223 @@
     });
   }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  document.querySelectorAll('.mosaic-grid img').forEach((img, i) => {
-    img.style.animationDelay = (i * 0.02) + 's';
-  });
 
   document.addEventListener('click', function(e) {
-    const dropdown = document.querySelector('.nav-dropdown');
-    if (dropdown && !dropdown.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
+    document.querySelectorAll('.control-dropdown, .nav-dropdown').forEach(function(dd) {
+      if (!dd.contains(e.target)) dd.classList.remove('open');
+    });
   });
 
-  fetch('data/stats.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      document.getElementById('stat-lib-books').textContent = data.library.books;
-      document.getElementById('stat-lib-starwars').textContent = data.library.star_wars;
-      document.getElementById('stat-lib-avg').textContent = data.library.avg_rating;
-      document.getElementById('stat-lib-perfect').textContent = data.library.perfect_10s;
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // ---- LIBRARY LIST ----
+  var allBooks = [];
+  var currentFilter = 'all';
+  var currentSort = 'series';
+
+  fetch('data/books.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' fetching data/books.json');
+      return r.json();
+    })
+    .then(function(books) {
+      allBooks = books;
+
+      // Auto-calculate stats
+      var ratedSum = 0, ratedCount = 0, perfect = 0, starWars = 0;
+      books.forEach(function(b) {
+        var n = parseInt(b.rating, 10);
+        if (!isNaN(n)) { ratedSum += n; ratedCount++; if (n === 10) perfect++; }
+        if (b.group && b.group.indexOf('Star Wars') === 0) starWars++;
+      });
+      document.getElementById('stat-lib-books').textContent = books.length;
+      document.getElementById('stat-lib-starwars').textContent = starWars;
+      document.getElementById('stat-lib-avg').textContent = ratedCount ? (ratedSum / ratedCount).toFixed(1) : '—';
+      document.getElementById('stat-lib-perfect').textContent = perfect;
+
+      // Mosaic (skip books without a cover)
+      var mosaic = document.getElementById('mosaic-grid');
+      books.forEach(function(b, i) {
+        if (!b.cover) return;
+        var a = document.createElement('a');
+        a.href = '#' + b.id;
+        a.className = 'mosaic-link';
+        a.innerHTML = '<img src="' + b.cover + '" alt="' + escHtml(b.title) + '" loading="lazy">';
+        mosaic.appendChild(a);
+      });
+      Array.prototype.forEach.call(mosaic.querySelectorAll('img'), function(img, i) {
+        img.style.animationDelay = (i * 0.02) + 's';
+      });
+
+      // Build filter options from genres (in genre_order)
+      var filterMenu = document.getElementById('filter-menu');
+      var allBtn = document.createElement('button');
+      allBtn.className = 'control-option active';
+      allBtn.setAttribute('data-filter', 'all');
+      allBtn.textContent = 'All genres';
+      filterMenu.appendChild(allBtn);
+
+      var genres = [];
+      books.slice().sort(function(a, b) { return a.genre_order - b.genre_order; })
+        .forEach(function(b) { if (genres.indexOf(b.genre) === -1) genres.push(b.genre); });
+      genres.forEach(function(g) {
+        var btn = document.createElement('button');
+        btn.className = 'control-option';
+        btn.setAttribute('data-filter', g);
+        btn.textContent = g;
+        filterMenu.appendChild(btn);
+      });
+
+      renderBooks();
+      setupControls();
+    })
+    .catch(function(err) {
+      console.error('Library load failed:', err);
+      var list = document.getElementById('book-list');
+      if (list) list.innerHTML = '<div style="max-width:800px;margin:0 auto;padding:1rem 3rem;color:var(--text-muted);font-size:0.85rem">Could not load data/books.json — ' + err.message + '</div>';
     });
+
+  function ratingValue(b) {
+    var n = parseInt(b.rating, 10);
+    return isNaN(n) ? -1 : n; // DNF / — sort to bottom
+  }
+
+  function renderBooks() {
+    var container = document.getElementById('book-list');
+    container.innerHTML = '';
+
+    var filtered = currentFilter === 'all'
+      ? allBooks.slice()
+      : allBooks.filter(function(b) { return b.genre === currentFilter; });
+
+    if (currentSort === 'rating') {
+      filtered.sort(function(a, b) { return ratingValue(b) - ratingValue(a); });
+    } else if (currentSort === 'alpha') {
+      filtered.sort(function(a, b) { return a.title.localeCompare(b.title); });
+    } else if (currentSort === 'author') {
+      filtered.sort(function(a, b) {
+        var c = (a.author_sort || '').localeCompare(b.author_sort || '');
+        return c !== 0 ? c : a.title.localeCompare(b.title);
+      });
+    } else if (currentSort === 'year') {
+      filtered.sort(function(a, b) { return (a.year || 9999) - (b.year || 9999); });
+    } else {
+      filtered.sort(function(a, b) {
+        if (a.group_order !== b.group_order) return a.group_order - b.group_order;
+        return 0; // preserve original within-series order
+      });
+    }
+
+    document.getElementById('book-count').textContent = filtered.length + ' book' + (filtered.length !== 1 ? 's' : '');
+
+    if (currentSort === 'series' && currentFilter === 'all') {
+      var currentGroup = null, groupNum = 0, listDiv = null;
+      filtered.forEach(function(book) {
+        if (book.group !== currentGroup) {
+          currentGroup = book.group;
+          groupNum++;
+          var groupBooks = filtered.filter(function(b) { return b.group === currentGroup; });
+
+          var groupDiv = document.createElement('div');
+          groupDiv.className = 'book-group fade-in';
+          var header = document.createElement('div');
+          header.className = 'group-header';
+          header.innerHTML = '<span class="group-number">' + String(groupNum).padStart(2, '0') + '</span>'
+            + '<h3 class="group-name">' + escHtml(currentGroup) + '</h3>'
+            + '<span class="group-count">' + groupBooks.length + ' book' + (groupBooks.length !== 1 ? 's' : '') + '</span>';
+          groupDiv.appendChild(header);
+
+          listDiv = document.createElement('div');
+          listDiv.className = 'book-list';
+          groupDiv.appendChild(listDiv);
+          container.appendChild(groupDiv);
+          observer.observe(groupDiv);
+          groupDiv.classList.add('visible');
+        }
+        listDiv.appendChild(buildCard(book));
+      });
+    } else {
+      var flatGroup = document.createElement('div');
+      flatGroup.className = 'book-group fade-in';
+      var flatList = document.createElement('div');
+      flatList.className = 'book-list';
+      flatGroup.appendChild(flatList);
+      filtered.forEach(function(book) { flatList.appendChild(buildCard(book)); });
+      container.appendChild(flatGroup);
+      observer.observe(flatGroup);
+      flatGroup.classList.add('visible');
+    }
+  }
+
+  function buildCard(book) {
+    var card = document.createElement('div');
+    card.className = 'book-card';
+    card.id = book.id;
+
+    var html = '';
+    if (book.cover) {
+      html += '<img src="' + book.cover + '" alt="' + escHtml(book.title) + '" class="book-cover-thumb" loading="lazy">';
+    } else {
+      html += '<div class="book-cover-placeholder"></div>';
+    }
+
+    html += '<div class="book-info"><div class="book-title-row"><span class="book-title">' + escHtml(book.title) + '</span>';
+    html += '<span style="display:flex;align-items:center;flex-shrink:0">';
+    if (book.genre) {
+      html += '<span class="genre-tag">' + escHtml(book.genre) + '</span>';
+    }
+    var rClass = book.rating_class || '';
+    var rText = book.rating_note ? escHtml(book.rating_note) : escHtml(book.rating);
+    html += '<span class="book-rating ' + rClass + '">' + rText + '</span></span></div>';
+
+    // Meta line: Author · Series · Format · Year (skip empty parts)
+    var metaParts = [book.author, book.series, book.format].filter(function(p) { return p && p.length; });
+    if (book.year) { metaParts.push(String(book.year)); }
+    if (metaParts.length) {
+      html += '<div class="book-meta">' + escHtml(metaParts.join(' · ')) + '</div>';
+    }
+    if (book.notes) {
+      html += '<p class="book-notes">' + escHtml(book.notes) + '</p>';
+    }
+    html += '</div>';
+    card.innerHTML = html;
+    return card;
+  }
+
+  function setupControls() {
+    var filterDD = document.getElementById('filter-dropdown');
+    var filterTrigger = document.getElementById('filter-trigger');
+    var filterMenu = document.getElementById('filter-menu');
+    filterTrigger.addEventListener('click', function() { filterDD.classList.toggle('open'); });
+    filterMenu.addEventListener('click', function(e) {
+      var opt = e.target.closest('.control-option');
+      if (!opt) return;
+      currentFilter = opt.getAttribute('data-filter');
+      filterMenu.querySelectorAll('.control-option').forEach(function(o) { o.classList.remove('active'); });
+      opt.classList.add('active');
+      filterTrigger.textContent = opt.textContent;
+      filterDD.classList.remove('open');
+      renderBooks();
+    });
+
+    var sortDD = document.getElementById('sort-dropdown');
+    var sortTrigger = document.getElementById('sort-trigger');
+    var sortMenu = document.getElementById('sort-menu');
+    sortTrigger.addEventListener('click', function() { sortDD.classList.toggle('open'); });
+    sortMenu.addEventListener('click', function(e) {
+      var opt = e.target.closest('.control-option');
+      if (!opt) return;
+      currentSort = opt.getAttribute('data-sort');
+      sortMenu.querySelectorAll('.control-option').forEach(function(o) { o.classList.remove('active'); });
+      opt.classList.add('active');
+      sortTrigger.textContent = opt.textContent;
+      sortDD.classList.remove('open');
+      renderBooks();
+    });
+  }
 </script>
 
 </body>
