@@ -9,7 +9,8 @@
     "date_sort": "2026-05-30",
     "url": "/doc/terraria-east-field-guide.pdf",
     "image": "/image/terreria-images/east-side-field-guide.png",
-    "link_text": "View guide"
+    "link_text": "View guide",
+    "published": "2026-05-30"
   },
   {
     "title": "Terraria — Progress Tracker",
@@ -21,7 +22,8 @@
     "date_sort": "2026-05-30",
     "url": "/pages/terraria/terraria-tracker.html",
     "image": "/image/terreria-images/progress-tracker.png",
-    "link_text": "View tracker"
+    "link_text": "View tracker",
+    "published": "2026-06-05"
   },
   {
     "title": "Glock 43X — Complete Owner's Guide",
@@ -33,7 +35,8 @@
     "date_sort": "2026-05-15",
     "url": "/pages/breakdowns/glock43x.html",
     "image": null,
-    "link_text": "View guide"
+    "link_text": "View guide",
+    "published": "2026-05-15"
   },
   {
     "title": "Lawn and tree care plan for Yukon, OK",
@@ -45,6 +48,7 @@
     "date_sort": "2026-05-01",
     "url": "/doc/bryce-lawn-and-tree-guide-2026.pdf",
     "image": "/image/lawn-guide-hero.png",
-    "link_text": "View guide"
+    "link_text": "View guide",
+    "published": "2026-05-01"
   }
 ]

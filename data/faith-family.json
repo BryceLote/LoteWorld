@@ -10,7 +10,8 @@
     "date_sort": "2026-05-31",
     "url": "/pages/faith-family/the-one-thing-i-didnt-build.html",
     "image": "/image/faith-builder-card.png",
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-05-31"
   },
   {
     "title": "Chosen Fatherhood",
@@ -23,7 +24,8 @@
     "date_sort": "2025-10-24",
     "url": "/pages/faith-family/chosen-fatherhood.html",
     "image": null,
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-06-02"
   },
   {
     "title": "Letter to Norah and Nehemiah",
@@ -36,7 +38,8 @@
     "date_sort": "2025-10-24",
     "url": "/pages/faith-family/adoption-day-letter.html",
     "image": null,
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-06-03"
   },
   {
     "title": "Note to Alli, on Adoption Day",
@@ -49,7 +52,8 @@
     "date_sort": "2025-10-25",
     "url": "/pages/faith-family/adoption-day-note-to-alli.html",
     "image": null,
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-06-04"
   },
   {
     "title": "One Week After Gianna's Birth",
@@ -62,7 +66,8 @@
     "date_sort": "2025-09-13",
     "url": "/pages/faith-family/one-week-after-giannas-birth.html",
     "image": null,
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-06-01"
   },
   {
     "title": "Married My Sweet Love Lady",
@@ -75,6 +80,7 @@
     "date_sort": "2024-08-11",
     "url": "/pages/faith-family/married-my-sweet-love-lady.html",
     "image": null,
-    "link_text": "Read"
+    "link_text": "Read",
+    "published": "2026-05-31"
   }
 ]

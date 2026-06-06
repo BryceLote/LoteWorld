@@ -11,7 +11,8 @@
     "date_sort": "2026-05-31",
     "url": "/pages/writing/the-long-work.html",
     "image": "/image/terreria-images/the-western-edge-at-the-end.png",
-    "link_text": "Read Entry One"
+    "link_text": "Read Entry One",
+    "published": "2026-05-31"
   },
   {
     "title": "What the phones taught me",
@@ -24,6 +25,7 @@
     "date_sort": "2026-05-15",
     "url": "/doc/3-month-outbound-lessons.pdf",
     "image": "/image/img-what-phones-taught-me.png",
-    "link_text": "Read the full piece"
+    "link_text": "Read the full piece",
+    "published": "2026-05-15"
   }
 ]
