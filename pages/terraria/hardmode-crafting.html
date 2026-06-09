@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hardmode Crafting Card — Bryce Lote</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1a1d21;--bg-card:#212428;--bg-surface:#272a2f;
+    --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);
+    --text-heading:#e8e5de;--text-body:#908b82;--text-muted:#5a5750;--text-faint:#3a3630;
+    --rust:#9e6b47;--sage:#7a8a6e;--quiet-blue:#6e7f8a;--clay:#a89279;
+    /* category accents mapped to the site palette */
+    --c-summons:#9e6b47;   /* rust   */
+    --c-wings:#6e7f8a;     /* quiet-blue */
+    --c-weapons:#a89279;   /* clay   */
+    --c-tools:#7a8a6e;     /* sage   */
+    --c-acc:#8a7fa0;       /* muted violet, in-family */
+    --c-potion:#a86b78;    /* muted rose */
+    --c-note:#a89279;      /* clay   */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-body);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit}
+
+  /* nav (site standard) */
+  nav{position:fixed;top:0;width:100%;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(26,29,33,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-name{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-heading);letter-spacing:0.02em;text-decoration:none}
+  .nav-links{display:flex;gap:2.5rem;align-items:center}
+  .nav-links a{font-size:0.9rem;color:var(--text-heading);text-decoration:none;letter-spacing:0.04em;transition:color 0.3s;font-weight:400}
+  .nav-links a:hover{opacity:0.7}
+  .nav-dropdown{position:relative}
+  .nav-dropdown-trigger{font-size:0.9rem;color:var(--text-heading);text-decoration:none;letter-spacing:0.04em;transition:color 0.3s;font-weight:400;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
+  .nav-dropdown-trigger:hover{opacity:0.7}
+  .nav-dropdown-trigger::after{content:'';display:inline-block;width:5px;height:5px;border-right:1px solid var(--text-muted);border-bottom:1px solid var(--text-muted);transform:rotate(45deg);margin-left:0.4rem;position:relative;top:-2px;transition:transform 0.3s}
+  .nav-dropdown.open .nav-dropdown-trigger::after{transform:rotate(-135deg);top:1px}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 0.75rem);right:0;background:var(--bg-surface);backdrop-filter:blur(12px);border:1px solid var(--border-hover);padding:0.5rem 0;min-width:180px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity 0.25s ease,transform 0.25s ease,visibility 0.25s;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+  .nav-dropdown-menu a{display:block;padding:0.5rem 1.25rem;font-size:0.88rem;color:var(--text-heading);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s,background 0.2s}
+  .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.04)}
+  @media(hover:hover){.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}}
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+
+  /* header */
+  .page-header{max-width:1080px;margin:0 auto;padding:9rem 3rem 1.5rem}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--rust);margin-bottom:0.6rem}
+  .page-header h1{font-family:'Libre Baskerville',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:400;color:var(--text-heading);line-height:1.2;margin-bottom:0.5rem}
+  .page-header .sub{font-size:0.95rem;color:var(--text-body);max-width:600px;line-height:1.7;margin-bottom:1.5rem}
+  .filter{width:100%;max-width:520px;padding:0.7rem 1rem;background:var(--bg-card);border:1px solid var(--border);color:var(--text-heading);font-size:0.95rem;font-family:inherit;transition:border-color 0.3s}
+  .filter::placeholder{color:var(--text-muted)}
+  .filter:focus{outline:none;border-color:var(--rust)}
+
+  main{max-width:1080px;margin:0 auto;padding:0 3rem 5rem}
+  .empty{display:none;text-align:center;color:var(--text-muted);padding:3rem 1rem;font-size:0.95rem}
+  .empty.show{display:block}
+
+  /* sections */
+  details.sec{border-top:1px solid var(--border);margin-top:0}
+  details.sec[open]{padding-bottom:1.5rem}
+  details.sec>summary{list-style:none;cursor:pointer;padding:1.1rem 0;display:flex;align-items:center;gap:0.75rem;user-select:none;transition:color 0.3s}
+  summary::-webkit-details-marker{display:none}
+  details.sec>summary:hover .sec-name{color:var(--rust)}
+  .swatch{width:9px;height:9px;flex:none}
+  .sec-name{font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-heading);transition:color 0.3s}
+  .sec-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-faint)}
+  .chev{width:8px;height:8px;border-right:2px solid var(--rust);border-bottom:2px solid var(--rust);transform:rotate(-45deg);transition:transform .2s ease;flex:none;margin-left:auto}
+  details.sec[open]>summary .chev{transform:rotate(45deg)}
+
+  /* card grid — desktop multi-column, collapses on mobile */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0.9rem}
+
+  .item{background:var(--bg-card);border:1px solid var(--border);padding:1rem 1.1rem;transition:border-color 0.3s}
+  .item:hover{border-color:var(--border-hover)}
+  .item-head{display:flex;align-items:flex-start;gap:0.7rem}
+  .slot{width:32px;height:32px;flex:none;background:var(--bg-surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
+  .slot img{max-width:26px;max-height:26px;image-rendering:pixelated;display:block}
+  .slot.nofill::after{content:"";position:absolute;inset:9px;background:currentColor;opacity:0.8}
+  .iname{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:var(--text-heading);line-height:1.25}
+  .makes{font-size:0.78rem;color:var(--text-muted);margin-top:0.15rem}
+  .ings{list-style:none;margin:0.8rem 0 0;padding:0}
+  .ings li{display:flex;align-items:baseline;gap:0.6rem;padding:0.3rem 0;border-top:1px solid var(--border);font-size:0.85rem}
+  .ings li:first-child{border-top:0}
+  .qty{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-heading);min-width:30px;text-align:right;flex:none;background:var(--bg-surface);border:1px solid var(--border);padding:0.05rem 0.35rem}
+  .ing-name{color:var(--text-body)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;transform:translateY(-1px)}
+  .src{color:var(--text-faint);font-size:0.78rem}
+  .station{margin-top:0.8rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--bg);font-weight:600;display:inline-block;padding:0.18rem 0.55rem}
+
+  /* plain reference rows */
+  .rows{display:flex;flex-direction:column}
+  .row{display:flex;gap:0.9rem;padding:0.6rem 0;font-size:0.88rem;border-top:1px solid var(--border)}
+  .row:first-child{border-top:0}
+  .row b{color:var(--text-heading);font-weight:500;flex:none;min-width:140px}
+  .row span{color:var(--text-muted)}
+  .keep .row b{color:var(--clay)}
+
+  .legend p{margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-body)}
+  .keys{display:flex;flex-wrap:wrap;gap:0.5rem 1.2rem;font-size:0.82rem}
+  .key{display:flex;align-items:center;gap:0.4rem;color:var(--text-body)}
+  .abbr{font-size:0.82rem;color:var(--text-muted);margin-top:0.8rem;line-height:1.7}
+  .abbr b{color:var(--text-body);font-weight:500}
+
+  /* wiki links inside cards */
+  .item a,.row b a,.wk a{color:inherit;text-decoration:none}
+  .ing-name a,.row b a,.wk a{border-bottom:1px dotted rgba(255,255,255,0.28)}
+  .iname a{border-bottom:0}
+  .iname a::after{content:"\2197";font-size:.62em;vertical-align:super;margin-left:2px;opacity:.5}
+
+  .back-section{max-width:1080px;margin:0 auto;padding:0 3rem 3rem}
+  .back-link{font-size:0.85rem;color:var(--text-muted);text-decoration:none;transition:color 0.3s}
+  .back-link:hover{color:var(--text-heading)}
+  .back-link span{margin-right:0.4rem;display:inline-block;transition:transform 0.3s}
+  .back-link:hover span{transform:translateX(-3px)}
+
+  footer{max-width:1080px;margin:0 auto;padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+  .footer-left{font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-body)}
+  .footer-left small{display:block;margin-top:0.3rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--text-muted)}
+  .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;font-size:0.78rem}
+  .footer-right a{color:var(--text-muted);text-decoration:none;transition:color 0.3s}
+  .footer-right a:hover{color:var(--text-heading)}
+  .footer-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-faint);text-align:center;padding:1.5rem 3rem 0;line-height:1.7}
+
+  @media(max-width:768px){
+    nav{padding:1.2rem 1.5rem}.nav-links{gap:1.5rem}.nav-links a{font-size:0.8rem}
+    .page-header{padding:7rem 1.5rem 1.5rem}
+    main{padding:0 1.5rem 4rem}
+    .grid{grid-template-columns:1fr}
+    .back-section{padding:0 1.5rem 2.5rem}
+    footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/index.html" class="nav-name">Bryce Lote</a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="/index.html#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">Everything</a>
+      <div class="nav-dropdown-menu">
+        <a href="/pages/writing.html">Writing</a>
+        <a href="/pages/breakdowns.html">Breakdowns</a>
+        <a href="/pages/body-mind.html">Body &amp; Mind</a>
+        <a href="/pages/faith-family.html">Faith &amp; Family</a>
+        <a href="/pages/library.html">Library</a>
+        <a href="/pages/games.html">Games</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">Early Hardmode &middot; World 1 &middot; Classic</div>
+  <h1>Hardmode Crafting Card</h1>
+  <p class="sub">A working reference for everything I'm crafting in early Hardmode: mech summons, wings, weapons, tools, accessory chains, and the materials each one needs. Built for my Corruption world.</p>
+  <input id="filter" class="filter" type="search" inputmode="search" autocomplete="off" placeholder="Filter items &amp; materials…" aria-label="Filter recipes">
+</div>
+
+<main id="main">
+  <p class="empty" id="empty">No match. Try a shorter word.</p>
+
+  <!-- HOW TO READ -->
+  <details class="sec" data-static open>
+    <summary><span class="swatch" style="background:var(--text-faint)"></span><span class="sec-name">How to read this</span><span class="chev"></span></summary>
+    <div class="legend">
+      <p>Each card shows what an item makes, its ingredients with counts, and where to craft it. Soul dots match the soul's in-game color.</p>
+      <div class="keys">
+        <span class="key"><i class="dot" style="background:#cfe8ff"></i>Soul of Light</span>
+        <span class="key"><i class="dot" style="background:#a274de"></i>Soul of Night</span>
+        <span class="key"><i class="dot" style="background:#e2eef0"></i>Soul of Flight</span>
+        <span class="key"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span>
+        <span class="key"><i class="dot" style="background:#ff6f6f"></i>Soul of Sight</span>
+        <span class="key"><i class="dot" style="background:#d4564a"></i>Soul of Fright</span>
+      </div>
+      <p class="abbr"><b>MA/OA</b> = Mythril or Orichalcum Anvil &nbsp;&middot;&nbsp; <b>TW</b> = Tinkerer's Workshop &nbsp;&middot;&nbsp; <b>Alch</b> = Placed Bottle / Alchemy Table</p>
+    </div>
+  </details>
+
+  <!-- MECH SUMMONS -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-summons)"></span><span class="sec-name">Mechanical Boss Summons</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="summons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/summon_mechanical_eye.png" alt="Mechanical Eye" loading="lazy"></span><div><div class="iname">Mechanical Eye</div><div class="makes">Summons The Twins · use at night</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">3</span><span class="ing-name">Lens <span class="src">· Demon Eyes</span></span></li>
+          <li><span class="qty">5</span><span class="ing-name">Iron / Lead Bar</span></li>
+          <li><span class="qty">6</span><span class="ing-name"><i class="dot" style="background:#cfe8ff"></i>Soul of Light</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-summons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="summons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/summon_mechanical_worm.png" alt="Mechanical Worm" loading="lazy"></span><div><div class="iname">Mechanical Worm</div><div class="makes">Summons The Destroyer · use at night</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">6</span><span class="ing-name">Rotten Chunk <span class="src">· Corruption (or Vertebra)</span></span></li>
+          <li><span class="qty">5</span><span class="ing-name">Iron / Lead Bar</span></li>
+          <li><span class="qty">6</span><span class="ing-name"><i class="dot" style="background:#a274de"></i>Soul of Night</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-summons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="summons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/summon_mechanical_skull.png" alt="Mechanical Skull" loading="lazy"></span><div><div class="iname">Mechanical Skull</div><div class="makes">Summons Skeletron Prime · use at night</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">30</span><span class="ing-name">Bone</span></li>
+          <li><span class="qty">5</span><span class="ing-name">Iron / Lead Bar</span></li>
+          <li><span class="qty">3</span><span class="ing-name"><i class="dot" style="background:#cfe8ff"></i>Soul of Light</span></li>
+          <li><span class="qty">3</span><span class="ing-name"><i class="dot" style="background:#a274de"></i>Soul of Night</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-summons)">MA / OA</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- WINGS -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-wings)"></span><span class="sec-name">Wings</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="wings">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/wing_angel_wings.png" alt="Angel Wings" loading="lazy"></span><div><div class="iname">Angel Wings</div><div class="makes">Flight + no fall damage · Corruption-world pick</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#e2eef0"></i>Soul of Flight <span class="src">· Wyverns, 5–10 each</span></span></li>
+          <li><span class="qty">10</span><span class="ing-name">Feather <span class="src">· Harpies</span></span></li>
+          <li><span class="qty">15</span><span class="ing-name"><i class="dot" style="background:#cfe8ff"></i>Soul of Light</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-wings)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="wings">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/wing_demon_wings.png" alt="Demon Wings" loading="lazy"></span><div><div class="iname">Demon Wings</div><div class="makes">Same stats as Angel · uses your evil souls</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#e2eef0"></i>Soul of Flight</span></li>
+          <li><span class="qty">10</span><span class="ing-name">Feather</span></li>
+          <li><span class="qty">15</span><span class="ing-name"><i class="dot" style="background:#a274de"></i>Soul of Night</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-wings)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="wings">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/wing_harpy_wings.png" alt="Harpy Wings" loading="lazy"></span><div><div class="iname">Harpy Wings</div><div class="makes">If you get the rare drop — skips the souls</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Giant Harpy Feather <span class="src">· rare, Harpies</span></span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#e2eef0"></i>Soul of Flight</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-wings)">MA / OA</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- WEAPONS -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-weapons)"></span><span class="sec-name">Weapons</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="weapons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/weapon_true_nights_edge.png" alt="True Night's Edge" loading="lazy"></span><div><div class="iname">True Night's Edge</div><div class="makes">Melee · upgrade of your Night's Edge</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Night's Edge</span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#ff6f6f"></i>Soul of Sight</span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#d4564a"></i>Soul of Fright</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-weapons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="weapons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/weapon_megashark.png" alt="Megashark" loading="lazy"></span><div><div class="iname">Megashark</div><div class="makes">Ranged · rapid-fire, 50% ammo save</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Minishark <span class="src">· Arms Dealer</span></span></li>
+          <li><span class="qty">5</span><span class="ing-name">Shark Fin <span class="src">· Ocean sharks</span></span></li>
+          <li><span class="qty">1</span><span class="ing-name">Illegal Gun Parts <span class="src">· Arms Dealer, night</span></span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-weapons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="weapons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/weapon_optic_staff.png" alt="Optic Staff" loading="lazy"></span><div><div class="iname">Optic Staff</div><div class="makes">Summon · mini Twins minion</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Black Lens <span class="src">· Demon Eyes, 1%</span></span></li>
+          <li><span class="qty">2</span><span class="ing-name">Lens</span></li>
+          <li><span class="qty">12</span><span class="ing-name">Hallowed Bar</span></li>
+          <li><span class="qty">20</span><span class="ing-name"><i class="dot" style="background:#ff6f6f"></i>Soul of Sight</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-weapons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="weapons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/weapon_light_disc.png" alt="Light Disc" loading="lazy"></span><div><div class="iname">Light Disc</div><div class="makes">Boomerang · throws 6 at once · heavy Might cost</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">20</span><span class="ing-name">Hallowed Bar</span></li>
+          <li><span class="qty">15</span><span class="ing-name"><i class="dot" style="background:#cfe8ff"></i>Soul of Light</span></li>
+          <li><span class="qty">25</span><span class="ing-name"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-weapons)">MA / OA</span>
+      </div>
+      <div class="item" data-cat="weapons">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/weapon_terra_blade.png" alt="Terra Blade" loading="lazy"></span><div><div class="iname">Sword line → Terra Blade</div><div class="makes">Where True Night's Edge goes next</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Excalibur</span> = 12 <span class="wk">Hallowed Bar</span></span></li>
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">True Excalibur</span> = <span class="wk">Excalibur</span> + 24 <span class="wk">Chlorophyte Bar</span></span></li>
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Terra Blade</span> = <span class="wk">True Night's Edge</span> + <span class="wk">True Excalibur</span> + <span class="wk">Broken Hero Sword</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-weapons)">MA / OA · post-Plantera</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- TOOLS -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-tools)"></span><span class="sec-name">Tools</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="tools">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/tool_pickaxe_axe.png" alt="Pickaxe Axe" loading="lazy"></span><div><div class="iname"><span class="wk">Pickaxe Axe</span> / <span class="wk">Drax</span></div><div class="makes">Mines up to Chlorophyte · same recipe, pick one</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">18</span><span class="ing-name">Hallowed Bar</span></li>
+          <li><span class="qty">1</span><span class="ing-name"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span></li>
+          <li><span class="qty">1</span><span class="ing-name"><i class="dot" style="background:#ff6f6f"></i>Soul of Sight</span></li>
+          <li><span class="qty">1</span><span class="ing-name"><i class="dot" style="background:#d4564a"></i>Soul of Fright</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-tools)">MA / OA</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- TINKERER -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-acc)"></span><span class="sec-name">Tinkerer Accessory Chains</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_fire_gauntlet.png" alt="Fire Gauntlet" loading="lazy"></span><div><div class="iname">Fire Gauntlet line</div><div class="makes">Your melee endgame glove · you hold 2 pieces</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Power Glove</span> = <span class="wk">Feral Claws</span> + <span class="wk">Titan Glove</span> <span class="src">(HM Mimic)</span></span></li>
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Mechanical Glove</span> = <span class="wk">Power Glove</span> + <span class="wk">Avenger Emblem</span></span></li>
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Fire Gauntlet</span> = <span class="wk">Mechanical Glove</span> + <span class="wk">Magma Stone</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_avenger_emblem.png" alt="Avenger Emblem" loading="lazy"></span><div><div class="iname">Avenger Emblem</div><div class="makes">+12% all damage · feeds the Mechanical Glove</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Emblem <span class="src">· your WoF drop</span></span></li>
+          <li><span class="qty">5</span><span class="ing-name"><i class="dot" style="background:#6db1ff"></i>Soul of Might</span></li>
+          <li><span class="qty">5</span><span class="ing-name"><i class="dot" style="background:#ff6f6f"></i>Soul of Sight</span></li>
+          <li><span class="qty">5</span><span class="ing-name"><i class="dot" style="background:#d4564a"></i>Soul of Fright</span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_ankh_shield.png" alt="Ankh Shield" loading="lazy"></span><div><div class="iname">Ankh Shield</div><div class="makes">Knockback + 11 debuff immunities · you have the capstone</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Ankh Charm <span class="src">· chain of 11 debuff-immunity items</span></span></li>
+          <li><span class="qty">1</span><span class="ing-name">Obsidian Shield <span class="src">· have it</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_master_ninja_gear.png" alt="Master Ninja Gear" loading="lazy"></span><div><div class="iname">Master Ninja Gear</div><div class="makes">Wall-cling + dash + dodge · you have the base</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Tiger Climbing Gear <span class="src">· have it</span></span></li>
+          <li><span class="qty">1</span><span class="ing-name">Tabi <span class="src">· HM Dungeon</span></span></li>
+          <li><span class="qty">1</span><span class="ing-name">Black Belt <span class="src">· HM Dungeon</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_charm_of_myths.png" alt="Charm of Myths" loading="lazy"></span><div><div class="iname">Charm of Myths</div><div class="makes">Regen + shorter healing-potion cooldown</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Band of Regeneration</span></li>
+          <li><span class="qty">1</span><span class="ing-name">Philosopher's Stone <span class="src">· HM</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+      <div class="item" data-cat="acc">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/accessory_cell_phone.png" alt="Cell Phone" loading="lazy"></span><div><div class="iname">Cell Phone</div><div class="makes">All-in-one info accessory · long combine</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">PDA</span> = <span class="wk">GPS</span> + <span class="wk">R.E.K. 3000</span> + <span class="wk">Fish Finder</span> + <span class="wk">Goblin Tech</span></span></li>
+          <li><span class="qty">→</span><span class="ing-name"><span class="wk">Cell Phone</span> = <span class="wk">PDA</span> + <span class="wk">Magic Mirror</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-acc)">TW</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- POTIONS -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-potion)"></span><span class="sec-name">Potions</span><span class="chev"></span></summary>
+    <div class="grid">
+      <div class="item" data-cat="potion">
+        <div class="item-head"><span class="slot"><img src="/image/terreria-images/terraria_tracker_images/potion_greater_healing.png" alt="Greater Healing Potion" loading="lazy"></span><div><div class="iname">Greater Healing Potion</div><div class="makes">Restores 150 HP</div></div></div>
+        <ul class="ings">
+          <li><span class="qty">1</span><span class="ing-name">Bottled Water</span></li>
+          <li><span class="qty">3</span><span class="ing-name">Pixie Dust <span class="src">· Pixies (surface Hallow)</span></span></li>
+          <li><span class="qty">1</span><span class="ing-name">Crystal Shard <span class="src">· Pearlstone, Underground Hallow</span></span></li>
+        </ul>
+        <span class="station" style="background:var(--c-potion)">Alch</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- KEEP -->
+  <details class="sec" open>
+    <summary><span class="swatch" style="background:var(--c-note)"></span><span class="sec-name">Keep — don't sell or shimmer</span><span class="chev"></span></summary>
+    <div class="rows keep">
+      <div class="row"><b>WoF Emblem</b><span>→ Avenger Emblem → Mechanical Glove</span></div>
+      <div class="row"><b>Obsidian Shield</b><span>→ Ankh Shield</span></div>
+      <div class="row"><b>Magma Stone</b><span>→ Fire Gauntlet (or shimmer a Lava Charm to get one back)</span></div>
+      <div class="row"><b>Tiger Climbing Gear</b><span>→ Master Ninja Gear</span></div>
+      <div class="row"><b>Feral Claws</b><span>→ Power Glove</span></div>
+      <div class="row"><b>Spare Life Fruit</b><span>→ Aegis Fruit in Shimmer (after first mech)</span></div>
+    </div>
+  </details>
+
+  <!-- SOURCES -->
+  <details class="sec">
+    <summary><span class="swatch" style="background:var(--text-faint)"></span><span class="sec-name">Material sources</span><span class="chev"></span></summary>
+    <div class="rows">
+      <div class="row"><b>Soul of Light</b><span>Underground Hallow · ~20% per kill</span></div>
+      <div class="row"><b>Soul of Night</b><span>Underground Corruption · ~20%</span></div>
+      <div class="row"><b>Soul of Flight</b><span>Wyverns, high sky · 5–10 each</span></div>
+      <div class="row"><b>Soul of Might</b><span>The Destroyer</span></div>
+      <div class="row"><b>Soul of Sight</b><span>The Twins</span></div>
+      <div class="row"><b>Soul of Fright</b><span>Skeletron Prime</span></div>
+      <div class="row"><b>Hallowed Bar</b><span>Any mechanical boss (drops directly)</span></div>
+      <div class="row"><b>Crystal Shard</b><span>Pearlstone / Pink Ice, Underground Hallow · regrows</span></div>
+      <div class="row"><b>Pixie Dust</b><span>Pixies, surface Hallow</span></div>
+      <div class="row"><b>Chlorophyte Bar</b><span>Smelt Chlorophyte Ore, Underground Jungle</span></div>
+      <div class="row"><b>Titan Glove</b><span>Hardmode Mimics</span></div>
+      <div class="row"><b>Tabi / Black Belt</b><span>Hardmode Dungeon</span></div>
+      <div class="row"><b>Broken Hero Sword</b><span>Mothron · post-Plantera Solar Eclipse</span></div>
+      <div class="row"><b>Magma Stone</b><span>Lava Bats / Hellbats, Underworld</span></div>
+    </div>
+  </details>
+</main>
+
+<p class="footer-note">Recipes for Terraria 1.4.4 · Classic · Corruption world · quantities are per craft.</p>
+
+<div class="back-section">
+  <a href="/pages/breakdowns.html" class="back-link"><span>&larr;</span> Back to Breakdowns</a>
+</div>
+
+<footer>
+  <div class="footer-left">Bryce Lote<small>Yukon, Oklahoma</small></div>
+  <div class="footer-right">
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+  </div>
+</footer>
+
+<script>
+/* filter */
+(function(){
+  var f=document.getElementById('filter');
+  var items=[].slice.call(document.querySelectorAll('.item'));
+  var rows=[].slice.call(document.querySelectorAll('.row'));
+  var secs=[].slice.call(document.querySelectorAll('details.sec'));
+  var empty=document.getElementById('empty');
+  var openState=null;
+  function txt(el){return (el.textContent||'').toLowerCase();}
+  f.addEventListener('input',function(){
+    var q=f.value.trim().toLowerCase();
+    if(q && openState===null){openState=secs.map(function(s){return s.open;});}
+    var any=false;
+    items.forEach(function(el){var m=!q||txt(el).indexOf(q)>-1; el.style.display=m?'':'none'; if(m)any=true;});
+    rows.forEach(function(el){var m=!q||txt(el).indexOf(q)>-1; el.style.display=m?'':'none'; if(m)any=true;});
+    secs.forEach(function(s){
+      if(s.hasAttribute('data-static')){ s.style.display=q?'none':''; return; }
+      var visible=[].slice.call(s.querySelectorAll('.item,.row')).some(function(el){return el.style.display!=='none';});
+      s.style.display=visible?'':'none';
+      if(q) s.open=true;
+    });
+    if(!q){ secs.forEach(function(s,i){ s.style.display=''; if(openState) s.open=openState[i]; }); openState=null; empty.classList.remove('show'); }
+    else{ empty.classList.toggle('show',!any); }
+  });
+})();
+/* wiki linker */
+(function(){
+  var W={
+    "Mechanical Eye":"Mechanical_Eye","Mechanical Worm":"Mechanical_Worm","Mechanical Skull":"Mechanical_Skull",
+    "Angel Wings":"Angel_Wings","Demon Wings":"Demon_Wings","Harpy Wings":"Harpy_Wings",
+    "True Night's Edge":"True_Night%27s_Edge","Night's Edge":"Night%27s_Edge","Megashark":"Megashark",
+    "Optic Staff":"Optic_Staff","Light Disc":"Light_Disc",
+    "Pickaxe Axe":"Pickaxe_Axe","Drax":"Drax",
+    "Avenger Emblem":"Avenger_Emblem","Ankh Shield":"Ankh_Shield","Ankh Charm":"Ankh_Charm",
+    "Master Ninja Gear":"Master_Ninja_Gear","Charm of Myths":"Charm_of_Myths","Cell Phone":"Cell_Phone",
+    "Obsidian Shield":"Obsidian_Shield","Obsidian Skull":"Obsidian_Skull","Cobalt Shield":"Cobalt_Shield",
+    "Greater Healing Potion":"Greater_Healing_Potion",
+    "Power Glove":"Power_Glove","Mechanical Glove":"Mechanical_Glove","Fire Gauntlet":"Fire_Gauntlet",
+    "Feral Claws":"Feral_Claws","Titan Glove":"Titan_Glove","Magma Stone":"Magma_Stone",
+    "Tiger Climbing Gear":"Tiger_Climbing_Gear","Tabi":"Tabi","Black Belt":"Black_Belt",
+    "Band of Regeneration":"Band_of_Regeneration","Philosopher's Stone":"Philosopher%27s_Stone",
+    "Excalibur":"Excalibur","True Excalibur":"True_Excalibur","Terra Blade":"Terra_Blade",
+    "Broken Hero Sword":"Broken_Hero_Sword","Chlorophyte Bar":"Chlorophyte_Bar","Hallowed Bar":"Hallowed_Bar",
+    "PDA":"PDA","GPS":"GPS","R.E.K. 3000":"R.E.K._3000","Fish Finder":"Fish_Finder","Goblin Tech":"Goblin_Tech","Magic Mirror":"Magic_Mirror",
+    "Lens":"Lens","Black Lens":"Black_Lens","Iron / Lead Bar":"Iron_Bar","Rotten Chunk":"Rotten_Chunk","Bone":"Bone",
+    "Feather":"Feather","Giant Harpy Feather":"Giant_Harpy_Feather","Minishark":"Minishark","Shark Fin":"Shark_Fin","Illegal Gun Parts":"Illegal_Gun_Parts",
+    "Bottled Water":"Bottled_Water","Pixie Dust":"Pixie_Dust","Crystal Shard":"Crystal_Shard","Lava Charm":"Lava_Charm",
+    "Soul of Light":"Soul_of_Light","Soul of Night":"Soul_of_Night","Soul of Flight":"Soul_of_Flight",
+    "Soul of Might":"Soul_of_Might","Soul of Sight":"Soul_of_Sight","Soul of Fright":"Soul_of_Fright"
+  };
+  function wrap(el,skipIfLinked){
+    if(skipIfLinked && el.querySelector('a')) return;
+    [].slice.call(el.childNodes).forEach(function(n){
+      if(n.nodeType!==3) return;
+      var raw=n.nodeValue, key=raw.trim();
+      if(!key || !W[key]) return;
+      var lead=raw.match(/^\s*/)[0], trail=raw.match(/\s*$/)[0];
+      var a=document.createElement('a');
+      a.href="https://terraria.wiki.gg/wiki/"+W[key];
+      a.target="_blank"; a.rel="noopener noreferrer"; a.textContent=key;
+      var fr=document.createDocumentFragment();
+      if(lead) fr.appendChild(document.createTextNode(lead));
+      fr.appendChild(a);
+      if(trail) fr.appendChild(document.createTextNode(trail));
+      el.replaceChild(fr,n);
+    });
+  }
+  ['.wk','.ing-name','.row b'].forEach(function(sel){ [].forEach.call(document.querySelectorAll(sel),function(e){wrap(e,false);}); });
+  [].forEach.call(document.querySelectorAll('.iname'),function(e){wrap(e,true);});
+
+  document.addEventListener('click', function(e){
+    var dd=document.querySelector('.nav-dropdown');
+    if(dd && !dd.contains(e.target)) dd.classList.remove('open');
+  });
+})();
+</script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/prevnext.js"></script>
+</body>
+</html>
