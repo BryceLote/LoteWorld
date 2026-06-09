@@ -1,0 +1,40 @@
+// === IMG-map additions for terraria-tracker.html ===
+// In the const IMG = { ... } object:
+
+// 1) REPLACE the two empty entries so the upcoming bosses get icons:
+"Deerclops":"boss_deerclops.png",
+"Wall of Flesh":"boss_wall_of_flesh.png",
+
+// 2) ADD these (items already on the tracker, currently iconless):
+"Clothier":"npc_clothier.png",
+"Imp Staff":"weapon_imp_staff.png",
+"Frostspark Boots":"accessory_frostspark_boots.png",
+"Mana Flower":"accessory_mana_flower.png",
+"Obsidian Shield":"accessory_obsidian_shield.png",
+"Obsidian Water Walking Boots":"accessory_obsidian_water_walking_boots.png",
+"Magma Stone":"accessory_magma_stone.png",
+
+// 3) ADD as you reach them (not on the tracker yet):
+"Queen Slime":"boss_queen_slime.png",
+"The Twins":"boss_the_twins.png",
+"The Destroyer":"boss_the_destroyer.png",
+"Skeletron Prime":"boss_skeletron_prime.png",
+"Plantera":"boss_plantera.png",
+"Pwnhammer":"tool_pwnhammer.png",
+"Terraspark Boots":"accessory_terraspark_boots.png",
+"Lava Waders":"accessory_lava_waders.png",
+"Lava Charm":"accessory_lava_charm.png",
+"Obsidian Rose":"accessory_obsidian_rose.png",
+"Demolitionist":"npc_demolitionist.png",
+"Mechanic":"npc_mechanic.png",
+"Wizard":"npc_wizard.png",
+"Tax Collector":"npc_tax_collector.png",
+"Steampunker":"npc_steampunker.png",
+"Pirate":"npc_pirate.png",
+"Cyborg":"npc_cyborg.png",
+"Truffle":"npc_truffle.png",
+"Party Girl":"npc_party_girl.png",
+"Princess":"npc_princess.png",
+"Santa Claus":"npc_santa_claus.png",
+
+"Breaker Blade":"weapon_breaker_blade.png",

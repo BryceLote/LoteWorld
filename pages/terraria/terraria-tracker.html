@@ -160,7 +160,7 @@ footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px s
 <body>
 <header class="nav">
   <div class="nav-inner">
-    <a href="/index.html" class="brand" style="text-decoration:none">Bryce Lote</a>
+    <a href="index.html" class="brand" style="text-decoration:none">Bryce Lote</a>
     <nav class="chips">
       <a href="#overview">Overview</a><a href="#bosses">Bosses</a><a href="#goals">Goals</a><a href="#gear">Gear</a>
       <a href="#acc">Accessories</a><a href="#npcs">Townsfolk</a><a href="#map">Map</a>
@@ -259,13 +259,14 @@ const RC={0:"--r0",1:"--r1",2:"--r2",3:"--r3",4:"--r4"};
 // To move the image folder, change ONLY this line:
 const IMG_BASE="/image/terreria-images/terraria_tracker_images/";
 const IMG={
-"Eye of Cthulhu":"boss_eye_of_cthulhu.png","Eater of Worlds":"boss_eater_of_worlds.png","Queen Bee":"boss_queen_bee.png","Skeletron":"boss_skeletron.png","King Slime":"boss_king_slime.png","Deerclops":"","Wall of Flesh":"",
+"Eye of Cthulhu":"boss_eye_of_cthulhu.png","Eater of Worlds":"boss_eater_of_worlds.png","Queen Bee":"boss_queen_bee.png","Skeletron":"boss_skeletron.png","King Slime":"boss_king_slime.png","Deerclops":"boss_deerclops.png","Wall of Flesh":"boss_wall_of_flesh.png",
 "Goblin Army":"event_goblin_army.png","Blood Moon":"event_blood_moon.png",
 "Molten armor":"armor_molten.png","Shadow Armor":"armor_shadow.png","Meteor armor":"armor_meteor.png",
 "Bee Keeper":"weapon_bee_keeper.png","Night's Edge":"weapon_nights_edge.png","Phoenix Blaster":"weapon_phoenix_blaster.png","Vilethorn":"weapon_vilethorn.png","Molten Fury":"weapon_molten_fury.png","The Volcano":"weapon_the_volcano.png","Water Bolt":"weapon_water_bolt.png","Demon Bow + Unholy Arrows":"weapon_demon_bow.png","War Axe of the Night":"weapon_war_axe_of_the_night.png","Flaming Mace":"weapon_flaming_mace.png","Space Gun":"weapon_space_gun.png","Dark Lance":"weapon_dark_lance.png","Sunfury":"weapon_sunfury.png","Flamelash":"weapon_flamelash.png","Flower of Fire":"weapon_flower_of_fire.png","Hellwing Bow":"weapon_hellwing_bow.png","Boomstick":"weapon_boomstick.png",
 "Molten Pickaxe":"tool_molten_pickaxe.png","Molten Hamaxe":"tool_molten_hamaxe.png","Diamond Hook":"tool_diamond_hook.png","Staff of Regrowth":"tool_staff_of_regrowth.png",
 "Lightning Boots":"accessory_lightning_boots.png","Tiger Climbing Gear":"accessory_tiger_climbing_gear.png","Mana Regeneration Band":"accessory_mana_regeneration_band.png","Ancient Chisel":"accessory_ancient_chisel.png","Feral Claws":"accessory_feral_claws.png","Whoopie Cushion":"accessory_whoopie_cushion.png","Chillet":"mount_chillet.png","Obsidian Skull Rose":"accessory_obsidian_skull_rose.png","Ram Rune":"accessory_ram_rune.png",
-"Guide":"npc_guide.png","Merchant":"npc_merchant.png","Nurse":"npc_nurse.png","Dryad":"npc_dryad.png","Painter":"npc_painter.png","Zoologist":"npc_zoologist.png","Angler":"npc_angler.png","Goblin Tinkerer":"npc_goblin_tinkerer.png","Arms Dealer":"npc_arms_dealer.png","Tavernkeep":"npc_tavernkeep.png","Skeleton Merchant":"npc_skeleton_merchant.png","Dye Trader":"npc_dye_trader.png","Witch Doctor":"npc_witch_doctor.png","Golfer":"npc_golfer.png","Stylist":"npc_stylist.png","Town Slime":"npc_town_slime.png"
+"Guide":"npc_guide.png","Merchant":"npc_merchant.png","Nurse":"npc_nurse.png","Dryad":"npc_dryad.png","Painter":"npc_painter.png","Zoologist":"npc_zoologist.png","Angler":"npc_angler.png","Goblin Tinkerer":"npc_goblin_tinkerer.png","Arms Dealer":"npc_arms_dealer.png","Tavernkeep":"npc_tavernkeep.png","Skeleton Merchant":"npc_skeleton_merchant.png","Dye Trader":"npc_dye_trader.png","Witch Doctor":"npc_witch_doctor.png","Golfer":"npc_golfer.png","Stylist":"npc_stylist.png","Town Slime":"npc_town_slime.png",
+"Clothier":"npc_clothier.png","Imp Staff":"weapon_imp_staff.png","Frostspark Boots":"accessory_frostspark_boots.png","Mana Flower":"accessory_mana_flower.png","Obsidian Shield":"accessory_obsidian_shield.png","Obsidian Water Walking Boots":"accessory_obsidian_water_walking_boots.png","Magma Stone":"accessory_magma_stone.png","Breaker Blade":"weapon_breaker_blade.png","Pwnhammer":"tool_pwnhammer.png","Terraspark Boots":"accessory_terraspark_boots.png","Lava Waders":"accessory_lava_waders.png","Lava Charm":"accessory_lava_charm.png","Obsidian Rose":"accessory_obsidian_rose.png","Queen Slime":"boss_queen_slime.png","The Twins":"boss_the_twins.png","The Destroyer":"boss_the_destroyer.png","Skeletron Prime":"boss_skeletron_prime.png","Plantera":"boss_plantera.png","Demolitionist":"npc_demolitionist.png","Mechanic":"npc_mechanic.png","Wizard":"npc_wizard.png","Tax Collector":"npc_tax_collector.png","Steampunker":"npc_steampunker.png","Pirate":"npc_pirate.png","Cyborg":"npc_cyborg.png","Truffle":"npc_truffle.png","Party Girl":"npc_party_girl.png","Princess":"npc_princess.png","Santa Claus":"npc_santa_claus.png"
 };
 function imgKey(name){
   var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
@@ -277,27 +278,34 @@ function imgTag(name,cls){
   return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
 }
 const DATA={
-  updated:"Updated through Session 10 — Thursday, June 4, 2026",
+  updated:"Updated through Session 13 — Tuesday, June 9, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · +4 reach"],["Favored Kit","Night's Edge + Phoenix Blaster"]
+    ["Permanent Buff","Artisan Loaf · Vital + Arcane Crystals"],["Favored Kit","Night's Edge + Phoenix Blaster"],["World","Hardmode — entered Session 12"]
   ],
   hp:400, mana:200,
   approach:"<p><b>Play style.</b> First playthrough; immersion and collecting and experimenting across all classes, not min-maxing. Currently runs the Night's Edge (melee) and Phoenix Blaster (ranged) as his main pair; not using a magic weapon at the moment, but open to trying one.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems (pylons, platforms, a hub base) for short, sustainable sessions around a busy life and to ease navigation once Hardmode makes travel dangerous. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
   goals:[
-    "Finish the last pre-Hardmode bosses — King Slime and Deerclops — then take on the Wall of Flesh",
-    "Build a Wall of Flesh arena (the Underworld lava bridge is a head start)",
-    "Find the Shimmer and run a path/route to it",
-    "Start fishing (the Angler is already on staff)"
+    "Forge a Mythril or Orichalcum pickaxe at the new anvil — unblocks the third ore tier (Adamantite/Titanium) and most Hardmode crafting",
+    "Sort out armor — at least a Cobalt set, or skip straight to Mythril — to retire Molten before the mech bosses",
+    "Craft Crystal Bullets from the Crystal Shards and put the Phoenix Blaster back into rotation for the mobile mech fights",
+    "Keep containing the Corruption / Hallow around the base and jungle",
+    "Build a mech arena and start the mechanical bosses — Destroyer first (its Souls of Might feed a Megashark), then Skeletron Prime, then the Twins",
+    "Work toward Wings (needs the anvil plus Souls of Flight from Wyverns at the floating islands)"
   ],
   bosses:[
     ["Eye of Cthulhu",1,""],
     ["Eater of Worlds",1,"killed five times total"],
-    ["Queen Bee",1,"dropped the Bee Keeper, a favorite"],
+    ["Queen Bee",1,"dropped the Bee Keeper, a favorite; killed several more times in the underground jungle"],
     ["Skeletron",1,"defeated — opened the Dungeon"],
-    ["King Slime",0,"not yet fought (optional)"],
+    ["King Slime",1,"defeated"],
     ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
-    ["Wall of Flesh",0,"not yet fought — gateway to Hardmode"]
+    ["Wall of Flesh",1,"defeated — Hardmode begins! dropped the Pwnhammer and the Breaker Blade"],
+    ["Queen Slime",0,"Hardmode — optional slime boss"],
+    ["The Twins",0,"Hardmode mechanical boss"],
+    ["The Destroyer",0,"Hardmode mechanical boss"],
+    ["Skeletron Prime",0,"Hardmode mechanical boss"],
+    ["Plantera",0,"Hardmode — after the three mechs"]
   ],
   events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
   armor:[
@@ -322,18 +330,23 @@ const DATA={
     ["Flamelash","magic",3,"Shadow Chest","30 dmg"],
     ["Flower of Fire","magic",3,"Shadow Chest","28 dmg"],
     ["Hellwing Bow","ranged",3,"Shadow Chest","20 dmg"],
-    ["Boomstick","ranged",2,"Jungle gun; found, not needed","30 dmg"]
+    ["Boomstick","ranged",2,"Jungle gun; found, not needed","30 dmg"],
+    ["Imp Staff","summon",3,"Shadow Chest summon weapon; a Flying Imp throwing piercing On Fire! fireballs — easy passive damage","17 dmg"],
+    ["Breaker Blade","melee",4,"Wall of Flesh drop (25%); huge reach and knockback, +150% damage to enemies above 90% HP","43 dmg"]
   ],
   tools:[
     ["Molten Pickaxe","top pre-Hardmode pickaxe — can mine the first Hardmode ores","100% pick"],
     ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
     ["Diamond Hook","grapple",""],
-    ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
+    ["Staff of Regrowth","improves herb harvesting and grass spreading",""],
+    ["Pwnhammer","Wall of Flesh drop; smashes Demon Altars to unlock the Hardmode ore tiers",""],
+    ["Cobalt Pickaxe","Session 13 — first Hardmode pickaxe; currently mining Mythril","110% pick"],
+    ["Mythril Anvil","Session 13 — placed but nothing forged yet; gates the next pickaxe tier, Wings, and most Hardmode gear",""]
   ],
   accEq:[
-    "Lightning Boots (Hermes + Rocket = Spectre, + Aglet + Anklet of the Wind)",
+    "Terraspark Boots (Frostspark Boots + Lava Waders)",
     "Tiger Climbing Gear (Climbing Claws + Shoe Spikes)",
-    "Mana Regeneration Band (Band of Starpower + Band of Regeneration)",
+    "Mana Flower (Mana Regeneration Band + Nature's Gift; auto-uses mana potions)",
     "Ancient Chisel — mining speed (reforged)",
     "Feral Claws — melee speed / autoswing (reforged +5% move speed)"
   ],
@@ -341,15 +354,17 @@ const DATA={
     "Vanity: Whoopie Cushion",
     "Mount: Chillet (hatched from a Large Dragon Egg)",
     "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
+    "Obsidian Shield — knockback immunity + fire-block immunity (Obsidian Skull + Cobalt Shield)",
+    "Magma Stone — adds On Fire! to melee hits (held)",
     "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents"
   ],
   npcs:[
     ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
     ["Angler","deep jungle"],["Goblin Tinkerer","below spawn"],["Arms Dealer","snow biome"],["Tavernkeep","snow biome"],
     ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
-    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"]
+    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"],["Wizard","underground mushroom · Session 13"]
   ],
-  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier have since moved out to the snow biome, and the Golfer and Stylist now live up on the sky islands.",
+  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier moved out to the snow biome, and the Golfer and Stylist now live up on the sky islands. The Wizard, rescued in Session 13, lives in the natural underground mushroom biome deep beneath the base. Truffle has started spawning but has no home yet — he only moves into an above-ground mushroom biome, so a surface mushroom house is still needed.",
   zones:[
     ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
     ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
@@ -365,10 +380,14 @@ const DATA={
     "Gem trees on underground stone (topaz, amethyst, emerald)",
     "Hellevator: a roped vertical shaft from beneath the base straight to the Underworld",
     "Skeletron arena: stacked platform layers over the Dungeon",
-    "Underworld platform road reaching both edges, bridged over the lava to the center",
-    "Fast travel via platform + Lightning Boots + Chillet mount"
+    "Underworld road complete — spans the full width of the Underworld, bridged over the lava in the center",
+    "Containment trenches around the base and jungle to slow the Hardmode Corruption / Hallow spread (Session 13)",
+    "Fast travel via platform + Terraspark Boots + Chillet mount"
   ],
   sessions:[
+    [13,"Tuesday, June 9, 2026","containing the spread",["Spent the session containing the Corruption — dug it out, found it far more widespread underground than expected, then built solid containment trenches around the base and jungle","Smashed several Demon Altars with the Pwnhammer; the world rolled Cobalt and Mythril as its first two Hardmode ore tiers","Spotted the third tier (Adamantite or Titanium) but couldn't mine it yet — needs a Mythril/Orichalcum pickaxe first","Crafted a Cobalt Pickaxe and used it to mine Mythril","Placed a Mythril/Orichalcum Anvil (nothing forged yet — it gates Wings and most Hardmode gear)","Rescued the Wizard and housed him in the natural underground mushroom biome below the base","Truffle started spawning but has no home yet (needs a surface mushroom biome)","Collected one of each mechanical boss summon, plus Souls of Light, Night, and Flight, and stockpiled Cursed Flame and Crystal Shards"]],
+    [12,"Sunday, June 7, 2026","",["Finished the Underworld road — it now spans the full width of the world","Located the Shimmer and crafted the Terraspark Boots, uncovering a lot of the underground jungle along the way","Defeated King Slime","Defeated the Wall of Flesh — Hardmode begins; dropped the Pwnhammer and the Breaker Blade","Shimmered a Life Crystal into a Vital Crystal and a Mana Crystal into an Arcane Crystal — permanent life- and mana-regen boosts"]],
+    [11,"Saturday, June 6, 2026","on and off",["Killed two more Queen Bees while exploring the underground jungle","Ran the Underworld road further across — now about 75% complete","Accidentally summoned the Wall of Flesh by killing a Voodoo Demon over lava; already weak from lava damage, died almost immediately","Crafted an Obsidian Shield, the Obsidian Skull Rose, and Obsidian Water Walking Boots (working toward Lava Waders)","Crafted the Frostspark Boots from the Lightning Boots and Ice Skates, aiming for Terraspark Boots","Crafted a Mana Flower; holding a Magma Stone and planning to find the Shimmer to finish the Terraspark Boots","Equipped the Imp Staff for some passive minion damage"]],
     [10,"Thursday, June 4, 2026","",["Got the Handgun and crafted the Phoenix Blaster, reforged to Godly","Collected the Blade of Grass and Muramasa and crafted the Night's Edge (with Fiery Greatsword + Light's Bane), reforged to Godly","Found the Staff of Regrowth","Set up a snow-biome pylon by the Dungeon — fast travel to both sides of the map","Got the Ram Rune (ground pound), making hellevator descents much better","Reached the Underworld on both edges; bridged the east Underworld to the center over the lava","Found the Boomstick and multiples of every Shadow Chest weapon; doesn't need them","Reforged Feral Claws for +5% movement speed and the Ancient Chisel"]],
     [9,"Wednesday, June 3, 2026","short version",["Finished the westward stone platform to the west map edge","Built a Skeletron arena and defeated Skeletron, opening the Dungeon","Found a second Corruption beyond the Dungeon; smashed its Shadow Orbs and killed three more Eaters of Worlds","Began laying stone platform roads across the Underworld","Mined the meteorite; crafted Meteor armor and the Space Gun (unused)","Looted many Shadow Chests; explored much of the Dungeon and Ice biome (neither complete)","Found the Stylist (spider nest) and two Town Slimes; found the Water Bolt"]],
     [8,"Tuesday, June 2, 2026","",["Collected a lot of obsidian and returned for more Hellstone","Crafted and equipped the full Molten armor set; misses Shadow's +15% move speed","Crafted The Volcano, the Molten Pickaxe, and the Molten Hamaxe","Fought off a second Goblin Army","Started a platform road heading west; found two floating islands","Found and freed the Golfer; the Underworld map filled out a lot"]],
@@ -421,7 +440,7 @@ $("#bossmeta").textContent=`${bd} / ${DATA.bosses.length} fought`;
 // armor
 DATA.armor.forEach(([n,d,stat])=>{const i=el("div","item"); i.innerHTML=`${imgTag(n)}<span class="nm">${wlink(n)}</span>${stat?`<span class="stat-chip">${stat}</span>`:""}<span class="d">${d}</span>`; $("#armor").appendChild(i);});
 // weapons + filters
-const classes=["all","melee","ranged","magic"];
+const classes=["all","melee","ranged","magic","summon"];
 const fw=$("#filters");
 classes.forEach(c=>{const b=el("button",c==="all"?"active":""); b.textContent=c; b.dataset.c=c; b.onclick=()=>{document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("active")); b.classList.add("active"); renderWeapons(c);}; fw.appendChild(b);});
 function renderWeapons(filter){
