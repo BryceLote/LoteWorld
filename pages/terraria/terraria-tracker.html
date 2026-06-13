@@ -266,7 +266,12 @@ const IMG={
 "Molten Pickaxe":"tool_molten_pickaxe.png","Molten Hamaxe":"tool_molten_hamaxe.png","Diamond Hook":"tool_diamond_hook.png","Staff of Regrowth":"tool_staff_of_regrowth.png",
 "Lightning Boots":"accessory_lightning_boots.png","Tiger Climbing Gear":"accessory_tiger_climbing_gear.png","Mana Regeneration Band":"accessory_mana_regeneration_band.png","Ancient Chisel":"accessory_ancient_chisel.png","Feral Claws":"accessory_feral_claws.png","Whoopie Cushion":"accessory_whoopie_cushion.png","Chillet":"mount_chillet.png","Obsidian Skull Rose":"accessory_obsidian_skull_rose.png","Ram Rune":"accessory_ram_rune.png",
 "Guide":"npc_guide.png","Merchant":"npc_merchant.png","Nurse":"npc_nurse.png","Dryad":"npc_dryad.png","Painter":"npc_painter.png","Zoologist":"npc_zoologist.png","Angler":"npc_angler.png","Goblin Tinkerer":"npc_goblin_tinkerer.png","Arms Dealer":"npc_arms_dealer.png","Tavernkeep":"npc_tavernkeep.png","Skeleton Merchant":"npc_skeleton_merchant.png","Dye Trader":"npc_dye_trader.png","Witch Doctor":"npc_witch_doctor.png","Golfer":"npc_golfer.png","Stylist":"npc_stylist.png","Town Slime":"npc_town_slime.png",
-"Clothier":"npc_clothier.png","Imp Staff":"weapon_imp_staff.png","Frostspark Boots":"accessory_frostspark_boots.png","Mana Flower":"accessory_mana_flower.png","Obsidian Shield":"accessory_obsidian_shield.png","Obsidian Water Walking Boots":"accessory_obsidian_water_walking_boots.png","Magma Stone":"accessory_magma_stone.png","Breaker Blade":"weapon_breaker_blade.png","Pwnhammer":"tool_pwnhammer.png","Terraspark Boots":"accessory_terraspark_boots.png","Lava Waders":"accessory_lava_waders.png","Lava Charm":"accessory_lava_charm.png","Obsidian Rose":"accessory_obsidian_rose.png","Queen Slime":"boss_queen_slime.png","The Twins":"boss_the_twins.png","The Destroyer":"boss_the_destroyer.png","Skeletron Prime":"boss_skeletron_prime.png","Plantera":"boss_plantera.png","Demolitionist":"npc_demolitionist.png","Mechanic":"npc_mechanic.png","Wizard":"npc_wizard.png","Tax Collector":"npc_tax_collector.png","Steampunker":"npc_steampunker.png","Pirate":"npc_pirate.png","Cyborg":"npc_cyborg.png","Truffle":"npc_truffle.png","Party Girl":"npc_party_girl.png","Princess":"npc_princess.png","Santa Claus":"npc_santa_claus.png"
+"Clothier":"npc_clothier.png","Imp Staff":"weapon_imp_staff.png","Frostspark Boots":"accessory_frostspark_boots.png","Mana Flower":"accessory_mana_flower.png","Obsidian Shield":"accessory_obsidian_shield.png","Obsidian Water Walking Boots":"accessory_obsidian_water_walking_boots.png","Magma Stone":"accessory_magma_stone.png","Breaker Blade":"weapon_breaker_blade.png","Pwnhammer":"tool_pwnhammer.png","Terraspark Boots":"accessory_terraspark_boots.png","Lava Waders":"accessory_lava_waders.png","Lava Charm":"accessory_lava_charm.png","Obsidian Rose":"accessory_obsidian_rose.png","Queen Slime":"boss_queen_slime.png","The Twins":"boss_the_twins.png","The Destroyer":"boss_the_destroyer.png","Skeletron Prime":"boss_skeletron_prime.png","Plantera":"boss_plantera.png","Demolitionist":"npc_demolitionist.png","Mechanic":"npc_mechanic.png","Wizard":"npc_wizard.png","Tax Collector":"npc_tax_collector.png","Steampunker":"npc_steampunker.png","Pirate":"npc_pirate.png","Cyborg":"npc_cyborg.png","Truffle":"npc_truffle.png","Party Girl":"npc_party_girl.png","Princess":"npc_princess.png","Santa Claus":"npc_santa_claus.png",
+"Chlorophyte armor":"armor_chlorophyte.png","Titanium armor":"armor_titanium.png","Cobalt armor":"armor_cobalt.png",
+"Megashark":"weapon_megashark.png","Titanium Repeater":"weapon_titanium_repeater.png","True Night's Edge":"weapon_true_nights_edge.png","Excalibur":"weapon_excalibur.png","Spider Staff":"weapon_spider_staff.png","Queen Spider Staff":"weapon_queen_spider_staff.png",
+"Pickaxe Axe":"tool_pickaxe_axe.png","Titanium Pickaxe":"tool_titanium_pickaxe.png","Mythril Pickaxe":"tool_mythril_pickaxe.png","Cobalt Pickaxe":"tool_cobalt_pickaxe.png",
+"Angel Wings":"wing_angel_wings.png","Avenger Emblem":"accessory_avenger_emblem.png","Magic Quiver":"accessory_magic_quiver.png","GPS":"accessory_gps.png","Metal Detector":"accessory_metal_detector.png","Radar":"accessory_radar.png","Tally Counter":"accessory_tally_counter.png",
+"Mythril Anvil":"station_mythril_anvil.png","Tinkerer's Workshop":"station_tinkerers_workshop.png"
 };
 function imgKey(name){
   var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
@@ -278,20 +283,19 @@ function imgTag(name,cls){
   return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
 }
 const DATA={
-  updated:"Updated through Session 13 — Tuesday, June 9, 2026",
+  updated:"Updated through Session 17 — Friday, June 12, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · Vital + Arcane Crystals"],["Favored Kit","Night's Edge + Phoenix Blaster"],["World","Hardmode — entered Session 12"]
+    ["Permanent Buff","Artisan Loaf · Vital + Arcane Crystals"],["Favored Kit","True Night's Edge + Megashark"],["World","Hardmode · all 3 mechs down"]
   ],
   hp:400, mana:200,
-  approach:"<p><b>Play style.</b> First playthrough; immersion and collecting and experimenting across all classes, not min-maxing. Currently runs the Night's Edge (melee) and Phoenix Blaster (ranged) as his main pair; not using a magic weapon at the moment, but open to trying one.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems (pylons, platforms, a hub base) for short, sustainable sessions around a busy life and to ease navigation once Hardmode makes travel dangerous. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  approach:"<p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. Now runs a mixed melee/ranged setup — the True Night's Edge and Megashark as the main pair, with the Spider Staff and Queen Spider Staff adding passive summon damage — and swaps between the melee (Mask) and ranged (Headgear) Chlorophyte helmets to match the fight; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel through Hardmode. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
   goals:[
-    "Forge a Mythril or Orichalcum pickaxe at the new anvil — unblocks the third ore tier (Adamantite/Titanium) and most Hardmode crafting",
-    "Sort out armor — at least a Cobalt set, or skip straight to Mythril — to retire Molten before the mech bosses",
-    "Craft Crystal Bullets from the Crystal Shards and put the Phoenix Blaster back into rotation for the mobile mech fights",
+    "All three mechs are down — break a Plantera's Bulb (pink, pulsing, on jungle grass in the Underground Jungle) to summon Plantera",
+    "Use Plantera's Temple Key to open the Lihzahrd Temple that's already been found in the jungle",
+    "After Plantera: the Temple → Golem (Lihzahrd Power Cell at the Altar), plus the upgraded Hardmode Dungeon and Ectoplasm for Spectre armor",
     "Keep containing the Corruption / Hallow around the base and jungle",
-    "Build a mech arena and start the mechanical bosses — Destroyer first (its Souls of Might feed a Megashark), then Skeletron Prime, then the Twins",
-    "Work toward Wings (needs the anvil plus Souls of Flight from Wyverns at the floating islands)"
+    "Finally give Truffle an above-ground mushroom house so he'll move in"
   ],
   bosses:[
     ["Eye of Cthulhu",1,""],
@@ -302,18 +306,27 @@ const DATA={
     ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
     ["Wall of Flesh",1,"defeated — Hardmode begins! dropped the Pwnhammer and the Breaker Blade"],
     ["Queen Slime",0,"Hardmode — optional slime boss"],
-    ["The Twins",0,"Hardmode mechanical boss"],
-    ["The Destroyer",0,"Hardmode mechanical boss"],
-    ["Skeletron Prime",0,"Hardmode mechanical boss"],
-    ["Plantera",0,"Hardmode — after the three mechs"]
+    ["The Destroyer",1,"defeated — first mech down (Session 16), beaten again Session 17; Souls of Might fed the Megashark and Excalibur"],
+    ["The Twins",1,"defeated Session 17 — all three mechs cleared in one night"],
+    ["Skeletron Prime",1,"defeated Session 17 — all three mechs cleared in one night"],
+    ["Plantera",0,"now available — all 3 mechs down, so Bulbs spawn in the Underground Jungle; her Temple Key opens the Jungle Temple"]
   ],
   events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
   armor:[
-    ["Molten armor","Hellstone set, equipped — best pre-Hardmode defense and melee bonuses; no movement bonus","25 def"],
-    ["Shadow Armor","kept — +15% movement speed, which he misses under Molten","13 def"],
+    ["Chlorophyte armor","equipped (Session 17) — the post-mechs set; built both the Mask (melee) and Headgear (ranged) helmets to swap by class; set bonus spawns a Crystal Leaf that auto-fires","58 def"],
+    ["Titanium armor","previous set, superseded by Chlorophyte","46 def"],
+    ["Cobalt armor","early Hardmode stepping-stone set; long superseded","45 def"],
+    ["Molten armor","pre-Hardmode Hellstone set; retired","25 def"],
+    ["Shadow Armor","kept — +15% movement speed","13 def"],
     ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
   ],
   weapons:[
+    ["Megashark","ranged",4,"Session 16 — crafted from the Destroyer's Souls of Might; fast-firing, now the top gun; reforged","25 dmg"],
+    ["True Night's Edge","melee",5,"Session 17 — Night's Edge + 20 each Soul of Might / Sight / Fright; the path to the Terra Blade; Pointy","52 dmg"],
+    ["Titanium Repeater","ranged",4,"Session 16 — the Destroyer-killer with Jester's Arrows + Magic Quiver","31 dmg"],
+    ["Excalibur","melee",4,"Session 16 — 12 Hallowed Bars from the Destroyer; strong early-Hardmode sword","66 dmg"],
+    ["Spider Staff","summon",4,"Session 17 — spider minions that follow and attack for passive DPS","23 dmg"],
+    ["Queen Spider Staff","summon",4,"Session 17 — a stationary spider sentry turret for area control","30 dmg"],
     ["Bee Keeper","melee",3,"Queen Bee sword; releases bees on hit; sentimental favorite","26 dmg"],
     ["Night's Edge","melee",4,"Godly · pre-Hardmode sword capstone (Blade of Grass + Muramasa + Fiery Greatsword + Light's Bane)","40 dmg"],
     ["Phoenix Blaster","ranged",4,"Godly · Handgun + Hellstone Bars; top pre-Hardmode gun","30 dmg"],
@@ -335,28 +348,37 @@ const DATA={
     ["Breaker Blade","melee",4,"Wall of Flesh drop (25%); huge reach and knockback, +150% damage to enemies above 90% HP","43 dmg"]
   ],
   tools:[
-    ["Molten Pickaxe","top pre-Hardmode pickaxe — can mine the first Hardmode ores","100% pick"],
+    ["Pickaxe Axe","Session 17 — current best tool; mines Chlorophyte and doubles as an axe; reforged for speed + knockback","200% pick · 175% axe"],
+    ["Titanium Pickaxe","Session 14 — previous best; superseded by the Pickaxe Axe","180% pick"],
+    ["Mythril Pickaxe","the bridge tool — it's what mines Adamantite / Titanium","150% pick"],
+    ["Cobalt Pickaxe","superseded — was used to mine Mythril","110% pick"],
+    ["Molten Pickaxe","mines the first Hardmode ore tier","100% pick"],
+    ["Pwnhammer","Wall of Flesh drop; smashes Demon Altars to unlock the Hardmode ore tiers",""],
     ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
     ["Diamond Hook","grapple",""],
-    ["Staff of Regrowth","improves herb harvesting and grass spreading",""],
-    ["Pwnhammer","Wall of Flesh drop; smashes Demon Altars to unlock the Hardmode ore tiers",""],
-    ["Cobalt Pickaxe","Session 13 — first Hardmode pickaxe; currently mining Mythril","110% pick"],
-    ["Mythril Anvil","Session 13 — placed but nothing forged yet; gates the next pickaxe tier, Wings, and most Hardmode gear",""]
+    ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
   ],
   accEq:[
+    "Obsidian Shield — knockback immunity + fire-block immunity (Ankh Shield component)",
+    "Angel Wings — flight + fall-damage negation (first wings)",
     "Terraspark Boots (Frostspark Boots + Lava Waders)",
-    "Tiger Climbing Gear (Climbing Claws + Shoe Spikes)",
-    "Mana Flower (Mana Regeneration Band + Nature's Gift; auto-uses mana potions)",
     "Ancient Chisel — mining speed (reforged)",
-    "Feral Claws — melee speed / autoswing (reforged +5% move speed)"
+    "Avenger Emblem — +12% damage (Session 17; reforged Warding for +4 defense; base for a future Mechanical Emblem)"
   ],
   accOther:[
-    "Vanity: Whoopie Cushion",
-    "Mount: Chillet (hatched from a Large Dragon Egg)",
+    "Informational (carried, no slot): GPS — coordinates",
+    "Informational (carried, no slot): Metal Detector — flags nearby valuable ore",
+    "Informational (carried, no slot): Radar — nearby enemy count",
+    "Informational (carried, no slot): Tally Counter — kill count of the targeted enemy",
+    "Tiger Climbing Gear (Climbing Claws + Shoe Spikes)",
+    "Mana Flower — auto-uses mana potions",
+    "Feral Claws — melee speed / autoswing (reforged)",
+    "Magic Quiver — boosts arrow damage and speed; swapped in for ranged boss fights",
     "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
-    "Obsidian Shield — knockback immunity + fire-block immunity (Obsidian Skull + Cobalt Shield)",
-    "Magma Stone — adds On Fire! to melee hits (held)",
-    "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents"
+    "Magma Stone — adds On Fire! to melee hits (Fire Gauntlet component)",
+    "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents",
+    "Vanity: Whoopie Cushion",
+    "Mount: Chillet (hatched from a Large Dragon Egg)"
   ],
   npcs:[
     ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
@@ -364,27 +386,32 @@ const DATA={
     ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
     ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"],["Wizard","underground mushroom · Session 13"]
   ],
-  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn in the starting caves, spaced for happiness. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier moved out to the snow biome, and the Golfer and Stylist now live up on the sky islands. The Wizard, rescued in Session 13, lives in the natural underground mushroom biome deep beneath the base. Truffle has started spawning but has no home yet — he only moves into an above-ground mushroom biome, so a surface mushroom house is still needed.",
+  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier are in the snow biome, and the Golfer and Stylist live up on the sky islands. The Wizard lives in the underground mushroom biome below the base. Session 17 added more NPC housing tied into the new sky highways, plus pylon hubs at the east Ocean and in the underground mushroom biome. Truffle has started spawning but has no home yet — he only moves into an above-ground mushroom biome, so a surface mushroom house is still needed.",
   zones:[
     ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
     ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
     ["Forest","","#26392a"],["SPAWN","home base","#26392a"],["Forest","living tree","#26392a"],
-    ["Desert","antlions","#3d3526"],["Jungle","Queen Bee","#1f3320"],["Ocean","east edge","#23384a"]
+    ["Desert","antlions","#3d3526"],["Jungle","Temple found","#1f3320"],["Ocean","east edge","#23384a"]
   ],
   underworld:"<b>Underworld</b> — reached via the hellevator and on both the west and east edges. Much of it mapped, with a lava-spanning bridge linking the east to the center.",
   infra:[
+    "Sky highways across the top of the map (Session 17) — multiple stone highways linking east and west edges, with ropes dropping down for access",
+    "Pylon network (5): spawn, jungle, snow (by the Dungeon), east Ocean, and underground mushroom biome (the last two added Session 17) — fast travel across the whole map",
+    "Mechanical-boss arena (built Sessions 14–15): stacked platform levels with ropes, an ammo box, a Bast Statue, campfires, Heart Lanterns, a Star in a Bottle, a Sharpening Station, and a Bewitching Table",
     "Stone platform from spawn east to the world edge, with rope drops to the surface",
-    "Western platform road finished all the way to the west map edge (two floating islands found along it)",
-    "Two houses in the deep jungle caves (near where Queen Bee was found)",
-    "Pylon network: spawn, jungle, and a snow pylon by the Dungeon — fast travel to both sides of the map",
-    "Gem trees on underground stone (topaz, amethyst, emerald)",
+    "Western platform road all the way to the west map edge (two floating islands found along it)",
+    "Full-width Underworld road, bridged over the lava to the center (Session 12)",
     "Hellevator: a roped vertical shaft from beneath the base straight to the Underworld",
     "Skeletron arena: stacked platform layers over the Dungeon",
-    "Underworld road complete — spans the full width of the Underworld, bridged over the lava in the center",
-    "Containment trenches around the base and jungle to slow the Hardmode Corruption / Hallow spread (Session 13)",
-    "Fast travel via platform + Terraspark Boots + Chillet mount"
+    "Containment trenches around the base and jungle to slow the Hardmode Corruption / Hallow spread (Session 13; extended Session 17)",
+    "Gem trees on underground stone (topaz, amethyst, emerald)",
+    "Fast east/west travel via platform + Terraspark Boots + Chillet mount"
   ],
   sessions:[
+    [17,"Friday, June 12, 2026","all three mechs in one night",["Built multiple stone sky highways across the top of the map linking east and west, with ropes dropping down","Dug more containment trenches to slow the Hallow and Corruption spread","Built NPC houses and set up two new pylons — east Ocean and the (now partly hallowed) underground mushroom biome","Defeated all three mechanical bosses in one night — the Destroyer (second kill), The Twins, and Skeletron Prime","Crafted the Pickaxe Axe and the True Night's Edge from the mech drops","Crafted the Spider Staff and Queen Spider Staff for summon DPS and a defensive sentry","Mined an excessive amount of Chlorophyte and built the Chlorophyte armor set with both the Mask (melee) and Headgear (ranged) helmets","Crafted the Avenger Emblem (+12% damage)","Found the Lihzahrd Temple, but it stays locked until a Temple Key drops from Plantera"]],
+    [16,"Thursday, June 11, 2026","first mech down",["Defeated The Destroyer — first mechanical boss down — on the second attempt of the night","The setup that did it: a Titanium Repeater with Jester's Arrows, a Magic Quiver, and all the damage potions and food","Crafted the Megashark from the Souls of Might and Excalibur from the Hallowed Bars — both off the Destroyer's drops"]],
+    [15,"Wednesday, June 11, 2026","arena + Destroyer attempts",["Acquired the Angel Wings — first wings, a major mobility upgrade","Built out the boss arena: ammo box, Bast Statue (+defense), torches, and more platform levels with ropes","Added a Sharpening Station (melee armor penetration) and a Bewitching Table (+1 minion)","Attempted the Destroyer three times in full Titanium armor — survival was fine, DPS was the problem","On one attempt the Destroyer despawned at dawn with nearly a third of its health left","Found Cursed Bullets hit noticeably harder than Crystal on the Phoenix Blaster"]],
+    [14,"Wednesday, June 10, 2026","Titanium tier",["Forged a Mythril Pickaxe — the bridge tool needed to mine the third ore tier","Summoned the Destroyer in Cobalt armor and was crushed almost immediately","Pivoted to mining: the third tier rolled Titanium; collected enough for a Titanium Pickaxe and a full Titanium armor set, now equipped (Molten retired)","Built out the mechanical-boss arena with campfires, Heart Lanterns, and a Star in a Bottle","Eyeing the Megashark and the True Night's Edge as the next upgrades"]],
     [13,"Tuesday, June 9, 2026","containing the spread",["Spent the session containing the Corruption — dug it out, found it far more widespread underground than expected, then built solid containment trenches around the base and jungle","Smashed several Demon Altars with the Pwnhammer; the world rolled Cobalt and Mythril as its first two Hardmode ore tiers","Spotted the third tier (Adamantite or Titanium) but couldn't mine it yet — needs a Mythril/Orichalcum pickaxe first","Crafted a Cobalt Pickaxe and used it to mine Mythril","Placed a Mythril/Orichalcum Anvil (nothing forged yet — it gates Wings and most Hardmode gear)","Rescued the Wizard and housed him in the natural underground mushroom biome below the base","Truffle started spawning but has no home yet (needs a surface mushroom biome)","Collected one of each mechanical boss summon, plus Souls of Light, Night, and Flight, and stockpiled Cursed Flame and Crystal Shards"]],
     [12,"Sunday, June 7, 2026","",["Finished the Underworld road — it now spans the full width of the world","Located the Shimmer and crafted the Terraspark Boots, uncovering a lot of the underground jungle along the way","Defeated King Slime","Defeated the Wall of Flesh — Hardmode begins; dropped the Pwnhammer and the Breaker Blade","Shimmered a Life Crystal into a Vital Crystal and a Mana Crystal into an Arcane Crystal — permanent life- and mana-regen boosts"]],
     [11,"Saturday, June 6, 2026","on and off",["Killed two more Queen Bees while exploring the underground jungle","Ran the Underworld road further across — now about 75% complete","Accidentally summoned the Wall of Flesh by killing a Voodoo Demon over lava; already weak from lava damage, died almost immediately","Crafted an Obsidian Shield, the Obsidian Skull Rose, and Obsidian Water Walking Boots (working toward Lava Waders)","Crafted the Frostspark Boots from the Lightning Boots and Ice Skates, aiming for Terraspark Boots","Crafted a Mana Flower; holding a Magma Stone and planning to find the Shimmer to finish the Terraspark Boots","Equipped the Imp Staff for some passive minion damage"]],
