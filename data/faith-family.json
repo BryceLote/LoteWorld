@@ -24,7 +24,7 @@
     "date": "October 2025",
     "date_sort": "2025-10-24",
     "url": "/pages/faith-family/chosen-fatherhood.html",
-    "image": null,
+    "image": "/image/chosen-fatherhood.png",
     "link_text": "Read",
     "published": "2026-06-02",
     "read_min": 2
@@ -39,7 +39,7 @@
     "date": "October 2025",
     "date_sort": "2025-10-24",
     "url": "/pages/faith-family/adoption-day-letter.html",
-    "image": null,
+    "image": "/image/letter-to-norah-and-nehemiah.png",
     "link_text": "Read",
     "published": "2026-06-03",
     "read_min": 2
@@ -54,7 +54,7 @@
     "date": "October 2025",
     "date_sort": "2025-10-25",
     "url": "/pages/faith-family/adoption-day-note-to-alli.html",
-    "image": null,
+    "image": "/image/note-to-alli-adoption.png",
     "link_text": "Read",
     "published": "2026-06-04",
     "read_min": 2
@@ -69,7 +69,7 @@
     "date": "September 2025",
     "date_sort": "2025-09-13",
     "url": "/pages/faith-family/one-week-after-giannas-birth.html",
-    "image": null,
+    "image": "/image/giannas-birth.png",
     "link_text": "Read",
     "published": "2026-06-01",
     "read_min": 3
@@ -84,7 +84,7 @@
     "date": "August 2024",
     "date_sort": "2024-08-11",
     "url": "/pages/faith-family/married-my-sweet-love-lady.html",
-    "image": null,
+    "image": "/image/married-love-lady.png",
     "link_text": "Read",
     "published": "2026-05-31",
     "read_min": 6
