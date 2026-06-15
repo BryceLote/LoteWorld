@@ -147,6 +147,8 @@ details.sess[open]::before{background:var(--brass)}
 
 footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px solid var(--line); color:var(--faint); font-family:"JetBrains Mono",monospace; font-size:11px; line-height:1.7}
 .note{font-style:italic; color:var(--faint); font-size:13px; margin-top:10px; font-family:"Spectral",serif}
+.goals-link{display:inline-block; margin-top:14px; padding-top:12px; border-top:1px solid var(--line); font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.04em; color:var(--brass); text-decoration:none; transition:color .2s}
+.goals-link:hover{color:var(--brass-bright)}
 /* item sprites (added) */
 .spr{height:26px; width:auto; max-width:48px; image-rendering:pixelated; image-rendering:crisp-edges; flex:none; align-self:center}
 .line .spr{height:30px; max-width:60px}
@@ -191,7 +193,10 @@ footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px s
 
   <section id="goals" style="animation-delay:.11s">
     <div class="s-head"><span class="tick"></span><h2>Goals</h2><span class="meta" id="goalmeta"></span></div>
-    <div class="card"><div id="goallist"></div></div>
+    <div class="card">
+      <div id="goallist"></div>
+      <a href="/pages/terraria/terraria-build-goals.html" class="goals-link">See the full build goals &rarr;</a>
+    </div>
   </section>
 
   <section id="gear" style="animation-delay:.12s">
@@ -271,7 +276,9 @@ const IMG={
 "Megashark":"weapon_megashark.png","Titanium Repeater":"weapon_titanium_repeater.png","True Night's Edge":"weapon_true_nights_edge.png","Excalibur":"weapon_excalibur.png","Spider Staff":"weapon_spider_staff.png","Queen Spider Staff":"weapon_queen_spider_staff.png",
 "Pickaxe Axe":"tool_pickaxe_axe.png","Titanium Pickaxe":"tool_titanium_pickaxe.png","Mythril Pickaxe":"tool_mythril_pickaxe.png","Cobalt Pickaxe":"tool_cobalt_pickaxe.png",
 "Angel Wings":"wing_angel_wings.png","Avenger Emblem":"accessory_avenger_emblem.png","Magic Quiver":"accessory_magic_quiver.png","GPS":"accessory_gps.png","Metal Detector":"accessory_metal_detector.png","Radar":"accessory_radar.png","Tally Counter":"accessory_tally_counter.png",
-"Mythril Anvil":"station_mythril_anvil.png","Tinkerer's Workshop":"station_tinkerers_workshop.png"
+"Mythril Anvil":"station_mythril_anvil.png","Tinkerer's Workshop":"station_tinkerers_workshop.png",
+"Terra Blade":"weapon_terra_blade.png","True Excalibur":"weapon_true_excalibur.png","Optic Staff":"weapon_optic_staff.png",
+"Thorn Hook":"tool_thorn_hook.png","Bat Wings":"wing_bat_wings.png","Golem":"boss_golem.png","Solar Eclipse":"event_solar_eclipse.png","Aegis Fruit":"accessory_aegis_fruit.png"
 };
 function imgKey(name){
   var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
@@ -283,19 +290,20 @@ function imgTag(name,cls){
   return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
 }
 const DATA={
-  updated:"Updated through Session 17 — Friday, June 12, 2026",
+  updated:"Updated through Session 19 — Sunday, June 14, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · Vital + Arcane Crystals"],["Favored Kit","True Night's Edge + Megashark"],["World","Hardmode · all 3 mechs down"]
+    ["Permanent Buff","Artisan Loaf · Vital + Arcane + Aegis"],["Favored Kit","Terra Blade + Megashark"],["World","Hardmode · Plantera down"]
   ],
-  hp:400, mana:200,
-  approach:"<p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. Now runs a mixed melee/ranged setup — the True Night's Edge and Megashark as the main pair, with the Spider Staff and Queen Spider Staff adding passive summon damage — and swaps between the melee (Mask) and ranged (Headgear) Chlorophyte helmets to match the fight; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel through Hardmode. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  hp:465, mana:200,
+  approach:"<p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. Now runs a mixed melee/ranged setup — the Terra Blade and Megashark as the main pair, with the Optic Staff adding passive summon damage — and swaps between the melee (Mask) and ranged (Headgear) Chlorophyte helmets to match the fight; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel through Hardmode. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
   goals:[
-    "All three mechs are down — break a Plantera's Bulb (pink, pulsing, on jungle grass in the Underground Jungle) to summon Plantera",
-    "Use Plantera's Temple Key to open the Lihzahrd Temple that's already been found in the jungle",
-    "After Plantera: the Temple → Golem (Lihzahrd Power Cell at the Altar), plus the upgraded Hardmode Dungeon and Ectoplasm for Spectre armor",
-    "Keep containing the Corruption / Hallow around the base and jungle",
-    "Finally give Truffle an above-ground mushroom house so he'll move in"
+    "Golem is the next gate — the Temple is cleared except the boss room; go in deliberately with a Lihzahrd Power Cell at the Altar. Beating him opens the path to the lunar events",
+    "Finish the Charm of Myths — has a Philosopher's Stone, but sold the Bands of Regeneration, so grab a new Band from a Gold Chest or Living Mahogany Tree",
+    "Keep farming Ankh Shield materials: still need Vitamins, Megaphone, Nazar, and Blindfold",
+    "Fire Gauntlet — still want the Titan Glove (Mimics, which also drop the Philosopher's Stone)",
+    "Eat a few more Life Fruit to reach the 500 HP cap",
+    "Still ticking along: containing the Corruption / Hallow, and giving Truffle an above-ground mushroom house"
   ],
   bosses:[
     ["Eye of Cthulhu",1,""],
@@ -305,13 +313,14 @@ const DATA={
     ["King Slime",1,"defeated"],
     ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
     ["Wall of Flesh",1,"defeated — Hardmode begins! dropped the Pwnhammer and the Breaker Blade"],
-    ["Queen Slime",0,"Hardmode — optional slime boss"],
-    ["The Destroyer",1,"defeated — first mech down (Session 16), beaten again Session 17; Souls of Might fed the Megashark and Excalibur"],
-    ["The Twins",1,"defeated Session 17 — all three mechs cleared in one night"],
+    ["Queen Slime",1,"defeated Session 19 — during a materials run"],
+    ["The Destroyer",1,"defeated — first mech down (Session 16); Souls of Might fed the Megashark and Excalibur"],
+    ["The Twins",1,"first beaten Session 17; re-killed twice in Session 18 for more Souls of Sight"],
     ["Skeletron Prime",1,"defeated Session 17 — all three mechs cleared in one night"],
-    ["Plantera",0,"now available — all 3 mechs down, so Bulbs spawn in the Underground Jungle; her Temple Key opens the Jungle Temple"]
+    ["Plantera",1,"defeated Session 19 — dropped the Temple Key and the Thorn Hook; opened the Temple and flipped the Dungeon to post-Plantera"],
+    ["Golem",0,"attempted Session 19 — accidentally summoned at the Lihzahrd Altar and died; the next real fight"]
   ],
-  events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"]],
+  events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"],["Solar Eclipse",1,"first survived Session 18; a post-Plantera eclipse in Session 19 brought Mothron — its Broken Hero Sword finished the Terra Blade"]],
   armor:[
     ["Chlorophyte armor","equipped (Session 17) — the post-mechs set; built both the Mask (melee) and Headgear (ranged) helmets to swap by class; set bonus spawns a Crystal Leaf that auto-fires","58 def"],
     ["Titanium armor","previous set, superseded by Chlorophyte","46 def"],
@@ -321,11 +330,12 @@ const DATA={
     ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
   ],
   weapons:[
+    ["Terra Blade","melee",5,"Session 19 — True Night's Edge + True Excalibur + Broken Hero Sword; the payoff weapon, now his main and far ahead of the rest","95 dmg"],
     ["Megashark","ranged",4,"Session 16 — crafted from the Destroyer's Souls of Might; fast-firing, now the top gun; reforged","25 dmg"],
-    ["True Night's Edge","melee",5,"Session 17 — Night's Edge + 20 each Soul of Might / Sight / Fright; the path to the Terra Blade; Pointy","52 dmg"],
+    ["Optic Staff","summon",4,"Session 18 — twin mechanical-eye minions from 20 Souls of Sight; now the main summon","29 dmg"],
     ["Titanium Repeater","ranged",4,"Session 16 — the Destroyer-killer with Jester's Arrows + Magic Quiver","31 dmg"],
     ["Excalibur","melee",4,"Session 16 — 12 Hallowed Bars from the Destroyer; strong early-Hardmode sword","66 dmg"],
-    ["Spider Staff","summon",4,"Session 17 — spider minions that follow and attack for passive DPS","23 dmg"],
+    ["Spider Staff","summon",4,"Session 17 — spider minions; superseded by the Optic Staff","23 dmg"],
     ["Queen Spider Staff","summon",4,"Session 17 — a stationary spider sentry turret for area control","30 dmg"],
     ["Bee Keeper","melee",3,"Queen Bee sword; releases bees on hit; sentimental favorite","26 dmg"],
     ["Night's Edge","melee",4,"Godly · pre-Hardmode sword capstone (Blade of Grass + Muramasa + Fiery Greatsword + Light's Bane)","40 dmg"],
@@ -355,12 +365,13 @@ const DATA={
     ["Molten Pickaxe","mines the first Hardmode ore tier","100% pick"],
     ["Pwnhammer","Wall of Flesh drop; smashes Demon Altars to unlock the Hardmode ore tiers",""],
     ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
+    ["Thorn Hook","Session 19 — Plantera drop; a longer-reach single hook over the Diamond Hook",""],
     ["Diamond Hook","grapple",""],
     ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
   ],
   accEq:[
     "Obsidian Shield — knockback immunity + fire-block immunity (Ankh Shield component)",
-    "Angel Wings — flight + fall-damage negation (first wings)",
+    "Bat Wings — flight (Session 19; replaced the Angel Wings — longer flight time)",
     "Terraspark Boots (Frostspark Boots + Lava Waders)",
     "Ancient Chisel — mining speed (reforged)",
     "Avenger Emblem — +12% damage (Session 17; reforged Warding for +4 defense; base for a future Mechanical Emblem)"
@@ -374,6 +385,7 @@ const DATA={
     "Mana Flower — auto-uses mana potions",
     "Feral Claws — melee speed / autoswing (reforged)",
     "Magic Quiver — boosts arrow damage and speed; swapped in for ranged boss fights",
+    "Angel Wings — first wings; replaced by the Bat Wings",
     "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
     "Magma Stone — adds On Fire! to melee hits (Fire Gauntlet component)",
     "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents",
@@ -408,6 +420,8 @@ const DATA={
     "Fast east/west travel via platform + Terraspark Boots + Chillet mount"
   ],
   sessions:[
+    [19,"Sunday, June 14, 2026","Plantera down, Terra Blade done",["Defeated Plantera — collected the Temple Key and the Thorn Hook","Rushed re-kills of the three mechs and Queen Bee, and beat Queen Slime for the first time, all for materials","A post-Plantera Solar Eclipse dropped a Broken Hero Sword off Mothron — crafted the Terra Blade (plus a pile of other eclipse weapons it overshadows)","Cleared the Lihzahrd Temple of traps except the boss room; accidentally summoned the Golem and died","Ate a stack of Life Fruit (~465 HP) and shimmered one into an Aegis Fruit for a permanent +4 defense","Found Philosopher's Stones but had sold the Bands of Regeneration, so the Charm of Myths is waiting on a new Band","Upgraded wings to Bat Wings; moved the Goblin Tinkerer to a sky-island house above the Mechanic"]],
+    [18,"Saturday, June 13, 2026","Optic Staff + first eclipse",["Re-killed The Twins twice for more Souls of Sight (materials for the Optic Staff)","Crafted the Optic Staff and started running it as the main summon","Crafted the True Excalibur (Excalibur + Chlorophyte Bars) — banked toward the Terra Blade","Survived his first Solar Eclipse","Moved the Witch Doctor to the Jungle (unlocks Leaf Wings at night)","Accidentally summoned Plantera and was killed — broke a Bulb while unprepared","Started farming Ankh Charm materials: Medicated Bandage, The Plan, and the Pocket Mirror so far"]],
     [17,"Friday, June 12, 2026","all three mechs in one night",["Built multiple stone sky highways across the top of the map linking east and west, with ropes dropping down","Dug more containment trenches to slow the Hallow and Corruption spread","Built NPC houses and set up two new pylons — east Ocean and the (now partly hallowed) underground mushroom biome","Defeated all three mechanical bosses in one night — the Destroyer (second kill), The Twins, and Skeletron Prime","Crafted the Pickaxe Axe and the True Night's Edge from the mech drops","Crafted the Spider Staff and Queen Spider Staff for summon DPS and a defensive sentry","Mined an excessive amount of Chlorophyte and built the Chlorophyte armor set with both the Mask (melee) and Headgear (ranged) helmets","Crafted the Avenger Emblem (+12% damage)","Found the Lihzahrd Temple, but it stays locked until a Temple Key drops from Plantera"]],
     [16,"Thursday, June 11, 2026","first mech down",["Defeated The Destroyer — first mechanical boss down — on the second attempt of the night","The setup that did it: a Titanium Repeater with Jester's Arrows, a Magic Quiver, and all the damage potions and food","Crafted the Megashark from the Souls of Might and Excalibur from the Hallowed Bars — both off the Destroyer's drops"]],
     [15,"Wednesday, June 11, 2026","arena + Destroyer attempts",["Acquired the Angel Wings — first wings, a major mobility upgrade","Built out the boss arena: ammo box, Bast Statue (+defense), torches, and more platform levels with ropes","Added a Sharpening Station (melee armor penetration) and a Bewitching Table (+1 minion)","Attempted the Destroyer three times in full Titanium armor — survival was fine, DPS was the problem","On one attempt the Destroyer despawned at dawn with nearly a third of its health left","Found Cursed Bullets hit noticeably harder than Crystal on the Phoenix Blaster"]],
