@@ -278,7 +278,10 @@ const IMG={
 "Angel Wings":"wing_angel_wings.png","Avenger Emblem":"accessory_avenger_emblem.png","Magic Quiver":"accessory_magic_quiver.png","GPS":"accessory_gps.png","Metal Detector":"accessory_metal_detector.png","Radar":"accessory_radar.png","Tally Counter":"accessory_tally_counter.png",
 "Mythril Anvil":"station_mythril_anvil.png","Tinkerer's Workshop":"station_tinkerers_workshop.png",
 "Terra Blade":"weapon_terra_blade.png","True Excalibur":"weapon_true_excalibur.png","Optic Staff":"weapon_optic_staff.png",
-"Thorn Hook":"tool_thorn_hook.png","Bat Wings":"wing_bat_wings.png","Golem":"boss_golem.png","Solar Eclipse":"event_solar_eclipse.png","Aegis Fruit":"accessory_aegis_fruit.png"
+"Thorn Hook":"tool_thorn_hook.png","Bat Wings":"wing_bat_wings.png","Golem":"boss_golem.png","Solar Eclipse":"event_solar_eclipse.png","Aegis Fruit":"accessory_aegis_fruit.png",
+"Hallowed armor":"armor_hallowed.png","Picksaw":"tool_picksaw.png","Piranha Gun":"weapon_piranha_gun.png","Deadly Sphere Staff":"weapon_deadly_sphere_staff.png","Clinger Staff":"weapon_clinger_staff.png","Nimbus Rod":"weapon_nimbus_rod.png",
+"Bottomless Lava Bucket":"tool_bottomless_lava_bucket.png","Steampunk Wings":"wing_steampunk_wings.png","Flame Wings":"wing_flame_wings.png","Celestial Shell":"accessory_celestial_shell.png","Fire Gauntlet":"accessory_fire_gauntlet.png","Master Ninja Gear":"accessory_master_ninja_gear.png",
+"Deerclops":"boss_deerclops.png","Duke Fishron":"boss_duke_fishron.png","Mechanic":"npc_mechanic.png","Demolitionist":"npc_demolitionist.png","Steampunker":"npc_steampunker.png","Tax Collector":"npc_tax_collector.png"
 };
 function imgKey(name){
   var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
@@ -290,20 +293,21 @@ function imgTag(name,cls){
   return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
 }
 const DATA={
-  updated:"Updated through Session 19 — Sunday, June 14, 2026",
+  updated:"Updated through Session 23 — Thursday, June 18, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · Vital + Arcane + Aegis"],["Favored Kit","Terra Blade + Megashark"],["World","Hardmode · Plantera down"]
+    ["Permanent Buff","Artisan Loaf · Vital + Arcane + Aegis"],["Favored Kit","Terra Blade + Megashark"],["World","Hardmode · Golem down"]
   ],
-  hp:465, mana:200,
-  approach:"<p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. Now runs a mixed melee/ranged setup — the Terra Blade and Megashark as the main pair, with the Optic Staff adding passive summon damage — and swaps between the melee (Mask) and ranged (Headgear) Chlorophyte helmets to match the fight; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel through Hardmode. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
+  hp:480, mana:200,
+  approach:"<p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. Now runs a mixed melee/ranged setup — the Terra Blade and Megashark as the main pair, with the Deadly Sphere Staff adding passive summon damage — and swaps between the melee and ranged helmets of his Hallowed set to match the fight; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel through Hardmode. Loves collecting resources for their own sake, isn't rushing to finish, and enjoys a slow exploring pace.</p>",
   goals:[
-    "Golem is the next gate — the Temple is cleared except the boss room; go in deliberately with a Lihzahrd Power Cell at the Altar. Beating him opens the path to the lunar events",
-    "Finish the Charm of Myths — has a Philosopher's Stone, but sold the Bands of Regeneration, so grab a new Band from a Gold Chest or Living Mahogany Tree",
-    "Keep farming Ankh Shield materials: still need Vitamins, Megaphone, Nazar, and Blindfold",
-    "Fire Gauntlet — still want the Titan Glove (Mimics, which also drop the Philosopher's Stone)",
-    "Eat a few more Life Fruit to reach the 500 HP cap",
-    "Still ticking along: containing the Corruption / Hallow, and giving Truffle an above-ground mushroom house"
+    "Golem is down — the path to the Lunar events is open whenever he wants endgame; summon the Lunatic Cultist at the Dungeon entrance to start it",
+    "Beetle armor in progress: has the Beetle Husks (Golem); craft Turtle armor first (one more Turtle Shell from Giant Tortoises + Chlorophyte Bars), then upgrade each piece to Beetle — a melee step up from Hallowed",
+    "Take another run at Duke Fishron once the Beetle armor is on",
+    "Dungeon Biome Chests: Jungle is open (Piranha Gun). Four left — Corruption, Hallowed, Ice, Desert — each needs its Biome Key (1/2500 from enemies in that biome)",
+    "Finish the Ankh Shield: have Medicated Bandage, The Plan, Pocket Mirror, and Vitamins; still farming Megaphone, Nazar, and Blindfold",
+    "Charm of Myths: has a Philosopher's Stone, just needs a fresh Band of Regeneration",
+    "Eat four more Life Fruit to reach the 500 HP cap; still containing the Corruption / Hallow and owing Truffle a surface mushroom house"
   ],
   bosses:[
     ["Eye of Cthulhu",1,""],
@@ -311,18 +315,20 @@ const DATA={
     ["Queen Bee",1,"dropped the Bee Keeper, a favorite; killed several more times in the underground jungle"],
     ["Skeletron",1,"defeated — opened the Dungeon"],
     ["King Slime",1,"defeated"],
-    ["Deerclops",0,"not yet fought (the \"deer thing\" boss)"],
+    ["Deerclops",1,"defeated Session 22 — twice on a boss/materials run"],
     ["Wall of Flesh",1,"defeated — Hardmode begins! dropped the Pwnhammer and the Breaker Blade"],
     ["Queen Slime",1,"defeated Session 19 — during a materials run"],
     ["The Destroyer",1,"defeated — first mech down (Session 16); Souls of Might fed the Megashark and Excalibur"],
     ["The Twins",1,"first beaten Session 17; re-killed twice in Session 18 for more Souls of Sight"],
     ["Skeletron Prime",1,"defeated Session 17 — all three mechs cleared in one night"],
     ["Plantera",1,"defeated Session 19 — dropped the Temple Key and the Thorn Hook; opened the Temple and flipped the Dungeon to post-Plantera"],
-    ["Golem",0,"attempted Session 19 — accidentally summoned at the Lihzahrd Altar and died; the next real fight"]
+    ["Golem",1,"defeated Session 23 — farmed 9× for the Sun Stone and Beetle Husks; drops the Picksaw"],
+    ["Duke Fishron",0,"attempted Session 23 — summoned with a Truffle Worm in the Ocean and got wrecked; optional, one of the hardest fights in the game"]
   ],
   events:[["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],["Blood Moon",1,"survived more than once"],["Solar Eclipse",1,"first survived Session 18; a post-Plantera eclipse in Session 19 brought Mothron — its Broken Hero Sword finished the Terra Blade"]],
   armor:[
-    ["Chlorophyte armor","equipped (Session 17) — the post-mechs set; built both the Mask (melee) and Headgear (ranged) helmets to swap by class; set bonus spawns a Crystal Leaf that auto-fires","58 def"],
+    ["Hallowed armor","equipped (Session 21) — built the Mask (melee) and Helmet (ranged); set bonus is a dodge, Holy Protection. Swapped to it because Chlorophyte's Crystal Leaf kept auto-killing the Tortured Soul before he could purify the Tax Collector","56 def"],
+    ["Chlorophyte armor","the post-mechs set (Session 17), both Mask and Headgear; Crystal Leaf set bonus auto-fires. Set aside for the Hallowed set, kept for swapping back","58 def"],
     ["Titanium armor","previous set, superseded by Chlorophyte","46 def"],
     ["Cobalt armor","early Hardmode stepping-stone set; long superseded","45 def"],
     ["Molten armor","pre-Hardmode Hellstone set; retired","25 def"],
@@ -330,9 +336,13 @@ const DATA={
     ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
   ],
   weapons:[
-    ["Terra Blade","melee",5,"Session 19 — True Night's Edge + True Excalibur + Broken Hero Sword; the payoff weapon, now his main and far ahead of the rest","95 dmg"],
+    ["Terra Blade","melee",5,"Session 19 — True Night's Edge + True Excalibur + Broken Hero Sword; the payoff weapon, now his main; reforged Session 22","95 dmg"],
     ["Megashark","ranged",4,"Session 16 — crafted from the Destroyer's Souls of Might; fast-firing, now the top gun; reforged","25 dmg"],
-    ["Optic Staff","summon",4,"Session 18 — twin mechanical-eye minions from 20 Souls of Sight; now the main summon","29 dmg"],
+    ["Deadly Sphere Staff","summon",4,"Session 21 — Mothron drop; floating spiked spheres, now the main summon","52 dmg"],
+    ["Piranha Gun","ranged",4,"Session 21 — Jungle Biome Chest; latches onto a target and drills continuous damage","42 dmg"],
+    ["Clinger Staff","magic",4,"Session 21 — Corrupt Mimic drop; sets a wall of Cursed Flame; set-and-forget area weapon, earmarked for boss fights","48 dmg"],
+    ["Nimbus Rod","magic",3,"carried for the Plantera fight — drops damaging rain clouds","26 dmg"],
+    ["Optic Staff","summon",4,"Session 18 — twin mechanical-eye minions; superseded by the Deadly Sphere Staff","29 dmg"],
     ["Titanium Repeater","ranged",4,"Session 16 — the Destroyer-killer with Jester's Arrows + Magic Quiver","31 dmg"],
     ["Excalibur","melee",4,"Session 16 — 12 Hallowed Bars from the Destroyer; strong early-Hardmode sword","66 dmg"],
     ["Spider Staff","summon",4,"Session 17 — spider minions; superseded by the Optic Staff","23 dmg"],
@@ -358,7 +368,8 @@ const DATA={
     ["Breaker Blade","melee",4,"Wall of Flesh drop (25%); huge reach and knockback, +150% damage to enemies above 90% HP","43 dmg"]
   ],
   tools:[
-    ["Pickaxe Axe","Session 17 — current best tool; mines Chlorophyte and doubles as an axe; reforged for speed + knockback","200% pick · 175% axe"],
+    ["Picksaw","Session 23 — Golem drop; mines anything including Lihzahrd Brick; now the main pickaxe","210% pick"],
+    ["Pickaxe Axe","Session 17 — superseded as a pickaxe by the Picksaw, kept for chopping; reforged","200% pick · 175% axe"],
     ["Titanium Pickaxe","Session 14 — previous best; superseded by the Pickaxe Axe","180% pick"],
     ["Mythril Pickaxe","the bridge tool — it's what mines Adamantite / Titanium","150% pick"],
     ["Cobalt Pickaxe","superseded — was used to mine Mythril","110% pick"],
@@ -367,27 +378,29 @@ const DATA={
     ["Molten Hamaxe","Hellstone hammer-axe combo","70% axe · 60% hammer"],
     ["Thorn Hook","Session 19 — Plantera drop; a longer-reach single hook over the Diamond Hook",""],
     ["Diamond Hook","grapple",""],
-    ["Staff of Regrowth","improves herb harvesting and grass spreading",""]
+    ["Staff of Regrowth","improves herb harvesting and grass spreading",""],
+    ["Bottomless Lava Bucket","Session 23 — found; infinite placeable lava for lava farms / traps",""]
   ],
   accEq:[
     "Obsidian Shield — knockback immunity + fire-block immunity (Ankh Shield component)",
-    "Bat Wings — flight (Session 19; replaced the Angel Wings — longer flight time)",
+    "Steampunk Wings — flight (Session 23; bought from the Steampunker, replaced the Flame Wings)",
     "Terraspark Boots (Frostspark Boots + Lava Waders)",
-    "Ancient Chisel — mining speed (reforged)",
-    "Avenger Emblem — +12% damage (Session 17; reforged Warding for +4 defense; base for a future Mechanical Emblem)"
+    "Fire Gauntlet — +12% melee damage / speed, +10% size, autoswing, Hellfire on hit (Session 22; finished the full glove chain)",
+    "Celestial Shell — all-around boost to damage, crit, defense, regen, and mobility, stronger at night and in water (Session 23; replaced the Avenger Emblem)"
   ],
   accOther:[
     "Informational (carried, no slot): GPS — coordinates",
     "Informational (carried, no slot): Metal Detector — flags nearby valuable ore",
     "Informational (carried, no slot): Radar — nearby enemy count",
     "Informational (carried, no slot): Tally Counter — kill count of the targeted enemy",
-    "Tiger Climbing Gear (Climbing Claws + Shoe Spikes)",
+    "Master Ninja Gear (Session 22 — Tabi + Black Belt + Tiger Climbing Gear; reforged Warding); benched for damage, kept for the dash / dodge",
+    "Avenger Emblem — +12% damage, Warding; benched Session 23 when the Celestial Shell took its slot",
+    "Flame Wings — spare since Session 23, replaced by the Steampunk Wings",
+    "Bat Wings — spare since Session 21, replaced by the Flame Wings",
+    "Ancient Chisel — mining speed (benched Session 22 for the Fire Gauntlet)",
     "Mana Flower — auto-uses mana potions",
-    "Feral Claws — melee speed / autoswing (reforged)",
     "Magic Quiver — boosts arrow damage and speed; swapped in for ranged boss fights",
-    "Angel Wings — first wings; replaced by the Bat Wings",
     "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
-    "Magma Stone — adds On Fire! to melee hits (Fire Gauntlet component)",
     "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents",
     "Vanity: Whoopie Cushion",
     "Mount: Chillet (hatched from a Large Dragon Egg)"
@@ -396,9 +409,10 @@ const DATA={
     ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
     ["Angler","deep jungle"],["Goblin Tinkerer","below spawn"],["Arms Dealer","snow biome"],["Tavernkeep","snow biome"],
     ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
-    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"],["Wizard","underground mushroom · Session 13"]
+    ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"],["Wizard","underground mushroom · Session 13"],
+    ["Mechanic","from the Dungeon"],["Demolitionist","west caverns"],["Steampunker","sells the Steampunk Wings"],["Tax Collector","west caverns · Session 21"]
   ],
-  npcplace:"Witch Doctor and Goblin Tinkerer are housed just below spawn. Angler and Dye Trader live in the deep jungle-cave houses. The Arms Dealer, Tavernkeep, and Clothier are in the snow biome, and the Golfer and Stylist live up on the sky islands. The Wizard lives in the underground mushroom biome below the base. Session 17 added more NPC housing tied into the new sky highways, plus pylon hubs at the east Ocean and in the underground mushroom biome. Truffle has started spawning but has no home yet — he only moves into an above-ground mushroom biome, so a surface mushroom house is still needed.",
+  npcplace:"The Goblin Tinkerer sits in a sky-island house above the Mechanic (the two get along). The Witch Doctor and Dye Trader cluster in the Jungle near the Shimmer and the Lihzahrd Temple, with the jungle pylon beside them; the Angler has his own house on the Ocean. The Arms Dealer, Tavernkeep, and Clothier are in the snow biome; the Golfer and Stylist on the sky islands; the Wizard in the underground mushroom biome; and the Tax Collector and Demolitionist anchor a new Cavern pylon out in the west caverns. Truffle has started spawning but still has no home — he only moves into an above-ground mushroom biome, so a surface mushroom house is needed.",
   zones:[
     ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
     ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
@@ -408,7 +422,8 @@ const DATA={
   underworld:"<b>Underworld</b> — reached via the hellevator and on both the west and east edges. Much of it mapped, with a lava-spanning bridge linking the east to the center.",
   infra:[
     "Sky highways across the top of the map (Session 17) — multiple stone highways linking east and west edges, with ropes dropping down for access",
-    "Pylon network (5): spawn, jungle, snow (by the Dungeon), east Ocean, and underground mushroom biome (the last two added Session 17) — fast travel across the whole map",
+    "Pylon network (6): spawn, jungle, snow (by the Dungeon), east Ocean, underground mushroom biome, and the west caverns (the Cavern pylon added Session 22) — fast travel across the whole map",
+    "Minecart track along the eastern stone road, spawn to the east edge (Session 21)",
     "Mechanical-boss arena (built Sessions 14–15): stacked platform levels with ropes, an ammo box, a Bast Statue, campfires, Heart Lanterns, a Star in a Bottle, a Sharpening Station, and a Bewitching Table",
     "Stone platform from spawn east to the world edge, with rope drops to the surface",
     "Western platform road all the way to the west map edge (two floating islands found along it)",
@@ -420,6 +435,10 @@ const DATA={
     "Fast east/west travel via platform + Terraspark Boots + Chillet mount"
   ],
   sessions:[
+    [23,"Thursday, June 18, 2026","Golem down, endgame opens",["Defeated Golem — farmed him 9× for the Sun Stone and a stack of Beetle Husks; he drops the Picksaw","Crafted the Celestial Shell (Moon Shell + Celestial Stone) and equipped it over the Avenger Emblem","Tried Duke Fishron and got wrecked — then bought the Steampunk Wings from the Steampunker","Swapped the main pickaxe to the Picksaw","Ran a few more fishing quests; randomly turned up a Bottomless Lava Bucket","Collected 2 of 3 Turtle Shells toward Turtle armor, with enough Beetle Husks banked to take it straight to Beetle armor"]],
+    [22,"Wednesday, June 17, 2026","Fire Gauntlet + boss night",["Moved the Tax Collector and Demolitionist to the west caverns to anchor a new Cavern pylon","Reforged the Terra Blade for more damage and knockback","Found the Titan Glove and finished the Fire Gauntlet (the full glove chain)","Found a Black Belt and built the Master Ninja Gear (reforged Warding) — then benched it for an Avenger Emblem's damage","Boss night: Plantera ×2, Deerclops ×2 (first Deerclops kills), and Queen Slime ×1","Ran Flasks of Gold and pulled in a big pile of gold for reforging","Ate three more Life Fruit — now ~480 HP, four short of the cap"]],
+    [21,"Tuesday, June 16, 2026","Hallowed + new summons",["Laid a minecart track along the eastern stone road, spawn to the east edge","Built the Angler a house on the Ocean and finished his first Angler quest","Purified the Tax Collector (Purification Powder on a Tortured Soul)","Farmed the Hardmode Dungeon; opened the Jungle Biome Chest for the Piranha Gun and found the Tabi","Crafted the Moon Shell and the Flame Wings (equipped, replacing the Bat Wings)","Switched into Hallowed armor — Chlorophyte's Crystal Leaf kept killing the Tortured Soul before he could purify it","Got the Deadly Sphere Staff (Mothron) as the new main summon, and the Clinger Staff (Corrupt Mimic)"]],
+    [20,"Monday, June 15, 2026","Ankh + Dungeon clear",["Collected the Vitamins for the Ankh Charm (the Armor Bracing combine is now ready)","Ran another Blood Moon for its drops","Cleared out the Shadow Chests and grabbed a few Hardmode Underworld items","Fully explored the Hardmode Dungeon; a few Biome Chests stay locked behind Biome Keys","Reorganized the jungle hub: moved the Angler and Dye Trader next to the Witch Doctor and relocated the jungle pylon beside all three"]],
     [19,"Sunday, June 14, 2026","Plantera down, Terra Blade done",["Defeated Plantera — collected the Temple Key and the Thorn Hook","Rushed re-kills of the three mechs and Queen Bee, and beat Queen Slime for the first time, all for materials","A post-Plantera Solar Eclipse dropped a Broken Hero Sword off Mothron — crafted the Terra Blade (plus a pile of other eclipse weapons it overshadows)","Cleared the Lihzahrd Temple of traps except the boss room; accidentally summoned the Golem and died","Ate a stack of Life Fruit (~465 HP) and shimmered one into an Aegis Fruit for a permanent +4 defense","Found Philosopher's Stones but had sold the Bands of Regeneration, so the Charm of Myths is waiting on a new Band","Upgraded wings to Bat Wings; moved the Goblin Tinkerer to a sky-island house above the Mechanic"]],
     [18,"Saturday, June 13, 2026","Optic Staff + first eclipse",["Re-killed The Twins twice for more Souls of Sight (materials for the Optic Staff)","Crafted the Optic Staff and started running it as the main summon","Crafted the True Excalibur (Excalibur + Chlorophyte Bars) — banked toward the Terra Blade","Survived his first Solar Eclipse","Moved the Witch Doctor to the Jungle (unlocks Leaf Wings at night)","Accidentally summoned Plantera and was killed — broke a Bulb while unprepared","Started farming Ankh Charm materials: Medicated Bandage, The Plan, and the Pocket Mirror so far"]],
     [17,"Friday, June 12, 2026","all three mechs in one night",["Built multiple stone sky highways across the top of the map linking east and west, with ropes dropping down","Dug more containment trenches to slow the Hallow and Corruption spread","Built NPC houses and set up two new pylons — east Ocean and the (now partly hallowed) underground mushroom biome","Defeated all three mechanical bosses in one night — the Destroyer (second kill), The Twins, and Skeletron Prime","Crafted the Pickaxe Axe and the True Night's Edge from the mech drops","Crafted the Spider Staff and Queen Spider Staff for summon DPS and a defensive sentry","Mined an excessive amount of Chlorophyte and built the Chlorophyte armor set with both the Mask (melee) and Headgear (ranged) helmets","Crafted the Avenger Emblem (+12% damage)","Found the Lihzahrd Temple, but it stays locked until a Temple Key drops from Plantera"]],

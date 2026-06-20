@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terraria Build Goals · World 1</title>
+<title>Terraria Build Goals · World 1 · Post-Golem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,15 +22,13 @@
     color:var(--ink); font-family:var(--body); line-height:1.5; font-size:16px}
   .wrap{max-width:760px; margin:0 auto; padding:0 16px 80px}
 
-  /* ---- Header ---- */
   header{padding:24px 0 6px}
   .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); margin:0 0 10px}
   h1{font-family:var(--display); font-weight:700; font-size:27px; line-height:1.12; margin:0 0 10px}
   h1 .dim{color:var(--terra)}
-  .lede{color:var(--muted); font-size:14.5px; margin:0 0 4px; max-width:60ch}
+  .lede{color:var(--muted); font-size:14.5px; margin:0 0 4px; max-width:62ch}
   .lede b{color:var(--ink); font-weight:600}
 
-  /* ---- Sticky nav ---- */
   nav.bar{position:sticky; top:0; z-index:20; margin:16px 0 6px;
     background:rgba(21,19,14,.92); backdrop-filter:blur(8px);
     border:1px solid var(--line); border-radius:9px; padding:9px 10px;
@@ -43,12 +41,10 @@
     font-size:11px; color:var(--muted); cursor:pointer; padding:5px 4px}
   .toggle input{accent-color:var(--terra); width:15px; height:15px; cursor:pointer}
 
-  /* ---- Section headings ---- */
   h2.sec{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
     color:var(--muted); margin:30px 0 12px; display:flex; align-items:center; gap:10px; scroll-margin-top:90px}
   h2.sec::after{content:""; flex:1; height:1px; background:var(--line)}
 
-  /* ---- Overview grid ---- */
   .ov{display:grid; grid-template-columns:1fr 1fr; gap:10px}
   @media (max-width:520px){.ov{grid-template-columns:1fr}}
   .ovcard{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line);
@@ -59,11 +55,9 @@
   .bar-fill{height:100%; background:var(--accent,var(--brass)); border-radius:100px}
   .ov .meta{font-family:var(--mono); font-size:10.5px; color:var(--muted); letter-spacing:.03em}
 
-  /* ---- Goal cards (details) ---- */
   details.goal{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line);
     border-left:3px solid var(--accent,var(--brass)); border-radius:9px; margin:11px 0; overflow:hidden; scroll-margin-top:90px}
-  details.goal>summary{list-style:none; cursor:pointer; padding:14px 15px; display:flex; flex-wrap:wrap;
-    align-items:baseline; gap:8px 11px}
+  details.goal>summary{list-style:none; cursor:pointer; padding:14px 15px; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 11px}
   details.goal>summary::-webkit-details-marker{display:none}
   summary .gname{font-family:var(--display); font-weight:700; font-size:19px}
   summary .gtier{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent,var(--brass))}
@@ -75,7 +69,6 @@
   .needline{font-size:13px; margin:12px 0 0; padding-top:11px; border-top:1px dashed var(--line)}
   .needline .k{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--terra); margin-right:7px}
 
-  /* ---- Tree nodes ---- */
   .node{margin:3px 0}
   .node-row{display:flex; align-items:baseline; gap:8px; padding:4px 0}
   .node-name, .node-name:visited{color:var(--ink); text-decoration:none; font-weight:500; border-bottom:1px dotted #5a513c}
@@ -83,36 +76,58 @@
   .node-name .ar{font-size:11px; opacity:.6; margin-left:2px}
   .node-src{font-size:12.5px; color:var(--muted); margin:0 0 2px 2px; padding-left:2px}
   .node-kids{margin-left:9px; padding-left:13px; border-left:1px solid var(--line)}
-  .combine{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
-    color:#7c7359; margin:3px 0 1px}
+  .combine{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#7c7359; margin:3px 0 1px}
 
   .chip{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
     padding:2px 7px; border-radius:100px; white-space:nowrap; flex:none}
   .c-have{background:#19271f; color:var(--teal); border:1px solid #2c4a3a}
   .c-need{background:#2a1812; color:var(--terra); border:1px solid #533021}
-  .c-check{background:#272013; color:var(--brass); border:1px solid #50421f}
-  .c-gated{background:#211a2e; color:var(--corrupt); border:1px solid #3d3460}
   .c-craft{background:#211d15; color:var(--muted); border:1px solid var(--line)}
+  .c-option{background:#211a2e; color:var(--corrupt); border:1px solid #3d3460}
 
-  /* ---- Farm route ---- */
-  .farm{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line);
-    border-left:3px solid var(--accent,var(--brass)); border-radius:8px; padding:13px 15px; margin:10px 0}
-  .farm h3{font-family:var(--display); font-size:16.5px; font-weight:700; margin:0 0 4px}
+  .opt{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line);
+    border-left:3px solid var(--accent,var(--brass)); border-radius:7px; padding:12px 14px; margin:9px 0}
+  .opt .top{display:flex; flex-wrap:wrap; align-items:baseline; gap:7px 10px; margin-bottom:5px}
+  .opt .nm{font-family:var(--display); font-size:16.5px; font-weight:700}
+  .opt a.nm-link, .opt a.nm-link:visited{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent,var(--brass))}
+  .opt a.nm-link:hover{color:var(--accent,var(--brass))}
+  .opt .badge{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--bg); background:var(--accent,var(--brass)); padding:2px 7px; border-radius:100px}
+  .opt .src{font-size:13px; margin:0 0 4px}
+  .opt .src .k{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent,var(--brass)); margin-right:6px}
+  .opt .note{font-size:12.5px; color:var(--muted); margin:0}
+
+  .callout{background:#1a1726; border:1px solid #36305a; border-left:3px solid var(--corrupt); border-radius:8px; padding:13px 15px; margin:12px 0}
+  .callout h3{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--corrupt); margin:0 0 7px}
+  .callout p{margin:0; font-size:13.5px}
+  .callout a, .callout a:visited{color:var(--ink); border-bottom:1px dotted var(--corrupt); text-decoration:none}
+
+  .potgroup{margin:14px 0 4px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent,var(--brass))}
+  .pot{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line); border-radius:7px; padding:10px 13px; margin:7px 0}
+  .pot .ph{display:flex; flex-wrap:wrap; align-items:baseline; gap:7px 10px}
+  .pot a.pn, .pot a.pn:visited{font-family:var(--display); font-weight:700; font-size:15px; color:var(--ink); text-decoration:none; border-bottom:1px dotted #5a513c}
+  .pot a.pn:hover{color:var(--brass)}
+  .pot .eff{font-size:12.5px; color:var(--teal)}
+  .pot .rec{font-size:13px; color:var(--muted); margin:5px 0 0}
+  .pot .rec b{color:var(--ink); font-weight:500}
+
+  .farm{background:linear-gradient(180deg,var(--card),var(--bg2)); border:1px solid var(--line); border-left:3px solid var(--accent,var(--brass)); border-radius:8px; padding:13px 15px; margin:10px 0}
+  .farm h3{font-family:var(--display); font-size:16px; font-weight:700; margin:0 0 4px}
   .farm .two{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--terra); margin-left:8px}
   .drops{margin:8px 0 0; display:flex; flex-direction:column; gap:5px}
   .drop{display:flex; flex-wrap:wrap; align-items:baseline; gap:7px; font-size:13.5px}
   .drop a, .drop a:visited{color:var(--ink); text-decoration:none; border-bottom:1px dotted #5a513c}
   .drop a:hover{color:var(--accent,var(--brass))}
   .goaltag{font-family:var(--mono); font-size:10px; color:var(--muted)}
-  .goaltag::before{content:"→ "; opacity:.6}
-  .ratetag{font-family:var(--mono); font-size:9.5px; color:var(--bg); background:var(--accent,var(--brass)); padding:1px 6px; border-radius:100px}
+  .goaltag::before{content:"\2192 "; opacity:.6}
   .farm .fnote{font-size:12.5px; color:var(--muted); margin:9px 0 0; padding-top:8px; border-top:1px dashed var(--line)}
 
   .accent-brass{--accent:var(--brass)} .accent-terra{--accent:var(--terra)}
   .accent-corrupt{--accent:var(--corrupt)} .accent-teal{--accent:var(--teal)}
 
-  footer{margin-top:34px; padding-top:14px; border-top:1px solid var(--line);
-    font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.04em; line-height:1.7}
+  footer{margin-top:34px; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--muted)}
+  footer .done{font-family:var(--mono); font-size:11px; letter-spacing:.04em; line-height:1.9}
+  footer .done b{color:var(--teal)}
+  footer .fine{font-family:var(--mono); font-size:11px; margin-top:10px; line-height:1.7}
   footer a{color:var(--muted)}
 
   #top{position:fixed; right:16px; bottom:16px; z-index:30; width:42px; height:42px; border-radius:50%;
@@ -130,17 +145,18 @@
 <div class="wrap">
 
   <header>
-    <p class="eyebrow">Build Dashboard · World 1 — Corruption · Classic</p>
-    <h1>Four goals, <span class="dim">one farming plan.</span></h1>
-    <p class="lede">Crafting trees and farm routes for the <b>Fire Gauntlet</b>, <b>Ankh Shield</b>, <b>Terra Blade</b>, and <b>Charm of Myths</b>. Every item links to the wiki; each piece is tagged with whether you already have it. Tap a goal to expand its tree, flip the toggle to hide what's done, and check the <b>Farm Route</b> at the bottom to knock out multiple goals per trip.</p>
+    <p class="eyebrow">Build Dashboard · World 1 — Corruption · Post-Golem</p>
+    <h1>What's worth chasing <span class="dim">on the way to endgame.</span></h1>
+    <p class="lede">Golem's down and the Terra Blade carries your melee, so this is built around the gaps: finishing the <b>Ankh Shield</b>, stepping up to <b>Beetle armor</b>, and upgrading your <b>ranged</b> and <b>summons</b> (both badly outpaced by your melee now). Plus a <b>potions</b> section with verified recipes for boss prep. Tap a goal to expand, use the toggle to hide what's done.</p>
   </header>
 
   <nav class="bar" aria-label="Section navigation">
     <a href="#overview">Overview</a>
-    <a href="#fire-gauntlet">Fire Gauntlet</a>
+    <a href="#beetle-armor">Beetle Armor</a>
     <a href="#ankh-shield">Ankh Shield</a>
-    <a href="#terra-blade">Terra Blade</a>
-    <a href="#charm-of-myths">Charm of Myths</a>
+    <a href="#ranged">Ranged</a>
+    <a href="#summons">Summons</a>
+    <a href="#potions">Potions</a>
     <a href="#farm-route">Farm Route</a>
     <label class="toggle"><input type="checkbox" id="needToggle"> Need only</label>
   </nav>
@@ -151,198 +167,220 @@
   <h2 class="sec">Crafting trees</h2>
   <div id="goals"></div>
 
-  <h2 class="sec" id="farm-route">Farm route — by location</h2>
-  <p class="lede" style="margin-bottom:10px">Grouped so each trip clears as much as possible. Drops here are rare (≈1–2%), so run a Water Candle + Battle Potion and lean on your Lifeform Analyzer.</p>
+  <h2 class="sec" id="ranged">Ranged upgrades</h2>
+  <p class="lede" style="margin-bottom:8px">Your Megashark is well behind the rest of your kit now. Easiest gains are in the post-Plantera Dungeon; the best pre-Lunar guns come from events.</p>
+  <div id="rangedList"></div>
+
+  <h2 class="sec" id="summons">Summon upgrades</h2>
+  <p class="lede" style="margin-bottom:8px">The Deadly Sphere Staff is fine, but a couple of post-Golem minions clearly outdo it.</p>
+  <div id="summonList"></div>
+
+  <div class="callout">
+    <h3>One event, both upgrades</h3>
+    <p><a href="https://terraria.wiki.gg/wiki/Martian_Madness" target="_blank" rel="noopener">Martian Madness</a> is a post-Golem event that drops the <b>Xeno Staff</b> (your summon upgrade) and the <b>Xenopopper</b> (a ranged upgrade) from the same Martian Saucer — so one event covers both. Your Piranha Gun is great for latching onto and killing the Saucers.</p>
+  </div>
+
+  <div class="callout">
+    <h3>Endgame, when you're ready</h3>
+    <p>Golem opens the <a href="https://terraria.wiki.gg/wiki/Lunar_Events" target="_blank" rel="noopener">Lunar events</a>: cultists spawn at the Dungeon entrance, killing them summons the <a href="https://terraria.wiki.gg/wiki/Lunatic_Cultist" target="_blank" rel="noopener">Lunatic Cultist</a>, then the four Celestial Pillars, then <a href="https://terraria.wiki.gg/wiki/Moon_Lord" target="_blank" rel="noopener">Moon Lord</a>. The Pillars drop fragments for best-in-slot gear — <a href="https://terraria.wiki.gg/wiki/Vortex_Beater" target="_blank" rel="noopener">Vortex Beater</a> / <a href="https://terraria.wiki.gg/wiki/Phantasm" target="_blank" rel="noopener">Phantasm</a> for ranged and the <a href="https://terraria.wiki.gg/wiki/Stardust_Dragon_Staff" target="_blank" rel="noopener">Stardust Dragon</a> for summons. No rush; the door's just open.</p>
+  </div>
+
+  <h2 class="sec" id="potions">Potions &amp; buffs worth farming</h2>
+  <p class="lede" style="margin-bottom:8px">All buff potions use a <a href="https://terraria.wiki.gg/wiki/Bottled_Water" target="_blank" rel="noopener" style="color:var(--muted)">Bottled Water</a> base at a Placed Bottle or, better, an <a href="https://terraria.wiki.gg/wiki/Alchemy_Table" target="_blank" rel="noopener" style="color:var(--muted)">Alchemy Table</a> (in the Dungeon — 33% chance to not consume ingredients). Flasks use the <a href="https://terraria.wiki.gg/wiki/Imbuing_Station" target="_blank" rel="noopener" style="color:var(--muted)">Imbuing Station</a> from your Witch Doctor.</p>
+  <div id="potions"></div>
+
+  <h2 class="sec" id="farm-route">Farm route</h2>
   <div id="farms"></div>
 
   <footer>
-    World 1 · Corruption · Classic — built around your current inventory<br>
-    Status tags reflect your tracker; <b>Check</b> = confirm you still have it. Links open <a href="https://terraria.wiki.gg" target="_blank" rel="noopener">terraria.wiki.gg</a> · v1.4.4
+    <div class="done">
+      <b>Already done:</b> Fire Gauntlet &middot; Terra Blade &middot; Celestial Shell &middot; Master Ninja Gear (benched) &middot; Golem
+    </div>
+    <div class="fine">
+      World 1 · Corruption · Classic — tuned to your current inventory<br>
+      Status tags reflect your tracker. Links open <a href="https://terraria.wiki.gg" target="_blank" rel="noopener">terraria.wiki.gg</a> · v1.4.4
+    </div>
   </footer>
 </div>
 
-<button id="top" aria-label="Back to top">↑</button>
+<button id="top" aria-label="Back to top">&uarr;</button>
 
 <script>
 const W = s => "https://terraria.wiki.gg/wiki/" + s;
-const STATUS = {have:"Have", need:"Need", check:"Check", gated:"Locked", craft:"Craft"};
+const STATUS = {have:"Have", need:"Need", craft:"Craft", option:"Option"};
 
 const GOALS = [
  {
-  id:"fire-gauntlet", name:"Fire Gauntlet", tier:"post-mechs", accent:"accent-terra",
-  blurb:"Top melee accessory: +12% melee damage & speed, +10% size, autoswing, and Hellfire on hit. You already own two of the four pieces (Feral Claws, Avenger Emblem).",
-  tree:{name:"Fire Gauntlet", w:"Fire_Gauntlet", status:"craft", note:"Mechanical Glove + Magma Stone",
+  id:"beetle-armor", name:"Beetle Armor", tier:"melee upgrade", accent:"accent-terra",
+  blurb:"A real step up from your Hallowed set. Built from Turtle armor, one piece at a time. Pick the bonus by your off-hand piece: Beetle Might (ramps melee damage + speed as you attack) for offense, or Beetle Scale Mail (up to 15% damage reduction) for defense.",
+  tree:{name:"Beetle armor", w:"Beetle_armor", status:"craft", note:"upgrade each Turtle piece with Beetle Husks",
    kids:[
-    {name:"Mechanical Glove", w:"Mechanical_Glove", status:"craft", note:"Power Glove + Avenger Emblem", kids:[
-      {name:"Power Glove", w:"Power_Glove", status:"craft", note:"Feral Claws + Titan Glove", kids:[
-        {name:"Feral Claws", w:"Feral_Claws", status:"have", src:"Have it. (Ivy Chests / Jungle & Bramble Crates, pre-Hardmode jungle)"},
-        {name:"Titan Glove", w:"Titan_Glove", status:"need", src:"Drops from Mimics in the Hardmode caverns"}
-      ]},
-      {name:"Avenger Emblem", w:"Avenger_Emblem", status:"have", src:"Have it (already crafted)"}
+    {name:"Turtle armor", w:"Turtle_armor", status:"craft", note:"Chlorophyte Bars + Turtle Shells", kids:[
+      {name:"Chlorophyte Bars", w:"Chlorophyte_Bar", status:"have", src:"Have — from your Chlorophyte haul"},
+      {name:"Turtle Shell", w:"Turtle_Shell", status:"need", src:"Have 2 of 3 — drops from Giant Tortoises in the Hardmode Jungle"}
     ]},
-    {name:"Magma Stone", w:"Magma_Stone", status:"check", src:"Listed in your gear — confirm. Else: Hellbats (0.67%) / Lava Bats (2%), the Underworld"}
+    {name:"Beetle Husk", w:"Beetle_Husk", status:"have", src:"Have plenty — Golem drops them (you farmed him 9x)"}
    ]}
  },
  {
-  id:"ankh-shield", name:"Ankh Shield", tier:"big project", accent:"accent-corrupt",
-  blurb:"Near-total debuff immunity plus knockback & fire-block immunity. You've already crafted the Medicated Bandage and The Plan, and you have the Pocket Mirror — four base pieces to go.",
+  id:"ankh-shield", name:"Ankh Shield", tier:"debuff immunity", accent:"accent-corrupt",
+  blurb:"Near-total debuff immunity plus knockback and fire-block immunity. You've crafted the Medicated Bandage and The Plan, have the Pocket Mirror and Vitamins (so Armor Bracing is ready). Three base pieces left: Megaphone, Nazar, Blindfold.",
   tree:{name:"Ankh Shield", w:"Ankh_Shield", status:"craft", note:"Ankh Charm + Obsidian Shield",
    kids:[
     {name:"Ankh Charm", w:"Ankh_Charm", status:"craft", note:"combine the five below", kids:[
-      {name:"Medicated Bandage", w:"Medicated_Bandage", status:"have", note:"Bezoar + Adhesive Bandage", kids:[
-        {name:"Bezoar", w:"Bezoar", status:"have", src:"Have (in your Medicated Bandage)"},
-        {name:"Adhesive Bandage", w:"Adhesive_Bandage", status:"have", src:"Have (in your Medicated Bandage)"}
-      ]},
+      {name:"Medicated Bandage", w:"Medicated_Bandage", status:"have", src:"Crafted (Bezoar + Adhesive Bandage)"},
       {name:"Armor Bracing", w:"Armor_Bracing", status:"craft", note:"Armor Polish + Vitamins", kids:[
         {name:"Armor Polish", w:"Armor_Polish", status:"have", src:"Have it"},
-        {name:"Vitamins", w:"Vitamins", status:"need", src:"Corruptors, in your Hardmode Corruption"}
+        {name:"Vitamins", w:"Vitamins", status:"have", src:"Have it (Session 20)"}
       ]},
-      {name:"The Plan", w:"The_Plan", status:"have", note:"Fast Clock + Trifold Map", kids:[
-        {name:"Fast Clock", w:"Fast_Clock", status:"have", src:"Have (in your Plan)"},
-        {name:"Trifold Map", w:"Trifold_Map", status:"have", src:"Have (in your Plan)"}
-      ]},
+      {name:"The Plan", w:"The_Plan", status:"have", src:"Crafted (Fast Clock + Trifold Map)"},
       {name:"Countercurse Mantra", w:"Countercurse_Mantra", status:"craft", note:"Megaphone + Nazar", kids:[
         {name:"Megaphone", w:"Megaphone", status:"need", src:"Pixies, the Hallow (or Shimmer-flip a spare Nazar)"},
         {name:"Nazar", w:"Nazar", status:"need", src:"Cursed Skulls, the Dungeon"}
       ]},
       {name:"Reflective Shades", w:"Reflective_Shades", status:"craft", note:"Blindfold + Pocket Mirror", kids:[
         {name:"Blindfold", w:"Blindfold", status:"need", src:"Corrupt Slimes / Dark Mummies, a Corrupt Desert"},
-        {name:"Pocket Mirror", w:"Pocket_Mirror", status:"have", src:"Have it (Medusa drop)"}
+        {name:"Pocket Mirror", w:"Pocket_Mirror", status:"have", src:"Have it"}
       ]}
     ]},
-    {name:"Obsidian Shield", w:"Obsidian_Shield", status:"have", src:"Have it"}
-   ]}
- },
- {
-  id:"terra-blade", name:"Terra Blade", tier:"post-Plantera", accent:"accent-teal",
-  blurb:"A top-tier sword that fires a projectile beam. You already hold both halves — it's gated only by a Broken Hero Sword, which needs Plantera down first.",
-  tree:{name:"Terra Blade", w:"Terra_Blade", status:"gated", note:"True Night's Edge + True Excalibur + Broken Hero Sword",
-   kids:[
-    {name:"True Night's Edge", w:"True_Night%27s_Edge", status:"have", src:"Have it"},
-    {name:"True Excalibur", w:"True_Excalibur", status:"have", src:"Have it"},
-    {name:"Broken Hero Sword", w:"Broken_Hero_Sword", status:"gated", src:"Locked: drops from Mothron during a Solar Eclipse, AFTER Plantera is defeated"}
-   ]}
- },
- {
-  id:"charm-of-myths", name:"Charm of Myths", tier:"quality of life", accent:"accent-brass",
-  blurb:"+1 HP/sec regen and -25% healing-potion cooldown (60s → 45s) — a quietly excellent boss-fight accessory. Just two pieces.",
-  tree:{name:"Charm of Myths", w:"Charm_of_Myths", status:"craft", note:"Band of Regeneration + Philosopher's Stone",
-   kids:[
-    {name:"Band of Regeneration", w:"Band_of_Regeneration", status:"check", src:"You found one back in Session 2 — confirm. Else: Gold Chests (Underground/Cavern) or Living Mahogany Trees"},
-    {name:"Philosopher's Stone", w:"Philosopher%27s_Stone", status:"need", src:"Drops from Mimics in the Hardmode caverns (1/6 chance)"}
+    {name:"Obsidian Shield", w:"Obsidian_Shield", status:"have", src:"Have it (equipped)"}
    ]}
  }
 ];
 
-const FARMS = [
- {spot:"Mimics — Hardmode caverns", accent:"accent-brass", two:true,
-  items:[{n:"Titan Glove", w:"Titan_Glove", g:"Fire Gauntlet", r:"drop"},
-         {n:"Philosopher's Stone", w:"Philosopher%27s_Stone", g:"Charm of Myths", r:"1/6"}],
-  note:"The best two-for-one on the list — one Mimic farm feeds both the Fire Gauntlet and the Charm of Myths. Regular Mimics spawn in the Hardmode cavern layer; Water Candle + Battle Potion to crowd them."},
- {spot:"Underworld — Hellbats / Lava Bats", accent:"accent-terra",
-  items:[{n:"Magma Stone", w:"Magma_Stone", g:"Fire Gauntlet", r:"0.67–2%"}],
-  note:"Only if you no longer have your Magma Stone. Bring fire-block immunity (your Obsidian Skull Rose) and build a flat arena."},
- {spot:"Your Corruption — Corruptors", accent:"accent-corrupt",
-  items:[{n:"Vitamins", w:"Vitamins", g:"Ankh Shield", r:"drop"}],
-  note:"Native to your world's evil biome, so no conversion needed — the easiest Ankh piece."},
- {spot:"Corrupt Desert — Slimes & Dark Mummies", accent:"accent-corrupt",
-  items:[{n:"Blindfold", w:"Blindfold", g:"Ankh Shield", r:"~1–2%"}],
-  note:"Corrupt Slimes split into Slimelings, all of which can drop it — roughly 4× the odds."},
- {spot:"The Hallow — Pixies", accent:"accent-teal",
-  items:[{n:"Megaphone", w:"Megaphone", g:"Ankh Shield", r:"~1–2%"}],
-  note:"Shimmer shortcut: flip a spare Megaphone into the Nazar (they convert both ways in 1.4.4)."},
- {spot:"The Dungeon — Cursed Skulls", accent:"accent-brass",
-  items:[{n:"Nazar", w:"Nazar", g:"Ankh Shield", r:"~1%"}],
-  note:"Cursed Skulls and Giant Cursed Skulls."},
- {spot:"Gold Chests / Living Mahogany Trees", accent:"accent-brass",
-  items:[{n:"Band of Regeneration", w:"Band_of_Regeneration", g:"Charm of Myths", r:"chest"}],
-  note:"Check your storage first — you likely banked one back in Session 2."},
- {spot:"Post-Plantera → Solar Eclipse → Mothron", accent:"accent-corrupt", gated:true,
-  items:[{n:"Broken Hero Sword", w:"Broken_Hero_Sword", g:"Terra Blade", r:"Mothron"}],
-  note:"The only piece you can't farm yet — locked until Plantera is dead, after which Mothron spawns in Solar Eclipses and drops it."}
+const RANGED = [
+ {n:"Tactical Shotgun", w:"Tactical_Shotgun", badge:"Dungeon", accent:"accent-brass",
+  src:"Tactical Skeletons in the post-Plantera Dungeon", note:"Fires six bullets at once with autofire — the cleanest straight upgrade over the Megashark, and you're already farming the Dungeon."},
+ {n:"Sniper Rifle", w:"Sniper_Rifle", badge:"Dungeon", accent:"accent-brass",
+  src:"Tactical Skeletons in the post-Plantera Dungeon", note:"Huge single-shot damage at a slow rate. Great for big single targets; pair with the Sniper Scope (also Dungeon) which tinkers into strong gun accessories."},
+ {n:"Xenopopper", w:"Xenopopper", badge:"Martian Madness", accent:"accent-corrupt",
+  src:"Martian Saucer, Martian Madness event", note:"Autofire shotgun with an unusual bubble-burst pattern. Same event drops the Xeno Staff, so it's an efficient two-for-one trip."},
+ {n:"Chlorophyte / Nano Bullets", w:"Chlorophyte_Bullet", badge:"ammo", accent:"accent-teal",
+  src:"Chlorophyte Bullets (70 ore + 70 Musket Balls) or Nano Bullets (Nanites from the Cyborg)", note:"Homing ammo is a big accuracy boost for any gun. Nano Bullets hit a bit harder than Chlorophyte."}
 ];
 
-// ---- helpers ----
+const SUMMONS = [
+ {n:"Xeno Staff", w:"Xeno_Staff", badge:"Martian Madness", accent:"accent-corrupt",
+  src:"Martian Saucer (1/6), Martian Madness event", note:"UFO minions with excellent tracking that teleport to targets — the most reliable upgrade over your Deadly Sphere Staff, and reachable now that Golem's down."},
+ {n:"Tempest Staff", w:"Tempest_Staff", badge:"Duke Fishron", accent:"accent-terra",
+  src:"Duke Fishron (1/5)", note:"Sharknado minions, higher raw damage than the Xeno Staff — but Duke is one of the hardest fights in the game and already beat you once. Worth another run with Beetle armor on."},
+ {n:"Papyrus Scarab", w:"Papyrus_Scarab", badge:"accessory", accent:"accent-brass",
+  src:"Hercules Beetle (Witch Doctor, in the Jungle at night) + Necromantic Scroll (Mourning Wood, Pumpkin Moon)", note:"+1 minion and +15% summon damage. Even on a melee build, a free extra minion makes any summon staff pull more weight."}
+];
+
+const POTIONS = [
+ {group:"Summon", items:[
+   {n:"Summoning Potion", w:"Summoning_Potion", eff:"+1 minion", rec:"Moonglow + Variegated Lardfish", extra:"Stacks with your Bewitching Table for +2 minions total."}
+ ]},
+ {group:"Melee", items:[
+   {n:"Flask of Cursed Flames", w:"Flask_of_Cursed_Flames", eff:"Cursed Inferno on hit", rec:"Cursed Flame (Imbuing Station)", extra:"Your evil-biome flask — the melee imbue actually worth running. (Flask of Ichor is Crimson-only.)"}
+ ]},
+ {group:"Damage & crit", items:[
+   {n:"Wrath Potion", w:"Wrath_Potion", eff:"+10% damage", rec:"Deathweed + Ebonkoi", extra:"Corruption-side, so craftable in your world."},
+   {n:"Rage Potion", w:"Rage_Potion", eff:"+10% crit", rec:"Deathweed + Hemopiranha", extra:"Crimson-gated — needs a Crimson fish, so you'd have to make an artificial Crimson patch to brew it."}
+ ]},
+ {group:"Survival", items:[
+   {n:"Lifeforce Potion", w:"Lifeforce_Potion", eff:"+20% max life", rec:"Prismite + Moonglow + Shiverthorn + Waterleaf", extra:"The single biggest combat buff — worth the multi-biome shopping list for boss fights."},
+   {n:"Endurance Potion", w:"Endurance_Potion", eff:"-10% damage taken", rec:"Armored Cavefish + Blinkroot", extra:""},
+   {n:"Ironskin Potion", w:"Ironskin_Potion", eff:"+8 defense", rec:"Daybloom + Iron or Lead Ore", extra:""},
+   {n:"Regeneration Potion", w:"Regeneration_Potion", eff:"steady life regen", rec:"Daybloom + Mushroom", extra:""}
+ ]},
+ {group:"Ranged", items:[
+   {n:"Archery Potion", w:"Archery_Potion", eff:"+10% bow damage, +20% arrow speed", rec:"Daybloom + Lens", extra:"For the Chlorophyte Shotbow / Daedalus, not guns."},
+   {n:"Ammo Reservation", w:"Ammo_Reservation_Potion", eff:"20% chance to not use ammo", rec:"Double Cod + Moonglow", extra:"Saves your Chlorophyte/Nano bullets in long fights."}
+ ]}
+];
+
+const FARMS = [
+ {spot:"Post-Plantera Dungeon", accent:"accent-brass",
+  items:[{n:"Tactical Shotgun", w:"Tactical_Shotgun", g:"Ranged", r:"drop"},{n:"Sniper Rifle", w:"Sniper_Rifle", g:"Ranged", r:"drop"},{n:"Nazar", w:"Nazar", g:"Ankh Shield", r:"~1%"}],
+  note:"Tactical Skeletons drop both guns; Cursed Skulls drop the Nazar. Water Candle + Battle Potion to crowd spawns."},
+ {spot:"Martian Madness", accent:"accent-corrupt", two:true,
+  items:[{n:"Xeno Staff", w:"Xeno_Staff", g:"Summons", r:"1/6"},{n:"Xenopopper", w:"Xenopopper", g:"Ranged", r:"1/9"}],
+  note:"Post-Golem event — both your summon and a ranged upgrade from the same Saucer. Hook it with the Piranha Gun."},
+ {spot:"Hardmode Jungle", accent:"accent-teal",
+  items:[{n:"Turtle Shell", w:"Turtle_Shell", g:"Beetle Armor", r:"drop"}],
+  note:"Giant Tortoises drop the third Turtle Shell you need. Moonglow and Variegated Lardfish for potions are here too."},
+ {spot:"The Hallow", accent:"accent-teal",
+  items:[{n:"Megaphone", w:"Megaphone", g:"Ankh Shield", r:"~1-2%"},{n:"Prismite", w:"Prismite", g:"Lifeforce Potion", r:"fishing"}],
+  note:"Pixies drop the Megaphone; fish the Hallow water for Prismite."},
+ {spot:"Corrupt Desert", accent:"accent-corrupt",
+  items:[{n:"Blindfold", w:"Blindfold", g:"Ankh Shield", r:"~1-2%"}],
+  note:"Corrupt Slimes split into Slimelings for ~4x odds; Dark Mummies drop it too."},
+ {spot:"Herbs & fish for potions", accent:"accent-brass",
+  items:[{n:"Deathweed + Ebonkoi", w:"Deathweed", g:"Wrath", r:"Corruption"},{n:"Shiverthorn", w:"Shiverthorn", g:"Lifeforce", r:"Ice"},{n:"Cursed Flame", w:"Cursed_Flame", g:"Flask", r:"Corruption"}],
+  note:"A herb garden (Daybloom, Blinkroot, Moonglow, Deathweed, Shiverthorn, Waterleaf) plus a fishing trip covers nearly every potion above."}
+];
+
 function leaves(node, acc){ if(!node.kids){ acc.push(node); } else node.kids.forEach(k=>leaves(k,acc)); return acc; }
 
 function renderNode(node){
-  const kids = node.kids ? `<div class="node-kids">${node.note?`<div class="combine">⤷ ${node.note}</div>`:""}${node.kids.map(renderNode).join("")}</div>` : "";
-  const src = node.src ? `<div class="node-src">${node.src}</div>` : "";
-  return `<div class="node" data-status="${node.status}">
-    <div class="node-row">
-      <span class="chip c-${node.status}">${STATUS[node.status]}</span>
-      <a class="node-name" href="${W(node.w)}" target="_blank" rel="noopener">${node.name}<span class="ar">↗</span></a>
-    </div>${src}${kids}</div>`;
+  const kids = node.kids ? '<div class="node-kids">' + (node.note?'<div class="combine">\u2937 '+node.note+'</div>':'') + node.kids.map(renderNode).join('') + '</div>' : '';
+  const src = node.src ? '<div class="node-src">'+node.src+'</div>' : '';
+  return '<div class="node" data-status="'+node.status+'">'
+    + '<div class="node-row"><span class="chip c-'+node.status+'">'+STATUS[node.status]+'</span>'
+    + '<a class="node-name" href="'+W(node.w)+'" target="_blank" rel="noopener">'+node.name+'<span class="ar">\u2197</span></a></div>'
+    + src + kids + '</div>';
 }
 
-// ---- overview ----
-const ovGrid = document.getElementById("ovGrid");
-ovGrid.innerHTML = GOALS.map(g=>{
+document.getElementById("ovGrid").innerHTML = GOALS.map(g=>{
   const lv = leaves(g.tree, []);
   const have = lv.filter(n=>n.status==="have").length;
-  const total = lv.length;
-  const pct = Math.round(have/total*100);
-  const need = lv.filter(n=>["need","gated","check"].includes(n.status)).map(n=>n.name);
-  return `<a class="ovcard ${g.accent}" href="#${g.id}">
-    <div class="t">${g.name}</div>
-    <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-    <div class="meta">${have}/${total} pieces in hand · ${need.length} to go</div>
-  </a>`;
+  const total = lv.length, pct = Math.round(have/total*100);
+  const need = lv.filter(n=>n.status==="need").length;
+  return '<a class="ovcard '+g.accent+'" href="#'+g.id+'"><div class="t">'+g.name+'</div>'
+    + '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div>'
+    + '<div class="meta">'+have+'/'+total+' pieces in hand &middot; '+need+' to go</div></a>';
 }).join("");
 
-// ---- goal cards ----
 document.getElementById("goals").innerHTML = GOALS.map((g,i)=>{
   const lv = leaves(g.tree, []);
-  const have = lv.filter(n=>n.status==="have").length;
-  const total = lv.length;
-  const need = lv.filter(n=>["need","gated","check"].includes(n.status)).map(n=>n.name);
-  const needTxt = need.length ? `<p class="needline"><span class="k">Still need</span>${need.join(", ")}</p>` : "";
-  return `<details class="goal ${g.accent}" id="${g.id}" ${i<2?"open":""}>
-    <summary>
-      <span class="caret">▸</span>
-      <span class="gname">${g.name}</span>
-      <span class="gtier">${g.tier}</span>
-      <span class="gprog">${have}/${total} in hand</span>
-    </summary>
-    <div class="gbody">
-      <p class="gblurb">${g.blurb}</p>
-      ${renderNode(g.tree)}
-      ${needTxt}
-    </div>
-  </details>`;
+  const have = lv.filter(n=>n.status==="have").length, total = lv.length;
+  const need = lv.filter(n=>n.status==="need").map(n=>n.name);
+  const needTxt = need.length ? '<p class="needline"><span class="k">Still need</span>'+need.join(", ")+'</p>' : '';
+  return '<details class="goal '+g.accent+'" id="'+g.id+'" open><summary>'
+    + '<span class="caret">\u25b8</span><span class="gname">'+g.name+'</span>'
+    + '<span class="gtier">'+g.tier+'</span><span class="gprog">'+have+'/'+total+' in hand</span></summary>'
+    + '<div class="gbody"><p class="gblurb">'+g.blurb+'</p>'+renderNode(g.tree)+needTxt+'</div></details>';
 }).join("");
 
-// ---- farm route ----
+function renderOpt(o){
+  return '<div class="opt '+o.accent+'"><div class="top">'
+    + '<span class="nm"><a class="nm-link" href="'+W(o.w)+'" target="_blank" rel="noopener">'+o.n+'</a></span>'
+    + '<span class="badge">'+o.badge+'</span></div>'
+    + '<p class="src"><span class="k">From</span>'+o.src+'</p><p class="note">'+o.note+'</p></div>';
+}
+document.getElementById("rangedList").innerHTML = RANGED.map(renderOpt).join("");
+document.getElementById("summonList").innerHTML = SUMMONS.map(renderOpt).join("");
+
+document.getElementById("potions").innerHTML = POTIONS.map(grp=>{
+  return '<div class="potgroup accent-brass">'+grp.group+'</div>' + grp.items.map(p=>{
+    const extra = p.extra ? ' <span style="color:var(--muted)">&mdash; '+p.extra+'</span>' : '';
+    return '<div class="pot"><div class="ph">'
+      + '<a class="pn" href="'+W(p.w)+'" target="_blank" rel="noopener">'+p.n+'</a>'
+      + '<span class="eff">'+p.eff+'</span></div>'
+      + '<p class="rec"><b>'+p.rec+'</b>'+extra+'</p></div>';
+  }).join("");
+}).join("");
+
 document.getElementById("farms").innerHTML = FARMS.map(f=>{
-  const drops = f.items.map(it=>`<div class="drop">
-      <a href="${W(it.w)}" target="_blank" rel="noopener">${it.n}</a>
-      <span class="ratetag">${it.r}</span>
-      <span class="goaltag">${it.g}</span>
-    </div>`).join("");
-  return `<div class="farm ${f.accent}">
-    <h3>${f.spot}${f.two?`<span class="two">two-for-one</span>`:""}${f.gated?`<span class="two" style="color:var(--corrupt)">locked</span>`:""}</h3>
-    <div class="drops">${drops}</div>
-    <p class="fnote">${f.note}</p>
-  </div>`;
+  const drops = f.items.map(it=>'<div class="drop"><a href="'+W(it.w)+'" target="_blank" rel="noopener">'+it.n+'</a>'
+    + '<span class="goaltag">'+it.g+'</span></div>').join("");
+  return '<div class="farm '+f.accent+'"><h3>'+f.spot+(f.two?'<span class="two">two-for-one</span>':'')+'</h3>'
+    + '<div class="drops">'+drops+'</div><p class="fnote">'+f.note+'</p></div>';
 }).join("");
 
-// ---- need-only toggle ----
 document.getElementById("needToggle").addEventListener("change", e=>{
   document.body.classList.toggle("need-only", e.target.checked);
 });
-
-// ---- back to top ----
 const topBtn = document.getElementById("top");
 topBtn.addEventListener("click", ()=>window.scrollTo({top:0, behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"}));
 addEventListener("scroll", ()=>topBtn.classList.toggle("show", scrollY>500), {passive:true});
 
-// ---- active nav highlight ----
 const navLinks = [...document.querySelectorAll("nav.bar a")];
 const map = {};
 navLinks.forEach(a=>{ const id=a.getAttribute("href").slice(1); const el=document.getElementById(id); if(el) map[id]=a; });
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{ if(en.isIntersecting){ navLinks.forEach(a=>a.classList.remove("active")); const a=map[en.target.id]; if(a)a.classList.add("active"); } });
-},{rootMargin:"-40% 0px -55% 0px"});
+const obs = new IntersectionObserver(es=>{es.forEach(en=>{ if(en.isIntersecting){ navLinks.forEach(a=>a.classList.remove("active")); const a=map[en.target.id]; if(a)a.classList.add("active"); } });},{rootMargin:"-40% 0px -55% 0px"});
 Object.keys(map).forEach(id=>{ const el=document.getElementById(id); if(el) obs.observe(el); });
 </script>
 </body>
