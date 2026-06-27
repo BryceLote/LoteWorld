@@ -560,8 +560,8 @@
         </div>
         <div class="library-card-stats">
           <div class="library-stat"><span class="library-stat-number" id="stat-recipes-count">79</span><span class="library-stat-label">recipes</span></div>
-          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-entrees">45</span><span class="library-stat-label">entrees</span></div>
-          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-veg">21</span><span class="library-stat-label">vegetarian</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-proteins">7</span><span class="library-stat-label">proteins</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-cuisines">10</span><span class="library-stat-label">cuisines</span></div>
         </div>
       </div>
     </a>
@@ -696,14 +696,24 @@
     .then(function(r) { return r.json(); })
     .then(function(doc) {
       var recipes = doc.recipes || [];
-      var entrees = 0, veg = 0;
+      function proteinGroup(p) {
+        p = (p || '').toLowerCase();
+        if (/vegetarian/.test(p)) return 'vegetarian';
+        if (/chicken/.test(p)) return 'chicken';
+        if (/salmon|fish|tuna|shrimp|seafood/.test(p)) return 'seafood';
+        if (/beef/.test(p)) return 'beef';
+        if (/turkey/.test(p)) return 'turkey';
+        if (/pork/.test(p)) return 'pork';
+        return 'other';
+      }
+      var proteins = {}, cuisines = {};
       recipes.forEach(function(r) {
-        if (r.meal_type === 'entree') entrees++;
-        if (/vegetarian/i.test(r.protein || '')) veg++;
+        proteins[proteinGroup(r.protein)] = true;
+        if (r.cuisine) cuisines[r.cuisine] = true;
       });
       document.getElementById('stat-recipes-count').textContent = recipes.length;
-      document.getElementById('stat-recipes-entrees').textContent = entrees;
-      document.getElementById('stat-recipes-veg').textContent = veg;
+      document.getElementById('stat-recipes-proteins').textContent = Object.keys(proteins).length;
+      document.getElementById('stat-recipes-cuisines').textContent = Object.keys(cuisines).length;
     })
     .catch(function(err) { console.error('Recipes stats failed:', err); });
 

@@ -25,7 +25,7 @@
       "servings": "4",
       "calories": "245kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "Air Fryer BBQ Chicken Servings: 4 breasts",
       "layout": "split",
       "ingredients": [
@@ -74,7 +74,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -109,7 +109,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -171,7 +171,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -309,7 +309,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -447,7 +447,7 @@
       "servings": "",
       "calories": "222kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -496,7 +496,7 @@
       "servings": "4",
       "calories": "440kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mexican",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -630,7 +630,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -694,7 +694,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "AMERICAN",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -816,7 +816,7 @@
       "servings": "8",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -874,7 +874,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "AMERICAN",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -943,7 +943,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1065,7 +1065,7 @@
       "servings": "8",
       "calories": "771kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1141,7 +1141,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mediterranean",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1189,7 +1189,7 @@
       "servings": "12",
       "calories": "774kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1311,7 +1311,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1382,7 +1382,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mediterranean",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1436,7 +1436,7 @@
       "servings": "4",
       "calories": "550kcal",
       "course": "Dinner",
-      "cuisine": "",
+      "cuisine": "Cajun",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1556,7 +1556,7 @@
       "servings": "4",
       "calories": "838kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1624,7 +1624,7 @@
       "servings": "4",
       "calories": "536kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -1852,7 +1852,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "AMERICAN",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2067,7 +2067,7 @@
       "servings": "8",
       "calories": "199kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mexican",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2125,7 +2125,7 @@
       "servings": "6",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2190,7 +2190,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2253,7 +2253,7 @@
       "servings": "6",
       "calories": "485kcal",
       "course": "Main Course",
-      "cuisine": "greek",
+      "cuisine": "Greek",
       "keyword": "chicken and rice, greek chicken and rice",
       "layout": "split",
       "ingredients": [
@@ -2318,7 +2318,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Greek",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2381,7 +2381,7 @@
       "servings": "4",
       "calories": "276kcal",
       "course": "Main Course",
-      "cuisine": "",
+      "cuisine": "Greek",
       "keyword": "greek lemon chicken, lemon garlic chicken, lemon garlic chicken recipe",
       "layout": "split",
       "ingredients": [
@@ -2431,7 +2431,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2483,7 +2483,7 @@
       "servings": "",
       "calories": "278kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Chinese",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2608,7 +2608,7 @@
       "servings": "4",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Hawaiian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2658,7 +2658,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -2847,7 +2847,7 @@
       "servings": "12",
       "calories": "237kcal",
       "course": "Appetizers",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "hawaiian roll sliders, Italian sandwiches, salami sandwiches",
       "layout": "split",
       "ingredients": [
@@ -2904,7 +2904,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -2983,7 +2983,7 @@
       "servings": "6",
       "calories": "572KCAL",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Korean",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3065,7 +3065,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Korean",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3126,7 +3126,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3194,7 +3194,7 @@
       "servings": "1",
       "calories": "523kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3304,7 +3304,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3458,7 +3458,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3542,7 +3542,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3604,7 +3604,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3653,7 +3653,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3707,7 +3707,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3868,7 +3868,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -3973,7 +3973,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "AMERICAN",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4045,7 +4045,7 @@
       "servings": "4",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4121,7 +4121,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4168,7 +4168,7 @@
       "servings": "4",
       "calories": "567kcal",
       "course": "Main Course",
-      "cuisine": "American",
+      "cuisine": "Italian",
       "keyword": "salmon pesto pasta Servings: 4 Author: Natasha Bull",
       "layout": "split",
       "ingredients": [
@@ -4229,7 +4229,7 @@
       "servings": "10",
       "calories": "314kcal",
       "course": "Soup",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4311,7 +4311,7 @@
       "servings": "4",
       "calories": "476CAL",
       "course": "MAIN COURSE",
-      "cuisine": "AMERICAN",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4373,7 +4373,7 @@
       "servings": "12",
       "calories": "354kcal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4434,7 +4434,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4687,7 +4687,7 @@
       "servings": "8 - 10",
       "calories": "323cal",
       "course": "",
-      "cuisine": "",
+      "cuisine": "American",
       "keyword": "Slow Cooker Turkey Breast, Turkey Breast Servings: 8 - 10 people",
       "layout": "split",
       "ingredients": [
@@ -4790,7 +4790,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mexican",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -4827,7 +4827,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "ITALIAN",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -4921,7 +4921,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "ASIAN",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -5059,7 +5059,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Swedish",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -5135,7 +5135,7 @@
       "servings": "1",
       "calories": "",
       "course": "",
-      "cuisine": "ASIAN",
+      "cuisine": "Asian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -5211,7 +5211,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Thai",
       "keyword": "",
       "layout": "split",
       "ingredients": [
@@ -5406,7 +5406,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Mediterranean",
       "keyword": "",
       "layout": "block",
       "ingredients": [],
@@ -5442,7 +5442,7 @@
       "servings": "",
       "calories": "",
       "course": "",
-      "cuisine": "",
+      "cuisine": "Italian",
       "keyword": "",
       "layout": "split",
       "ingredients": [
