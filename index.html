@@ -219,6 +219,7 @@
   .branch-card:nth-child(4)::before { background: var(--clay); }
   .branch-card:nth-child(5)::before { background: var(--rust); }
   .branch-card:nth-child(6)::before { background: var(--sage); }
+  .branch-card:nth-child(7)::before { background: var(--quiet-blue); }
 
   .branch-card:hover {
     background: var(--bg-surface);
@@ -441,6 +442,7 @@
         <a href="/pages/faith-family.html">Faith &amp; Family</a>
         <a href="/pages/library.html">Library</a>
         <a href="/pages/games.html">Games</a>
+        <a href="/pages/recipes.html">Recipes</a>
       </div>
     </div>
   </div>
@@ -542,6 +544,24 @@
           <div class="library-stat"><span class="library-stat-number" id="stat-games-count">90</span><span class="library-stat-label">games</span></div>
           <div class="library-stat"><span class="library-stat-number" id="stat-games-hours">12,000+</span><span class="library-stat-label">hours</span></div>
           <div class="library-stat"><span class="library-stat-number" id="stat-games-perfect">5</span><span class="library-stat-label">perfect 10s</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="branch-card branch-card-library" href="/pages/recipes.html">
+      <div class="library-card-content">
+        <div>
+          <div class="branch-title-row">
+            <div class="branch-number">07</div>
+            <div class="branch-title">Recipes</div>
+          </div>
+          <div class="branch-desc">The dinners our family comes back to week after week, gathered in one place so meal planning is a matter of browsing, not remembering.</div>
+          <div class="branch-arrow">&rarr;</div>
+        </div>
+        <div class="library-card-stats">
+          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-count">79</span><span class="library-stat-label">recipes</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-entrees">45</span><span class="library-stat-label">entrees</span></div>
+          <div class="library-stat"><span class="library-stat-number" id="stat-recipes-veg">21</span><span class="library-stat-label">vegetarian</span></div>
         </div>
       </div>
     </a>
@@ -671,6 +691,21 @@
       document.getElementById('stat-games-perfect').textContent = perfect;
     })
     .catch(function(err) { console.error('Games stats failed:', err); });
+
+  fetch('/data/recipes.json')
+    .then(function(r) { return r.json(); })
+    .then(function(doc) {
+      var recipes = doc.recipes || [];
+      var entrees = 0, veg = 0;
+      recipes.forEach(function(r) {
+        if (r.meal_type === 'entree') entrees++;
+        if (/vegetarian/i.test(r.protein || '')) veg++;
+      });
+      document.getElementById('stat-recipes-count').textContent = recipes.length;
+      document.getElementById('stat-recipes-entrees').textContent = entrees;
+      document.getElementById('stat-recipes-veg').textContent = veg;
+    })
+    .catch(function(err) { console.error('Recipes stats failed:', err); });
 
   // ---- ALL-CONTENT FEATURES (Latest feed + tag cloud) ----
   var TYPE_LABEL = { article: '', book: 'Library', game: 'Games' };

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe — Bryce Lote</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#1a1d21;--bg-card:#212428;--bg-surface:#272a2f;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text-heading:#e8e5de;--text-body:#908b82;--text-muted:#5a5750;--text-faint:#3a3630;--rust:#9e6b47;--sage:#7a8a6e;--quiet-blue:#6e7f8a;--clay:#a89279; }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-body);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased; }
+
+  nav { position:fixed;top:0;width:100%;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(26,29,33,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+  .nav-name { font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-heading);letter-spacing:0.02em;text-decoration:none; }
+  .nav-links { display:flex;gap:2.5rem;align-items:center; }
+  .nav-links a { font-size:0.85rem;color:var(--text-body);text-decoration:none;letter-spacing:0.06em;transition:color 0.3s; }
+  .nav-links a:hover { color:var(--text-heading); }
+  .nav-dropdown { position:relative; }
+  .nav-dropdown-trigger { font-size:0.85rem;color:var(--text-body);text-decoration:none;letter-spacing:0.06em;transition:color 0.3s;font-weight:400;cursor:pointer;background:none;border:none;font-family:inherit;padding:0; }
+  .nav-dropdown-trigger::after { content:'';display:inline-block;width:5px;height:5px;border-right:1px solid var(--clay);border-bottom:1px solid var(--clay);transform:rotate(45deg);margin-left:0.4rem;position:relative;top:-2px;transition:transform 0.3s; }
+  .nav-dropdown.open .nav-dropdown-trigger::after { transform:rotate(-135deg);top:1px; }
+  .nav-dropdown-menu { position:absolute;top:calc(100% + 0.75rem);right:0;background:var(--bg-surface);backdrop-filter:blur(12px);border:1px solid var(--border-hover);padding:0.5rem 0;min-width:180px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity 0.25s ease,transform 0.25s ease,visibility 0.25s;box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+  .nav-dropdown-menu a { display:block;padding:0.5rem 1.25rem;font-size:0.88rem;color:var(--text-heading);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s,background 0.2s; }
+  .nav-dropdown-menu a:hover { background:rgba(255,255,255,0.04); }
+  @media (hover:hover) { .nav-dropdown:hover .nav-dropdown-menu { opacity:1;visibility:visible;transform:translateY(0); } }
+  .nav-dropdown.open .nav-dropdown-menu { opacity:1;visibility:visible;transform:translateY(0); }
+
+  .recipe-wrap { max-width:820px;margin:0 auto;padding:7rem 3rem 2rem; }
+  .back-link { display:inline-block;font-size:0.8rem;color:var(--text-muted);letter-spacing:0.06em;margin-bottom:2rem;transition:color 0.3s;text-decoration:none; }
+  .back-link:hover { color:var(--rust); }
+  .back-link::before { content:'\2190';margin-right:0.5rem; }
+
+  .recipe-head { display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2.5rem; }
+  .recipe-hero-img { width:100%;max-height:420px;object-fit:cover;background:var(--bg-surface); }
+  .recipe-hero-placeholder { width:100%;aspect-ratio:16/7;background:linear-gradient(135deg,var(--bg-surface),var(--bg-card));display:flex;align-items:center;justify-content:center; }
+  .recipe-hero-placeholder span { font-family:'Libre Baskerville',serif;font-style:italic;color:var(--text-faint); }
+  .recipe-title { font-family:'Libre Baskerville',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:400;color:var(--text-heading);line-height:1.2; }
+
+  .recipe-facts { display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;padding:1.2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
+  .fact { display:flex;flex-direction:column;gap:0.2rem; }
+  .fact-label { font-size:0.68rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase; }
+  .fact-val { font-size:0.95rem;color:var(--text-heading);text-transform:capitalize; }
+
+  .recipe-body { display:grid;grid-template-columns:1fr;gap:3rem;margin-top:2.5rem; }
+  @media (min-width:760px) { .recipe-body.split { grid-template-columns:0.85fr 1.15fr; } }
+  .col-title { font-size:0.95rem;color:var(--text-heading);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border); }
+  ul.ingredients { list-style:none;display:flex;flex-direction:column;gap:0.55rem; }
+  ul.ingredients li { position:relative;padding-left:1.3rem;font-size:0.95rem;color:var(--text-body);line-height:1.5; }
+  ul.ingredients li.subhead { padding-left:0;font-family:'Libre Baskerville',serif;font-style:italic;color:var(--text-heading);margin-top:0.6rem; }
+  ul.ingredients li:not(.subhead)::before { content:'';position:absolute;left:0;top:0.6rem;width:6px;height:6px;background:var(--rust);border-radius:50%; }
+  ol.steps { list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:1.1rem; }
+  ol.steps li { position:relative;padding-left:2.4rem;font-size:1rem;color:var(--text-body);line-height:1.65; }
+  ol.steps li::before { counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:1.7rem;height:1.7rem;background:var(--bg-surface);border:1px solid var(--border-hover);color:var(--rust);font-size:0.8rem;display:flex;align-items:center;justify-content:center;border-radius:50%;font-family:'DM Sans',sans-serif; }
+  .recipe-block { font-size:1rem;color:var(--text-body);line-height:1.75; }
+  .recipe-block p { margin-bottom:0.85rem; }
+  .block-note { font-size:0.8rem;color:var(--text-muted);font-style:italic;margin-bottom:1.2rem; }
+
+  .recipe-tags { margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center; }
+  .recipe-tags .tl { font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-right:0.5rem; }
+  .recipe-tag { font-size:0.72rem;letter-spacing:0.04em;color:var(--text-body);border:1px solid var(--border);padding:0.2rem 0.7rem;text-decoration:none;transition:border-color 0.3s,color 0.3s; }
+  .recipe-tag:hover { border-color:var(--rust);color:var(--rust); }
+
+  .notes-section { margin-top:2.5rem;padding:1.3rem 1.5rem;background:var(--bg-card);border:1px solid var(--border); }
+  .notes-section .col-title { border-bottom:none;margin-bottom:0.7rem; }
+  .notes-section ul { list-style:none;display:flex;flex-direction:column;gap:0.5rem; }
+  .notes-section li { font-size:0.9rem;color:var(--text-body);font-style:italic; }
+
+  footer { padding:4rem 3rem;max-width:820px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--border); }
+  .footer-left { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-body); }
+  .footer-left small { display:block;margin-top:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--text-muted); }
+  .footer-right { font-size:0.8rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem; }
+  .footer-right a { color:var(--text-muted);text-decoration:none;transition:color 0.3s; }
+  .footer-right a:hover { color:var(--text-heading); }
+
+  .loading, .error { max-width:820px;margin:0 auto;padding:8rem 3rem;text-align:center;color:var(--text-muted);font-style:italic; }
+
+  @media (max-width:768px) {
+    nav { padding:1.2rem 1.5rem; }
+    .nav-links { gap:1.5rem; }
+    .recipe-wrap { padding:6rem 1.5rem 1rem; }
+    footer { flex-direction:column;gap:1.5rem;padding:3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-name">Bryce Lote</a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="/index.html#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">Everything</a>
+      <div class="nav-dropdown-menu">
+        <a href="/pages/writing.html">Writing</a>
+        <a href="/pages/breakdowns.html">Breakdowns</a>
+        <a href="/pages/body-mind.html">Body &amp; Mind</a>
+        <a href="/pages/faith-family.html">Faith &amp; Family</a>
+        <a href="/pages/library.html">Library</a>
+        <a href="/pages/games.html">Games</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="recipe-root">
+  <div class="loading">Loading recipe…</div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    Bryce Lote
+    <small>Yukon, Oklahoma</small>
+  </div>
+  <div class="footer-right">
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function getParam(name) {
+    var m = new RegExp('[?&]' + name + '=([^&]+)').exec(location.search);
+    return m ? decodeURIComponent(m[1].replace(/\+/g,' ')) : '';
+  }
+  // an ingredient line that is a subsection label, e.g. "For the sauce:"
+  function isSubhead(s) { return /^(for the .+:|.+:)\s*$/i.test(s) && s.length < 40; }
+
+  var slug = getParam('r');
+  var root = document.getElementById('recipe-root');
+
+  if (!slug) {
+    root.innerHTML = '<div class="error">No recipe specified. <a href="/pages/recipes.html" style="color:var(--rust)">Back to all recipes</a>.</div>';
+  } else {
+    fetch('/data/recipes.json')
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(doc){
+        var recipe = (doc.recipes||[]).filter(function(x){return x.id===slug;})[0];
+        if (!recipe) {
+          root.innerHTML = '<div class="error">Recipe not found. <a href="/pages/recipes.html" style="color:var(--rust)">Back to all recipes</a>.</div>';
+          return;
+        }
+        document.title = recipe.title + ' — Bryce Lote';
+        renderRecipe(recipe);
+      })
+      .catch(function(err){
+        root.innerHTML = '<div class="error">Could not load recipe — ' + escHtml(err.message) + '</div>';
+      });
+  }
+
+  function renderRecipe(r) {
+    var html = '<div class="recipe-wrap">';
+    html += '<a href="/pages/recipes.html" class="back-link">All recipes</a>';
+
+    html += '<div class="recipe-head">';
+    if (r.has_image && r.image) {
+      html += '<img class="recipe-hero-img" src="' + r.image + '" alt="' + escHtml(r.title) + '">';
+    } else {
+      html += '<div class="recipe-hero-placeholder"><span>' + escHtml(r.title) + '</span></div>';
+    }
+    html += '<h1 class="recipe-title">' + escHtml(r.title) + '</h1>';
+    html += '</div>';
+
+    // facts row (only show what exists)
+    var facts = [];
+    if (r.prep_time) facts.push(['Prep time', r.prep_time]);
+    if (r.servings)  facts.push(['Servings', r.servings]);
+    if (r.calories)  facts.push(['Calories', r.calories]);
+    if (r.course)    facts.push(['Course', r.course]);
+    if (r.cuisine)   facts.push(['Cuisine', r.cuisine]);
+    if (!r.course && r.meal_type) facts.push(['Meal', r.meal_type]);
+    if (r.cooking_method) facts.push(['Method', r.cooking_method]);
+    if (facts.length) {
+      html += '<div class="recipe-facts">';
+      facts.forEach(function(f){
+        html += '<div class="fact"><span class="fact-label">' + escHtml(f[0]) +
+          '</span><span class="fact-val">' + escHtml(f[1]) + '</span></div>';
+      });
+      html += '</div>';
+    }
+
+    var hasSplit = r.layout === 'split' && (r.ingredients||[]).length && (r.instructions||[]).length;
+    if (hasSplit) {
+      html += '<div class="recipe-body split">';
+      html += '<div class="col"><div class="col-title">Ingredients</div><ul class="ingredients">';
+      r.ingredients.forEach(function(i){
+        html += '<li class="' + (isSubhead(i) ? 'subhead' : '') + '">' + escHtml(i) + '</li>';
+      });
+      html += '</ul></div>';
+      html += '<div class="col"><div class="col-title">Instructions</div><ol class="steps">';
+      r.instructions.forEach(function(s){ html += '<li>' + escHtml(s) + '</li>'; });
+      html += '</ol></div>';
+      html += '</div>';
+    } else {
+      // block fallback: complete recipe text in one column
+      html += '<div class="recipe-body">';
+      html += '<div class="col">';
+      if ((r.ingredients||[]).length) {
+        html += '<div class="col-title">Ingredients</div><ul class="ingredients">';
+        r.ingredients.forEach(function(i){ html += '<li class="' + (isSubhead(i)?'subhead':'') + '">' + escHtml(i) + '</li>'; });
+        html += '</ul><div style="height:2rem"></div>';
+      }
+      html += '<div class="col-title">' + ((r.ingredients||[]).length ? 'Instructions' : 'Recipe') + '</div>';
+      html += '<p class="block-note">This one came from a source whose layout did not split cleanly; the full recipe is shown below as written.</p>';
+      html += '<div class="recipe-block">';
+      (r.instructions||[]).forEach(function(s){ html += '<p>' + escHtml(s) + '</p>'; });
+      html += '</div></div></div>';
+    }
+
+    if ((r.notes||[]).length) {
+      html += '<div class="notes-section"><div class="col-title">Notes</div><ul>';
+      r.notes.forEach(function(n){ html += '<li>' + escHtml(n) + '</li>'; });
+      html += '</ul></div>';
+    }
+
+    if ((r.tags||[]).length) {
+      html += '<div class="recipe-tags"><span class="tl">Tags</span>';
+      r.tags.forEach(function(t){
+        html += '<a class="recipe-tag" href="/pages/recipes.html">' + escHtml(t) + '</a>';
+      });
+      html += '</div>';
+    }
+
+    html += '</div>';
+    root.innerHTML = html;
+  }
+
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+      if (!dd.contains(e.target)) dd.classList.remove('open');
+    });
+  });
+</script>
+
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+</body>
+</html>

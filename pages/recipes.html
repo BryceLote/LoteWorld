@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes — Bryce Lote</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#1a1d21;--bg-card:#212428;--bg-surface:#272a2f;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text-heading:#e8e5de;--text-body:#908b82;--text-muted:#5a5750;--text-faint:#3a3630;--rust:#9e6b47;--sage:#7a8a6e;--quiet-blue:#6e7f8a;--clay:#a89279; }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-body);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased; }
+
+  nav { position:fixed;top:0;width:100%;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(26,29,33,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+  .nav-name { font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-heading);letter-spacing:0.02em;text-decoration:none; }
+  .nav-links { display:flex;gap:2.5rem;align-items:center; }
+  .nav-links a { font-size:0.85rem;color:var(--text-body);text-decoration:none;letter-spacing:0.06em;transition:color 0.3s; }
+  .nav-links a:hover { color:var(--text-body); }
+  .nav-dropdown { position:relative; }
+  .nav-dropdown-trigger { font-size:0.85rem;color:var(--text-body);text-decoration:none;letter-spacing:0.06em;transition:color 0.3s;font-weight:400;cursor:pointer;background:none;border:none;font-family:inherit;padding:0; }
+  .nav-dropdown-trigger:hover { color:var(--text-body); }
+  .nav-dropdown-trigger::after { content:'';display:inline-block;width:5px;height:5px;border-right:1px solid var(--clay);border-bottom:1px solid var(--clay);transform:rotate(45deg);margin-left:0.4rem;position:relative;top:-2px;transition:transform 0.3s; }
+  .nav-dropdown.open .nav-dropdown-trigger::after { transform:rotate(-135deg);top:1px; }
+  .nav-dropdown-menu { position:absolute;top:calc(100% + 0.75rem);right:0;background:var(--bg-surface);backdrop-filter:blur(12px);border:1px solid var(--border-hover);padding:0.5rem 0;min-width:180px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity 0.25s ease,transform 0.25s ease,visibility 0.25s;box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+  .nav-dropdown-menu a { display:block;padding:0.5rem 1.25rem;font-size:0.88rem;color:var(--text-heading);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s,background 0.2s; }
+  .nav-dropdown-menu a:hover { background:rgba(255,255,255,0.04); }
+  @media (hover:hover) { .nav-dropdown:hover .nav-dropdown-menu { opacity:1;visibility:visible;transform:translateY(0); } }
+  .nav-dropdown.open .nav-dropdown-menu { opacity:1;visibility:visible;transform:translateY(0); }
+
+  .hero { min-height:54vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 3rem;max-width:800px;margin:0 auto; }
+  .hero-greeting { font-size:0.85rem;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards; }
+  .hero h1 { font-family:'Libre Baskerville',serif;font-size:clamp(2.2rem,4.5vw,3.2rem);font-weight:400;color:var(--text-heading);line-height:1.25;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.5s forwards; }
+  .hero-description { font-size:1.05rem;color:var(--text-body);max-width:560px;line-height:1.8;opacity:0;animation:fadeUp 0.8s ease 0.8s forwards; }
+  .hero-line { width:60px;height:1px;background:var(--text-faint);margin-top:2.5rem;opacity:0;animation:fadeUp 0.8s ease 1.1s forwards; }
+
+  .stats { max-width:800px;margin:0 auto;padding:2.5rem 3rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;opacity:0;animation:fadeUp 0.8s ease 1.2s forwards; }
+  .stat { text-align:center; }
+  .stat-number { font-family:'Libre Baskerville',serif;font-size:2rem;color:var(--text-heading);display:block;line-height:1.2; }
+  .stat-label { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.4rem; }
+
+  .divider { max-width:800px;margin:0 auto;padding:0 3rem; }
+  .divider-line { height:1px;background:linear-gradient(to right,transparent,var(--border-hover),transparent); }
+
+  .recipes-section { max-width:1100px;margin:0 auto;padding:2rem 3rem 1rem; }
+  .section-label { font-size:0.95rem;color:var(--text-heading);letter-spacing:0.12em;margin-bottom:1.25rem; }
+  .recipes-section h2 { font-family:'Libre Baskerville',serif;font-size:1.8rem;font-weight:400;color:var(--text-heading);margin-bottom:0;line-height:1.35; }
+
+  /* ---- SEARCH ---- */
+  .search-bar { max-width:1100px;margin:0 auto;padding:0 3rem 1.25rem; }
+  .search-wrap { position:relative;max-width:520px; }
+  .recipe-search-input {
+    width:100%;font-family:inherit;font-size:0.95rem;color:var(--text-heading);
+    background:#3a3f47;border:1px solid rgba(255,255,255,0.22);border-radius:6px;
+    padding:0.75rem 2.2rem 0.75rem 1rem;transition:border-color 0.3s,box-shadow 0.3s,background 0.3s;
+  }
+  .recipe-search-input::placeholder { color:#c9c4ba;opacity:1; }
+  .recipe-search-input:focus { outline:none;background:#42474f;border-color:var(--rust);box-shadow:0 0 0 3px rgba(158,107,71,0.3); }
+  .search-clear {
+    position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);
+    background:none;border:none;color:var(--text-muted);font-size:1.1rem;
+    cursor:pointer;line-height:1;padding:0.2rem;display:none;
+  }
+  .search-clear:hover { color:var(--text-heading); }
+
+  /* ---- CONTROLS ---- */
+  .controls-bar { max-width:1100px;margin:0 auto;padding:0 3rem 1.25rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap; }
+  .control-group { display:flex;align-items:center;gap:0.5rem; }
+  .control-label { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em; }
+  .control-dropdown { position:relative; }
+  .control-trigger { font-family:inherit;font-size:0.85rem;color:var(--text-heading);background:var(--bg-card);border:1px solid var(--border);padding:0.4rem 0.9rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:border-color 0.3s; }
+  .control-trigger:hover { border-color:var(--border-hover); }
+  .control-trigger::after { content:'';display:inline-block;width:5px;height:5px;border-right:1px solid var(--text-muted);border-bottom:1px solid var(--text-muted);transform:rotate(45deg);position:relative;top:-1px;transition:transform 0.3s; }
+  .control-dropdown.open .control-trigger::after { transform:rotate(-135deg);top:2px; }
+  .control-menu { position:absolute;top:calc(100% + 0.4rem);left:0;background:var(--bg-surface);border:1px solid var(--border-hover);padding:0.35rem 0;min-width:200px;max-height:340px;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity 0.2s ease,transform 0.2s ease,visibility 0.2s;box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:50; }
+  .control-dropdown.open .control-menu { opacity:1;visibility:visible;transform:translateY(0); }
+  .control-option { display:block;width:100%;font-family:inherit;font-size:0.85rem;color:var(--text-body);background:none;border:none;padding:0.4rem 1rem;text-align:left;cursor:pointer;transition:color 0.2s,background 0.2s;text-transform:capitalize; }
+  .control-option:hover { color:var(--text-heading);background:rgba(255,255,255,0.04); }
+  .control-option.active { color:var(--text-heading); }
+  .recipe-count { font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em;margin-left:auto; }
+
+  /* ---- ACTIVE TAG CHIP ---- */
+  .active-tag-bar { max-width:1100px;margin:0 auto;padding:0 3rem 0.5rem;display:none; }
+  .active-tag-bar.show { display:block; }
+  .active-tag { display:inline-flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-heading);background:rgba(158,107,71,0.15);border:1px solid var(--rust);padding:0.25rem 0.7rem; }
+  .active-tag button { background:none;border:none;color:var(--rust);cursor:pointer;font-size:0.95rem;line-height:1;padding:0; }
+
+  /* ---- CARD GRID ---- */
+  .recipe-grid { max-width:1100px;margin:0 auto;padding:0.5rem 3rem 1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem; }
+  .recipe-card { display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border);text-decoration:none;color:inherit;transition:transform 0.25s ease,border-color 0.25s ease;overflow:hidden; }
+  .recipe-card:hover { transform:translateY(-3px);border-color:var(--border-hover); }
+  .recipe-card:hover .recipe-card-title { color:var(--rust); }
+  .recipe-thumb { width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg-surface); }
+  .recipe-thumb-placeholder { width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,var(--bg-surface),var(--bg-card));display:flex;align-items:center;justify-content:center; }
+  .recipe-thumb-placeholder span { font-family:'Libre Baskerville',serif;font-style:italic;color:var(--text-faint);font-size:0.85rem; }
+  .recipe-card-body { padding:0.9rem 1rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem;flex:1; }
+  .recipe-card-title { font-family:'Libre Baskerville',serif;font-size:1.12rem;color:var(--text-heading);font-weight:500;line-height:1.3;transition:color 0.3s; }
+  .recipe-card-meta { font-size:0.72rem;color:var(--text-muted);letter-spacing:0.04em;text-transform:capitalize;margin-top:auto; }
+  .recipe-card-tags { display:flex;flex-wrap:wrap;gap:0.3rem; }
+  .recipe-card-tag { font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border);padding:0.1rem 0.45rem;white-space:nowrap; }
+
+  /* ---- GROUPED VIEW (when filtered) ---- */
+  .recipe-group { max-width:1100px;margin:0 auto 0.5rem;padding:0 3rem; }
+  .group-header { display:flex;align-items:baseline;gap:1rem;margin:1.5rem 0 0.5rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border); }
+  .group-name { font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--text-muted);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;flex:1; }
+  .group-count { font-size:0.75rem;color:var(--text-muted); }
+
+  .empty-state { max-width:1100px;margin:0 auto;padding:2rem 3rem 4rem;text-align:center;color:var(--text-muted);font-style:italic; }
+
+  footer { padding:4rem 3rem;max-width:800px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end; }
+  .footer-left { font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--text-body); }
+  .footer-left small { display:block;margin-top:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--text-muted); }
+  .footer-right { font-size:0.8rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem; }
+  .footer-right a { color:var(--text-muted);text-decoration:none;transition:color 0.3s; }
+  .footer-right a:hover { color:var(--text-heading); }
+
+  @keyframes fadeUp { from { opacity:0;transform:translateY(20px); } to { opacity:1;transform:translateY(0); } }
+  .fade-in { opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease; }
+  .fade-in.visible { opacity:1;transform:translateY(0); }
+
+  @media (max-width:768px) {
+    nav { padding:1.2rem 1.5rem; }
+    .nav-links { gap:1.5rem; }
+    .hero { padding:7rem 1.5rem 2.5rem; }
+    .stats { grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem; }
+    .recipes-section,.search-bar,.controls-bar,.recipe-grid,.recipe-group,.active-tag-bar { padding-left:1.5rem;padding-right:1.5rem; }
+    .recipe-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem; }
+    footer { flex-direction:column;gap:1.5rem;padding:3rem 1.5rem; }
+    .divider { padding:0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-name">Bryce Lote</a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="/index.html#work" class="nav-dropdown-trigger" onclick="if(window.innerWidth > 768) return true; event.preventDefault(); this.parentElement.classList.toggle('open');">Everything</a>
+      <div class="nav-dropdown-menu">
+        <a href="/pages/writing.html">Writing</a>
+        <a href="/pages/breakdowns.html">Breakdowns</a>
+        <a href="/pages/body-mind.html">Body &amp; Mind</a>
+        <a href="/pages/faith-family.html">Faith &amp; Family</a>
+        <a href="/pages/library.html">Library</a>
+        <a href="/pages/games.html">Games</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-greeting">the family table</div>
+  <h1>The meals we actually make.</h1>
+  <p class="hero-description">
+    A home for the dinners we come back to week after week. Most of these aren't ours originally; they're the ones that earned a permanent place in the rotation. Gathered here so meal planning is a matter of browsing, not remembering.
+  </p>
+  <div class="hero-line"></div>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-number" id="stat-total">79</span><div class="stat-label">recipes</div></div>
+  <div class="stat"><span class="stat-number" id="stat-entrees">45</span><div class="stat-label">entrees</div></div>
+  <div class="stat"><span class="stat-number" id="stat-veg">21</span><div class="stat-label">vegetarian</div></div>
+  <div class="stat"><span class="stat-number" id="stat-methods">12</span><div class="stat-label">cooking methods</div></div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="recipes-section fade-in">
+  <div class="section-label">the collection</div>
+  <h2>Find something to make</h2>
+</div>
+
+<div class="search-bar">
+  <div class="search-wrap">
+    <input type="text" class="recipe-search-input" id="search-input" placeholder="Search by name, ingredient, or tag…" autocomplete="off">
+    <button class="search-clear" id="search-clear" aria-label="Clear search">&times;</button>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <div class="control-group">
+    <span class="control-label">Protein</span>
+    <div class="control-dropdown" id="protein-dropdown">
+      <button class="control-trigger" id="protein-trigger">All</button>
+      <div class="control-menu" id="protein-menu"></div>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Meal</span>
+    <div class="control-dropdown" id="meal-dropdown">
+      <button class="control-trigger" id="meal-trigger">All</button>
+      <div class="control-menu" id="meal-menu"></div>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Method</span>
+    <div class="control-dropdown" id="method-dropdown">
+      <button class="control-trigger" id="method-trigger">All</button>
+      <div class="control-menu" id="method-menu"></div>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Sort</span>
+    <div class="control-dropdown" id="sort-dropdown">
+      <button class="control-trigger" id="sort-trigger">A–Z</button>
+      <div class="control-menu" id="sort-menu">
+        <button class="control-option active" data-sort="alpha">A–Z</button>
+        <button class="control-option" data-sort="meal">Meal type</button>
+        <button class="control-option" data-sort="protein">Protein</button>
+        <button class="control-option" data-sort="method">Cooking method</button>
+      </div>
+    </div>
+  </div>
+  <span class="recipe-count" id="recipe-count"></span>
+</div>
+
+<div class="active-tag-bar" id="active-tag-bar"></div>
+
+<div id="recipe-results"></div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-left">
+    Bryce Lote
+    <small>Yukon, Oklahoma</small>
+  </div>
+  <div class="footer-right">
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.control-dropdown, .nav-dropdown').forEach(function(dd) {
+      if (!dd.contains(e.target)) dd.classList.remove('open');
+    });
+  });
+
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function titleCase(s) { return (s||'').replace(/\b\w/g, function(c){return c.toUpperCase();}); }
+
+  var allRecipes = [];
+  var state = { protein:'all', meal:'all', method:'all', sort:'alpha', q:'', tag:'' };
+
+  fetch('/data/recipes.json')
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+' fetching data/recipes.json'); return r.json(); })
+    .then(function(doc){
+      allRecipes = (doc.recipes || []).slice();
+
+      // stats
+      document.getElementById('stat-total').textContent = allRecipes.length;
+      document.getElementById('stat-entrees').textContent = allRecipes.filter(function(r){return r.meal_type==='entree';}).length;
+      document.getElementById('stat-veg').textContent = allRecipes.filter(function(r){return /vegetarian/i.test(r.protein);}).length;
+      var methods = {}; allRecipes.forEach(function(r){ if(r.cooking_method) methods[r.cooking_method]=1; });
+      document.getElementById('stat-methods').textContent = Object.keys(methods).length;
+
+      buildFilterMenu('protein', 'protein', distinct('protein'));
+      buildFilterMenu('meal', 'meal_type', distinct('meal_type'));
+      buildFilterMenu('method', 'cooking_method', distinct('cooking_method'));
+
+      setupControls();
+      render();
+    })
+    .catch(function(err){
+      console.error('Recipes load failed:', err);
+      document.getElementById('recipe-results').innerHTML =
+        '<div class="empty-state">Could not load data/recipes.json — ' + escHtml(err.message) + '</div>';
+    });
+
+  function distinct(field) {
+    var seen = {}, out = [];
+    allRecipes.forEach(function(r){ var v=r[field]; if(v && !seen[v]){ seen[v]=1; out.push(v); } });
+    out.sort(function(a,b){ return a.localeCompare(b); });
+    return out;
+  }
+
+  function buildFilterMenu(key, field, values) {
+    var menu = document.getElementById(key + '-menu');
+    var all = document.createElement('button');
+    all.className = 'control-option active';
+    all.setAttribute('data-val', 'all');
+    all.textContent = 'All';
+    menu.appendChild(all);
+    values.forEach(function(v){
+      var b = document.createElement('button');
+      b.className = 'control-option';
+      b.setAttribute('data-val', v);
+      b.textContent = v;
+      menu.appendChild(b);
+    });
+    var dd = document.getElementById(key + '-dropdown');
+    var trigger = document.getElementById(key + '-trigger');
+    trigger.addEventListener('click', function(){ dd.classList.toggle('open'); });
+    menu.addEventListener('click', function(e){
+      var opt = e.target.closest('.control-option'); if(!opt) return;
+      state[key] = opt.getAttribute('data-val');
+      menu.querySelectorAll('.control-option').forEach(function(o){o.classList.remove('active');});
+      opt.classList.add('active');
+      trigger.textContent = opt.getAttribute('data-val')==='all' ? 'All' : opt.textContent;
+      dd.classList.remove('open');
+      render();
+    });
+  }
+
+  function setupControls() {
+    var sortDD = document.getElementById('sort-dropdown');
+    var sortTrigger = document.getElementById('sort-trigger');
+    var sortMenu = document.getElementById('sort-menu');
+    sortTrigger.addEventListener('click', function(){ sortDD.classList.toggle('open'); });
+    sortMenu.addEventListener('click', function(e){
+      var opt = e.target.closest('.control-option'); if(!opt) return;
+      state.sort = opt.getAttribute('data-sort');
+      sortMenu.querySelectorAll('.control-option').forEach(function(o){o.classList.remove('active');});
+      opt.classList.add('active');
+      sortTrigger.textContent = opt.textContent;
+      sortDD.classList.remove('open');
+      render();
+    });
+
+    var input = document.getElementById('search-input');
+    var clearBtn = document.getElementById('search-clear');
+    input.addEventListener('input', function(){
+      state.q = input.value.trim().toLowerCase();
+      clearBtn.style.display = input.value ? 'block' : 'none';
+      render();
+    });
+    clearBtn.addEventListener('click', function(){
+      input.value=''; state.q=''; clearBtn.style.display='none'; input.focus(); render();
+    });
+  }
+
+  function matchesSearch(r, q) {
+    if (!q) return true;
+    if (r.title.toLowerCase().indexOf(q) !== -1) return true;
+    if ((r.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)!==-1;})) return true;
+    if ((r.ingredients||[]).some(function(i){return i.toLowerCase().indexOf(q)!==-1;})) return true;
+    if ((r.keyword||'').toLowerCase().indexOf(q)!==-1) return true;
+    return false;
+  }
+
+  function activeFilterCount() {
+    var n = 0;
+    if (state.protein!=='all') n++;
+    if (state.meal!=='all') n++;
+    if (state.method!=='all') n++;
+    if (state.tag) n++;
+    if (state.q) n++;
+    return n;
+  }
+
+  function render() {
+    var list = allRecipes.filter(function(r){
+      if (state.protein!=='all' && r.protein!==state.protein) return false;
+      if (state.meal!=='all' && r.meal_type!==state.meal) return false;
+      if (state.method!=='all' && r.cooking_method!==state.method) return false;
+      if (state.tag && !(r.tags||[]).map(function(t){return t.toLowerCase();}).includes(state.tag.toLowerCase())) return false;
+      if (!matchesSearch(r, state.q)) return false;
+      return true;
+    });
+
+    // active tag chip
+    var tagBar = document.getElementById('active-tag-bar');
+    if (state.tag) {
+      tagBar.className = 'active-tag-bar show';
+      tagBar.innerHTML = '<span class="active-tag">tag: ' + escHtml(state.tag) +
+        ' <button id="clear-tag" aria-label="Clear tag">&times;</button></span>';
+      document.getElementById('clear-tag').addEventListener('click', function(){ state.tag=''; render(); });
+    } else {
+      tagBar.className = 'active-tag-bar';
+      tagBar.innerHTML = '';
+    }
+
+    document.getElementById('recipe-count').textContent =
+      list.length + ' recipe' + (list.length!==1 ? 's' : '');
+
+    var results = document.getElementById('recipe-results');
+    results.innerHTML = '';
+
+    if (!list.length) {
+      results.innerHTML = '<div class="empty-state">No recipes match. Try clearing a filter or the search.</div>';
+      return;
+    }
+
+    var grouped = state.sort==='meal' || state.sort==='protein' || state.sort==='method';
+    if (grouped) {
+      var field = state.sort==='meal' ? 'meal_type' : state.sort;
+      var groups = {};
+      list.forEach(function(r){ var k=r[field]||'other'; (groups[k]=groups[k]||[]).push(r); });
+      Object.keys(groups).sort(function(a,b){return a.localeCompare(b);}).forEach(function(k){
+        var section = document.createElement('div');
+        section.className = 'recipe-group';
+        section.innerHTML = '<div class="group-header"><span class="group-name">' + escHtml(titleCase(k)) +
+          '</span><span class="group-count">' + groups[k].length + '</span></div>';
+        var grid = document.createElement('div');
+        grid.className = 'recipe-grid';
+        grid.style.padding = '0.5rem 0 0';
+        groups[k].forEach(function(r){ grid.appendChild(buildCard(r)); });
+        section.appendChild(grid);
+        results.appendChild(section);
+      });
+    } else {
+      list.sort(function(a,b){ return a.title.localeCompare(b.title); });
+      var grid = document.createElement('div');
+      grid.className = 'recipe-grid';
+      list.forEach(function(r){ grid.appendChild(buildCard(r)); });
+      results.appendChild(grid);
+    }
+  }
+
+  function buildCard(r) {
+    var card = document.createElement('a');
+    card.className = 'recipe-card';
+    card.href = r.url;
+
+    var html = '';
+    if (r.has_image && r.image) {
+      html += '<img class="recipe-thumb" src="' + r.image + '" alt="' + escHtml(r.title) + '" loading="lazy">';
+    } else {
+      html += '<div class="recipe-thumb-placeholder"><span>' + escHtml(r.title) + '</span></div>';
+    }
+    html += '<div class="recipe-card-body">';
+    html += '<div class="recipe-card-title">' + escHtml(r.title) + '</div>';
+    var tags = (r.tags||[]).slice(0,3);
+    if (tags.length) {
+      html += '<div class="recipe-card-tags">' +
+        tags.map(function(t){return '<span class="recipe-card-tag">' + escHtml(t) + '</span>';}).join('') +
+        '</div>';
+    }
+    var meta = [r.protein, r.meal_type, r.cooking_method].filter(function(p){return p && !/^none/.test(p);});
+    html += '<div class="recipe-card-meta">' + escHtml(meta.join(' · ')) + '</div>';
+    html += '</div>';
+    card.innerHTML = html;
+    return card;
+  }
+</script>
+
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+</body>
+</html>
