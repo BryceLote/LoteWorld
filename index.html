@@ -681,12 +681,13 @@
   fetch('/data/games.json')
     .then(function(r) { return r.json(); })
     .then(function(games) {
+      var listed = games.filter(function(g) { return !g.currently; });
       var totalHours = 0, perfect = 0;
-      games.forEach(function(g) {
+      listed.forEach(function(g) {
         totalHours += g.hours || 0;
         if (parseFloat(g.rating) === 10) perfect++;
       });
-      document.getElementById('stat-games-count').textContent = games.length;
+      document.getElementById('stat-games-count').textContent = listed.length;
       document.getElementById('stat-games-hours').textContent = Math.round(totalHours).toLocaleString();
       document.getElementById('stat-games-perfect').textContent = perfect;
     })

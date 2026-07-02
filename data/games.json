@@ -421,8 +421,8 @@
     "title": "Doom II",
     "tier": "foundation",
     "tier_label": "Foundation",
-    "rating": "9",
-    "rating_class": "nine",
+    "rating": "10",
+    "rating_class": "ten",
     "meta": "1000+ hrs · FPS / Modding · 1994",
     "hours": 1000.0,
     "year": 1994,
@@ -1392,5 +1392,55 @@
     "hours": 23.9,
     "year": 2013,
     "sub_genre": "Survival / Zombie / Open World"
+  },
+  {
+    "id": "terraria",
+    "title": "Terraria",
+    "genre": "Sandbox & Builders",
+    "genre_order": 9,
+    "sub_genre": "Sandbox Survival",
+    "hours": 100.0,
+    "rating": "10",
+    "rating_class": "ten",
+    "year": 2011,
+    "meta": "100 hrs · Sandbox Survival · 2011",
+    "cover": "/image/game-covers/Terraria.jpg",
+    "url": "https://store.steampowered.com/app/105600/Terraria/",
+    "notes": "I avoided this for years because I dismissed it as 2D Minecraft, and that was a real disservice to myself. It is so much more. Where Minecraft drops you in a world to build and collect, Terraria gives you an actual role in its world; a sense of purpose and progression that pulls you forward. The loop is the whole thing for me: explore, gather, craft the next tier, hit a wall in the form of a boss, come back stronger, and do it again. It's the first game in a long time that gave me a real reason to collect everything, beyond just being able to say I did. The crafting and exploration are genuinely addictive and the challenge sits right where I like it, demanding without being punishing. Around 100 hours in I've collected nearly everything my world has to offer, and I haven't even touched the modding scene yet.",
+    "tier": "hall-of-fame",
+    "tier_label": "Hall of Fame",
+    "articles": [
+      {
+        "title": "The Long Work — Entry One",
+        "url": "/pages/writing/the-long-work.html",
+        "published": "2026-05-31"
+      },
+      {
+        "title": "East-Side Field Guide",
+        "url": "/doc/terraria-east-field-guide.pdf",
+        "published": "2026-05-30"
+      },
+      {
+        "title": "Progress Tracker",
+        "url": "/pages/terraria/terraria-tracker.html",
+        "published": "2026-07-02"
+      }
+    ]
+  },
+  {
+    "id": "monster-hunter-rise",
+    "title": "Monster Hunter Rise",
+    "genre": "Action RPG",
+    "genre_order": 3,
+    "sub_genre": "Hunting Action",
+    "hours": 0.0,
+    "rating": "—",
+    "rating_class": "",
+    "year": 2021,
+    "meta": "In progress · Action RPG · 2021",
+    "cover": "/image/game-covers/Monster_Hunter_Rise.jpg",
+    "url": "https://store.steampowered.com/app/1446780/Monster_Hunter_Rise/",
+    "notes": "Just started, playing on PC and Steam Deck.",
+    "currently": true
   }
 ]

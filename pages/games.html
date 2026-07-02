@@ -278,7 +278,7 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-greeting">448 games owned · 90 with 10+ hours</div>
+  <div class="hero-greeting">448 games owned · 91 with 10+ hours</div>
   <h1>Every game that held my attention.</h1>
   <p class="hero-description">
     Every game I can remember playing for 10 hours or more, ranked and rated.
@@ -302,25 +302,16 @@
 
 <div class="currently-playing fade-in">
   <div class="section-label">Currently Playing</div>
-  <div class="cp-card">
+  <div class="cp-card" id="monster-hunter-rise">
     <div class="cp-cover">
-      <a href="https://store.steampowered.com/app/105600/Terraria/" target="_blank" rel="noopener">
-        <img src="/image/game-covers/Terraria.jpg" alt="Terraria" loading="lazy">
+      <a href="https://store.steampowered.com/app/1446780/Monster_Hunter_Rise/" target="_blank" rel="noopener">
+        <img src="/image/game-covers/Monster_Hunter_Rise.jpg" alt="Monster Hunter Rise" loading="lazy">
       </a>
     </div>
     <div class="cp-info">
-      <div class="cp-title"><a href="https://store.steampowered.com/app/105600/Terraria/" target="_blank" rel="noopener">Terraria</a></div>
-      <div class="cp-meta">95 hours · Sandbox Survival · 2011</div>
-      <p style="font-size:0.9rem;color:var(--text-body);line-height:1.7;margin-bottom:1rem;max-width:500px;">First playthrough. Corruption world, Classic difficulty. A 2D sandbox where you dig, build, fight bosses, and collect gear across a procedurally generated world. It looks simple until you realize the crafting tree is hundreds of items deep and every biome has its own ecosystem of enemies, materials, and secrets.</p>
-      <div class="cp-articles-wrap collapsed" id="terraria-wrap">
-        <button class="cp-articles-label" id="terraria-toggle" aria-expanded="false">
-          Related Articles <span class="cp-count" id="terraria-count"></span>
-          <span class="cp-chevron">&#9656;</span>
-        </button>
-        <div class="cp-articles" id="terraria-articles">
-          <!-- Populated from data/terraria-articles.json -->
-        </div>
-      </div>
+      <div class="cp-title"><a href="https://store.steampowered.com/app/1446780/Monster_Hunter_Rise/" target="_blank" rel="noopener">Monster Hunter Rise</a></div>
+      <div class="cp-meta">Starting this weekend · Action RPG · 2021</div>
+      <p style="font-size:0.9rem;color:var(--text-body);line-height:1.7;margin-bottom:1rem;max-width:500px;">Just picked this up to play on PC and the Steam Deck. An action-hunting RPG where you track and take down giant monsters, then carve their parts into better gear to hunt bigger ones. The loop is all about learning each monster's patterns and steadily building your loadout across dozens of weapon types.</p>
     </div>
   </div>
 </div>
@@ -407,37 +398,6 @@
     });
   });
 
-  // Load Terraria related articles (collapsible, newest-first by publish date)
-  fetch('/data/terraria-articles.json')
-    .then(function(r) { return r.json(); })
-    .then(function(articles) {
-      var container = document.getElementById('terraria-articles');
-      articles.sort(function(a, b) {
-        return (b.published || '').localeCompare(a.published || '');
-      });
-      articles.forEach(function(article) {
-        var link = document.createElement('a');
-        link.href = article.url;
-        if (/^https?:|\.pdf$/i.test(article.url)) { link.target = '_blank'; link.rel = 'noopener'; }
-        link.innerHTML = article.title + ' <span>&rarr;</span>';
-        container.appendChild(link);
-      });
-      var count = document.getElementById('terraria-count');
-      if (count) count.textContent = '(' + articles.length + ')';
-    }).catch(function() {});
-
-  // Terraria related-articles collapse toggle
-  (function() {
-    var wrap = document.getElementById('terraria-wrap');
-    var tog = document.getElementById('terraria-toggle');
-    if (wrap && tog) {
-      tog.addEventListener('click', function() {
-        var c = wrap.classList.toggle('collapsed');
-        tog.setAttribute('aria-expanded', String(!c));
-      });
-    }
-  })();
-
   // ---- GAMES LIST ----
   var allGames = [];
   var currentFilter = 'all';
@@ -446,7 +406,9 @@
   fetch('/data/games.json')
     .then(function(r) { return r.json(); })
     .then(function(games) {
-      allGames = games;
+      // The mosaic shows the full collection; the ranked list and stats exclude
+      // any "currently playing" entry (featured in its own card above, not yet rated).
+      allGames = games.filter(function(g) { return !g.currently; });
 
       // Mosaic (built from JSON, preserves array order)
       var mosaic = document.getElementById('mosaic-grid');
@@ -462,22 +424,22 @@
         img.style.animationDelay = (i * 0.015) + 's';
       });
 
-      // Auto-calculate stats
+      // Auto-calculate stats (from the ranked list, excluding currently-playing)
       var totalHours = 0;
       var perfectCount = 0;
       var foundationCount = 0;
-      games.forEach(function(g) {
+      allGames.forEach(function(g) {
         totalHours += g.hours || 0;
         if (parseFloat(g.rating) === 10) perfectCount++;
         if (g.tier === 'foundation') foundationCount++;
       });
 
-      document.getElementById('stat-gm-count').textContent = games.length;
+      document.getElementById('stat-gm-count').textContent = allGames.length;
       document.getElementById('stat-gm-hours').textContent = Math.round(totalHours).toLocaleString();
       document.getElementById('stat-gm-foundation').textContent = foundationCount;
       document.getElementById('stat-gm-perfect').textContent = perfectCount;
 
-      buildInsights(games);
+      buildInsights(allGames);
 
       // Build filter options
       var filterMenu = document.getElementById('filter-menu');
@@ -488,7 +450,7 @@
       filterMenu.appendChild(allBtn);
 
       var genres = [];
-      games.forEach(function(g) {
+      allGames.forEach(function(g) {
         if (genres.indexOf(g.genre) === -1) genres.push(g.genre);
       });
       genres.forEach(function(genre) {
@@ -618,10 +580,13 @@
 
   function buildCard(game) {
     var hasUrl = game.url && game.url !== '#';
-    var card = document.createElement(hasUrl ? 'a' : 'div');
+    var hasArticles = game.articles && game.articles.length;
+    // Cards with a related-articles dropdown can't be a wrapping <a> (that would
+    // nest interactive links); render them as a <div> with the title as the link.
+    var card = document.createElement((hasUrl && !hasArticles) ? 'a' : 'div');
     card.className = 'book-card';
     card.id = game.id;
-    if (hasUrl) {
+    if (hasUrl && !hasArticles) {
       card.href = game.url;
       card.target = '_blank';
       card.rel = 'noopener';
@@ -636,7 +601,11 @@
 
     // Info
     html += '<div class="book-info"><div class="book-title-row"><span class="book-title">';
-    html += escHtml(game.title);
+    if (hasArticles && hasUrl) {
+      html += '<a href="' + escHtml(game.url) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">' + escHtml(game.title) + '</a>';
+    } else {
+      html += escHtml(game.title);
+    }
     if (game.tier) {
       html += ' <span class="tier-badge ' + game.tier + '">' + game.tier_label + '</span>';
     }
@@ -657,8 +626,37 @@
       html += '<p class="book-notes">' + escHtml(game.notes) + '</p>';
     }
 
+    // Related articles (collapsible)
+    if (hasArticles) {
+      var sorted = game.articles.slice().sort(function(a, b) {
+        return (b.published || '').localeCompare(a.published || '');
+      });
+      html += '<div class="cp-articles-wrap collapsed">'
+        + '<button class="cp-articles-label" type="button" aria-expanded="false">'
+        + 'Related Articles <span class="cp-count">(' + sorted.length + ')</span>'
+        + '<span class="cp-chevron">&#9656;</span></button>'
+        + '<div class="cp-articles">';
+      sorted.forEach(function(a) {
+        var ext = /^https?:|\.pdf$/i.test(a.url) ? ' target="_blank" rel="noopener"' : '';
+        html += '<a href="' + escHtml(a.url) + '"' + ext + '>' + escHtml(a.title) + ' <span>&rarr;</span></a>';
+      });
+      html += '</div></div>';
+    }
+
     html += '</div>';
     card.innerHTML = html;
+
+    // Wire the dropdown toggle
+    if (hasArticles) {
+      var wrap = card.querySelector('.cp-articles-wrap');
+      var tog = card.querySelector('.cp-articles-label');
+      tog.addEventListener('click', function(e) {
+        e.preventDefault();
+        var c = wrap.classList.toggle('collapsed');
+        tog.setAttribute('aria-expanded', String(!c));
+      });
+    }
+
     return card;
   }
 

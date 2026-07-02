@@ -287,7 +287,8 @@ const IMG={
 "Solar Flare armor":"armor_solar_flare.png","Vortex armor":"armor_vortex.png","Beetle armor":"armor_beetle.png",
 "Meowmere":"weapon_meowmere.png","Solar Eruption":"weapon_solar_eruption.png","Star Wrath":"weapon_star_wrath.png","Terrarian":"weapon_terrarian.png","Lunar Flare":"weapon_lunar_flare.png","Rainbow Crystal Staff":"weapon_rainbow_crystal_staff.png","S.D.M.G.":"weapon_sdmg.png","Tactical Shotgun":"weapon_tactical_shotgun.png","Sniper Rifle":"weapon_sniper_rifle.png","Laser Machinegun":"weapon_laser_machinegun.png","Xenopopper":"weapon_xenopopper.png","Staff of the Frost Hydra":"weapon_frost_hydra.png","Scourge of the Corruptor":"weapon_scourge_of_the_corruptor.png","Stardust Cell Staff":"weapon_stardust_cell_staff.png","Stardust Dragon Staff":"weapon_stardust_dragon_staff.png","Vortex Beater":"weapon_vortex_beater.png","Tsunami":"weapon_tsunami.png","Bubble Gun":"weapon_bubble_gun.png",
 "Lunar Hook":"tool_lunar_hook.png","Ancient Manipulator":"station_ancient_manipulator.png",
-"Solar Wings":"wing_solar_wings.png","Beetle Wings":"wing_beetle_wings.png","Vortex Booster":"accessory_vortex_booster.png","Papyrus Scarab":"accessory_papyrus_scarab.png","Pygmy Necklace":"accessory_pygmy_necklace.png","High Test Fishing Line":"accessory_high_test_fishing_line.png","Coin Ring":"accessory_coin_ring.png","Destroyer Emblem":"accessory_destroyer_emblem.png","Ankh Shield":"accessory_ankh_shield.png","Charm of Myths":"accessory_charm_of_myths.png"
+"Solar Wings":"wing_solar_wings.png","Beetle Wings":"wing_beetle_wings.png","Vortex Booster":"accessory_vortex_booster.png","Papyrus Scarab":"accessory_papyrus_scarab.png","Pygmy Necklace":"accessory_pygmy_necklace.png","High Test Fishing Line":"accessory_high_test_fishing_line.png","Coin Ring":"accessory_coin_ring.png","Destroyer Emblem":"accessory_destroyer_emblem.png","Ankh Shield":"accessory_ankh_shield.png","Charm of Myths":"accessory_charm_of_myths.png",
+"Zenith":"weapon_zenith.png","Golden Fishing Rod":"tool_golden_fishing_rod.png","Bottomless Water Bucket":"tool_bottomless_water_bucket.png","Greedy Ring":"accessory_greedy_ring.png","R.E.K. 3000":"accessory_rek_3000.png","Goblin Tech":"accessory_goblin_tech.png","UFO":"mount_ufo.png"
 };
 function imgKey(name){
   var k=name.replace(/^Vanity:\s*/i,"").replace(/^Mount:\s*/i,"");
@@ -299,20 +300,19 @@ function imgTag(name,cls){
   return f?'<img class="'+(cls||"spr")+'" src="'+IMG_BASE+f+'" alt="'+imgKey(name)+'" loading="lazy">':"";
 }
 const DATA={
-  updated:"Updated through Session 28 — Wednesday, June 24, 2026",
+  updated:"Updated through the post-game catch-up — Thursday, July 2, 2026",
   stats:[
     ["World Evil","Corruption"],["Difficulty","Classic · 5 slots"],
-    ["Permanent Buff","Artisan Loaf · Vital + Arcane + Aegis"],["Favored Kit","Meowmere + S.D.M.G."],["World","Endgame · the game is beaten"]
+    ["Permanent Buff","Artisan Loaf · Vital + Arcane + Aegis"],["Favored Kit","Zenith + S.D.M.G."],["World","Endgame · the game is beaten"]
   ],
   hp:500, mana:200,
-  approach:"<p><b>The game is beaten.</b> The Moon Lord fell in Session 27 and has been farmed six times since. Everything from here is optional. Bryce now runs the full Solar Flare armor with the Meowmere as his default melee weapon, the Solar Eruption as a strong secondary, and the Stardust Cell Staff for passive summon damage; Beetle armor is kept for swapping.</p><p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. He runs three 1.4 equipment loadouts now — a melee combat set, a fishing / summon-support set with the full Angler gear, and a dedicated ranged set built around the S.D.M.G. and Vortex armor — swapping between them as needed; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — seven pylons, sky highways, platforms, a hub base — for short, sustainable sessions and safe travel. Loves collecting resources for their own sake, isn't rushing, and enjoys a slow exploring pace.</p>",
+  approach:"<p><b>The game is beaten.</b> The Moon Lord fell in Session 27 and has been farmed too many times to count since. Per-session logging has stopped now that play is loose and open-ended. Bryce runs the full Solar Flare armor with the <b>Zenith</b> as his main melee weapon (the ultimate sword, crafted from the Meowmere, Terra Blade, and the rest of the chain) and the Stardust Cell Staff for passive summon damage; Beetle armor is kept for swapping.</p><p><b>Play style.</b> First playthrough; immersion, collecting, and experimenting across all classes, not min-maxing. He runs three 1.4 equipment loadouts — a melee combat set, a fishing / summon-support set with the full Angler gear, and a dedicated ranged set built around the S.D.M.G. and Vortex armor — swapping between them as needed; still not really using magic.</p><p><b>Play philosophy.</b> Infrastructure-first by design. World-spanning systems — seven pylons, sky highways, an Asphalt speed highway, platforms, a hub base — for short, sustainable sessions and safe travel. Loves collecting resources for their own sake, isn't rushing, and enjoys a slow exploring pace.</p>",
   goals:[
-    "The Zenith — the post-game capstone sword, crafted from a long chain of swords (the Terra Blade among them) plus Moon Lord drops. The natural next project for a melee main now that everything's beaten",
-    "Empress of Light / Terraprisma — beating her entirely during the day is the only way to get the Terraprisma, the best summon weapon in the game. She enrages by day and one-shots through any defense. Grab the Guide to Critter Companionship from the Zoologist to stop accidental Lacewing summons until ready",
+    "Terraprisma (daytime Empress) — the one real challenge left. The Empress is beaten at night, but the Terraprisma only drops from a full daytime kill, where every hit one-shots regardless of defense. Two Prismatic Lacewings are banked; release one right at 4:30 AM for the full daytime window",
     "Convert the Corruption past the Dungeon into a surface Glowing Mushroom biome (Clentaminator + Dark Blue Solution on mud) to finally give Truffle a home",
     "Last two Dungeon Biome Chests — Hallowed (Rainbow Gun) and Desert (Desert Tiger Staff); each needs its Biome Key (1/2500 from enemies in that biome)",
-    "Optimize ranged Loadout 3: chase the Recon Scope (Rifle Scope + Destroyer Emblem → Sniper Scope, then + Putrid Scent), add a second Ankh Shield and Terraspark Boots, and reforge to Menacing for max DPS",
-    "Big Luminite builds — the Drill Containment Unit makes mining trivial; re-summon the Moon Lord with a Celestial Sigil anytime for more Luminite and the rest of his weapon pool"
+    "Finish the Cell Phone — the info accessories are combined into the GPS, R.E.K. 3000, and Goblin Tech; just needs the Sextant to finish the Fish Finder → PDA → Cell Phone chain",
+    "Optimize ranged Loadout 3: chase the Recon Scope (Rifle Scope + Destroyer Emblem → Sniper Scope, then + Putrid Scent), add a second Ankh Shield, and reforge to Menacing for max DPS"
   ],
   bosses:[
     ["Eye of Cthulhu",1,""],
@@ -330,8 +330,8 @@ const DATA={
     ["Golem",1,"defeated Session 23 — farmed 9× for the Sun Stone and Beetle Husks; drops the Picksaw"],
     ["Lunatic Cultist",1,"defeated Session 25 — accidentally triggered fighting a Solar Eclipse near the Dungeon; dropped the Ancient Manipulator and kicked off the Lunar Events"],
     ["Duke Fishron",1,"defeated Session 28 — beaten 4× after the Session 23 wreck; trivial now with the endgame kit. Drops (Tsunami ×3, Bubble Gun) weren't useful to a gun build"],
-    ["Empress of Light",0,"accidentally summoned Session 24 (a stray Prismatic Lacewing kill while fishing); not defeated. By day she one-shots through any defense — but beating her by day is the only way to get the Terraprisma. Optional"],
-    ["Moon Lord",1,"DEFEATED — first kill Session 27, farmed to 6 kills total. The game is beaten. Drops: Star Wrath, Terrarian, Meowmere, Rainbow Crystal Staff, Lunar Flare, S.D.M.G., the Moon Lord mask, and stacks of Luminite"]
+    ["Empress of Light",1,"DEFEATED — beaten once, at night (post-Session 28). Two Prismatic Lacewings banked for daytime tries; the Terraprisma still requires a full daytime kill — the one real challenge left"],
+    ["Moon Lord",1,"DEFEATED — first kill Session 27; farmed too many times to count since. The game is beaten. Drops gathered: Star Wrath, Terrarian, Meowmere, Rainbow Crystal Staff, Lunar Flare, S.D.M.G., the Moon Lord mask, and stacks of Luminite"]
   ],
   events:[
     ["Goblin Army",1,"rescued the Goblin Tinkerer; a 2nd invasion fought off"],
@@ -356,14 +356,13 @@ const DATA={
     ["Meteor armor","crafted, unused — magic set that makes the Space Gun free to cast","15 def"]
   ],
   weapons:[
-    ["Meowmere","melee",4,"Session 27 — Moon Lord drop; fires bouncing rainbow cat projectiles, among the highest-DPS swords in the game and easy to swing on a gamepad. His default melee weapon now","200 dmg"],
-    ["S.D.M.G.","ranged",4,"Session 28 — Moon Lord drop; very high fire rate, fires an extra projectile and sometimes skips ammo. Reforged Godly. Centerpiece of the ranged Loadout 3","80 dmg"],
-    ["Solar Eruption","melee",4,"Session 26 — 18 Solar Fragments; a multi-hit flail that pierces, reaches through walls, and applies the Daybroken DoT. A strong secondary behind the Meowmere","110 dmg"],
-    ["Stardust Cell Staff","summon",4,"Session 27 — 18 Stardust Fragments; spawns cells that split off and seek enemies, applying a stacking debuff. His main summon over the Stardust Dragon","66 dmg"],
-    ["Rainbow Crystal Staff","summon",4,"Session 27 — Moon Lord drop; plants a rainbow crystal that fires a powerful beam. Swapped in as his sentry over the Frost Hydra","150 dmg"],
+    ["Zenith","melee",4,"Post-game — the ultimate sword, reforged Legendary. Fires a swarm of every component sword at once, pierces, homes, and ignores invulnerability frames. The craft consumed one each of the Terra Blade, Meowmere, Star Wrath, Terrarian and the rest of the chain. The Loadout 1 main now","190 dmg"],
+    ["S.D.M.G.","ranged",4,"Session 28 — Moon Lord drop; very high fire rate, fires an extra projectile and sometimes skips ammo. Reforged Staunch. Centerpiece of the ranged Loadout 3","80 dmg"],
+    ["Stardust Cell Staff","summon",4,"Session 27 — 18 Stardust Fragments; spawns cells that split off and seek enemies, applying a stacking debuff. Reforged Fabled (new 1.4.5 best summoner prefix). His main summon","66 dmg"],
+    ["Rainbow Crystal Staff","summon",4,"Session 27 — Moon Lord drop; plants a rainbow crystal that fires a powerful beam. Reforged Fabled. His sentry, over the Frost Hydra","150 dmg"],
     ["Vortex Beater","ranged",4,"Session 26 — 18 Vortex Fragments; chaingun that also lobs homing rockets, his highest-DPS gun; shines in the Vortex armor of Loadout 3","85 dmg"],
-    ["Terra Blade","melee",5,"Session 19 — True Night's Edge + True Excalibur + Broken Hero Sword; reforged (likely Legendary). Now a sidearm to the Solar Eruption, and feeds the future Zenith","95 dmg"],
-    ["Star Wrath","melee",4,"Session 27 — Moon Lord drop; calls a starfall down at the cursor. Strong but aim-heavy and awkward on a gamepad, so not a favorite","110 dmg"],
+    ["Meowmere","melee",4,"Moon Lord drop; his former default melee. Still owned — he kept a spare, and a copy went into the Zenith","200 dmg"],
+    ["Solar Eruption","melee",4,"Session 26 — 18 Solar Fragments; a multi-hit flail that pierces walls and applies the Daybroken DoT. No longer carried — the Zenith replaced it; kept in storage","110 dmg"],
     ["Terrarian","melee",4,"Session 27 — Moon Lord drop; a top-tier yoyo and one of the ingredients for the Zenith","190 dmg"],
     ["Lunar Flare","magic",4,"Session 27 — Moon Lord drop; rains piercing lunar bolts down at the cursor","100 dmg"],
     ["Megashark","ranged",4,"Session 16 — from the Destroyer's Souls of Might; was the top gun, now outdated next to the Tactical Shotgun and Sniper Rifle","25 dmg"],
@@ -418,7 +417,9 @@ const DATA={
     ["Thorn Hook","Session 19 — Plantera drop; a longer-reach single hook; superseded by the Lunar Hook",""],
     ["Diamond Hook","grapple",""],
     ["Staff of Regrowth","improves herb harvesting and grass spreading",""],
-    ["Bottomless Lava Bucket","Session 23 — found; infinite placeable lava for lava farms / traps",""]
+    ["Golden Fishing Rod","post-game — the best fishing rod in the game, an Angler reward after 30 quests; now his main rod",""],
+    ["Bottomless Lava Bucket","Session 23 — found; infinite placeable lava for lava farms / traps",""],
+    ["Bottomless Water Bucket","post-game — Angler reward; infinite placeable water, the counterpart to the lava bucket",""]
   ],
   accEq:[
     "Ankh Shield — near-total debuff immunity plus knockback and fire-block immunity (Session 28; the long-running goal, finally completed)",
@@ -428,23 +429,22 @@ const DATA={
     "Celestial Shell — all-around boost to damage, crit, defense, regen, and mobility, stronger at night and in water (Session 23)"
   ],
   accOther:[
-    "Loadout 2 — Fishing / summon: Coin Ring (bigger coin pickup, extra coin drops, +luck)",
+    "Loadout 2 — Fishing / summon: Greedy Ring (post-game — Coin Ring + Discount Card; coin pickup range, extra coin drops, +luck, and a 20% shop discount)",
     "Loadout 2 — Fishing / summon: Papyrus Scarab (Session 28 — Hercules Beetle + Necromantic Scroll; +1 minion, +15% summon damage, reduced aggro)",
     "Loadout 2 — Fishing / summon: Pygmy Necklace (+1 minion slot; bought from the Witch Doctor)",
-    "Loadout 2 — Fishing / summon: Beetle Wings (mid-tier wings from Beetle Husks + Souls of Flight)",
-    "Loadout 2 — Fishing / summon: High Test Fishing Line (Session 28 — Angler reward; the line never breaks)",
+    "Loadout 2 — Fishing / summon: Steampunk Wings (post-game — moved into this loadout's wing slot)",
+    "Loadout 2 — Fishing / summon: High Test Fishing Line (Session 28 — Angler reward; the line never breaks). Swapped for the Lavaproof Fishing Hook when fishing lava",
     "Loadout 3 — Ranged: Destroyer Emblem (+10% damage, +8% crit; moved here from Loadout 1)",
     "Loadout 3 — Ranged: Obsidian Shield (a second one, for knockback + fire-block immunity)",
     "Loadout 3 — Ranged: Vortex Booster (the vortex jet pack — hover + vertical boost)",
     "Loadout 3 — Ranged: Charm of Myths (+regen, shorter potion cooldown)",
-    "Loadout 3 — Ranged: Lightning Boots (mobility; planned upgrade to Terraspark Boots)",
-    "Informational (carried, no slot): GPS — coordinates",
-    "Informational (carried, no slot): Metal Detector — flags nearby valuable ore",
-    "Informational (carried, no slot): Radar — nearby enemy count",
-    "Informational (carried, no slot): Tally Counter — kill count of the targeted enemy",
+    "Loadout 3 — Ranged: Terraspark Boots (post-game — upgraded from the Lightning Boots; best movement boots)",
+    "Informational (carried, no slot): GPS — position coordinates (Compass + Depth Meter + Watch)",
+    "Informational (carried, no slot): R.E.K. 3000 — enemy count, kill count, and nearby rare creatures (Radar + Tally Counter + Lifeform Analyzer)",
+    "Informational (carried, no slot): Goblin Tech — nearest valuable tile, speed, and DPS (Metal Detector + Stopwatch + DPS Meter)",
     "Master Ninja Gear (Session 22 — Tabi + Black Belt + Tiger Climbing Gear, Warding); benched Session 28 when the High Test Fishing Line took its Loadout 2 slot",
     "Avenger Emblem — +12% damage, Warding; benched Session 23 when the Celestial Shell took its slot",
-    "Steampunk Wings — spare since Session 27, replaced by the Solar Wings",
+    "Beetle Wings — benched (post-game) when the Steampunk Wings took the Loadout 2 wing slot",
     "Flame Wings — spare since Session 23",
     "Bat Wings — spare since Session 21",
     "Ancient Chisel — mining speed (benched Session 22 for the Fire Gauntlet)",
@@ -453,17 +453,18 @@ const DATA={
     "Obsidian Skull Rose — fire-block immunity + reduced lava damage",
     "Ram Rune — ground pound, fall-damage immune; speeds hellevator descents",
     "Vanity: Whoopie Cushion",
-    "Mount: Chillet (hatched from a Large Dragon Egg)"
+    "Mount: Chillet (hatched from a Large Dragon Egg)",
+    "Mount: UFO (post-game — from the Cosmic Car Key, a Martian Saucer drop; free omnidirectional flight, ignores the wing timer)"
   ],
   npcs:[
     ["Guide",""],["Merchant",""],["Nurse",""],["Dryad",""],["Painter",""],["Zoologist",""],
-    ["Angler","Ocean house"],["Goblin Tinkerer","sky island"],["Arms Dealer","Hallowed Desert · Session 24"],["Tavernkeep","snow biome"],
-    ["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
+    ["Angler","Ocean house"],["Goblin Tinkerer","sky island"],["Arms Dealer","Hallowed Desert · Session 24"],["Tavernkeep","east Ocean home"],
+    ["Pirate","east Ocean home"],["Clothier","snow biome"],["Skeleton Merchant","wanders"],["Dye Trader","deep jungle"],["Witch Doctor","“Kohna” · from Queen Bee"],
     ["Golfer","sky island"],["Stylist","sky island"],["Town Slime","×2"],["Wizard","underground mushroom · Session 13"],
     ["Mechanic","from the Dungeon"],["Demolitionist","west caverns"],["Steampunker","sells the Steampunk Wings"],["Tax Collector","west caverns · Session 21"],
     ["Princess","spawn base · Session 26"]
   ],
-  npcplace:"The Goblin Tinkerer sits in a sky-island house above the Mechanic (the two get along). The Witch Doctor and Dye Trader cluster in the Jungle near the Shimmer and the Lihzahrd Temple, with the jungle pylon beside them; the Angler has his own house on the Ocean. The Arms Dealer moved to a new Hallowed Desert house with the Nurse (Session 24, anchoring a 7th pylon); the Tavernkeep and Clothier are in the snow biome; the Golfer and Stylist on the sky islands; the Wizard in the underground mushroom biome; and the Demolitionist and Tax Collector anchor the Cavern pylon in the west caverns. The Princess only moved in once nearly every other town NPC was housed. Truffle has started spawning but still has no home — he only moves into an above-ground mushroom biome, so a surface mushroom house is needed.",
+  npcplace:"The Goblin Tinkerer sits in a sky-island house above the Mechanic (the two get along). The Witch Doctor and Dye Trader cluster in the Jungle near the Shimmer and the Lihzahrd Temple, with the jungle pylon beside them; the Angler has his own house on the Ocean. The Arms Dealer moved to a new Hallowed Desert house with the Nurse (Session 24, anchoring a 7th pylon); the Tavernkeep and the Pirate share a new two-story home on the east Ocean bank (post-game); the Clothier is in the snow biome; the Golfer and Stylist on the sky islands; the Wizard in the underground mushroom biome; and the Demolitionist and Tax Collector anchor the Cavern pylon in the west caverns. The Princess only moved in once nearly every other town NPC was housed. Truffle has started spawning but still has no home — he only moves into an above-ground mushroom biome, so a surface mushroom house is needed.",
   zones:[
     ["Ocean","west edge","#23384a"],["2nd Corruption","orbs smashed","#3a2d4a"],["Dungeon","cleared Skeletron","#33373d"],
     ["Snow / Ice","explored, not done","#2a3b48"],["Corruption","Soul Eaters","#3a2d4a"],
@@ -475,6 +476,7 @@ const DATA={
     "Moon Lord arena (Session 26) — the main spawn-to-east-Ocean platform lined end to end with campfires, heart lanterns, and Stars in Bottles for constant HP/mana regen",
     "Sky highways across the top of the map (Session 17) — multiple stone highways linking east and west edges, with ropes dropping down for access",
     "Pylon network (7): spawn, jungle, snow (by the Dungeon), east Ocean, underground mushroom biome, the west caverns (Cavern pylon, Session 22), and the Hallowed Desert (Nurse + Arms Dealer, Session 24) — fast travel across the whole map",
+    "Two-story home on the east Ocean bank (post-game) housing the Tavernkeep and the Pirate, beside the existing Ocean pylon",
     "Minecart track along the eastern stone road, spawn to the east edge (Session 21)",
     "Mechanical-boss arena (built Sessions 14–15): stacked platform levels with ropes, an ammo box, a Bast Statue, campfires, Heart Lanterns, a Star in a Bottle, a Sharpening Station, and a Bewitching Table",
     "Stone platform from spawn east to the world edge, with rope drops to the surface",
@@ -484,9 +486,11 @@ const DATA={
     "Skeletron arena: stacked platform layers over the Dungeon",
     "Containment trenches around the base and jungle to slow the Hardmode Corruption / Hallow spread (Session 13; extended Session 17)",
     "Gem trees on underground stone (topaz, amethyst, emerald)",
-    "Fast east/west travel via platform + Terraspark Boots + Chillet mount"
+    "Asphalt speed highway (post-game) — replaced most of the top platform road with Asphalt Blocks for a big running-speed boost; paired with Terraspark Boots and the Chillet / UFO mounts for fast east/west travel"
   ],
   sessions:[
+    ["PG·2","Thursday, July 2, 2026","Post-game catch-up — reforges + refinements",["A batch of smaller post-game refinements; play is loose now and no longer logged per session","Reforges dialed in: Zenith to Legendary, S.D.M.G. to Staunch, and both the Stardust Cell Staff and Rainbow Crystal Staff to Fabled (the new 1.4.5 best-in-slot summoner prefix). All Loadout 2 and Loadout 3 accessories are Warding","Found the Cosmic Car Key (Martian Saucer drop) for the UFO mount — free omnidirectional flight","Replaced most of the top platform highway with Asphalt for a big speed boost","Got the Golden Fishing Rod (best rod) and lava-fishing gear (the Lavaproof Fishing Hook) — swapped in over the High Test Fishing Line when fishing lava","Combined the info accessories into the GPS, R.E.K. 3000, and Goblin Tech, kept in inventory so they work across all loadouts — just needs the Sextant to finish the Cell Phone","Stopped carrying the Solar Eruption (the Zenith covers melee); Loadout 2 now uses the Steampunk Wings","All bosses beaten multiple times — counts no longer tracked (Duke Fishron and the Empress being the only ones ever precisely counted)"]],
+    ["PG·1","Wednesday, June 25, 2026","Post-game catch-up — the Zenith + the Empress",["Per-session logging has stopped now that the game's beaten and play is looser; this folds in everything since Session 28","Crafted the Zenith (reforged Godly at first) — the ultimate sword, consuming the Terra Blade, Meowmere, and Star Wrath plus the rest of the chain. Now the Loadout 1 main","Defeated the Empress of Light for the first time (at night); banked 2 Prismatic Lacewings for daytime Terraprisma attempts","Beat the Moon Lord many more times — no longer counting","Got the Bottomless Water Bucket (infinite water, partner to the lava bucket)","Loadout upgrades: Greedy Ring (Coin Ring + Discount Card) in the fishing loadout; Terraspark Boots in the ranged loadout, over the Lightning Boots","Built a two-story home on the east Ocean bank and moved the Tavernkeep and the Pirate in (24 residents now)"]],
     [28,"Wednesday, June 24, 2026","Ankh Shield, ranged loadout, Duke down",["Farmed the Moon Lord several more times — 6 kills total; he finally dropped the S.D.M.G., reforged Godly","Crafted the full Vortex armor set and started a third loadout — a dedicated ranged build (S.D.M.G. + Vortex Beater); it already beat the Moon Lord on Chlorophyte Bullets, with ~1,000 Luminite Bullets crafted and waiting","Completed the Ankh Shield at last — the long-running goal — and slotted it into Loadout 1, moving the Destroyer Emblem to the ranged loadout","Built out Loadout 3's accessories: a second Obsidian Shield, Lightning Boots, the Vortex Booster, a Charm of Myths, and the Destroyer Emblem — all reforged Warding","Completed the full Angler armor set and refit the fishing loadout: crafted the Papyrus Scarab and added the High Test Fishing Line, replacing the Master Ninja Gear","Defeated Duke Fishron four times — finally cleared him after the Session 23 wreck; the drops (Tsunami ×3, Bubble Gun, trophy) weren't useful to a gun build","Shimmered the Slime Gun and the Clentaminator — next target is converting the evil biome past the Dungeon into a surface Glowing Mushroom biome to house Truffle"]],
     [27,"Tuesday, June 23, 2026","THE MOON LORD FALLS",["Defeated the Moon Lord for the first time — the final boss of Terraria; the first kill came off the Beetle armor + Solar Eruption / Terra Blade / Star Wrath combo, dropping Star Wrath and the Terrarian","Crafted the Solar Flare Breastplate from the first Luminite, re-ran the whole Lunar chain, and killed him a second time — drops were the Meowmere and the Rainbow Crystal Staff","Finished the full Solar Flare armor set and beat the Moon Lord a third time easily — that kill dropped the Moon Lord mask and the Lunar Flare","Crafted the Solar Wings and the Lunar Hook, and swapped to the Stardust Cell Staff as the main summon over the Stardust Dragon","Settled on the Meowmere as his default weapon over the Solar Eruption; swapped the Rainbow Crystal Staff in as his sentry","Didn't care for the Star Wrath (aim-at-cursor starfall is awkward on a gamepad); selling the spare Portal Guns","The game is beaten. Everything from here is optional: the Zenith, Duke Fishron, the daytime Empress / Terraprisma, the Ankh Shield, and building"]],
     [26,"Monday, June 22, 2026","Lunar weapons + Moon Lord arena",["Crafted three Lunar weapons at the Ancient Manipulator: the Solar Eruption (melee), the Vortex Beater (ranged), and the Stardust Dragon Staff (summon)","Built the Moon Lord arena — lined the main platform from spawn to the east Ocean with campfires, heart lanterns, and Stars in Bottles for constant regen","Swapped the Destroyer Emblem into the Obsidian Shield's slot for the fight","Re-killed the Cultists and started a second Lunar event — two pillars down, two to go; the plan is to drop the last two and take a real shot at the Moon Lord next session","The Princess moved into the spawn base (she only shows up once nearly every other town NPC is present)"]],
@@ -594,11 +598,12 @@ const tl=$("#timeline");
 DATA.sessions.forEach((s,idx)=>{
   const [n,date,tagline,items]=s;
   const det=el("details","sess"); if(idx===0)det.open=true;
-  const sum=el("summary"); sum.innerHTML=`<span class="sn">S${n}</span><span class="st">${tagline?tagline:"Session "+n}</span><span class="sd">${date}</span><span class="chev">&#9656;</span>`;
+  const label=(typeof n==="number")?("S"+n):n;
+  const sum=el("summary"); sum.innerHTML=`<span class="sn">${label}</span><span class="st">${tagline?tagline:"Session "+n}</span><span class="sd">${date}</span><span class="chev">&#9656;</span>`;
   const body=el("div","body"); const ul=el("ul"); items.forEach(it=>ul.appendChild(el("li",null,it))); body.appendChild(ul);
   det.appendChild(sum); det.appendChild(body); tl.appendChild(det);
 });
-$("#logmeta").textContent=`${DATA.sessions.length} sessions`;
+$("#logmeta").textContent=`${DATA.sessions.filter(s=>typeof s[0]==="number").length} sessions + post-game`;
 </script>
 <script src="/assets/js/content.js"></script>
 <script src="/assets/js/search.js"></script>
