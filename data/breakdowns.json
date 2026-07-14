@@ -1,5 +1,33 @@
 [
   {
+    "title": "Something to Point To",
+    "description": "A weekend spent turning a retired laptop into a full home server, and the quieter story underneath it: ADHD urgency, hyperfixation, and the cost of being present in body but not attention.",
+    "tags": [
+      "tech",
+      "home"
+    ],
+    "date": "July 2026",
+    "date_sort": "2026-07-14",
+    "url": "/pages/breakdowns/something-to-point-to.html",
+    "image": "/image/something-to-point-to.png",
+    "link_text": "Read",
+    "published": "2026-07-14",
+    "read_min": 10
+  },
+  {
+    "title": "Monster Hunter Rise — Progress Tracker",
+    "description": "A living document tracking my first Monster Hunter playthrough. Hunter and buddies, quest progress, monsters hunted, gear, and what happened each session. Updated as I play.",
+    "tags": [
+      "monster-hunter"
+    ],
+    "date": "July 2026",
+    "date_sort": "2026-07-03",
+    "url": "/pages/monster-hunter-rise/monster-hunter-rise-tracker.html",
+    "image": "/image/game-covers/Monster_Hunter_Rise.jpg",
+    "link_text": "View tracker",
+    "published": "2026-07-03"
+  },
+  {
     "title": "Terraria — East-Side Field Guide",
     "description": "Every weapon, armor set, and accessory still left to collect on the east side of my Corruption world, organized by zone. Jungle, desert, ocean, sky. A checklist for clearing what remains before heading west.",
     "tags": [

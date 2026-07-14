@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monster Hunter Rise Progress Tracker — Bryce Lote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1d21; --panel:#212428; --panel2:#272a2f; --border:rgba(255,255,255,0.06); --line:rgba(255,255,255,0.06);
+  --ink:#e8e5de; --muted:#908b82; --faint:#5a5750;
+  --brass:#9e6b47; --brass-bright:#c9a279;
+  --heart:#e05a4d; --mana:#6fb0e6;
+  --border-hover:rgba(255,255,255,0.12); --text-heading:#e8e5de; --text-body:#908b82; --text-muted:#5a5750;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink); font-family:"DM Sans",sans-serif; line-height:1.55;
+  -webkit-font-smoothing:antialiased; min-height:100vh; position:relative; overflow-x:hidden;
+}
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:inherit;text-decoration:none}
+
+/* nav */
+header.nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px); background:rgba(26,29,33,0.92); border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1080px; margin:0 auto; padding:12px 22px; display:flex; align-items:center; gap:18px}
+.brand{font-family:"Libre Baskerville",serif; font-weight:900; font-size:18px; letter-spacing:.01em; white-space:nowrap}
+.brand b{color:var(--brass)}
+.chips{display:flex; gap:6px; overflow-x:auto; margin-left:auto; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{font-family:"JetBrains Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:6px 10px; border:1px solid transparent; border-radius:0; white-space:nowrap; transition:.18s;}
+.chips a:hover{color:var(--ink); border-color:var(--border); background:var(--panel)}
+
+main{max-width:1080px; margin:0 auto; padding:0 22px 90px; position:relative; z-index:1}
+
+/* hero */
+.hero{padding:54px 0 26px; border-bottom:1px solid var(--line)}
+.eyebrow{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass)}
+.hero h1{font-family:"Libre Baskerville",serif; font-weight:900; font-size:clamp(34px,6vw,58px); line-height:1.02; margin:14px 0 6px; letter-spacing:-.01em}
+.hero h1 .sub{display:block; font-size:clamp(15px,2.4vw,20px); font-weight:400; font-style:italic; color:var(--muted); margin-top:10px; letter-spacing:0}
+.updated{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--faint); margin-top:16px}
+
+/* sections */
+section{padding:40px 0 6px; opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1; transform:none}}
+.s-head{display:flex; align-items:baseline; gap:14px; margin-bottom:20px}
+.s-head .tick{width:22px; height:2px; background:var(--brass); transform:translateY(-5px)}
+.s-head h2{font-family:"Libre Baskerville",serif; font-weight:600; font-size:26px; letter-spacing:-.01em}
+.s-head .meta{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--faint); margin-left:auto}
+
+.grid{display:grid; gap:14px}
+@media(min-width:720px){.cols-2{grid-template-columns:1fr 1fr}}
+.card{background:var(--panel); border:1px solid var(--border); border-radius:0; padding:18px 20px; transition:.2s}
+.card:hover{border-color:#3a3d45}
+.sub-h{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--brass); margin:0 0 12px}
+
+/* stat tiles */
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+@media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
+.stat{background:var(--panel); border:1px solid var(--border); border-radius:0; padding:15px 17px}
+.stat .k{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--faint)}
+.stat .v{font-family:"Libre Baskerville",serif; font-weight:600; font-size:21px; margin-top:5px}
+
+/* key/value rows */
+.kv{display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--line)}
+.kv:last-child{border-bottom:none}
+.kv .k{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.kv .v{font-weight:600; text-align:right}
+
+/* checkbox lines */
+.line{display:flex; gap:12px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:none}
+.box{flex:none; width:19px; height:19px; border-radius:5px; border:1.5px solid #777c85; display:grid; place-items:center; margin-top:1px; font-size:12px}
+.box.done{background:#2e6b3e; border-color:#2e6b3e; color:#fff}
+.line .t{font-weight:600} .line .n{color:var(--muted); font-weight:400; font-style:italic}
+.locked{color:var(--faint); font-style:italic; font-family:"JetBrains Mono",monospace; font-size:12px; padding:8px 0}
+
+/* table */
+.tbl{width:100%; border-collapse:collapse; font-size:14px}
+.tbl th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); text-align:left; padding:8px 10px; border-bottom:1px solid var(--border)}
+.tbl td{padding:10px; border-bottom:1px solid var(--line); vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td .mn{font-weight:600}
+.tbl td .note{color:var(--muted); font-style:italic}
+
+/* gear items */
+.item{display:flex; gap:10px; align-items:baseline; padding:8px 0; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.item:last-child{border-bottom:none}
+.item .nm{font-weight:600; font-size:15px}
+.tag{font-family:"JetBrains Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:5px; border:1px solid var(--muted); color:var(--muted); opacity:.9}
+.item .d{color:var(--muted); font-size:13px; flex-basis:100%; font-style:italic}
+.empty{color:var(--faint); font-style:italic; font-size:13px}
+
+/* buddies */
+.npc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px}
+.npc{background:var(--panel2); border:1px solid var(--border); border-radius:0; padding:13px 15px; transition:.16s; text-align:center}
+.npc:hover{border-color:var(--brass)}
+.npc .role{font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass)}
+.npc .nm{font-weight:600; font-size:17px; margin:4px 0 2px; font-family:"Libre Baskerville",serif}
+.npc .r{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint)}
+
+/* lists */
+.blist{list-style:none} .blist li{padding:8px 0 8px 20px; border-bottom:1px solid var(--line); position:relative; color:var(--text-body)}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:""; position:absolute; left:2px; top:15px; width:7px; height:7px; border-radius:2px; background:var(--brass); transform:rotate(45deg)}
+
+/* sessions */
+.timeline{position:relative; margin-left:8px; padding-left:24px; border-left:1px solid var(--border)}
+details.sess{margin-bottom:10px; position:relative}
+details.sess::before{content:""; position:absolute; left:-29px; top:13px; width:11px; height:11px; border-radius:50%; background:var(--panel); border:2px solid var(--brass)}
+details.sess[open]::before{background:var(--brass)}
+.sess summary{list-style:none; cursor:pointer; background:var(--panel); border:1px solid var(--border); border-radius:0; padding:12px 16px; display:flex; align-items:center; gap:12px; transition:.16s}
+.sess summary::-webkit-details-marker{display:none}
+.sess summary:hover{border-color:#3a3d45}
+.sess .sn{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--brass); flex:none}
+.sess .st{font-weight:600; font-size:15px}
+.sess .sd{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint); margin-left:auto; flex:none}
+.sess .chev{flex:none; color:var(--faint); transition:.2s; margin-left:4px}
+.sess[open] .chev{transform:rotate(90deg)}
+.sess .body{padding:14px 16px 4px; color:var(--text-body); font-size:14px; line-height:1.7}
+
+/* sprites */
+.spr{height:18px; width:auto; vertical-align:middle; margin-right:8px; flex:none}
+.mon-ic{height:36px; width:36px; object-fit:contain; vertical-align:middle; margin-right:12px}
+.kv .v .spr{margin-right:6px}
+
+footer{max-width:1080px; margin:0 auto; padding:28px 22px 60px; border-top:1px solid var(--line); color:var(--faint); font-family:"JetBrains Mono",monospace; font-size:11px; line-height:1.7}
+.foot-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1rem}
+.foot-row a{color:var(--faint)}
+.foot-row a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="brand" style="text-decoration:none">Bryce Lote</a>
+    <nav class="chips">
+      <a href="#overview">Overview</a><a href="#state">Status</a><a href="#quests">Quests</a>
+      <a href="#monsters">Monsters</a><a href="#gear">Gear</a><a href="#buddies">Buddies</a>
+      <a href="#systems">Systems</a><a href="#log">Sessions</a><a href="#notes">Notes</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="overview">
+    <div class="eyebrow">Monster Hunter Rise Chronicle &middot; Progress Tracker</div>
+    <h1>First Hunt<span class="sub">A first Monster Hunter playthrough, one hunt at a time.</span></h1>
+    <div class="updated">Updated Session 1 &mdash; Friday, July 3, 2026</div>
+  </div>
+
+  <section style="animation-delay:.05s" id="character">
+    <div class="s-head"><span class="tick"></span><h2>Character</h2></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="sub-h">The Hunter</div>
+        <div class="kv"><span class="k">Hunter Name</span><span class="v">Bryce Danger</span></div>
+        <div class="kv"><span class="k">Platform</span><span class="v">PC / Steam Deck</span></div>
+        <div class="kv"><span class="k">Primary Weapon</span><span class="v"><img class="spr" src="/image/mh-rise-images/weapon_long_sword.png" alt="Long Sword">Long Sword</span></div>
+      </div>
+      <div class="card">
+        <div class="sub-h">The Companions</div>
+        <div class="kv"><span class="k">Palamute &middot; Dog</span><span class="v">Vivian</span></div>
+        <div class="kv"><span class="k">Palico &middot; Cat</span><span class="v">Kona</span></div>
+        <div class="kv"><span class="k">Cohoot &middot; Owl</span><span class="v">Charles</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.08s" id="state">
+    <div class="s-head"><span class="tick"></span><h2>Current State</h2><span class="meta">~3 hours in</span></div>
+    <div class="stats">
+      <div class="stat"><div class="k">Hunter Rank</div><div class="v">HR 1</div></div>
+      <div class="stat"><div class="k">Village Quests</div><div class="v">&#9733;1 &middot; Urgent done</div></div>
+      <div class="stat"><div class="k">Hub Quests</div><div class="v">Not started</div></div>
+      <div class="stat"><div class="k">Weapon</div><div class="v">Defender Long Sword</div></div>
+      <div class="stat"><div class="k">Armor</div><div class="v">Defender Armor</div></div>
+      <div class="stat"><div class="k">Playtime</div><div class="v">~3 hrs</div></div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.1s" id="quests">
+    <div class="s-head"><span class="tick"></span><h2>Quest Progress</h2></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="sub-h">Village &middot; &#9733;1 Kamura</div>
+        <div class="line"><span class="box done">&#10003;</span><span><span class="t">Training quests</span> <span class="n">— all complete</span></span></div>
+        <div class="line"><span class="box done">&#10003;</span><span><span class="t">&#9733;1 Urgent: Great Izuchi</span> <span class="n">— hunted</span></span></div>
+        <div class="line"><span class="box"></span><span><span class="t">Roly-Poly Lanterns</span> <span class="n">— deliver 8 Firelanterns (key quest, remaining)</span></span></div>
+        <div class="locked">&#9733;2 &mdash; not yet unlocked</div>
+      </div>
+      <div class="card">
+        <div class="sub-h">Hub</div>
+        <div class="locked">Not yet started. Hub Quests support drop-in co-op for up to 4 players; Village Quests are solo only.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="monsters">
+    <div class="s-head"><span class="tick"></span><h2>Large Monsters Hunted</h2><span class="meta">1 species</span></div>
+    <div class="card" style="padding:8px 12px">
+      <table class="tbl">
+        <thead><tr><th>Monster</th><th>Count</th><th>First Hunted</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><img class="mon-ic" src="/image/mh-rise-images/monster_great_izuchi.png" alt="Great Izuchi"><span class="mn">Great Izuchi</span></td>
+            <td>1</td>
+            <td>July 3, 2026</td>
+            <td><span class="note">First large monster. &#9733;1 Village Urgent.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="gear">
+    <div class="s-head"><span class="tick"></span><h2>Gear Log</h2></div>
+    <div class="card">
+      <div class="sub-h">Weapons</div>
+      <div class="item"><img class="spr" src="/image/mh-rise-images/weapon_long_sword.png" alt="Long Sword"><span class="nm">Defender Long Sword</span><span class="tag">Long Sword</span><span class="tag">DLC starter</span><span class="d">Currently equipped. Overpowered for early content.</span></div>
+      <div class="sub-h" style="margin-top:20px">Armor</div>
+      <div class="item"><span class="nm">Defender Armor</span><span class="tag">DLC starter</span><span class="d">Currently equipped. High defense trivializes early hunts.</span></div>
+      <div class="sub-h" style="margin-top:20px">Crafted / Purchased</div>
+      <div class="empty">Nothing crafted or purchased yet.</div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="buddies">
+    <div class="s-head"><span class="tick"></span><h2>Buddy Status</h2></div>
+    <div class="npc-grid">
+      <div class="npc"><div class="role">Palamute</div><div class="nm">Vivian</div><div class="r">Default equipment</div></div>
+      <div class="npc"><div class="role">Palico</div><div class="nm">Kona</div><div class="r">Default equipment</div></div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="systems">
+    <div class="s-head"><span class="tick"></span><h2>Infrastructure &amp; Systems</h2></div>
+    <div class="card"><div class="empty">Argosy, Meowcenaries, Buddy Plaza, Submarine &mdash; status TBD as unlocked.</div></div>
+  </section>
+
+  <section style="animation-delay:.12s" id="log">
+    <div class="s-head"><span class="tick"></span><h2>Session Log</h2><span class="meta">1 session</span></div>
+    <div class="timeline">
+      <details class="sess" open>
+        <summary><span class="sn">S1</span><span class="st">First hunts in Kamura</span><span class="sd">Fri, July 3, 2026 &middot; ~3 hrs</span><span class="chev">&#9656;</span></summary>
+        <div class="body">Completed all training quests and every &#9733;1 Village quest except Roly-Poly Lanterns (the Firelantern gathering quest). Used the Long Sword exclusively. Defeated the Great Izuchi in the &#9733;1 Urgent quest for the first large-monster kill. Running full Defender gear from the DLC bonus items, so nothing crafted or purchased yet, and the crafting and upgrade systems are still untouched. Stopped for the night after the Izuchi clear.</div>
+      </details>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="notes">
+    <div class="s-head"><span class="tick"></span><h2>Notes &amp; Observations</h2></div>
+    <div class="card">
+      <ul class="blist">
+        <li>Started with Defender gear (DLC). It clearly trivializes early content and bypasses the crafting loop; considering a switch to base Kamura gear to let progression work as intended.</li>
+        <li>Long Sword is the only weapon tested so far. The training-area trio recommendation (Long Sword, Greatsword, Insect Glaive) is only partially explored.</li>
+        <li>A coworker is interested in multiplayer. Rise supports drop-in co-op for Hub Quests (up to 4 players); Village Quests are solo only.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-row">
+    <div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--ink)">Bryce Lote</div>
+      <div style="margin-top:4px">Yukon, Oklahoma</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+      <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+      <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+</body>
+</html>
