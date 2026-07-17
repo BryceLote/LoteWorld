@@ -439,6 +439,8 @@
     var card = document.createElement('a');
     card.className = 'recipe-card';
     card.href = r.url;
+    card.target = '_blank';
+    card.rel = 'noopener';
 
     var html = '';
     if (r.has_image && r.image) {
