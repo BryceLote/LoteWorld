@@ -36,8 +36,8 @@
         "stovetop",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/allis-alfredo-sauce.jpg",
+      "has_image": true,
       "url": "/doc/recipes/allis-alfredo-sauce.pdf"
     },
     {
@@ -52,8 +52,8 @@
         "soup",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/allis-chili.jpg",
+      "has_image": true,
       "url": "/doc/recipes/allis-chili.pdf"
     },
     {
@@ -92,8 +92,8 @@
         "no-cook",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/amish-friendship-bread.jpg",
+      "has_image": true,
       "url": "/doc/recipes/amish-friendship-bread.pdf"
     },
     {
@@ -109,8 +109,8 @@
         "no-cook",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/angel-food-cake.jpg",
+      "has_image": true,
       "url": "/doc/recipes/angel-food-cake.pdf"
     },
     {
@@ -193,8 +193,8 @@
         "entree",
         "italian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/baked-bison-and-zucchini-penne.jpg",
+      "has_image": true,
       "url": "/doc/recipes/baked-bison-and-zucchini-penne.pdf"
     },
     {
@@ -233,8 +233,8 @@
         "stovetop",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/balsamic-brussels-bowls.jpg",
+      "has_image": true,
       "url": "/doc/recipes/balsamic-brussels-bowls.pdf"
     },
     {
@@ -250,8 +250,8 @@
         "italian",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/bryces-spaghetti-bolognese.jpg",
+      "has_image": true,
       "url": "/doc/recipes/bryces-spaghetti-bolognese.pdf"
     },
     {
@@ -271,8 +271,8 @@
         "butter-cake",
         "american"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/butter-cake-cookies.jpg",
+      "has_image": true,
       "url": "/doc/recipes/butter-cake-cookies.pdf"
     },
     {
@@ -334,8 +334,8 @@
         "italian",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/chicken-and-broccoli-alfredo.jpg",
+      "has_image": true,
       "url": "/doc/recipes/chicken-and-broccoli-alfredo.pdf"
     },
     {
@@ -374,8 +374,8 @@
         "salad",
         "side"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/chicken-caesar-salad-pizza.jpg",
+      "has_image": true,
       "url": "/doc/recipes/chicken-caesar-salad-pizza.pdf"
     },
     {
@@ -391,8 +391,8 @@
         "soup",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/chicken-parm-soup.jpg",
+      "has_image": true,
       "url": "/doc/recipes/chicken-parm-soup.pdf"
     },
     {
@@ -430,8 +430,8 @@
         "soup",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/chicken-potato-soup.jpg",
+      "has_image": true,
       "url": "/doc/recipes/chicken-potato-soup.pdf"
     },
     {
@@ -557,8 +557,8 @@
         "entree",
         "italian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/christinas-baked-ziti.jpg",
+      "has_image": true,
       "url": "/doc/recipes/christinas-baked-ziti.pdf"
     },
     {
@@ -595,8 +595,8 @@
         "stovetop",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/classic-waffles.jpg",
+      "has_image": true,
       "url": "/doc/recipes/classic-waffles.pdf"
     },
     {
@@ -613,8 +613,8 @@
         "stovetop",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/copycat-cfa-cookies.jpg",
+      "has_image": true,
       "url": "/doc/recipes/copycat-cfa-cookies.pdf"
     },
     {
@@ -788,8 +788,8 @@
         "indian",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/curried-chicken-broccoli-and-sweet-potatoes.jpg",
+      "has_image": true,
       "url": "/doc/recipes/curried-chicken-broccoli-and-sweet-potatoes.pdf"
     },
     {
@@ -1054,8 +1054,8 @@
         "entree",
         "honey"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/honey-balsamic-beef-roast.jpg",
+      "has_image": true,
       "url": "/doc/recipes/honey-balsamic-beef-roast.pdf"
     },
     {
@@ -1072,8 +1072,8 @@
         "honey",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/honey-sriracha-bowls.jpg",
+      "has_image": true,
       "url": "/doc/recipes/honey-sriracha-bowls.pdf"
     },
     {
@@ -1298,8 +1298,8 @@
         "side",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/nevas-cranberry-salad.jpg",
+      "has_image": true,
       "url": "/doc/recipes/nevas-cranberry-salad.pdf"
     },
     {
@@ -1343,8 +1343,8 @@
         "italian",
         "comfort-food"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/pasta-fagioli.jpg",
+      "has_image": true,
       "url": "/doc/recipes/pasta-fagioli.pdf"
     },
     {
@@ -1365,8 +1365,8 @@
         "quick",
         "healthy"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/peaches-and-cream-oatmeal.jpg",
+      "has_image": true,
       "url": "/doc/recipes/peaches-cream-oatmeal.pdf"
     },
     {
@@ -1381,8 +1381,8 @@
         "entree",
         "italian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/pizza-pasta-bake.jpg",
+      "has_image": true,
       "url": "/doc/recipes/pizza-pasta-bake.pdf"
     },
     {
@@ -1425,8 +1425,8 @@
         "italian",
         "incomplete-source"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/pork-milanese-bowls.jpg",
+      "has_image": true,
       "url": "/doc/recipes/pork-milanese.pdf"
     },
     {
@@ -1507,8 +1507,8 @@
         "beef",
         "side"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/roasted-vegetables.jpg",
+      "has_image": true,
       "url": "/doc/recipes/roasted-vegetables.pdf"
     },
     {
@@ -1571,8 +1571,8 @@
         "side",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/salmon-asparagus-smashed-potatoes.jpg",
+      "has_image": true,
       "url": "/doc/recipes/salmon-asparagus-smashed-potatoes.pdf"
     },
     {
@@ -1588,8 +1588,8 @@
         "sausage",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/sausage-tortellilni.jpg",
+      "has_image": true,
       "url": "/doc/recipes/sausage-tortellilni.pdf"
     },
     {
@@ -1605,8 +1605,8 @@
         "baked",
         "seafood"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/sheet-pan-shrimp-boil.jpg",
+      "has_image": true,
       "url": "/doc/recipes/sheet-pan-shrimp-boil.pdf"
     },
     {
@@ -1622,8 +1622,8 @@
         "entree",
         "stovetop"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/sloppy-joes.jpg",
+      "has_image": true,
       "url": "/doc/recipes/sloppy-joes.pdf"
     },
     {
@@ -1890,8 +1890,8 @@
         "no-cook",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/strawberry-angel-food-cake-dessert.jpg",
+      "has_image": true,
       "url": "/doc/recipes/strawberry-angel-food-cake-dessert.pdf"
     },
     {
@@ -1952,8 +1952,8 @@
         "no-cook",
         "vegetarian"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/tartar-sauce.jpg",
+      "has_image": true,
       "url": "/doc/recipes/tartar-sauce.pdf"
     },
     {
@@ -1994,8 +1994,8 @@
         "stovetop",
         "turkey"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/turkey-meatloaf.jpg",
+      "has_image": true,
       "url": "/doc/recipes/turkey-meatloaf.pdf"
     },
     {
@@ -2065,8 +2065,8 @@
         "italian",
         "comfort-food"
       ],
-      "image": "",
-      "has_image": false,
+      "image": "/image/recipes/vegetable-tortellini-soup.jpg",
+      "has_image": true,
       "url": "/doc/recipes/veggie-tortellini-soup.pdf"
     }
   ]
