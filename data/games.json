@@ -14,7 +14,14 @@
     "hours": 3000.0,
     "year": 2002,
     "sub_genre": "Open World RPG",
-    "notes": "Played thousands of hours starting around age 7, before I could read fluently. Completed the game through spatial memory, pattern recognition, and world-reading rather than text. All-time favorite. The game that established how I process complex systems — by inhabiting them"
+    "notes": "Played thousands of hours starting around age 7, before I could read fluently. Completed the game through spatial memory, pattern recognition, and world-reading rather than text. All-time favorite. The game that established how I process complex systems — by inhabiting them",
+    "articles": [
+      {
+        "title": "Brutus — Heavy Armor Tank Build",
+        "url": "/pages/morrowind/brutus-tank-build.html",
+        "published": "2026-07-22"
+      }
+    ]
   },
   {
     "id": "the-elder-scrolls-iv-oblivion",

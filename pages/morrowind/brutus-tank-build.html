@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brutus — Morrowind Heavy Armor Tank — Bryce Lote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1d21; --panel:#212428; --panel2:#272a2f; --border:rgba(255,255,255,0.06); --line:rgba(255,255,255,0.06);
+  --ink:#e8e5de; --muted:#908b82; --faint:#5a5750;
+  --brass:#9e6b47; --brass-bright:#c9a279;
+  --phys:#ff9d8a; --magic:#8fb8f0; --sustain:#9bd08a;
+  --border-hover:rgba(255,255,255,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:inherit;text-decoration:none}
+header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(26,29,33,0.92);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+.brand{font-family:"Libre Baskerville",serif;font-weight:900;font-size:18px}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-left:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 10px;border:1px solid transparent;white-space:nowrap;transition:.18s}
+.chips a:hover{color:var(--ink);border-color:var(--border);background:var(--panel)}
+main{max-width:1080px;margin:0 auto;padding:0 22px 90px}
+.hero{padding:54px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.hero h1{font-family:"Libre Baskerville",serif;font-weight:900;font-size:clamp(34px,6vw,58px);line-height:1.02;margin:14px 0 6px}
+.hero h1 .sub{display:block;font-size:clamp(15px,2.4vw,20px);font-weight:400;font-style:italic;color:var(--muted);margin-top:10px}
+.updated{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint);margin-top:16px}
+section{padding:40px 0 6px;opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.s-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.s-head .tick{width:22px;height:2px;background:var(--brass);transform:translateY(-5px)}
+.s-head h2{font-family:"Libre Baskerville",serif;font-weight:600;font-size:26px}
+.s-head .meta{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint);margin-left:auto}
+.grid{display:grid;gap:14px}
+@media(min-width:760px){.cols-2{grid-template-columns:1fr 1fr}}
+.card{background:var(--panel);border:1px solid var(--border);padding:18px 20px}
+.sub-h{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brass);margin:0 0 12px}
+.prose p{margin-bottom:10px}.prose p:last-child{margin-bottom:0}
+.prose b{color:var(--brass-bright);font-weight:600}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border-bottom:none}
+.kv .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kv .v{font-weight:600;text-align:right}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--panel);border:1px solid var(--border);padding:14px 16px}
+.stat .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.stat .v{font-family:"Libre Baskerville",serif;font-weight:600;font-size:20px;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th.r,td.r{text-align:right}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td .nm{font-weight:600}
+td .loc{color:var(--faint);font-size:12px;font-style:italic}
+td .eff{color:var(--muted);font-size:13px}
+.attr td:first-child{color:var(--ink);font-weight:600}
+.attr td.num{font-family:"JetBrains Mono",monospace;text-align:right;color:var(--brass-bright)}
+.attr td.note{color:var(--muted);font-size:12.5px;font-style:italic}
+.spr{height:30px;width:auto;max-width:40px;vertical-align:middle;margin-right:10px;border-radius:3px;flex:none}
+.gear-name{display:flex;align-items:center}
+.blist{list-style:none}.blist li{padding:8px 0 8px 20px;border-bottom:1px solid var(--line);position:relative}
+.blist li:last-child{border-bottom:none}
+.blist li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;background:var(--brass);transform:rotate(45deg)}
+.blist b{color:var(--brass-bright)}
+.axis{border-left:3px solid var(--faint);padding:2px 0 2px 14px;margin-bottom:14px}
+.axis.phys{border-left-color:var(--phys)}.axis.magic{border-left-color:var(--magic)}.axis.sustain{border-left-color:var(--sustain)}
+.axis .t{font-weight:700;margin-bottom:3px}
+.axis.phys .t{color:var(--phys)}.axis.magic .t{color:var(--magic)}.axis.sustain .t{color:var(--sustain)}
+.axis .d{color:var(--muted);font-size:14px}
+.tags-line{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-family:"JetBrains Mono",monospace;font-size:11px;padding:3px 9px;border:1px solid var(--border);border-radius:99px;color:var(--muted)}
+.assess{font-size:16px;line-height:1.7}
+footer{max-width:1080px;margin:0 auto;padding:28px 22px 60px;border-top:1px solid var(--line);color:var(--faint);font-family:"JetBrains Mono",monospace;font-size:11px;line-height:1.7}
+.foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.foot-row a{color:var(--faint)}.foot-row a:hover{color:var(--ink)}
+.back{display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--brass)}
+.back:hover{color:var(--brass-bright)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="brand">Bryce Lote</a>
+    <nav class="chips">
+      <a href="#overview">Overview</a><a href="#sheet">Character</a><a href="#racial">Racial</a>
+      <a href="#gear">Gear</a><a href="#effects">Effects</a><a href="#play">How It Plays</a>
+      <a href="#offense">Offense</a><a href="#weak">Weaknesses</a><a href="#verdict">Verdict</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="overview">
+    <div class="eyebrow">Morrowind Chronicle &middot; Endgame Build</div>
+    <h1>Brutus, the Immovable<span class="sub">A constant-effect attrition tank that wins by not losing. Planned on paper, followed exactly, played to completion.</span></h1>
+    <div class="updated">Nord &middot; custom class "Adventurer" &middot; Level 42 &middot; sword-and-board Heavy Armor</div>
+  </div>
+
+  <section style="animation-delay:.05s" id="sheet">
+    <div class="s-head"><span class="tick"></span><h2>Identity &amp; Character Sheet</h2></div>
+    <div class="grid cols-2">
+      <div class="card prose">
+        <div class="sub-h">Concept</div>
+        <p>An immovable frontline fighter that wins by not losing. It layers physical mitigation, magical resilience, and passive sustain so combat needs almost no reactive input: <b>stand ground, absorb punishment, outlast</b>.</p>
+        <p>Sword-and-board Heavy Armor with a blunt weapon (Skull Crusher), prioritizing consistency and durability, with god-tier burst available on demand through Alchemy. The win condition: enemy damage collapses against stacked mitigation while passive Restore Health refills the gap.</p>
+      </div>
+      <div class="card">
+        <div class="sub-h">Vitals (as played)</div>
+        <div class="kv"><span class="k">Health</span><span class="v">466</span></div>
+        <div class="kv"><span class="k">Magicka</span><span class="v">~10,923 <span class="mono" style="color:var(--faint);font-size:11px">(potion loop)</span></span></div>
+        <div class="kv"><span class="k">Fatigue</span><span class="v">509</span></div>
+        <div class="kv"><span class="k">Armor rating</span><span class="v" style="color:var(--brass-bright)">283</span></div>
+        <div class="kv"><span class="k">Encumbrance</span><span class="v">~0 / 600</span></div>
+        <div class="kv"><span class="k">Gold</span><span class="v">290,202</span></div>
+      </div>
+    </div>
+
+    <div class="grid cols-2" style="margin-top:14px">
+      <div class="card" style="padding:8px 12px">
+        <table class="attr">
+          <thead><tr><th>Attribute</th><th class="r">Value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Strength</td><td class="num">120</td><td class="note">base 100 + Fists of Randagulf 20</td></tr>
+            <tr><td>Intelligence</td><td class="num">~10,923</td><td class="note">active Fortify Intelligence loop; base ~100</td></tr>
+            <tr><td>Willpower</td><td class="num">89</td><td class="note">left below cap</td></tr>
+            <tr><td>Agility</td><td class="num">160</td><td class="note">base 100 + Oreyn Bearclaw 40 + Fists 20</td></tr>
+            <tr><td>Speed</td><td class="num">100</td><td class="note">maxed</td></tr>
+            <tr><td>Endurance</td><td class="num">140</td><td class="note">base 100 + Oreyn Bearclaw 40</td></tr>
+            <tr><td>Personality</td><td class="num">100</td><td class="note">maxed</td></tr>
+            <tr><td>Luck</td><td class="num">68</td><td class="note">&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="sub-h">Skills &amp; Standing</div>
+        <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px"><b style="color:var(--brass-bright)">Maxed (100):</b> Block &middot; Blunt Weapon &middot; Heavy Armor &middot; Long Blade</p>
+        <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px">Alchemy 71 &middot; Speechcraft 70 &middot; Athletics 64 &middot; Armorer 57 &middot; Medium Armor 57 &middot; Axe 55 &middot; Short Blade 50 &middot; Mysticism 50</p>
+        <div class="sub-h">Factions</div>
+        <div class="tags-line">
+          <span class="pill">Blades</span><span class="pill">Fighters Guild &middot; Master</span><span class="pill">Mages Guild</span><span class="pill">House Redoran</span><span class="pill">Thieves Guild</span>
+        </div>
+        <div class="sub-h" style="margin-top:14px">Birthsign &mdash; The Lady</div>
+        <p style="font-size:13.5px;color:var(--muted)">Fortify Personality 25 + Fortify Endurance 25</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.08s" id="racial">
+    <div class="s-head"><span class="tick"></span><h2>Racial Abilities &amp; Powers</h2><span class="meta">Nord</span></div>
+    <div class="card">
+      <div class="kv"><span class="k">Resist Shock (constant)</span><span class="v">50 pts</span></div>
+      <div class="kv"><span class="k">Immune to Frost (constant)</span><span class="v">Resist Frost 100</span></div>
+      <div class="kv"><span class="k">Thunder Fist (power)</span><span class="v">Frost Damage 25 on Touch</span></div>
+      <div class="kv"><span class="k">Woad (power)</span><span class="v">Shield 30 for 60s on Self</span></div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.1s" id="gear">
+    <div class="s-head"><span class="tick"></span><h2>Gear &amp; Artifacts</h2><span class="meta">constant effects unless noted</span></div>
+    <div class="card" style="padding:8px 12px">
+      <table>
+        <thead><tr><th>Item</th><th>Slot</th><th>Effect</th><th>Location</th></tr></thead>
+        <tbody id="gearbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="effects">
+    <div class="s-head"><span class="tick"></span><h2>Total Constant Effects</h2><span class="meta">stacked from gear + racial</span></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="sub-h">Fortify</div>
+        <p class="prose" style="font-size:14px;color:var(--muted)">Intelligence 35 &middot; Endurance 40 &middot; Agility 60 &middot; Strength 20 &middot; Attack 5 &middot; Acrobatics 20</p>
+        <div class="sub-h" style="margin-top:16px">Utility</div>
+        <p class="prose" style="font-size:14px;color:var(--muted)">Spell Absorption 25 &middot; Reflect 45 &middot; Feather 115 &middot; Restore Health 1</p>
+      </div>
+      <div class="card">
+        <div class="sub-h">Resistances</div>
+        <p class="prose" style="font-size:14px;color:var(--muted)">Fire 125 &middot; Poison 20 &middot; Shock 70 total (gear 20 + Nord 50) &middot; Magicka 20 &middot; Normal Weapons 65 &middot; <b>Frost 100 (immune)</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="play">
+    <div class="s-head"><span class="tick"></span><h2>How It Plays</h2><span class="meta">three independent defensive axes</span></div>
+    <div class="card">
+      <div class="axis phys"><div class="t">Physical</div><div class="d">Resist Normal Weapons 65 on top of Heavy Armor 100 (283 armor rating) and Block 100 with a shield guts melee damage.</div></div>
+      <div class="axis magic"><div class="t">Magic</div><div class="d">Spell Absorption 25% rolls first (nullify + gain magicka), then Reflect 45% (bounce back at the caster) &mdash; roughly a <b>59% chance any hostile spell does zero and may punish the caster</b>, before resistances touch the remainder. Fire is then soaked entirely.</div></div>
+      <div class="axis sustain"><div class="t">Sustain</div><div class="d">Constant Restore Health plus Eleidon's Ward (50&ndash;100 burst heal, cast when used) means you outlast rather than out-DPS.</div></div>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="highlights">
+    <div class="s-head"><span class="tick"></span><h2>Design Highlights</h2><span class="meta">why it's smart</span></div>
+    <div class="card">
+      <ul class="blist">
+        <li><b>Layered anti-magic</b> is the standout: absorption, then reflection, then resistance. Enemy mages effectively fight themselves.</li>
+        <li><b>Fire 125</b> is deliberate over-engineering: 25 pts of overflow past the practical 100% cap buffers against enemy fire-weakness debuffs. Pre-paid insurance.</li>
+        <li><b>Nord racial synergy</b> covers the two elements the gear doesn't (Shock 70 total, Frost immune), freeing gear slots to over-invest in fire.</li>
+        <li><b>Feather 115</b> is the quiet MVP: it holds encumbrance near 0/600 despite a full Daedric loadout, keeping him mobile instead of turtled.</li>
+        <li><b>Artifact efficiency</b>: Oreyn Bearclaw (Agi 40 + End 40) is near best-in-slot; Fists of Randagulf double-dip Str + Agi from the glove slot; the two rings cover Reflect / RNW / Acrobatics and Poison / Shock / Magicka.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="offense">
+    <div class="s-head"><span class="tick"></span><h2>Offense</h2><span class="meta">defense is the baseline; offense scales on tap</span></div>
+    <div class="card prose">
+      <p>Despite reading as a pure defensive shell on paper, Brutus hits hard, and can hit like a god on command.</p>
+      <p><b>Attributes maxed before gear</b>, so gear Fortify stacks on capped stats: Strength 120, Agility 160. Since Strength is a linear multiplier on melee damage in Morrowind, high blunt damage is baked in, backed by Blunt Weapon 100 and Block 100.</p>
+      <p><b>Alchemy 71 + Fortify Intelligence looping = on-demand god mode.</b> Drinking Fortify Intelligence potions balloons Magicka and potion strength, letting him brew massively fortified combat potions (Fortify Strength / Attack / Blunt). The stats screen captured this mid-loop: Intelligence and Magicka at ~10,923. When a fight needs to end <i>now</i>, a potion or two makes damage effectively unlimited.</p>
+      <p>Net: defense is the always-on baseline; offense scales from "solidly strong" to "god-tier" at will.</p>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="weak">
+    <div class="s-head"><span class="tick"></span><h2>Honest Weaknesses</h2></div>
+    <div class="card">
+      <ul class="blist">
+        <li><b>Spell Absorption is indiscriminate</b>: it can eat your own self-cast buffs and heals. The build sidesteps this by being gear- and potion-driven (constant Restore Health + cast-when-used shield), so it's a non-issue as long as you don't self-cast defensive magic.</li>
+        <li><b>Resist Normal Weapons has gaps</b>: it excludes enchanted/Daedric enemy weapons and magical creature attacks. Heavy Armor + shield + high health cover those, but it's the one crack in the physical wall.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="animation-delay:.12s" id="verdict">
+    <div class="s-head"><span class="tick"></span><h2>Overall Assessment</h2></div>
+    <div class="card prose assess">
+      <p>A near-optimal constant-effect defensive tank, close to the set a theorycrafter would converge on, with a couple of genuinely sharp touches: the absorption&rarr;reflection&rarr;resist magic stack, the fire overflow buffer, the Nord racial covering the off-elements. With attributes maxed underneath (Str 120 / Agi 160 / End 140), four combat skills at 100, and Alchemy for on-demand burst, Brutus is not the slow-to-kill glass fortress he looks like on paper. He's a 283-armor wall that also swings hard and can spike to god-tier whenever he wants. Planned on paper, followed exactly, and it does what it set out to do: it makes endgame Morrowind an attrition problem you always win.</p>
+      <a href="/pages/breakdowns.html" class="back">&larr; Back to Breakdowns</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-row">
+    <div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--ink)">Bryce Lote</div>
+      <div style="margin-top:4px">Yukon, Oklahoma</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+      <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+      <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+var IMG_BASE="/image/morrowind-images/";
+var GEAR=[
+  ["Necromancer's Amulet","necromancers-amulet","Amulet","Resist Normal Weapons 25, Fortify Intelligence 25, Restore Health 1, Spell Absorption 25","Worn by Archmage Trebonius, Vivec Mages Guild hall"],
+  ["Marara's Ring","","Ring","Reflect 20, Fortify Acrobatics 10, Resist Normal Weapons 40","Worn by Marara, Drethan Ancestral Tomb (island S of Dagon Fel)"],
+  ["Ring of Phynaster","ring-of-phynaster","Ring","Resist Poison 20, Resist Shock 20, Resist Magicka 20","On Pop Je's corpse, Senim Ancestral Tomb (SE of Dagon Fel)"],
+  ["Fists of Randagulf","fists-of-randagulf","Gloves","Fortify Agility 20 (left), Fortify Strength 20 (right)","Ilunibi, Soul's Rattle section (NW of Gnaar Mok)"],
+  ["Eleidon's Ward","eleidons-ward","Shield","Restore Health 50–100 (cast when used)","Above Mordrin Hanin's skeleton, Ibar-Dad (coast E of Khuul)"],
+  ["Daedric Greaves","daedric-greaves","Greaves","Feather 50","Reward from Therana, Auriel's Bow quest"],
+  ["Skull Crusher","skull-crusher","Blunt (1H)","Feather 15, Fortify Attack 5","Forge of Hilbongard, Anudnabia (via Omaren Ancestral Tomb, E of Sadrith Mora)"],
+  ["Robe of the Drake's Pride","","Robe","Fortify Intelligence 10, Resist Fire 25, Reflect 25","On Senise Thindo, Tel Aruhn Living Quarters"],
+  ["Helm of Oreyn Bearclaw","helm-of-oreyn-bearclaw","Helmet","Fortify Agility 40, Fortify Endurance 40","Malacath's Quest, shrine in the Sheogorad region"],
+  ["Dragonbone Cuirass","dragonbone-cuirass","Cuirass","Resist Fire 100","Locked Dwemer closet, Central Vault, Mudan Grotto (SW of Ebonheart)"],
+  ["Daedric Armor","daedric-armor","Remaining slots","Custom-enchantable","Standard Daedric in the open slots"]
+];
+var esc=function(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");};
+var tb=document.getElementById("gearbody");
+GEAR.forEach(function(g){
+  var icon=g[1]?'<img class="spr" src="'+IMG_BASE+g[1]+'.jpg" alt="'+esc(g[0])+'" loading="lazy">':'';
+  var tr=document.createElement("tr");
+  tr.innerHTML='<td><span class="gear-name">'+icon+'<span class="nm">'+esc(g[0])+'</span></span></td>'+
+    '<td class="mono" style="color:var(--muted);font-size:12px">'+esc(g[2])+'</td>'+
+    '<td class="eff">'+esc(g[3])+'</td>'+
+    '<td class="loc">'+esc(g[4])+'</td>';
+  tb.appendChild(tr);
+});
+</script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/prevnext.js"></script>
+</body>
+</html>

@@ -1,5 +1,19 @@
 [
   {
+    "title": "Morrowind — Brutus, the Heavy Armor Tank",
+    "description": "An endgame constant-effect defensive build for Morrowind: a Nord sword-and-board tank that layers physical mitigation, an absorption-reflection-resist anti-magic stack, and passive sustain, with on-demand god-tier burst through Alchemy. Character sheet, gear, and design breakdown.",
+    "tags": [
+      "morrowind",
+      "gaming"
+    ],
+    "date": "July 2026",
+    "date_sort": "2026-07-22",
+    "url": "/pages/morrowind/brutus-tank-build.html",
+    "image": "/image/game-covers/38_Morrowind.jpg",
+    "link_text": "Read the build",
+    "published": "2026-07-22"
+  },
+  {
     "title": "Something to Point To",
     "description": "A weekend spent turning a retired laptop into a full home server, and the quieter story underneath it: ADHD urgency, hyperfixation, and the cost of being present in body but not attention.",
     "tags": [
