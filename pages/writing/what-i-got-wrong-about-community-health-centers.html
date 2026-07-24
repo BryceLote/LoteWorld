@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I Got Wrong About Community Health Centers — Bryce Lote</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#1a1d21;--bg-card:#212428;--bg-surface:#272a2f;
+    --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);
+    --text-heading:#e8e5de;--text-body:#908b82;--text-muted:#5a5750;--text-faint:#3a3630;
+    --rust:#9e6b47;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Libre Baskerville',Georgia,serif;background:var(--bg);color:var(--text-body);line-height:1.9;font-size:17px;-webkit-font-smoothing:antialiased}
+  nav{position:fixed;top:0;width:100%;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(26,29,33,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  nav a{font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--text-muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.3s}
+  nav a:hover{color:var(--text-heading)}
+  .article-header{max-width:680px;margin:0 auto;padding:9rem 3rem 2.5rem;text-align:center}
+  .article-header h1{font-size:clamp(2rem,4.5vw,2.9rem);font-weight:400;color:var(--text-heading);line-height:1.25;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards}
+  .article-meta{font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-body);letter-spacing:0.02em;line-height:1.7;max-width:560px;margin:0 auto;opacity:0;animation:fadeUp 0.8s ease 0.5s forwards}
+  .article-meta .read{display:block;margin-top:0.9rem;font-size:0.78rem;color:var(--text-muted);letter-spacing:0.06em}
+  .article-rule{width:48px;height:1px;background:var(--text-faint);margin:2.5rem auto;opacity:0;animation:fadeUp 0.8s ease 0.7s forwards}
+  .article-hero{max-width:820px;margin:0 auto;padding:0 3rem;opacity:0;animation:fadeUp 0.8s ease 0.6s forwards}
+  .article-hero img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,0.35)}
+
+  .prose{max-width:680px;margin:0 auto;padding:0 3rem 4rem}
+  .prose p{margin-bottom:1.5rem;color:var(--text-body);line-height:1.9}
+  .prose h2{font-family:'Libre Baskerville',serif;font-weight:700;font-size:1.4rem;color:var(--text-heading);line-height:1.3;margin:3rem 0 1.4rem;padding-top:1.6rem;border-top:1px solid var(--border)}
+  .prose .drop-cap::first-letter{float:left;font-size:3.8rem;line-height:0.8;padding-right:0.1em;padding-top:0.06em;color:var(--text-heading);font-weight:400}
+  .back-section{max-width:680px;margin:0 auto;padding:0 3rem 4rem}
+  .back-link{font-family:'DM Sans',sans-serif;display:inline-block;font-size:0.82rem;color:var(--text-muted);text-decoration:none;transition:color 0.3s}
+  .back-link:hover{color:var(--text-heading)}
+  footer{padding:3rem;max-width:680px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--border);font-family:'DM Sans',sans-serif}
+  .footer-left{font-size:0.85rem;color:var(--text-muted)}
+  .footer-left small{display:block;margin-top:0.3rem;font-size:0.75rem;color:var(--text-muted)}
+  .footer-right{font-size:0.78rem;display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem}
+  .footer-right a{color:var(--text-muted);text-decoration:none;transition:color 0.3s}
+  .footer-right a:hover{color:var(--text-heading)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:768px){nav{padding:1rem 1.5rem}.article-header{padding:7rem 1.5rem 2rem}.prose{padding:0 1.5rem 3rem}.back-section{padding:0 1.5rem 3rem}footer{padding:2rem 1.5rem;flex-direction:column;gap:1rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/index.html">&larr; Home</a>
+  <a href="/pages/writing.html">Writing</a>
+</nav>
+<div class="article-header">
+  <h1>What I Got Wrong About Community Health Centers</h1>
+  <div class="article-meta">Months of cold calls into Federally Qualified Health Centers, and what referrals, prior authorization, and the No Surprises Act taught me about the people holding patient care together.<span class="read">~12 min read</span></div>
+</div>
+<figure class="article-hero"><img src="/image/community-health-centers-cover.png" alt="What I Got Wrong About Community Health Centers" loading="lazy"></figure>
+<div class="article-rule"></div>
+<div class="prose">
+
+  <h2>Referrals, where it all started</h2>
+  <p class="drop-cap">I started with a phone, a list, and a question about referrals. I spent several months calling into Federally Qualified Health Centers across the country, talking to the people who do the administrative work that holds patient care together.</p>
+  <p>Referrals made sense to me. A provider places an order. Someone on the team pulls the records, verifies insurance, assembles the packet, and faxes it to a specialist. Then the waiting begins. Did the specialist receive it? Is the patient scheduled? Did the patient show up? Are the consult notes coming back?</p>
+  <p>I came from operations. When I first learned what was involved in sending a referral, the number of systems required to compile records surprised me. Charts scattered across systems, insurance details buried in different screens. I expected the inside of the building to be the problem.</p>
+  <p>It wasn't. The people doing this work were competent. Methodical. They had their steps down. The referral got built and it went out.</p>
+  <p>One coordinator told me she sends over five hundred referrals a month. I couldn't believe it. I remember actually gasping and asking her if she was serious. Thirty to forty a day, she said. Her pulmonologist was scheduling into the following summer. She handles medical records on top of everything else.</p>
+  <p>At another center, a coordinator told me she had over a thousand open referrals in her queue. For three providers. She tracks every follow-up manually, writes a note in a text field each time she calls, checks her own notes to remember where she left off. She told me she was having a very difficult time keeping up. At the end of the call she said, "I hope I explained it well enough for you."</p>
+  <p>I felt ashamed for taking so much of her time after learning how busy she was. But her question carried weight beyond the moment. I realized the kind of person who does this work genuinely cares about everyone who crosses their path. Even a vendor on the phone during a busy Tuesday.</p>
+  <p>I kept hearing some version of the same thing. The process inside the building was sound. The people were good at their jobs. But once the referral crossed the threshold into a system they couldn't control, everything slowed down. Specialist offices that don't return faxes. Scheduling backlogs six months deep. A year in some cases.</p>
+  <p>And someone at the center absorbing all of that delay through repeated calls and manual tracking, sending follow-up faxes on letterhead marked first attempt, second attempt, third attempt.</p>
+  <p>I was not ready for how much of the work was invisible. And I kept asking the same question on every call because nobody else seemed to be asking it: How do you keep track of whether or not a patient actually gets seen?</p>
+  <p>Every person answered immediately. They didn't hesitate because the answer had been sitting with them. They'd just never been asked. These are people carrying a lot, and carrying it quietly. I was a stranger cold-calling on a Tuesday afternoon and they opened up because someone finally wanted to know.</p>
+  <p>When a referral falls through at these organizations, the most common way anyone finds out is the patient calling back to ask what happened. At a private practice, that is a scheduling delay and maybe lost revenue. At a community health center serving a predominantly Medicaid population in a town with one clinic, that is a patient who does not get seen.</p>
+  <p>One nursing leader I spoke with put it plainly. Her team had been exploring whether patients could self-schedule specialist appointments to relieve the workload. She shut it down. Not because the idea was wrong, but because she knew her population. Most of her patients were not in a position to navigate that on their own. She said the nurse in her wouldn't allow it. She would not transfer risk to the people least equipped to carry it.</p>
+
+  <h2>Prior Authorization — The Thing That Hit Me at Home</h2>
+  <p>Prior authorization came up on almost every call I made. It lived in the background of every referral conversation. A coordinator would be walking me through how she tracks open referrals and then mention, almost in passing, that half of them couldn't move forward because the authorization hadn't come through yet. Leadership would ask me if we could make it easier. Everyone I spoke to had something to say about it.</p>
+  <p>But I treated it like a secondary topic. Referrals were the thing I understood. Prior auth was the thing I kept hearing about but hadn't sat with long enough to feel.</p>
+  <p>Then it happened to someone I love.</p>
+  <p>My wife has had seven spinal surgeries. Late last year she gave birth to our daughter, and since then she has been dealing with significant pain. Her primary care physician ordered an MRI. Denied. Her neurosurgeon ordered one. Denied. Multiple attempts, multiple denials. The imaging her doctors agreed she needed to even begin the process of getting care was being blocked by someone who had never examined her.</p>
+  <p>I watched her wait. I watched her hurt. And I sat with the reality that the system requiring permission before a patient can access care their own doctor ordered is not an abstraction. It is not a workflow problem. It is a person in pain, waiting for someone she will never meet to decide whether her doctor was right.</p>
+  <p>That is when prior authorization became real for me.</p>
+  <p>I went back to the phones. I stopped asking about it as a sidebar to referrals and started asking about it directly. I called coordinators and asked them to walk me through what happens when a prior auth lands on their desk. I asked the developers on my team. I asked people in my own life whether they had been through this process and what it looked like from their end.</p>
+  <p>What I learned first was that two completely different workflows live under the same name. I did not figure this out on a call. It came from a conversation with someone on my team who had spent years working inside these organizations. He asked me one question about whether I had looked into the pharmacy side of prior auth. I told him I had not. I told him I did not understand it well enough. That conversation changed how I understood the entire process.</p>
+  <p>One version is pharmacy-based. A provider writes a prescription, the pharmacy runs it, the system flags it as requiring authorization, and a case gets created electronically. A fax arrives at the clinic. Someone opens the case, answers a set of clinical questions, and submits it. The path is defined. It is high volume, but the steps are known. One operations leader told his team the volume was so high he would need to hire sixteen more people to keep up. His current team was two.</p>
+  <p>The other version is nothing like that.</p>
+  <p>A provider orders a procedure or a specialist visit. The payer requires authorization before it can move forward. There is no single system for this. The person handling it pulls clinical documentation from the chart, matches diagnosis codes to the payer's requirements, and submits through a portal that works differently from the one they used an hour ago. No two payers handle it the same way. Some want notes uploaded. Some want a phone call. Some have a form buried three pages deep in a portal that changes quarterly.</p>
+  <p>This is not data entry. Every submission requires someone who understands the clinical picture well enough to pull the right documentation before it goes out. A wrong diagnosis code means a denied authorization. A denied authorization means the procedure does not happen and the patient does not get the care their provider ordered.</p>
+  <p>I had been asking the wrong questions for months. I thought prior auth was one thing. It was two things that shared a name and almost nothing else.</p>
+  <p>After that conversation I started writing down how I thought each process worked. Step by step. Then I went to the people building the tools to handle it and asked them to tell me where I was wrong. I was wrong in several places. The complexity of matching clinical documentation to payer-specific requirements, the number of different portals involved, the judgment calls that had to be made on every single submission. I had underestimated all of it.</p>
+  <p>At the centers I was calling into, the same small teams handling referrals were often handling this too. The same coordinator tracking a thousand open referrals was also navigating payer portals for prior authorizations on the procedures those referrals depended on.</p>
+  <p>In some cases the prior authorization was the referral. The specialist would not schedule the patient until the authorization was in hand, which meant the referral could not move forward until someone worked the auth.</p>
+  <p>Two workflows that looked separate on paper were the same person, at the same desk, carrying both.</p>
+  <p>The weight is different here. When a referral stalls, a patient waits longer to be seen. When a prior authorization is denied or submitted with the wrong documentation, a medication gets delayed. A procedure gets pushed back. A treatment plan that a provider already decided was necessary sits in a queue waiting for permission.</p>
+  <p>I think about my wife when I think about this. She has a neurosurgeon who knows her spine. She has a primary care doctor who sees her regularly. Both of them ordered the same imaging. Both were told no. And she is someone with a husband at home who can make phone calls and push back. Most of the patients at the centers I was calling into do not have that. They are relying entirely on a team that is already underwater to fight that fight for them.</p>
+
+  <h2>Good Faith Estimates?</h2>
+  <p>I have not had a single conversation with someone inside an FQHC about good faith estimates. I want to be upfront about that. What follows is not something I heard on a call. It is something I went and learned on my own because the signals told me I needed to.</p>
+  <p>When I started including good faith estimates in my outreach, the response was different. Not different like people were replying. Different like they were opening. The open rates on those emails were above ninety-five percent. For cold outreach. To the busiest people at each organization. People whose inboxes are full of vendors trying to get fifteen minutes. Almost every one of them opened an email about good faith estimates. Something about this was hitting a nerve. I did not know why yet. So I started digging.</p>
+  <p>What I found was a problem with no clean answer.</p>
+  <p>The No Surprises Act requires healthcare providers to give uninsured and self-pay patients a good faith estimate of expected charges before care is delivered. The intent is straightforward. Protect people from surprise bills. Give them a number before they walk in so they can make an informed decision. For most practices that is exactly what it does.</p>
+  <p>For the community health centers I have been learning about, it does something else entirely. The requirement applies specifically to uninsured and self-pay patients. At a community health center, that is most of the people walking through the door.</p>
+  <p>These organizations exist to provide care to people regardless of their ability to pay. Most of their patients are on Medicaid. Many qualify for a sliding fee scale that reduces their cost based on income. The sliding fee is not a discount. It is a core part of how these organizations fulfill their mission and how they are funded. But qualifying for it requires documentation. Pay stubs. Tax returns. Proof of household size. For someone who is skeptical of institutions, or who does not have those documents, or who is homeless, that requirement alone can be enough to keep them from walking through the door.</p>
+  <p>That is the first barrier. And I am not arguing it should not exist. The documentation protects the program. But it is still a barrier for the people who need the program most.</p>
+  <p>The second barrier is administrative. The sliding fee scale means a patient's cost depends on where they fall on the income spectrum. A visit that costs one patient $20 might cost another $150. Producing an accurate good faith estimate for a population where every patient's cost structure is different is significantly harder than producing one for a practice with a standard fee schedule. The math changes for every person who walks in.</p>
+  <p>The third barrier is the one I think about the most.</p>
+  <p>Most people I know will look at a bill for healthcare before they consider the physical cost of not getting care. They will see a number that feels too high and decide to tough it out. Wait it out. Hope it gets better. I believe the patients at community health centers are even more likely to react that way, and they are the same patients most likely to need care they cannot afford. Presenting a financial estimate to someone already hesitant to seek help risks pushing them further from the door instead of through it.</p>
+  <p>And here is where the trap closes.</p>
+  <p>If the organization does not provide the estimate, they are violating the No Surprises Act. They can face penalties of up to ten thousand dollars per violation. For a community health center operating on federal grants, that math adds up fast.</p>
+  <p>If they provide an estimate that is too low and the final bill exceeds it by four hundred dollars or more, the patient can trigger a formal dispute. The organization is not just wrong on paper. They are defending their billing in a process they do not have the administrative capacity to absorb.</p>
+  <p>If they provide an estimate that is too high, they risk the original problem. A number on a page that may tell a person in need that care is out of reach.</p>
+  <p>There is no right answer. Every direction carries a consequence.</p>
+  <p>And underneath all of it is an irony that I do not think gets enough attention. The No Surprises Act was built for a billing model where providers make money by seeing patients and collecting payment. That is not how community health centers work. Their funding comes from federal grants tied to the scope of services they provide and the communities they serve. Their mission is to serve everyone who walks in regardless of what that person can pay. The law was designed to protect consumers in a system built on revenue. These organizations operate in a system built on care. And they are bound by the same rules.</p>
+  <p>I have not spoken to the people living inside this problem yet. I do not know what it looks like at eight in the morning when a patient is sitting across from someone at the front desk and the estimate has to be produced before care can begin. I do not know how the staff navigates the conversation when the number on the screen is higher than what the patient expected. I do not know what it feels like to watch someone leave because of a document you were required to give them.</p>
+  <p>But I know enough now that when I do make that call, I am not asking someone to walk me through the basics on their already stretched time. I am not asking them to explain why their organization is different. I already did that work. The conversation I want to have is the one that starts after the fundamentals, where the person on the other end can tell me what I still have wrong. That is the conversation worth having. Not showing up with an answer to a problem I have not fully understood.</p>
+
+  <h2>Why I Wrote This</h2>
+  <p>I did not write this to sell anything.</p>
+  <p>I wrote this because the work happening inside community health centers is more complicated than most people realize. The systems are different. The funding is different. The stakes are different. And the people doing the work carry it quietly because nobody outside the building is paying close enough attention to notice.</p>
+  <p>If you do this work, I hope something in here made you feel seen. Not because I understand all of it. I do not. But because I have been listening, and what I have heard has stayed with me.</p>
+  <p>If you are a patient who has been frustrated by a denied authorization or a referral that went nowhere or an estimate that made you question whether you could afford to get help, I want you to know something. The people on the other side of that process are not the ones standing in your way. Most of them are fighting to get you through. They are doing it understaffed, under-resourced, and under pressure you will never see. They are on your side even when the system makes it hard to tell.</p>
+  <p>I am still learning. I will get things wrong. If you read this and I already have, I would rather hear about it than not.</p>
+
+</div>
+<div class="back-section">
+  <a href="/pages/writing.html" class="back-link">&larr; Back to Writing</a>
+</div>
+<footer>
+  <div class="footer-left">Bryce Lote<small>Yukon, Oklahoma</small></div>
+  <div class="footer-right">
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+  </div>
+</footer>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/prevnext.js"></script>
+</body>
+</html>
