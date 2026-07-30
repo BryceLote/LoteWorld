@@ -1,5 +1,19 @@
 [
   {
+    "title": "Valheim — Black Forest Checklist",
+    "description": "An interactive progression checklist for Valheim's Bronze Age: raw resource targets, crafting build order, tools, armor paths, food and meads, and Elder boss prep. Checkboxes save in your browser; every item links to its wiki page.",
+    "tags": [
+      "valheim",
+      "gaming"
+    ],
+    "date": "July 2026",
+    "date_sort": "2026-07-29",
+    "url": "/pages/valheim/valheim-black-forest-checklist.html",
+    "image": "/image/game-covers/Valheim.jpg",
+    "link_text": "Open the checklist",
+    "published": "2026-07-29"
+  },
+  {
     "title": "Morrowind — Brutus, the Heavy Armor Tank",
     "description": "An endgame constant-effect defensive build for Morrowind: a Nord sword-and-board tank that layers physical mitigation, an absorption-reflection-resist anti-magic stack, and passive sustain, with on-demand god-tier burst through Alchemy. Character sheet, gear, and design breakdown.",
     "tags": [

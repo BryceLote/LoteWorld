@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valheim — Black Forest Checklist — Bryce Lote</title>
+<style>
+:root {
+  --bg: #1c1917;
+  --surface: #262322;
+  --surface-hover: #2e2b29;
+  --border: #3a3533;
+  --accent: #c8a04a;
+  --accent-dim: #9a7a38;
+  --text: #e5ddd5;
+  --text-secondary: #8a817a;
+  --text-muted: #5c5550;
+  --green: #7a9a6b;
+  --green-dim: #3d4d35;
+  --red: #a65d5d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+}
+/* site nav */
+.site-nav{position:sticky;top:0;z-index:50;background:rgba(28,25,23,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.site-nav-inner{max-width:900px;margin:0 auto;padding:0.8rem 1.5rem;display:flex;align-items:center;gap:1.2rem}
+.site-nav .brand{font-weight:700;color:var(--accent);letter-spacing:0.02em;text-decoration:none;font-size:1rem}
+.site-nav a.link{margin-left:auto;font-size:0.82rem;color:var(--text-secondary);text-decoration:none;letter-spacing:0.04em}
+.site-nav a.link:hover{color:var(--text)}
+.wrap{max-width:900px;margin:0 auto;padding:1.5rem}
+
+h1 { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+.subtitle { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+.section { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.section-header { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--surface); cursor: pointer; user-select: none; transition: background 0.15s; }
+.section-header:hover { background: var(--surface-hover); }
+.section-header h2 { font-size: 1rem; font-weight: 600; color: var(--text); }
+.section-num { color: var(--accent); margin-right: 0.5rem; font-weight: 700; }
+.section-progress { font-size: 0.75rem; color: var(--text-secondary); white-space: nowrap; }
+.progress-bar { width: 80px; height: 4px; background: var(--border); border-radius: 2px; display: inline-block; vertical-align: middle; margin-left: 0.5rem; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; }
+.chevron { color: var(--text-muted); transition: transform 0.2s; font-size: 0.8rem; margin-left: 0.75rem; }
+.section.open .chevron { transform: rotate(180deg); }
+.section-body { display: none; padding: 0.75rem 1rem 1rem; background: var(--bg); }
+.section.open .section-body { display: block; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+thead th { text-align: left; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--border); color: var(--accent-dim); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+tbody td { padding: 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr.checked td { opacity: 0.45; }
+tbody tr.checked td:first-child { opacity: 1; }
+input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; vertical-align: middle; }
+.item-name { font-weight: 600; color: var(--text); }
+.source { color: var(--text-secondary); }
+.uses { color: var(--text-secondary); }
+.target { font-weight: 600; color: var(--accent); white-space: nowrap; }
+.note { font-size: 0.8rem; color: var(--text-secondary); font-style: italic; padding: 0.5rem; border-left: 2px solid var(--border); margin-top: 0.75rem; line-height: 1.5; }
+.build-order { list-style: none; padding: 0; }
+.build-order li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--border); }
+.build-order li:last-child { border-bottom: none; }
+.build-order li.checked { opacity: 0.45; }
+.build-order li.checked input { opacity: 1; }
+.build-item { flex: 1; }
+.build-name { font-weight: 600; color: var(--text); }
+.build-cost { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; }
+.build-unlocks { font-size: 0.8rem; color: var(--accent-dim); margin-top: 0.15rem; }
+.priority-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.15rem 0.4rem; border-radius: 3px; font-weight: 700; white-space: nowrap; margin-left: 0.5rem; vertical-align: middle; }
+.priority-high { background: var(--accent-dim); color: var(--bg); }
+.priority-mid { background: var(--border); color: var(--text-secondary); }
+.reset-btn { display: inline-block; margin-top: 1rem; padding: 0.4rem 0.8rem; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); font-size: 0.75rem; border-radius: 4px; cursor: pointer; }
+.reset-btn:hover { background: var(--red); color: var(--text); border-color: var(--red); }
+.comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
+.comparison-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem; }
+.comparison-card h4 { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.4rem; }
+.comparison-card p { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
+.comparison-card .verdict { font-size: 0.8rem; color: var(--text); margin-top: 0.4rem; font-style: italic; }
+/* additions: item icons + wiki links */
+.vspr { height: 20px; width: auto; max-width: 26px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated; }
+a.wikilink { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--accent-dim); transition: color 0.15s, border-color 0.15s; }
+a.wikilink:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.footer { max-width: 900px; margin: 2rem auto 0; padding: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: var(--text-muted); }
+.footer a { color: var(--text-muted); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+.back { display:inline-block; margin-top: 1rem; font-size: 0.8rem; color: var(--accent-dim); text-decoration:none; }
+.back:hover { color: var(--accent); }
+@media (max-width: 600px) {
+  .wrap { padding: 1rem 0.75rem; }
+  h1 { font-size: 1.3rem; }
+  table { font-size: 0.78rem; }
+  .comparison { grid-template-columns: 1fr; }
+  .progress-bar { width: 50px; }
+}
+</style>
+</head>
+<body>
+
+<div class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/index.html" class="brand">Bryce Lote</a>
+    <a href="/pages/games.html" class="link">&larr; Games</a>
+  </div>
+</div>
+
+<div class="wrap">
+<h1>Valheim — Black Forest Checklist</h1>
+<p class="subtitle">Post-Eikthyr progression through the Bronze Age. Everything needed before the Elder. Click any item name for its wiki page; checkboxes save in your browser.</p>
+
+<div id="app"></div>
+<button class="reset-btn" onclick="resetAll()">Reset all checkboxes</button>
+
+<a href="/pages/games.html" class="back">&larr; Back to Games</a>
+</div>
+
+<div class="footer">
+  <div>Bryce Lote &middot; Yukon, Oklahoma</div>
+  <div style="display:flex;gap:0.8rem">
+    <a href="https://www.linkedin.com/in/bryce-lote/">LinkedIn</a>
+    <a href="https://www.facebook.com/bryce.lote">Facebook</a>
+    <a href="https://www.instagram.com/Handsome_bryce">Instagram</a>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'valheim-bf-checklist';
+let state = {};
+
+function loadState() {
+  try { const s = localStorage.getItem(STORAGE_KEY); if (s) state = JSON.parse(s); } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+function toggle(id) { state[id] = !state[id]; saveState(); render(); }
+function resetAll() { if (confirm('Clear all checkboxes?')) { state = {}; saveState(); render(); } }
+
+// ---- wiki links + icons (added) ----
+const WIKI = {
+  copper:"Copper_ore", tin:"Tin_ore", surtling:"Surtling_core", corewood:"Corewood", finewood:"Finewood",
+  bone:"Bone_fragments", greydwarfeye:"Greydwarf_eye", leather:"Leather_scraps", deerhide:"Deer_hide",
+  trollhide:"Troll_hide", thistle:"Thistle", honey:"Honey", dandelion:"Dandelion", feathers:"Feathers",
+  resin:"Resin", queenbee:"Queen_bee", ancientseed:"Ancient_seed",
+  kiln:"Charcoal_kiln", smelter:"Smelter", forge:"Forge", forgecooler:"Forge_cooler", anvils:"Forge",
+  cauldron:"Cauldron", fermenter:"Fermenter", beehive:"Beehive", portal1:"Portal",
+  bronzeaxe:"Bronze_axe", finewoodbow:"Finewood_bow", bronzepick:"Bronze_pickaxe", bronzenails:"Bronze_nails",
+  bronzebuckler:"Bronze_buckler", bronzesword:"Bronze_sword", firearrows:"Fire_arrow",
+  troll_helm:"Troll_Set", troll_legs:"Troll_Set", troll_tunic:"Troll_Set", troll_cape:"Troll_hide_cape",
+  bronze_helm:"Bronze_Armor", bronze_legs:"Bronze_Armor", bronze_plate:"Bronze_Armor", bronze_buckler2:"Bronze_buckler",
+  cart:"Cart", karve:"Karve", portal2:"Portal",
+  food_cookedmeat:"Food", food_neckgrill:"Neck_tail", food_queenjam:"Queen's_jam", food_sausage:"Sausages",
+  mead_healing:"Minor_healing_mead", mead_stamina:"Minor_stamina_mead", mead_poison:"Poison_resistance_mead",
+  mead_frostresist:"Frost_resistance_mead", arrows_flint:"Flinthead_arrow", arrows_fire:"Fire_arrow",
+  elder_seeds:"Ancient_seed", elder_arrows:"Fire_arrow", elder_food:"Food", elder_gear:"Bronze_buckler",
+  elder_prep:"Workbench", elder_pillar:"The_Elder"
+};
+const ICONS = {copper:1,tin:1,surtling:1,corewood:1,finewood:1,bone:1,greydwarfeye:1,leather:1,deerhide:1,trollhide:1,thistle:1,honey:1,dandelion:1,feathers:1,resin:1,queenbee:1,ancientseed:1};
+function nameHtml(id, name) {
+  const icon = ICONS[id] ? '<img class="vspr" src="/image/valheim-images/' + id + '.png" alt="" loading="lazy">' : '';
+  const t = WIKI[id];
+  const label = t
+    ? '<a class="wikilink" href="https://valheim.fandom.com/wiki/' + encodeURI(t) + '" target="_blank" rel="noopener">' + name + '</a>'
+    : name;
+  return icon + label;
+}
+
+const sections = [
+  {
+    num: '1', title: 'Raw Resources — Collection Targets', type: 'table',
+    headers: ['', 'Resource', 'Source', 'Target', 'Key Uses'],
+    rows: [
+      { id: 'copper', name: 'Copper Ore', source: 'Large mossy boulders, Black Forest. Mine underneath — deposits extend deep.', target: '60+', uses: 'Forge (6 bars), all Bronze crafting (2 copper per 1 bronze)' },
+      { id: 'tin', name: 'Tin Ore', source: 'Small shiny rocks along BF rivers and shoreline only.', target: '30+', uses: 'Bronze crafting (1 tin per 1 bronze), Cauldron (10 tin)' },
+      { id: 'surtling', name: 'Surtling Cores', source: 'Burial Chambers — on stands and in chests. Both Meadows and BF.', target: '15+', uses: 'Kiln (5), Smelter (5), each Portal pair (2)' },
+      { id: 'corewood', name: 'Core Wood', source: 'Pine trees (tall, straight conifers) in Black Forest. Chop with any axe.', target: '30+', uses: 'Bronze Pickaxe (3), Forge Bellows, building pieces, furniture' },
+      { id: 'finewood', name: 'Fine Wood', source: 'Birch and Oak trees. Requires Bronze Axe to chop directly.', target: '40+', uses: 'Fine Wood Bow, Portals (10 each), Forge Cooler, Fermenter (30), furniture' },
+      { id: 'bone', name: 'Bone Fragments', source: 'Skeletons (BF and Burial Chambers), stone graves in Meadows. Respawn at ruins.', target: '20+', uses: 'Weapon/armor upgrades, Bone Tower Shield' },
+      { id: 'greydwarfeye', name: 'Greydwarf Eyes', source: 'Kill Greydwarfs in Black Forest. Common drop.', target: '30+', uses: 'Portals (10 each), Fire Arrows' },
+      { id: 'leather', name: 'Leather Scraps', source: 'Boars — hunt or breed in your pen for renewable supply.', target: '30+', uses: 'Bronze Axe, Bronze Pickaxe upgrades, armor upgrades' },
+      { id: 'deerhide', name: 'Deer Hide', source: 'Deer — bow hunt with sneak approach. 2 per kill.', target: '20+', uses: 'Forge Bellows, Troll Cape, Deer Rug (comfort), armor upgrades' },
+      { id: 'trollhide', name: 'Troll Hide', source: 'Trolls in Black Forest. Dangerous — bow kite or parry at range.', target: '15+', uses: 'Full Troll Hide Armor set (10 total), Troll Cape' },
+      { id: 'thistle', name: 'Thistle', source: 'Glowing blue-purple plants on ground, BF and Swamp edges. Sparkle at night.', target: '20+', uses: 'Sausages, Poison Resistance Mead, Minor Stamina Mead' },
+      { id: 'honey', name: 'Honey', source: 'Beehives at your base (passive). 1-2 per hive per cycle.', target: '20+', uses: 'Every mead base recipe, direct food' },
+      { id: 'dandelion', name: 'Dandelions', source: 'Meadows — yellow flowers in grass. 4-hour respawn after pick.', target: '15+', uses: 'Minor Healing Mead, Medium Healing Mead bases' },
+      { id: 'feathers', name: 'Feathers', source: 'Shoot birds with bow. Also found in ground nests.', target: '50+', uses: 'All arrow types (wood, flint, fire, bronze)' },
+      { id: 'resin', name: 'Resin', source: 'Greydwarf drops, chopping Beech and Birch trees. Abundant.', target: '50+', uses: 'Fire Arrows, torches, Fermenter (10), Finewood building' },
+      { id: 'queenbee', name: 'Queen Bee', source: 'Destroy wild beehives on abandoned houses. Listen for buzzing.', target: '3+', uses: 'Each builds one Beehive — passive honey forever' },
+      { id: 'ancientseed', name: 'Ancient Seeds', source: 'Greydwarf Brutes/Shamans (rare), destroy Greydwarf Nests in BF.', target: '3', uses: 'Elder boss summoning (burn 3 at Elder altar)' },
+    ]
+  },
+  {
+    num: '2', title: 'Crafting Infrastructure — Build Order', type: 'buildorder',
+    items: [
+      { id: 'kiln', name: 'Charcoal Kiln', cost: '5 Surtling Cores, 20 Stone', unlocks: 'Produces Coal from Wood. Feed it constantly — you always need more coal.', priority: 'high' },
+      { id: 'smelter', name: 'Smelter', cost: '5 Surtling Cores, 20 Stone', unlocks: 'Smelts ore into bars using Coal as fuel. One bar per ore, one coal per smelt.', priority: 'high' },
+      { id: 'forge', name: 'Forge', cost: '6 Copper bars, 4 Coal, 4 Stone, 10 Wood — must be roofed', unlocks: 'All metal crafting. Bronze alloy: 2 Copper + 1 Tin = 1 Bronze.', priority: 'high' },
+      { id: 'forgecooler', name: 'Forge Cooler', cost: '25 Fine Wood, 10 Copper — place near Forge', unlocks: 'Forge → Level 2. Unlocks first upgrade tier for bronze gear.', priority: 'mid' },
+      { id: 'anvils', name: 'Anvils', cost: '5 Wood, 2 Bronze — place near Forge', unlocks: 'Forge → Level 3. More upgrade tiers.', priority: 'mid' },
+      { id: 'cauldron', name: 'Cauldron', cost: '10 Tin bars — hang over a fire', unlocks: 'Cooking recipes (Sausages, Turnip Stew) and Mead Base brewing.', priority: 'mid' },
+      { id: 'fermenter', name: 'Fermenter', cost: '30 Fine Wood, 5 Bronze, 10 Resin', unlocks: 'Turns Mead Bases into drinkable Meads. 2 in-game days per batch.', priority: 'mid' },
+      { id: 'beehive', name: 'Beehive (each)', cost: '10 Wood, 1 Queen Bee', unlocks: 'Passive honey production. Build as many as you find Queen Bees.', priority: 'mid' },
+      { id: 'portal1', name: 'First Portal Pair', cost: '20 Fine Wood, 10 Greydwarf Eyes, 2 Surtling Cores × 2', unlocks: 'Instant travel between two linked portals. No metals allowed through.', priority: 'mid' },
+    ]
+  },
+  {
+    num: '3', title: 'Tools & Weapons — Priority Crafts', type: 'buildorder',
+    items: [
+      { id: 'bronzeaxe', name: 'Bronze Axe', cost: '8 Bronze, 4 Wood, 2 Leather Scraps', unlocks: 'Chops Birch/Oak (Fine Wood). Also a strong slash weapon vs most enemies.', priority: 'high' },
+      { id: 'finewoodbow', name: 'Fine Wood Bow', cost: '10 Fine Wood, 10 Core Wood, 2 Deer Hide', unlocks: 'Major range and damage upgrade over Crude Bow. Craft immediately after Bronze Axe.', priority: 'high' },
+      { id: 'bronzepick', name: 'Bronze Pickaxe', cost: '10 Bronze, 3 Core Wood', unlocks: 'Faster mining. Required to mine Muddy Scrap Piles in Swamp crypts (gates Iron).', priority: 'high' },
+      { id: 'bronzenails', name: 'Bronze Nails (batch)', cost: '1 Bronze = 20 Nails', unlocks: 'Needed for Cart, Karve, and many building pieces. Make 60+ nails.', priority: 'high' },
+      { id: 'bronzebuckler', name: 'Bronze Buckler', cost: '8 Bronze', unlocks: 'Better parry window and block power. Significant melee upgrade.', priority: 'mid' },
+      { id: 'bronzesword', name: 'Bronze Sword or Mace', cost: '~8 Bronze, 2 Wood, 2 Leather Scraps', unlocks: 'Sword: slash (general purpose). Mace: blunt (skeletons, mining camp enemies).', priority: 'mid' },
+      { id: 'firearrows', name: 'Fire Arrows (stock)', cost: '8 Wood, 8 Resin, 2 Feathers per 20 arrows', unlocks: 'Strong vs Trolls, Bears, and the Elder boss. Keep 100+ stocked.', priority: 'mid' },
+    ]
+  },
+  { num: '4', title: 'Armor — Two Paths', type: 'custom', id: 'armor' },
+  {
+    num: '5', title: 'Transport & Logistics', type: 'buildorder',
+    items: [
+      { id: 'cart', name: 'Cart', cost: '20 Bronze Nails, 20 Wood', unlocks: 'Pull behind you for land hauling. Carries ore and wood. Essential for mining runs.', priority: 'high' },
+      { id: 'karve', name: 'Karve', cost: '80 Bronze Nails, 30 Fine Wood, 10 Resin, 20 Deer Hide', unlocks: 'First real boat. 4 storage slots. Faster than the raft. Ocean-worthy for coastal trips.', priority: 'high' },
+      { id: 'portal2', name: 'Portal Network (ongoing)', cost: '20 Fine Wood, 10 Greydwarf Eyes, 2 Surtling Cores per pair', unlocks: 'Place portals at key locations (mining sites, dungeons, shore). Name-match to link pairs.', priority: 'mid' },
+    ]
+  },
+  { num: '6', title: 'Consumables & Food', type: 'custom', id: 'food' },
+  {
+    num: '7', title: 'Elder Boss Preparation', type: 'buildorder',
+    items: [
+      { id: 'elder_seeds', name: 'Collect 3 Ancient Seeds', cost: 'Kill Greydwarf Brutes/Shamans or destroy Greydwarf Nests', unlocks: 'Burn at the Elder altar to summon. Altar location from BF runestone.', priority: 'high' },
+      { id: 'elder_arrows', name: 'Stock 100+ Fire Arrows', cost: '8 Wood, 8 Resin, 2 Feathers per 20', unlocks: 'Elder is weak to fire. Fire arrows are the primary damage strategy.', priority: 'high' },
+      { id: 'elder_food', name: 'Best food available × 3 types', cost: 'Cooked Meat + Grilled Neck + Queen\'s Jam or Honey', unlocks: 'Full HP/Stamina pool. Never fight a boss unfed.', priority: 'high' },
+      { id: 'elder_gear', name: 'Bronze Buckler + upgraded weapon', cost: 'See Section 3', unlocks: 'Elder uses root attacks and vine summons. Block roots, dodge vines, keep shooting.', priority: 'high' },
+      { id: 'elder_prep', name: 'Build a shelter near the altar', cost: 'Workbench + Bed + Campfire + Walls', unlocks: 'Nearby spawn point if you die. Get Rested buff before the fight.', priority: 'mid' },
+      { id: 'elder_pillar', name: 'Use the pillars at the altar', cost: 'Free — already there', unlocks: 'Elder can\'t destroy the stone pillars at its arena. Use them as cover to break line of sight from root attacks while you reposition and heal.', priority: 'mid' },
+    ]
+  }
+];
+
+function getSectionProgress(section) {
+  let ids = [];
+  if (section.type === 'table') ids = section.rows.map(r => r.id);
+  else if (section.type === 'buildorder') ids = section.items.map(i => i.id);
+  else if (section.id === 'armor') ids = ['troll_helm','troll_legs','troll_tunic','troll_cape','bronze_helm','bronze_legs','bronze_plate','bronze_buckler2'];
+  else if (section.id === 'food') ids = ['food_cookedmeat','food_neckgrill','food_queenjam','food_sausage','mead_healing','mead_stamina','mead_poison','mead_frostresist','arrows_flint','arrows_fire','arrows_bronze'];
+  const done = ids.filter(id => state[id]).length;
+  return { done, total: ids.length };
+}
+
+function renderTable(section) {
+  let html = '<table><thead><tr>';
+  section.headers.forEach(h => html += `<th>${h}</th>`);
+  html += '</tr></thead><tbody>';
+  section.rows.forEach(r => {
+    const checked = state[r.id] ? 'checked' : '';
+    const rowClass = state[r.id] ? 'checked' : '';
+    html += `<tr class="${rowClass}">
+      <td><input type="checkbox" ${checked} onchange="toggle('${r.id}')"></td>
+      <td class="item-name">${nameHtml(r.id, r.name)}</td>
+      <td class="source">${r.source}</td>
+      <td class="target">${r.target}</td>
+      <td class="uses">${r.uses}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  return html;
+}
+
+function renderBuildOrder(section) {
+  let html = '<ul class="build-order">';
+  section.items.forEach(i => {
+    const checked = state[i.id] ? 'checked' : '';
+    const liClass = state[i.id] ? 'checked' : '';
+    const pClass = i.priority === 'high' ? 'priority-high' : 'priority-mid';
+    const pLabel = i.priority === 'high' ? 'Priority' : 'When Ready';
+    html += `<li class="${liClass}">
+      <input type="checkbox" ${checked} onchange="toggle('${i.id}')">
+      <div class="build-item">
+        <span class="build-name">${nameHtml(i.id, i.name)}</span><span class="priority-tag ${pClass}">${pLabel}</span>
+        <div class="build-cost">${i.cost}</div>
+        <div class="build-unlocks">${i.unlocks}</div>
+      </div>
+    </li>`;
+  });
+  html += '</ul>';
+  return html;
+}
+
+function renderArmor() {
+  const trollItems = [
+    { id: 'troll_helm', name: 'Troll Leather Helmet', cost: '5 Troll Hide, 3 Bone Fragments' },
+    { id: 'troll_legs', name: 'Troll Leather Pants', cost: '5 Troll Hide' },
+    { id: 'troll_tunic', name: 'Troll Leather Tunic', cost: '5 Troll Hide' },
+    { id: 'troll_cape', name: 'Troll Hide Cape', cost: '10 Troll Hide, 10 Bone Fragments' },
+  ];
+  const bronzeItems = [
+    { id: 'bronze_helm', name: 'Bronze Helmet', cost: '5 Bronze, 2 Deer Hide' },
+    { id: 'bronze_legs', name: 'Bronze Plate Leggings', cost: '5 Bronze, 2 Deer Hide' },
+    { id: 'bronze_plate', name: 'Bronze Plate Cuirass', cost: '5 Bronze, 2 Deer Hide' },
+    { id: 'bronze_buckler2', name: 'Bronze Buckler (upgraded)', cost: 'See Section 3' },
+  ];
+  function renderSet(items) {
+    let html = '';
+    items.forEach(i => {
+      const checked = state[i.id] ? 'checked' : '';
+      const cls = state[i.id] ? 'checked' : '';
+      html += `<li class="${cls}" style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;font-size:0.82rem;">
+        <input type="checkbox" ${checked} onchange="toggle('${i.id}')">
+        <div><span class="build-name">${nameHtml(i.id, i.name)}</span><div class="build-cost">${i.cost}</div></div>
+      </li>`;
+    });
+    return html;
+  }
+  return `
+    <div class="comparison">
+      <div class="comparison-card">
+        <h4>Troll Hide Armor</h4>
+        <p>Total: ~15 Troll Hide, 13 Bone Fragments</p>
+        <p>+Sneak bonus, no movement penalty, lighter</p>
+        <p class="verdict">Better for: exploration, bow play, stealth</p>
+        <ul style="list-style:none;padding:0;margin-top:0.5rem;">${renderSet(trollItems)}</ul>
+      </div>
+      <div class="comparison-card">
+        <h4>Bronze Armor</h4>
+        <p>Total: ~15 Bronze, 6 Deer Hide</p>
+        <p>Higher base defense, -5% movement speed</p>
+        <p class="verdict">Better for: melee tanking, boss fights</p>
+        <ul style="list-style:none;padding:0;margin-top:0.5rem;">${renderSet(bronzeItems)}</ul>
+      </div>
+    </div>
+    <div class="note">Recommendation: craft Troll Hide first — Trolls drop hides for free during exploration and the set has no bronze cost. Use Bronze on tools and weapons instead. Swap to Bronze armor pieces later when you have surplus bronze.</div>`;
+}
+
+function renderFood() {
+  const foods = [
+    { id: 'food_cookedmeat', name: 'Cooked Meat', cost: 'Raw Meat → Cooking Station', note: 'HP: 40, Stamina: 30. Watch the timer — burns into Coal.' },
+    { id: 'food_neckgrill', name: 'Grilled Neck Tail', cost: 'Neck Tail → Cooking Station', note: 'HP: 35, Stamina: 20. Farm Necks along shorelines.' },
+    { id: 'food_queenjam', name: 'Queen\'s Jam', cost: '8 Raspberries, 8 Blueberries → Cauldron', note: 'HP: 40, Stamina: 25. First Cauldron recipe — great for stockpiling.' },
+    { id: 'food_sausage', name: 'Sausages', cost: '2 Entrails, 1 Thistle, 4 Raw Meat → Cauldron', note: 'HP: 60, Stamina: 40. Best pre-Iron food. Entrails require Swamp leeches.' },
+  ];
+  const meads = [
+    { id: 'mead_healing', name: 'Minor Healing Mead', cost: '10 Honey, 5 Blueberries, 10 Raspberries, 1 Dandelion → Cauldron → Fermenter', note: 'Instant heal in combat. Brew first.' },
+    { id: 'mead_stamina', name: 'Minor Stamina Mead', cost: '10 Honey, 10 Raspberries, 10 Yellow Mushrooms → Cauldron → Fermenter', note: 'Emergency stamina in fights. Brew second.' },
+    { id: 'mead_poison', name: 'Poison Resistance Mead', cost: '10 Honey, 5 Thistle, 1 Neck Tail, 10 Coal → Cauldron → Fermenter', note: 'Critical for Swamp. Start brewing before you need it.' },
+    { id: 'mead_frostresist', name: 'Frost Resistance Mead', cost: '10 Honey, 5 Thistle, 2 Bloodbag, 1 Greydwarf Eye → Cauldron → Fermenter', note: 'For Mountain scouting. Bloodbags from Swamp leeches.' },
+  ];
+  const arrows = [
+    { id: 'arrows_flint', name: 'Flint Arrows (keep 100+)', cost: '8 Wood, 2 Flint, 2 Feathers per 20', note: 'General purpose. Cheap to mass-produce.' },
+    { id: 'arrows_fire', name: 'Fire Arrows (keep 100+)', cost: '8 Wood, 8 Resin, 2 Feathers per 20', note: 'Strongest at your tier. Essential for Elder and Trolls.' },
+    { id: 'arrows_bronze', name: 'Bronze Arrows (optional)', cost: '8 Wood, 1 Bronze, 2 Feathers per 20', note: 'Pierce damage upgrade. Only if bronze is plentiful.' },
+  ];
+  function renderList(items) {
+    let html = '<ul class="build-order">';
+    items.forEach(i => {
+      const checked = state[i.id] ? 'checked' : '';
+      const cls = state[i.id] ? 'checked' : '';
+      html += `<li class="${cls}">
+        <input type="checkbox" ${checked} onchange="toggle('${i.id}')">
+        <div class="build-item">
+          <span class="build-name">${nameHtml(i.id, i.name)}</span>
+          <div class="build-cost">${i.cost}</div>
+          <div class="build-unlocks">${i.note}</div>
+        </div>
+      </li>`;
+    });
+    html += '</ul>';
+    return html;
+  }
+  return `
+    <h4 style="color:var(--accent);font-size:0.85rem;margin-bottom:0.5rem;">Cooked Foods</h4>
+    ${renderList(foods)}
+    <h4 style="color:var(--accent);font-size:0.85rem;margin:1rem 0 0.5rem;">Meads — Brew Ahead of Need</h4>
+    ${renderList(meads)}
+    <div class="note">Start Poison Resistance Mead the moment you have a Fermenter. You need it for the Swamp and it takes 2 in-game days to ferment. Don't wait until you're standing at the Swamp entrance.</div>
+    <h4 style="color:var(--accent);font-size:0.85rem;margin:1rem 0 0.5rem;">Arrow Stock</h4>
+    ${renderList(arrows)}`;
+}
+
+function render() {
+  const app = document.getElementById('app');
+  let html = '';
+  sections.forEach((section, idx) => {
+    const { done, total } = getSectionProgress(section);
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+    const openClass = (state['open_' + idx] !== false) && idx === 0 ? 'open' : (state['open_' + idx] ? 'open' : '');
+    let bodyHtml = '';
+    if (section.type === 'table') bodyHtml = renderTable(section);
+    else if (section.type === 'buildorder') bodyHtml = renderBuildOrder(section);
+    else if (section.id === 'armor') bodyHtml = renderArmor();
+    else if (section.id === 'food') bodyHtml = renderFood();
+    html += `
+      <div class="section ${openClass}" id="section-${idx}">
+        <div class="section-header" onclick="toggleSection(${idx})">
+          <h2><span class="section-num">${section.num}</span>${section.title}</h2>
+          <div style="display:flex;align-items:center;">
+            <span class="section-progress">${done}/${total}<span class="progress-bar"><span class="progress-fill" style="width:${pct}%"></span></span></span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="section-body">${bodyHtml}</div>
+      </div>`;
+  });
+  app.innerHTML = html;
+}
+
+function toggleSection(idx) { state['open_' + idx] = !state['open_' + idx]; saveState(); render(); }
+
+loadState();
+render();
+</script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/search.js"></script>
+</body>
+</html>

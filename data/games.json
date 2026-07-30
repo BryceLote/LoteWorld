@@ -1440,14 +1440,43 @@
     "genre": "Action RPG",
     "genre_order": 3,
     "sub_genre": "Hunting Action",
-    "hours": 0.0,
+    "hours": 16.0,
+    "rating": "7",
+    "rating_class": "",
+    "year": 2021,
+    "meta": "16 hrs · Action RPG · 2021",
+    "cover": "/image/game-covers/Monster_Hunter_Rise.jpg",
+    "url": "https://store.steampowered.com/app/1446780/Monster_Hunter_Rise/",
+    "notes": "Played on PC and the Steam Deck. A solid entry point into the Monster Hunter series.",
+    "articles": [
+      {
+        "title": "Progress Tracker",
+        "url": "/pages/monster-hunter-rise/monster-hunter-rise-tracker.html",
+        "published": "2026-07-03"
+      }
+    ]
+  },
+  {
+    "id": "valheim",
+    "title": "Valheim",
+    "genre": "Sandbox & Builders",
+    "genre_order": 9,
+    "sub_genre": "Survival Sandbox",
+    "hours": 15.0,
     "rating": "—",
     "rating_class": "",
     "year": 2021,
-    "meta": "In progress · Action RPG · 2021",
-    "cover": "/image/game-covers/Monster_Hunter_Rise.jpg",
-    "url": "https://store.steampowered.com/app/1446780/Monster_Hunter_Rise/",
-    "notes": "Just started, playing on PC and Steam Deck.",
-    "currently": true
+    "meta": "15 hrs · Survival Sandbox · 2021",
+    "cover": "/image/game-covers/Valheim.jpg",
+    "url": "https://store.steampowered.com/app/892970/Valheim/",
+    "notes": "Currently playing. Norse survival-crafting sandbox; working through the Black Forest toward the Elder.",
+    "currently": true,
+    "articles": [
+      {
+        "title": "Black Forest Progression Checklist",
+        "url": "/pages/valheim/valheim-black-forest-checklist.html",
+        "published": "2026-07-28"
+      }
+    ]
   }
 ]
